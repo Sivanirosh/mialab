@@ -4,6 +4,7 @@ Image pre-processing aims to improve the image quality (image intensities) for s
 """
 import warnings
 
+import numpy as np
 import pymia.filtering.filter as pymia_fltr
 import SimpleITK as sitk
 
@@ -28,10 +29,17 @@ class ImageNormalization(pymia_fltr.Filter):
 
         img_arr = sitk.GetArrayFromImage(image)
 
-        # todo: normalize the image using numpy
-        warnings.warn('No normalization implemented. Returning unprocessed image.')
+        # Z-score normalization
+        mask = img_arr > 0 # consider only non-zero voxels (avoid background interference)
+        if np.any(mask):
+            mean_val = np.mean(img_arr[mask])
+            std_val = np.std(img_arr[mask])
+            if std_val > 0:
+                img_arr[mask] = (img_arr[mask] - mean_val) / std_val
+            else:
+                img_arr[mask] = img_arr[mask] - mean_val # avoid division by zero
 
-        img_out = sitk.GetImageFromArray(img_arr)
+        img_out = sitk.GetImageFromArray(img_arr.astype(np.float32))
         img_out.CopyInformation(image)
 
         return img_out
@@ -76,11 +84,13 @@ class SkullStripping(pymia_fltr.Filter):
             sitk.Image: The normalized image.
         """
         mask = params.img_mask  # the brain mask
+        mask_uint8 = sitk.Cast(mask, sitk.sitkUInt8)
 
-        # todo: remove the skull from the image by using the brain mask
-        warnings.warn('No skull-stripping implemented. Returning unprocessed image.')
+        # Apply the brain mask to remove skull
+        # Multiply the image by the mask (where mask=1 is brain, mask=0 is skull/background)
+        skull_stripped = sitk.Mask(image, mask_uint8, outsideValue=0, maskingValue=0)
 
-        return image
+        return skull_stripped
 
     def __str__(self):
         """Gets a printable string representation.
@@ -126,19 +136,30 @@ class ImageRegistration(pymia_fltr.Filter):
             sitk.Image: The registered image.
         """
 
-        # todo: replace this filter by a registration. Registration can be costly, therefore, we provide you the
-        # transformation, which you only need to apply to the image!
-        warnings.warn('No registration implemented. Returning unregistered image')
+        if params is None:
+            raise ValueError("ImageRegistrationParameters are required")
 
         atlas = params.atlas
         transform = params.transformation
         is_ground_truth = params.is_ground_truth  # the ground truth will be handled slightly different
 
-        # note: if you are interested in registration, and want to test it, have a look at
-        # pymia.filtering.registration.MultiModalRegistration. Think about the type of registration, i.e.
-        # do you want to register to an atlas or inter-subject? Or just ask us, we can guide you ;-)
+        # Set up the resampler
+        resampler = sitk.ResampleImageFilter()
+        resampler.SetReferenceImage(atlas)  # Use atlas as reference for output spacing, size, etc.
+        resampler.SetTransform(transform)
+        
+        # For ground truth (label images), use nearest neighbor interpolation to preserve labels
+        # For intensity images, use linear interpolation
+        if is_ground_truth:
+            resampler.SetInterpolator(sitk.sitkNearestNeighbor)
+            resampler.SetDefaultPixelValue(0)  # Background label is 0
+        else:
+            resampler.SetInterpolator(sitk.sitkLinear)
+            resampler.SetDefaultPixelValue(0.0)
 
-        return image
+        registered_image = resampler.Execute(image)
+        
+        return registered_image
 
     def __str__(self):
         """Gets a printable string representation.

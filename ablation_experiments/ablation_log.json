@@ -1,0 +1,64 @@
+{
+  "start_time": "2025-10-16T12:57:06.591804",
+  "optimization_level": "none",
+  "forest_config": {
+    "n_estimators": 100,
+    "max_depth": null,
+    "max_features": "sqrt",
+    "min_samples_split": 2,
+    "min_samples_leaf": 1,
+    "bootstrap": true,
+    "random_state": 42,
+    "n_jobs": -1
+  },
+  "experiments": {
+    "0": {
+      "name": "baseline_none",
+      "success": true,
+      "directory": "./ablation_experiments/exp_00_baseline_none"
+    },
+    "1": {
+      "name": "normalization_only",
+      "success": true,
+      "directory": "./ablation_experiments/exp_01_normalization_only"
+    },
+    "2": {
+      "name": "skullstrip_only",
+      "success": true,
+      "directory": "./ablation_experiments/exp_02_skullstrip_only"
+    },
+    "3": {
+      "name": "registration_only",
+      "success": true,
+      "directory": "./ablation_experiments/exp_03_registration_only"
+    },
+    "4": {
+      "name": "norm_skull",
+      "success": true,
+      "directory": "./ablation_experiments/exp_04_norm_skull"
+    },
+    "5": {
+      "name": "norm_reg",
+      "success": true,
+      "directory": "./ablation_experiments/exp_05_norm_reg"
+    },
+    "6": {
+      "name": "reg_skull",
+      "success": true,
+      "directory": "./ablation_experiments/exp_06_reg_skull"
+    },
+    "7": {
+      "name": "all_preprocessing",
+      "success": true,
+      "directory": "./ablation_experiments/exp_07_all_preprocessing"
+    },
+    "8": {
+      "name": "all_preprocessing_postprocessing",
+      "success": true,
+      "directory": "./ablation_experiments/exp_08_all_preprocessing_postprocessing"
+    }
+  },
+  "total_experiments": 9,
+  "successful_experiments": 9,
+  "failed_experiments": 0
+}

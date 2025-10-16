@@ -1,0 +1,10 @@
+experiment_id,name,description,timestamp,status,duration_seconds,config_file,results_dir
+exp_00_baseline_none,baseline_none,Baseline without any preprocessing,2025-10-16T11:36:36.208028,completed,229.7818,./ablation_experiments/exp_00_baseline_none/config.json,./ablation_experiments/exp_00_baseline_none
+exp_01_normalization_only,normalization_only,With normalization only,2025-10-16T11:40:29.779338,completed,229.675634,./ablation_experiments/exp_01_normalization_only/config.json,./ablation_experiments/exp_01_normalization_only
+exp_02_skullstrip_only,skullstrip_only,With skull stripping only,2025-10-16T12:26:43.366005,completed,214.702243,./ablation_experiments/exp_02_skullstrip_only/config.json,./ablation_experiments/exp_02_skullstrip_only
+exp_03_registration_only,registration_only,With registration only,2025-10-16T12:30:18.070262,completed,284.871865,./ablation_experiments/exp_03_registration_only/config.json,./ablation_experiments/exp_03_registration_only
+exp_04_norm_skull,norm_skull,With normalization + skull stripping,2025-10-16T12:35:02.944160,completed,226.453188,./ablation_experiments/exp_04_norm_skull/config.json,./ablation_experiments/exp_04_norm_skull
+exp_05_norm_reg,norm_reg,With normalization + registration,2025-10-16T12:38:49.399350,completed,282.037668,./ablation_experiments/exp_05_norm_reg/config.json,./ablation_experiments/exp_05_norm_reg
+exp_06_reg_skull,reg_skull,With registration + skull stripping,2025-10-16T12:43:31.439013,completed,269.844946,./ablation_experiments/exp_06_reg_skull/config.json,./ablation_experiments/exp_06_reg_skull
+exp_07_all_preprocessing,all_preprocessing,With normalization + skull stripping + registration,2025-10-16T12:48:01.286011,completed,279.710217,./ablation_experiments/exp_07_all_preprocessing/config.json,./ablation_experiments/exp_07_all_preprocessing
+exp_08_all_preprocessing_postprocessing,all_preprocessing_postprocessing,With all preprocessing + postprocessing,2025-10-16T12:52:40.998259,completed,265.591626,./ablation_experiments/exp_08_all_preprocessing_postprocessing/config.json,./ablation_experiments/exp_08_all_preprocessing_postprocessing

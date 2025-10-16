@@ -1,4 +1,12 @@
 # Created by .ignore support plugin (hsz.mobi)
+
+data/atlas/*
+data/train/*
+data/test/*
+ablation_experiments/exp_*
+ablation_experiments/temp_*
+
+
 ### Python template
 # Byte-compiled / optimized / DLL files
 __pycache__/

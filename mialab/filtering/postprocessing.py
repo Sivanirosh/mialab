@@ -9,6 +9,7 @@ import warnings
 # import pydensecrf.utils as crf_util
 import pymia.filtering.filter as pymia_fltr
 import SimpleITK as sitk
+import numpy as np
 
 
 class ImagePostProcessing(pymia_fltr.Filter):
@@ -29,10 +30,63 @@ class ImagePostProcessing(pymia_fltr.Filter):
             sitk.Image: The post-processed image.
         """
 
-        # todo: replace this filter by a post-processing - or do we need post-processing at all?
-        warnings.warn('No post-processing implemented. Can you think about something?')
 
-        return image
+        # Convert to numpy for processing
+        img_array = sitk.GetArrayFromImage(image)
+        processed_array = img_array.copy()
+        
+        # Get unique labels (excluding background)
+        unique_labels = np.unique(img_array)
+        unique_labels = unique_labels[unique_labels > 0]  # exclude background (0)
+        
+        # Apply connected component analysis for each label
+        for label in unique_labels:
+            # Create binary mask for this label
+            label_mask = (img_array == label).astype(np.uint8)
+            
+            # Convert to SimpleITK image for connected component analysis
+            label_img = sitk.GetImageFromArray(label_mask)
+            label_img.CopyInformation(image)
+            
+            # Ensure the label image is uint8 type to avoid deprecation warnings
+            label_img = sitk.Cast(label_img, sitk.sitkUInt8)
+            
+            # Apply connected component filter
+            cc_filter = sitk.ConnectedComponentImageFilter()
+            cc_img = cc_filter.Execute(label_img)
+            
+            # Get label statistics to find component sizes
+            label_stats = sitk.LabelShapeStatisticsImageFilter()
+            label_stats.Execute(cc_img)
+            
+            # Keep only components larger than minimum size (10 voxels)
+            min_size = 10
+            cc_array = sitk.GetArrayFromImage(cc_img)
+            filtered_mask = np.zeros_like(cc_array)
+            
+            for cc_label in label_stats.GetLabels():
+                if label_stats.GetNumberOfPixels(cc_label) >= min_size:
+                    filtered_mask[cc_array == cc_label] = 1
+            
+            # Apply morphological closing to fill small holes
+            closing_filter = sitk.BinaryMorphologicalClosingImageFilter()
+            closing_filter.SetKernelRadius(1)
+            closing_filter.SetForegroundValue(1)
+            
+            filtered_img = sitk.GetImageFromArray(filtered_mask.astype(np.uint8))
+            filtered_img.CopyInformation(image)
+            closed_img = closing_filter.Execute(filtered_img)
+            closed_array = sitk.GetArrayFromImage(closed_img)
+            
+            # Update the processed array
+            processed_array[closed_array == 1] = label
+            processed_array[closed_array == 0] = 0  # Set to background where component was removed
+        
+        # Convert back to SimpleITK image
+        result_img = sitk.GetImageFromArray(processed_array.astype(np.uint8))
+        result_img.CopyInformation(image)
+        
+        return result_img
 
     def __str__(self):
         """Gets a printable string representation.

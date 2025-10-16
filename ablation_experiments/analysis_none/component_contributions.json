@@ -1,0 +1,26 @@
+{
+  "baseline_performance": 0.6233669979009286,
+  "experiment_performance": {
+    "0": 0.6233669979009286,
+    "1": 0.5799275027758091,
+    "2": 0.6300174537349189,
+    "3": 0.6499419127226429,
+    "4": 0.5510239492598449,
+    "5": 0.6253987806528911,
+    "6": 0.6537811220183406,
+    "7": 0.6200505731354801,
+    "8": 0.3843707157609925
+  },
+  "normalization_isolated": -0.043439495125119576,
+  "skull_stripping_isolated": 0.006650455833990265,
+  "registration_isolated": 0.026574914821714257,
+  "normalization_marginal": -0.033730548882860534,
+  "skull_stripping_marginal": -0.005348207517411052,
+  "registration_marginal": 0.06902662387563518,
+  "postprocessing_effect": -0.23567985737448754,
+  "interactions": {
+    "norm_skull_interaction": -0.03555400934995445,
+    "norm_reg_interaction": 0.018896363055367793,
+    "skull_reg_interaction": -0.0028112465382925667
+  }
+}

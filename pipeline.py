@@ -33,7 +33,8 @@ LOADING_KEYS = [structure.BrainImageTypes.T1w,
                 structure.BrainImageTypes.RegistrationTransform]  # the list of data we will load
 
 
-def main(result_dir: str, data_atlas_dir: str, data_train_dir: str, data_test_dir: str):
+def main(result_dir: str, data_atlas_dir: str, data_train_dir: str, data_test_dir: str, 
+         config_dict: dict = None):
     """Brain tissue segmentation using decision forests.
 
     The main routine executes the medical image analysis pipeline:
@@ -48,6 +49,32 @@ def main(result_dir: str, data_atlas_dir: str, data_train_dir: str, data_test_di
         - Evaluation of the segmentation
     """
 
+    # Default configuration if none provided
+    if config_dict is None:
+        config_dict = {
+            'preprocessing': {
+                'skullstrip_pre': True,
+                'normalization_pre': True,
+                'registration_pre': True,
+                'coordinates_feature': True,
+                'intensity_feature': True,
+                'gradient_intensity_feature': True
+            },
+            'postprocessing': {
+                'simple_post': True
+            },
+            'forest': {
+                'n_estimators': 10,
+                'max_depth': 10,
+                'max_features': None
+            }
+        }
+
+    # Extract configuration
+    pre_process_params = config_dict.get('preprocessing', {})
+    post_process_params = config_dict.get('postprocessing', {})
+    forest_params = config_dict.get('forest', {})
+
     # load atlas images
     putil.load_atlas_images(data_atlas_dir)
 
@@ -58,12 +85,6 @@ def main(result_dir: str, data_atlas_dir: str, data_train_dir: str, data_test_di
                                           LOADING_KEYS,
                                           futil.BrainImageFilePathGenerator(),
                                           futil.DataDirectoryFilter())
-    pre_process_params = {'skullstrip_pre': True,
-                          'normalization_pre': True,
-                          'registration_pre': True,
-                          'coordinates_feature': True,
-                          'intensity_feature': True,
-                          'gradient_intensity_feature': True}
 
     # load images for training and pre-process
     images = putil.pre_process_batch(crawler.data, pre_process_params, multi_process=False)
@@ -72,10 +93,23 @@ def main(result_dir: str, data_atlas_dir: str, data_train_dir: str, data_test_di
     data_train = np.concatenate([img.feature_matrix[0] for img in images])
     labels_train = np.concatenate([img.feature_matrix[1] for img in images]).squeeze()
 
-    warnings.warn('Random forest parameters not properly set.')
-    forest = sk_ensemble.RandomForestClassifier(max_features=images[0].feature_matrix[0].shape[1],
-                                                n_estimators=1,
-                                                max_depth=5)
+    # Setup random forest with configurable parameters
+    n_features = images[0].feature_matrix[0].shape[1]
+    max_features = forest_params.get('max_features', n_features)
+    if max_features is None:
+        max_features = n_features
+    
+    forest = sk_ensemble.RandomForestClassifier(
+        max_features=max_features,
+        n_estimators=forest_params.get('n_estimators', 10),
+        max_depth=forest_params.get('max_depth', 10),
+        random_state=42,  # For reproducibility
+        n_jobs=-1  # Use all available cores
+    )
+
+    print(f'Training Random Forest with {forest_params.get("n_estimators", 10)} trees, '
+          f'max_depth={forest_params.get("max_depth", 10)}, '
+          f'max_features={max_features} (out of {n_features} total features)')
 
     start_time = timeit.default_timer()
     forest.fit(data_train, labels_train)
@@ -85,6 +119,11 @@ def main(result_dir: str, data_atlas_dir: str, data_train_dir: str, data_test_di
     t = datetime.datetime.now().strftime('%Y-%m-%d-%H-%M-%S')
     result_dir = os.path.join(result_dir, t)
     os.makedirs(result_dir, exist_ok=True)
+
+    # Save configuration used for this experiment
+    import json
+    with open(os.path.join(result_dir, 'experiment_config.json'), 'w') as f:
+        json.dump(config_dict, f, indent=2)
 
     print('-' * 5, 'Testing...')
 
@@ -124,7 +163,6 @@ def main(result_dir: str, data_atlas_dir: str, data_train_dir: str, data_test_di
         images_probabilities.append(image_probabilities)
 
     # post-process segmentation and evaluate with post-processing
-    post_process_params = {'simple_post': True}
     images_post_processed = putil.post_process_batch(images_test, images_prediction, images_probabilities,
                                                      post_process_params, multi_process=True)
 
@@ -138,9 +176,11 @@ def main(result_dir: str, data_atlas_dir: str, data_train_dir: str, data_test_di
 
     # use two writers to report the results
     os.makedirs(result_dir, exist_ok=True)  # generate result directory, if it does not exists
+    
+    # Write results with custom CSV format that includes experiment metadata
     result_file = os.path.join(result_dir, 'results.csv')
-    writer.CSVWriter(result_file).write(evaluator.results)
-
+    write_custom_results_csv(evaluator.results, result_file, config_dict)
+    
     print('\nSubject-wise results...')
     writer.ConsoleWriter().write(evaluator.results)
 
@@ -153,6 +193,61 @@ def main(result_dir: str, data_atlas_dir: str, data_train_dir: str, data_test_di
 
     # clear results such that the evaluator is ready for the next evaluation
     evaluator.clear()
+
+
+def write_custom_results_csv(results, result_file: str, config_dict: dict):
+    """Write results to CSV with consistent format and embedded metadata."""
+    import pandas as pd
+    from collections import defaultdict
+    
+    # Extract configuration for metadata
+    preprocessing = config_dict.get('preprocessing', {})
+    postprocessing = config_dict.get('postprocessing', {})
+    
+    # Group flat Results by (id_, label) to collect metrics per row
+    grouped_results = defaultdict(lambda: defaultdict(dict))  # {id_: {label: {metric: value}}}
+    
+    for result in results:  # Iterate the list of Result objects
+        subject_id = result.id_  # Correct attr: str, e.g., "118528" or "118528-PP"
+        label_name = result.label  # str, e.g., "GREYMATTER"
+        metric_name = result.metric  # str, e.g., "DICE" or "HDRFDST95"
+        metric_value = result.value  # float, e.g., 0.85
+        
+        # Collect into dict (flexible for any metrics)
+        grouped_results[subject_id][label_name][metric_name] = metric_value
+    
+    # Flatten to rows
+    rows = []
+    for subject_id, labels_dict in grouped_results.items():
+        for label_name, metrics_dict in labels_dict.items():
+            # Extract Dice and Hausdorff (handle naming variations like "DICE", "HD95")
+            dice_value = metrics_dict.get('DICE', metrics_dict.get('Dice', None))
+            hausdorff_value = None
+            for key in metrics_dict:
+                if 'Hausdorff' in key or 'HD' in key or 'HDRFDST' in key:
+                    hausdorff_value = metrics_dict[key]
+                    break
+            
+            row = {
+                'SUBJECT': subject_id,
+                'LABEL': label_name,
+                'DICE': dice_value if dice_value is not None else '',
+                'HDRFDST': hausdorff_value if hausdorff_value is not None else '',
+                'normalization': preprocessing.get('normalization_pre', False),
+                'skull_stripping': preprocessing.get('skullstrip_pre', False),
+                'registration': preprocessing.get('registration_pre', False),
+                'postprocessing': postprocessing.get('simple_post', False),
+                'coordinates_feature': preprocessing.get('coordinates_feature', False),
+                'intensity_feature': preprocessing.get('intensity_feature', False),
+                'gradient_intensity_feature': preprocessing.get('gradient_intensity_feature', False)
+            }
+            rows.append(row)
+    
+    # Create DataFrame and save as CSV
+    df = pd.DataFrame(rows)
+    df.to_csv(result_file, index=False, sep=',')
+    
+    print(f'Results saved to {result_file} with {len(rows)} measurements')
 
 
 if __name__ == "__main__":
@@ -191,4 +286,13 @@ if __name__ == "__main__":
     )
 
     args = parser.parse_args()
-    main(args.result_dir, args.data_atlas_dir, args.data_train_dir, args.data_test_dir)
+    
+    # Load configuration if provided
+    config_dict = None
+    if hasattr(args, 'config_file') and args.config_file:
+        import json
+        with open(args.config_file, 'r') as f:
+            config_dict = json.load(f)
+
+    
+    main(args.result_dir, args.data_atlas_dir, args.data_train_dir, args.data_test_dir, config_dict)
