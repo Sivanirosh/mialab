@@ -2,6 +2,10 @@
 
 The pipeline is used for brain tissue segmentation using a decision forest classifier.
 """
+
+# ---------------------------------------------------------------------------------------------------------------------
+# IMPORTS AND KEYS
+
 import argparse
 import datetime
 import os
@@ -32,6 +36,9 @@ LOADING_KEYS = [structure.BrainImageTypes.T1w,
                 structure.BrainImageTypes.BrainMask,
                 structure.BrainImageTypes.RegistrationTransform]  # the list of data we will load
 
+
+# ---------------------------------------------------------------------------------------------------------------------
+# MAIN FUNCTION
 
 def main(result_dir: str, data_atlas_dir: str, data_train_dir: str, data_test_dir: str, 
          config_dict: dict = None):
@@ -195,6 +202,9 @@ def main(result_dir: str, data_atlas_dir: str, data_train_dir: str, data_test_di
     evaluator.clear()
 
 
+# ---------------------------------------------------------------------------------------------------------------------
+# SAVE RESULTS TO CSV FUNCTION
+
 def write_custom_results_csv(results, result_file: str, config_dict: dict):
     """Write results to CSV with consistent format and embedded metadata."""
     import pandas as pd
@@ -250,10 +260,16 @@ def write_custom_results_csv(results, result_file: str, config_dict: dict):
     print(f'Results saved to {result_file} with {len(rows)} measurements')
 
 
+# ---------------------------------------------------------------------------------------------------------------------
+# RUN MAIN FUNCTION
+
 if __name__ == "__main__":
     """The program's entry point."""
 
     script_dir = os.path.dirname(sys.argv[0])
+
+    # -----------------------------------------------------------------------------------------------------------------
+    # PARSER FOR ARGUMENTS
 
     parser = argparse.ArgumentParser(description='Medical image analysis pipeline for brain tissue segmentation')
 
@@ -286,6 +302,9 @@ if __name__ == "__main__":
     )
 
     args = parser.parse_args()
+
+
+    
     
     # Load configuration if provided
     config_dict = None
