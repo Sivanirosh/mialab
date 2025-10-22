@@ -1,7 +1,7 @@
 pathos~=0.2.9
 pymia~=0.3.2
 matplotlib~=3.9.2
-numpy~=2.1.1
+numpy~=2.0.2
 Pillow~=10.0.1
 scikit-learn~=1.5.2
 SimpleITK~=2.1.1.2
