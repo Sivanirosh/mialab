@@ -292,28 +292,63 @@ class AblationStudyManager:
         return optimized_config
     
     def run_ablation_study(self, data_atlas_dir: str, data_train_dir: str, data_test_dir: str,
-                          optimization_level: OptimizationLevel = OptimizationLevel.QUICK) -> Dict[int, Dict]:
-        """Run complete 9-experiment ablation study."""
+                          optimization_level: OptimizationLevel = OptimizationLevel.QUICK,
+                          study_type: str = 'preprocessing') -> Dict[int, Dict]:
+        """Run ablation study with configurable study type.
+        
+        Args:
+            data_atlas_dir: Path to atlas data
+            data_train_dir: Path to training data
+            data_test_dir: Path to test data
+            optimization_level: RF optimization level
+            study_type: Type of ablation study to run:
+                - 'preprocessing': Original 9-experiment preprocessing ablation (default)
+                - 'postprocessing': 9-experiment postprocessing ablation
+                - 'combined': 18-experiment combined preprocessing + postprocessing ablation
+        
+        Returns:
+            Dictionary of experiment results
+        """
         
         print("Starting Comprehensive Ablation Study")
         print("=" * 60)
+        print(f"Study type: {study_type}")
         print(f"Optimization level: {optimization_level.value}")
         
         # Step 1: Optimize Random Forest parameters
         forest_config = self.optimize_random_forest(data_atlas_dir, data_train_dir, optimization_level)
         
-        # Step 2: Create ablation configurations
+        # Step 2: Create ablation configurations based on study type
         from .core.config import AblationStudyConfigurator
-        ablation_configs = AblationStudyConfigurator.create_ablation_configs(forest_config)
+        
+        if study_type == 'preprocessing':
+            ablation_configs = AblationStudyConfigurator.create_ablation_configs(forest_config)
+            n_experiments = 9
+            get_summary = AblationStudyConfigurator.get_experiment_summary
+        elif study_type == 'postprocessing':
+            ablation_configs = AblationStudyConfigurator.create_postprocessing_ablation_configs(forest_config)
+            n_experiments = 9
+            get_summary = AblationStudyConfigurator.get_postprocessing_experiment_summary
+        elif study_type == 'combined':
+            ablation_configs = AblationStudyConfigurator.create_combined_ablation_configs(forest_config)
+            n_experiments = 18
+            get_summary = AblationStudyConfigurator.get_combined_experiment_summary
+        else:
+            raise ValueError(f"Unknown study_type: {study_type}. Must be 'preprocessing', 'postprocessing', or 'combined'")
+        
+        print(f"\nRunning {n_experiments} experiments")
+        print("\nExperiment Plan:")
+        for exp_id, desc in get_summary().items():
+            print(f"  {exp_id}: {desc}")
         
         # Step 3: Run all experiments
         experiment_results = {}
         
-        for exp_id in range(9):
+        for exp_id in range(n_experiments):
             config = ablation_configs[exp_id]
             
             print(f"\n{'='*60}")
-            print(f"Running Experiment {exp_id}: {config.name}")
+            print(f"Running Experiment {exp_id}/{n_experiments-1}: {config.name}")
             print(f"Description: {config.description}")
             print(f"{'='*60}")
             
@@ -337,6 +372,7 @@ class AblationStudyManager:
         # Step 4: Log ablation study summary
         ablation_summary = {
             'start_time': datetime.datetime.now().isoformat(),
+            'study_type': study_type,
             'optimization_level': optimization_level.value,
             'forest_config': forest_config.__dict__,
             'experiments': {
@@ -370,6 +406,7 @@ class AblationStudyManager:
         # Summary
         print(f"\n🎉 ABLATION STUDY COMPLETED!")
         print("=" * 60)
+        print(f"Study type: {study_type}")
         print(f"Total experiments: {ablation_summary['total_experiments']}")
         print(f"Successful: {ablation_summary['successful_experiments']}")
         print(f"Failed: {ablation_summary['failed_experiments']}")

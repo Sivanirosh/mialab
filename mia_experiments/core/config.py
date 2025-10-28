@@ -34,6 +34,10 @@ class PreprocessingConfig:
 class PostprocessingConfig:
     """Configuration for postprocessing parameters."""
     simple_post: bool = True
+    min_component_size: int = 5  # Global default (down from 10)
+    per_tissue_sizes: Optional[Dict[str, int]] = None  # e.g., {'Hippocampus': 3, 'WhiteMatter': 20}
+    kernel_radius: tuple = (1, 1, 1)  # For closing/opening
+    retention_threshold: float = 0.5  # Skip if <50% voxels kept
 
 
 @dataclass
@@ -172,7 +176,7 @@ class AblationStudyConfigurator:
     
     @staticmethod
     def create_ablation_configs(forest_config: RandomForestConfig) -> Dict[int, ExperimentConfig]:
-        """Create all 9 ablation study configurations."""
+        """Create all 9 preprocessing ablation study configurations."""
         
         configs = {}
         
@@ -323,6 +327,214 @@ class AblationStudyConfigurator:
         return configs
     
     @staticmethod
+    def create_postprocessing_ablation_configs(forest_config: RandomForestConfig) -> Dict[int, ExperimentConfig]:
+        """Create postprocessing ablation study configurations.
+        
+        Tests different postprocessing parameters with full preprocessing enabled.
+        
+        Returns:
+            Dictionary mapping experiment IDs to configurations.
+        """
+        configs = {}
+        
+        # Base preprocessing config (use all preprocessing)
+        base_preprocessing = PreprocessingConfig(
+            skullstrip_pre=True,
+            normalization_pre=True,
+            registration_pre=True,
+            coordinates_feature=True,
+            intensity_feature=True,
+            gradient_intensity_feature=True
+        )
+        
+        # Experiment 0: No postprocessing (baseline)
+        configs[0] = ExperimentConfig(
+            name="post_none",
+            description="No postprocessing (baseline)",
+            preprocessing=base_preprocessing,
+            postprocessing=PostprocessingConfig(simple_post=False),
+            forest=forest_config
+        )
+        
+        # Experiment 1: Default postprocessing
+        configs[1] = ExperimentConfig(
+            name="post_default",
+            description="Default postprocessing (min_size=5, kernel=1)",
+            preprocessing=base_preprocessing,
+            postprocessing=PostprocessingConfig(
+                simple_post=True,
+                min_component_size=5,
+                kernel_radius=(1, 1, 1),
+                retention_threshold=0.5
+            ),
+            forest=forest_config
+        )
+        
+        # Experiment 2: Conservative postprocessing
+        configs[2] = ExperimentConfig(
+            name="post_conservative",
+            description="Conservative postprocessing (min_size=3, threshold=0.7)",
+            preprocessing=base_preprocessing,
+            postprocessing=PostprocessingConfig(
+                simple_post=True,
+                min_component_size=3,
+                kernel_radius=(1, 1, 1),
+                retention_threshold=0.7
+            ),
+            forest=forest_config
+        )
+        
+        # Experiment 3: Aggressive postprocessing
+        configs[3] = ExperimentConfig(
+            name="post_aggressive",
+            description="Aggressive postprocessing (min_size=15, kernel=3)",
+            preprocessing=base_preprocessing,
+            postprocessing=PostprocessingConfig(
+                simple_post=True,
+                min_component_size=15,
+                kernel_radius=(3, 3, 3),
+                retention_threshold=0.3
+            ),
+            forest=forest_config
+        )
+        
+        # Experiment 4: Per-tissue optimization (hippocampus-focused)
+        configs[4] = ExperimentConfig(
+            name="post_per_tissue_hippocampus",
+            description="Per-tissue sizes (hippocampus-focused: Hip=3, Amy=3, WM=20)",
+            preprocessing=base_preprocessing,
+            postprocessing=PostprocessingConfig(
+                simple_post=True,
+                min_component_size=5,
+                per_tissue_sizes={
+                    'Hippocampus': 3,
+                    'Amygdala': 3,
+                    'WhiteMatter': 20,
+                    'GreyMatter': 10
+                },
+                kernel_radius=(2, 2, 1),
+                retention_threshold=0.5
+            ),
+            forest=forest_config
+        )
+        
+        # Experiment 5: Per-tissue balanced
+        configs[5] = ExperimentConfig(
+            name="post_per_tissue_balanced",
+            description="Per-tissue sizes (balanced: Hip=4, WM=15, GM=8)",
+            preprocessing=base_preprocessing,
+            postprocessing=PostprocessingConfig(
+                simple_post=True,
+                min_component_size=5,
+                per_tissue_sizes={
+                    'Hippocampus': 4,
+                    'Amygdala': 4,
+                    'WhiteMatter': 15,
+                    'GreyMatter': 8,
+                    'Thalamus': 6
+                },
+                kernel_radius=(1, 1, 1),
+                retention_threshold=0.5
+            ),
+            forest=forest_config
+        )
+        
+        # Experiment 6: Anisotropic kernel (for thick slices)
+        configs[6] = ExperimentConfig(
+            name="post_anisotropic",
+            description="Anisotropic kernel (2,2,1) for thick slices",
+            preprocessing=base_preprocessing,
+            postprocessing=PostprocessingConfig(
+                simple_post=True,
+                min_component_size=5,
+                kernel_radius=(2, 2, 1),
+                retention_threshold=0.5
+            ),
+            forest=forest_config
+        )
+        
+        # Experiment 7: Large isotropic kernel
+        configs[7] = ExperimentConfig(
+            name="post_large_kernel",
+            description="Large isotropic kernel (3,3,3) with balanced size",
+            preprocessing=base_preprocessing,
+            postprocessing=PostprocessingConfig(
+                simple_post=True,
+                min_component_size=8,
+                kernel_radius=(3, 3, 3),
+                retention_threshold=0.4
+            ),
+            forest=forest_config
+        )
+        
+        # Experiment 8: Optimal combination (based on experience)
+        configs[8] = ExperimentConfig(
+            name="post_optimal",
+            description="Optimal combination: per-tissue + anisotropic",
+            preprocessing=base_preprocessing,
+            postprocessing=PostprocessingConfig(
+                simple_post=True,
+                min_component_size=5,
+                per_tissue_sizes={
+                    'Hippocampus': 3,
+                    'Amygdala': 3,
+                    'WhiteMatter': 18,
+                    'GreyMatter': 9,
+                    'Thalamus': 7
+                },
+                kernel_radius=(2, 2, 1),
+                retention_threshold=0.55
+            ),
+            forest=forest_config
+        )
+        
+        return configs
+    
+    @staticmethod
+    def create_combined_ablation_configs(forest_config: RandomForestConfig) -> Dict[int, ExperimentConfig]:
+        """Create combined preprocessing + postprocessing ablation study.
+        
+        This extends the original 9 experiments with the best postprocessing configurations.
+        Total: 18 experiments (9 preprocessing variations × 2 postprocessing states).
+        
+        Returns:
+            Dictionary mapping experiment IDs to configurations.
+        """
+        configs = {}
+        
+        # First 9: Original preprocessing ablation (no postprocessing)
+        preprocessing_configs = AblationStudyConfigurator.create_ablation_configs(forest_config)
+        for i in range(9):
+            configs[i] = preprocessing_configs[i]
+        
+        # Next 9: Same preprocessing ablation but with optimal postprocessing
+        optimal_postprocessing = PostprocessingConfig(
+            simple_post=True,
+            min_component_size=5,
+            per_tissue_sizes={
+                'Hippocampus': 3,
+                'Amygdala': 3,
+                'WhiteMatter': 18,
+                'GreyMatter': 9,
+                'Thalamus': 7
+            },
+            kernel_radius=(2, 2, 1),
+            retention_threshold=0.55
+        )
+        
+        for i in range(9):
+            orig_config = preprocessing_configs[i]
+            configs[i + 9] = ExperimentConfig(
+                name=f"{orig_config.name}_with_post",
+                description=f"{orig_config.description} + optimal postprocessing",
+                preprocessing=orig_config.preprocessing,
+                postprocessing=optimal_postprocessing,
+                forest=forest_config
+            )
+        
+        return configs
+    
+    @staticmethod
     def get_experiment_summary() -> Dict[int, str]:
         """Get summary description of each experiment."""
         return {
@@ -336,6 +548,37 @@ class AblationStudyConfigurator:
             7: "All preprocessing (Norm + Skull + Reg)",
             8: "All preprocessing + Post-processing"
         }
+    
+    @staticmethod
+    def get_postprocessing_experiment_summary() -> Dict[int, str]:
+        """Get summary of postprocessing ablation experiments."""
+        return {
+            0: "No postprocessing (baseline)",
+            1: "Default postprocessing (min_size=5, kernel=1)",
+            2: "Conservative (min_size=3, strict retention)",
+            3: "Aggressive (min_size=15, large kernel)",
+            4: "Per-tissue: Hippocampus-focused",
+            5: "Per-tissue: Balanced",
+            6: "Anisotropic kernel (2,2,1)",
+            7: "Large isotropic kernel (3,3,3)",
+            8: "Optimal: Per-tissue + anisotropic"
+        }
+    
+    @staticmethod
+    def get_combined_experiment_summary() -> Dict[int, str]:
+        """Get summary of combined ablation experiments."""
+        base_summary = AblationStudyConfigurator.get_experiment_summary()
+        combined_summary = {}
+        
+        # First 9: without postprocessing
+        for i in range(9):
+            combined_summary[i] = base_summary[i]
+        
+        # Next 9: with optimal postprocessing
+        for i in range(9):
+            combined_summary[i + 9] = f"{base_summary[i]} + Optimal Post"
+        
+        return combined_summary
 
 
 class ConfigurationValidator:

@@ -3,6 +3,7 @@
 Image post-processing aims to alter images such that they depict a desired representation.
 """
 import warnings
+from typing import Dict, Optional, Tuple
 
 # import numpy as np
 # import pydensecrf.densecrf as crf
@@ -12,24 +13,56 @@ import SimpleITK as sitk
 import numpy as np
 
 
+class PostProcessingParams(pymia_fltr.FilterParams):
+    """Parameters for post-processing filter."""
+    
+    def __init__(self, min_component_size: int = 5,
+                 per_tissue_sizes: Optional[Dict[str, int]] = None,
+                 kernel_radius: Tuple[int, int, int] = (1, 1, 1),
+                 retention_threshold: float = 0.5):
+        """Initializes a new instance of the PostProcessingParams class.
+        
+        Args:
+            min_component_size (int): Global minimum component size in voxels (default: 5).
+            per_tissue_sizes : Dictionary mapping tissue names to minimum sizes. If provided, overrides global min_component_size for specific tissues.
+            kernel_radius (Tuple[int, int, int]): Kernel radius for morphological operations (default: (1, 1, 1)).
+            retention_threshold (float): Skip postprocessing if less than this fraction of voxels would be retained (default: 0.5).
+        """
+        self.min_component_size = min_component_size
+        self.per_tissue_sizes = per_tissue_sizes or {}
+        self.kernel_radius = kernel_radius
+        self.retention_threshold = retention_threshold
+
+
 class ImagePostProcessing(pymia_fltr.Filter):
     """Represents a post-processing filter."""
+
+    # Map label indices to tissue names for per-tissue size configuration
+    LABEL_TO_TISSUE = {
+        1: 'WhiteMatter',
+        2: 'GreyMatter',
+        3: 'Hippocampus',
+        4: 'Amygdala',
+        5: 'Thalamus'
+    }
 
     def __init__(self):
         """Initializes a new instance of the ImagePostProcessing class."""
         super().__init__()
 
-    def execute(self, image: sitk.Image, params: pymia_fltr.FilterParams = None) -> sitk.Image:
-        """Registers an image.
+    def execute(self, image: sitk.Image, params: PostProcessingParams = None) -> sitk.Image:
+        """Post-processes a segmentation image.
 
         Args:
             image (sitk.Image): The image.
-            params (FilterParams): The parameters.
+            params (PostProcessingParams): The parameters.
 
         Returns:
             sitk.Image: The post-processed image.
         """
-
+        # Use default parameters if none provided
+        if params is None:
+            params = PostProcessingParams()
 
         # Convert to numpy for processing
         img_array = sitk.GetArrayFromImage(image)
@@ -41,8 +74,16 @@ class ImagePostProcessing(pymia_fltr.Filter):
         
         # Apply connected component analysis for each label
         for label in unique_labels:
+            # Determine minimum size for this specific label
+            tissue_name = self.LABEL_TO_TISSUE.get(int(label), None)
+            if tissue_name and tissue_name in params.per_tissue_sizes:
+                min_size = params.per_tissue_sizes[tissue_name]
+            else:
+                min_size = params.min_component_size
+            
             # Create binary mask for this label
             label_mask = (img_array == label).astype(np.uint8)
+            initial_voxel_count = np.sum(label_mask)
             
             # Convert to SimpleITK image for connected component analysis
             label_img = sitk.GetImageFromArray(label_mask)
@@ -59,8 +100,7 @@ class ImagePostProcessing(pymia_fltr.Filter):
             label_stats = sitk.LabelShapeStatisticsImageFilter()
             label_stats.Execute(cc_img)
             
-            # Keep only components larger than minimum size (10 voxels)
-            min_size = 10
+            # Keep only components larger than minimum size
             cc_array = sitk.GetArrayFromImage(cc_img)
             filtered_mask = np.zeros_like(cc_array)
             
@@ -68,9 +108,24 @@ class ImagePostProcessing(pymia_fltr.Filter):
                 if label_stats.GetNumberOfPixels(cc_label) >= min_size:
                     filtered_mask[cc_array == cc_label] = 1
             
+            # Check retention threshold
+            retained_voxels = np.sum(filtered_mask)
+            retention_ratio = retained_voxels / initial_voxel_count if initial_voxel_count > 0 else 0
+            
+            # Skip morphological operations if too many voxels were removed
+            if retention_ratio < params.retention_threshold:
+                warnings.warn(
+                    f"Label {label} ({tissue_name or 'unknown'}): Retention ratio {retention_ratio:.2%} "
+                    f"is below threshold {params.retention_threshold:.2%}. Skipping morphological closing."
+                )
+                # Keep the filtered result without morphological closing
+                processed_array[filtered_mask == 1] = label
+                processed_array[(img_array == label) & (filtered_mask == 0)] = 0
+                continue
+            
             # Apply morphological closing to fill small holes
             closing_filter = sitk.BinaryMorphologicalClosingImageFilter()
-            closing_filter.SetKernelRadius(1)
+            closing_filter.SetKernelRadius(params.kernel_radius)
             closing_filter.SetForegroundValue(1)
             
             filtered_img = sitk.GetImageFromArray(filtered_mask.astype(np.uint8))
@@ -80,7 +135,7 @@ class ImagePostProcessing(pymia_fltr.Filter):
             
             # Update the processed array
             processed_array[closed_array == 1] = label
-            processed_array[closed_array == 0] = 0  # Set to background where component was removed
+            processed_array[(img_array == label) & (closed_array == 0)] = 0  # Set removed voxels to background
         
         # Convert back to SimpleITK image
         result_img = sitk.GetImageFromArray(processed_array.astype(np.uint8))

@@ -122,6 +122,14 @@ def main(result_dir: str, data_atlas_dir: str, data_train_dir: str, data_test_di
     forest.fit(data_train, labels_train)
     print(' Time elapsed:', timeit.default_timer() - start_time, 's')
 
+    # Clean up training data to free memory before testing
+    del data_train
+    del labels_train
+    del images
+    import gc
+    gc.collect()
+    print(' Training data cleaned from memory')
+
     # create a result directory with timestamp
     t = datetime.datetime.now().strftime('%Y-%m-%d-%H-%M-%S')
     result_dir = os.path.join(result_dir, t)
@@ -170,8 +178,9 @@ def main(result_dir: str, data_atlas_dir: str, data_train_dir: str, data_test_di
         images_probabilities.append(image_probabilities)
 
     # post-process segmentation and evaluate with post-processing
+    # Changed multi_process to False to reduce memory consumption
     images_post_processed = putil.post_process_batch(images_test, images_prediction, images_probabilities,
-                                                     post_process_params, multi_process=True)
+                                                     post_process_params, multi_process=False)
 
     for i, img in enumerate(images_test):
         evaluator.evaluate(images_post_processed[i], img.images[structure.BrainImageTypes.GroundTruth],

@@ -2,52 +2,52 @@
   "performance_trends": {
     "overall_performance": {
       "best_experiment": 6,
-      "worst_experiment": 8,
-      "performance_range": 0.2694104062573481,
-      "mean_performance": 0.5908754453290944,
-      "std_performance": 0.08398587740221237
+      "worst_experiment": 13,
+      "performance_range": 0.12201081878468079,
+      "mean_performance": 0.6108678995276641,
+      "std_performance": 0.03369875834151279
     },
     "variability": {
       "most_consistent": 3,
-      "least_consistent": 8,
-      "mean_variability": 0.16654874391780577
+      "least_consistent": 10,
+      "mean_variability": 0.14859492466380742
     }
   },
   "tissue_specific_analysis": {
     "Thalamus": {
       "best_experiment": 3,
-      "worst_experiment": 4,
-      "performance_range": 0.10033641682878769,
-      "mean_performance": 0.7255174761536444,
-      "experiments_tested": 9
-    },
-    "Hippocampus": {
-      "best_experiment": 3,
-      "worst_experiment": 8,
-      "performance_range": 0.24945587716642037,
-      "mean_performance": 0.42324384364405254,
-      "experiments_tested": 9
-    },
-    "GreyMatter": {
-      "best_experiment": 2,
-      "worst_experiment": 8,
-      "performance_range": 0.4119293894525144,
-      "mean_performance": 0.6185681243232317,
-      "experiments_tested": 9
+      "worst_experiment": 13,
+      "performance_range": 0.11397006655658959,
+      "mean_performance": 0.7222862647868811,
+      "experiments_tested": 18
     },
     "Amygdala": {
       "best_experiment": 6,
-      "worst_experiment": 8,
-      "performance_range": 0.30910542706126487,
-      "mean_performance": 0.4443426847111104,
-      "experiments_tested": 9
+      "worst_experiment": 13,
+      "performance_range": 0.2054450427667156,
+      "mean_performance": 0.45867824834556753,
+      "experiments_tested": 18
+    },
+    "GreyMatter": {
+      "best_experiment": 2,
+      "worst_experiment": 13,
+      "performance_range": 0.16412137994641562,
+      "mean_performance": 0.6430652588576774,
+      "experiments_tested": 18
+    },
+    "Hippocampus": {
+      "best_experiment": 3,
+      "worst_experiment": 10,
+      "performance_range": 0.15145173434034398,
+      "mean_performance": 0.4427804671804696,
+      "experiments_tested": 18
     },
     "WhiteMatter": {
-      "best_experiment": 2,
-      "worst_experiment": 8,
-      "performance_range": 0.4244037964880946,
-      "mean_performance": 0.7427050978134325,
-      "experiments_tested": 9
+      "best_experiment": 11,
+      "worst_experiment": 4,
+      "performance_range": 0.051937275110169545,
+      "mean_performance": 0.7875292584677245,
+      "experiments_tested": 18
     }
   }
 }

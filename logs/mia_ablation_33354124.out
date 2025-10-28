@@ -1,0 +1,43 @@
+Python: /storage/homefs/ns12l060/.conda/envs/mialab/bin/python
+Environment: mialab
+Requirement already satisfied: scikit-learn in /storage/homefs/ns12l060/.conda/envs/mialab/lib/python3.14/site-packages (1.7.2)
+Requirement already satisfied: pymia in /storage/homefs/ns12l060/.conda/envs/mialab/lib/python3.14/site-packages (0.3.4)
+Requirement already satisfied: pathos in /storage/homefs/ns12l060/.conda/envs/mialab/lib/python3.14/site-packages (0.3.4)
+Collecting pandas
+  Downloading pandas-2.3.3-cp314-cp314-manylinux_2_24_x86_64.manylinux_2_28_x86_64.whl.metadata (91 kB)
+Requirement already satisfied: numpy>=1.22.0 in /storage/homefs/ns12l060/.conda/envs/mialab/lib/python3.14/site-packages (from scikit-learn) (2.3.4)
+Requirement already satisfied: scipy>=1.8.0 in /storage/homefs/ns12l060/.conda/envs/mialab/lib/python3.14/site-packages (from scikit-learn) (1.16.2)
+Requirement already satisfied: joblib>=1.2.0 in /storage/homefs/ns12l060/.conda/envs/mialab/lib/python3.14/site-packages (from scikit-learn) (1.5.2)
+Requirement already satisfied: threadpoolctl>=3.1.0 in /storage/homefs/ns12l060/.conda/envs/mialab/lib/python3.14/site-packages (from scikit-learn) (3.6.0)
+Requirement already satisfied: h5py>=2.10.0 in /storage/homefs/ns12l060/.conda/envs/mialab/lib/python3.14/site-packages (from pymia) (3.15.1)
+Requirement already satisfied: scikit-image>=0.17.2 in /storage/homefs/ns12l060/.conda/envs/mialab/lib/python3.14/site-packages (from pymia) (0.25.2)
+Requirement already satisfied: SimpleITK>=1.2.3 in /storage/homefs/ns12l060/.conda/envs/mialab/lib/python3.14/site-packages (from pymia) (2.5.2)
+Requirement already satisfied: ppft>=1.7.7 in /storage/homefs/ns12l060/.conda/envs/mialab/lib/python3.14/site-packages (from pathos) (1.7.7)
+Requirement already satisfied: dill>=0.4.0 in /storage/homefs/ns12l060/.conda/envs/mialab/lib/python3.14/site-packages (from pathos) (0.4.0)
+Requirement already satisfied: pox>=0.3.6 in /storage/homefs/ns12l060/.conda/envs/mialab/lib/python3.14/site-packages (from pathos) (0.3.6)
+Requirement already satisfied: multiprocess>=0.70.18 in /storage/homefs/ns12l060/.conda/envs/mialab/lib/python3.14/site-packages (from pathos) (0.70.18)
+Collecting python-dateutil>=2.8.2 (from pandas)
+  Downloading python_dateutil-2.9.0.post0-py2.py3-none-any.whl.metadata (8.4 kB)
+Collecting pytz>=2020.1 (from pandas)
+  Using cached pytz-2025.2-py2.py3-none-any.whl.metadata (22 kB)
+Collecting tzdata>=2022.7 (from pandas)
+  Using cached tzdata-2025.2-py2.py3-none-any.whl.metadata (1.4 kB)
+Collecting six>=1.5 (from python-dateutil>=2.8.2->pandas)
+  Downloading six-1.17.0-py2.py3-none-any.whl.metadata (1.7 kB)
+Requirement already satisfied: networkx>=3.0 in /storage/homefs/ns12l060/.conda/envs/mialab/lib/python3.14/site-packages (from scikit-image>=0.17.2->pymia) (3.5)
+Requirement already satisfied: pillow>=10.1 in /storage/homefs/ns12l060/.conda/envs/mialab/lib/python3.14/site-packages (from scikit-image>=0.17.2->pymia) (12.0.0)
+Requirement already satisfied: imageio!=2.35.0,>=2.33 in /storage/homefs/ns12l060/.conda/envs/mialab/lib/python3.14/site-packages (from scikit-image>=0.17.2->pymia) (2.37.0)
+Requirement already satisfied: tifffile>=2022.8.12 in /storage/homefs/ns12l060/.conda/envs/mialab/lib/python3.14/site-packages (from scikit-image>=0.17.2->pymia) (2025.10.16)
+Requirement already satisfied: packaging>=21 in /storage/homefs/ns12l060/.conda/envs/mialab/lib/python3.14/site-packages (from scikit-image>=0.17.2->pymia) (25.0)
+Requirement already satisfied: lazy-loader>=0.4 in /storage/homefs/ns12l060/.conda/envs/mialab/lib/python3.14/site-packages (from scikit-image>=0.17.2->pymia) (0.4)
+Downloading pandas-2.3.3-cp314-cp314-manylinux_2_24_x86_64.manylinux_2_28_x86_64.whl (12.3 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 12.3/12.3 MB 14.0 MB/s  0:00:00
+Downloading python_dateutil-2.9.0.post0-py2.py3-none-any.whl (229 kB)
+Using cached pytz-2025.2-py2.py3-none-any.whl (509 kB)
+Downloading six-1.17.0-py2.py3-none-any.whl (11 kB)
+Using cached tzdata-2025.2-py2.py3-none-any.whl (347 kB)
+Installing collected packages: pytz, tzdata, six, python-dateutil, pandas
+
+Successfully installed pandas-2.3.3 python-dateutil-2.9.0.post0 pytz-2025.2 six-1.17.0 tzdata-2025.2
+Starting ablation experiments...
+Done!

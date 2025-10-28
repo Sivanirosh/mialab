@@ -1,0 +1,3722 @@
+Python: /storage/homefs/ns12l060/.conda/envs/mialab/bin/python
+Environment: mialab
+Requirement already satisfied: scikit-learn in /storage/homefs/ns12l060/.conda/envs/mialab/lib/python3.14/site-packages (1.7.2)
+Requirement already satisfied: pymia in /storage/homefs/ns12l060/.conda/envs/mialab/lib/python3.14/site-packages (0.3.4)
+Requirement already satisfied: pathos in /storage/homefs/ns12l060/.conda/envs/mialab/lib/python3.14/site-packages (0.3.4)
+Requirement already satisfied: pandas in /storage/homefs/ns12l060/.conda/envs/mialab/lib/python3.14/site-packages (2.3.3)
+Requirement already satisfied: matplotlib in /storage/homefs/ns12l060/.conda/envs/mialab/lib/python3.14/site-packages (3.10.7)
+Requirement already satisfied: seaborn in /storage/homefs/ns12l060/.conda/envs/mialab/lib/python3.14/site-packages (0.13.2)
+Requirement already satisfied: numpy>=1.22.0 in /storage/homefs/ns12l060/.conda/envs/mialab/lib/python3.14/site-packages (from scikit-learn) (2.3.4)
+Requirement already satisfied: scipy>=1.8.0 in /storage/homefs/ns12l060/.conda/envs/mialab/lib/python3.14/site-packages (from scikit-learn) (1.16.2)
+Requirement already satisfied: joblib>=1.2.0 in /storage/homefs/ns12l060/.conda/envs/mialab/lib/python3.14/site-packages (from scikit-learn) (1.5.2)
+Requirement already satisfied: threadpoolctl>=3.1.0 in /storage/homefs/ns12l060/.conda/envs/mialab/lib/python3.14/site-packages (from scikit-learn) (3.6.0)
+Requirement already satisfied: h5py>=2.10.0 in /storage/homefs/ns12l060/.conda/envs/mialab/lib/python3.14/site-packages (from pymia) (3.15.1)
+Requirement already satisfied: scikit-image>=0.17.2 in /storage/homefs/ns12l060/.conda/envs/mialab/lib/python3.14/site-packages (from pymia) (0.25.2)
+Requirement already satisfied: SimpleITK>=1.2.3 in /storage/homefs/ns12l060/.conda/envs/mialab/lib/python3.14/site-packages (from pymia) (2.5.2)
+Requirement already satisfied: ppft>=1.7.7 in /storage/homefs/ns12l060/.conda/envs/mialab/lib/python3.14/site-packages (from pathos) (1.7.7)
+Requirement already satisfied: dill>=0.4.0 in /storage/homefs/ns12l060/.conda/envs/mialab/lib/python3.14/site-packages (from pathos) (0.4.0)
+Requirement already satisfied: pox>=0.3.6 in /storage/homefs/ns12l060/.conda/envs/mialab/lib/python3.14/site-packages (from pathos) (0.3.6)
+Requirement already satisfied: multiprocess>=0.70.18 in /storage/homefs/ns12l060/.conda/envs/mialab/lib/python3.14/site-packages (from pathos) (0.70.18)
+Requirement already satisfied: python-dateutil>=2.8.2 in /storage/homefs/ns12l060/.conda/envs/mialab/lib/python3.14/site-packages (from pandas) (2.9.0.post0)
+Requirement already satisfied: pytz>=2020.1 in /storage/homefs/ns12l060/.conda/envs/mialab/lib/python3.14/site-packages (from pandas) (2025.2)
+Requirement already satisfied: tzdata>=2022.7 in /storage/homefs/ns12l060/.conda/envs/mialab/lib/python3.14/site-packages (from pandas) (2025.2)
+Requirement already satisfied: contourpy>=1.0.1 in /storage/homefs/ns12l060/.conda/envs/mialab/lib/python3.14/site-packages (from matplotlib) (1.3.3)
+Requirement already satisfied: cycler>=0.10 in /storage/homefs/ns12l060/.conda/envs/mialab/lib/python3.14/site-packages (from matplotlib) (0.12.1)
+Requirement already satisfied: fonttools>=4.22.0 in /storage/homefs/ns12l060/.conda/envs/mialab/lib/python3.14/site-packages (from matplotlib) (4.60.1)
+Requirement already satisfied: kiwisolver>=1.3.1 in /storage/homefs/ns12l060/.conda/envs/mialab/lib/python3.14/site-packages (from matplotlib) (1.4.9)
+Requirement already satisfied: packaging>=20.0 in /storage/homefs/ns12l060/.conda/envs/mialab/lib/python3.14/site-packages (from matplotlib) (25.0)
+Requirement already satisfied: pillow>=8 in /storage/homefs/ns12l060/.conda/envs/mialab/lib/python3.14/site-packages (from matplotlib) (12.0.0)
+Requirement already satisfied: pyparsing>=3 in /storage/homefs/ns12l060/.conda/envs/mialab/lib/python3.14/site-packages (from matplotlib) (3.2.5)
+Requirement already satisfied: six>=1.5 in /storage/homefs/ns12l060/.conda/envs/mialab/lib/python3.14/site-packages (from python-dateutil>=2.8.2->pandas) (1.17.0)
+Requirement already satisfied: networkx>=3.0 in /storage/homefs/ns12l060/.conda/envs/mialab/lib/python3.14/site-packages (from scikit-image>=0.17.2->pymia) (3.5)
+Requirement already satisfied: imageio!=2.35.0,>=2.33 in /storage/homefs/ns12l060/.conda/envs/mialab/lib/python3.14/site-packages (from scikit-image>=0.17.2->pymia) (2.37.0)
+Requirement already satisfied: tifffile>=2022.8.12 in /storage/homefs/ns12l060/.conda/envs/mialab/lib/python3.14/site-packages (from scikit-image>=0.17.2->pymia) (2025.10.16)
+Requirement already satisfied: lazy-loader>=0.4 in /storage/homefs/ns12l060/.conda/envs/mialab/lib/python3.14/site-packages (from scikit-image>=0.17.2->pymia) (0.4)
+Starting ablation experiments...
+============================================================
+STARTING ABLATION STUDY
+============================================================
+Atlas data: ./data/atlas
+Training data: ./data/train
+Test data: ./data/test
+Optimization: none
+Study type: combined
+Output directory: ./ablation_experiments
+============================================================
+Starting Comprehensive Ablation Study
+============================================================
+Study type: combined
+Optimization level: none
+Using default Random Forest parameters (no optimization)
+
+Running 18 experiments
+
+Experiment Plan:
+  0: Baseline (no preprocessing)
+  1: Normalization only
+  2: Skull stripping only
+  3: Registration only
+  4: Normalization + Skull stripping
+  5: Normalization + Registration
+  6: Registration + Skull stripping
+  7: All preprocessing (Norm + Skull + Reg)
+  8: All preprocessing + Post-processing
+  9: Baseline (no preprocessing) + Optimal Post
+  10: Normalization only + Optimal Post
+  11: Skull stripping only + Optimal Post
+  12: Registration only + Optimal Post
+  13: Normalization + Skull stripping + Optimal Post
+  14: Normalization + Registration + Optimal Post
+  15: Registration + Skull stripping + Optimal Post
+  16: All preprocessing (Norm + Skull + Reg) + Optimal Post
+  17: All preprocessing + Post-processing + Optimal Post
+
+============================================================
+Running Experiment 0/17: baseline_none
+Description: Baseline without any preprocessing
+============================================================
+Running experiment: exp_00_baseline_none
+Description: Baseline without any preprocessing
+----- Training...
+---------- Processing 113922
+---------- Processing 100307
+---------- Processing 110411
+---------- Processing 100408
+---------- Processing 101107
+---------- Processing 101915
+---------- Processing 101309
+---------- Processing 108828
+---------- Processing 103414
+---------- Processing 115320
+---------- Processing 103111
+---------- Processing 113619
+---------- Processing 111312
+---------- Processing 106016
+---------- Processing 111716
+---------- Processing 114419
+---------- Processing 116524
+---------- Processing 105115
+---------- Processing 105014
+---------- Processing 103818
+Training Random Forest with 100 trees, max_depth=None, max_features=sqrt (out of 7 total features)
+ Time elapsed: 2.5638961840886623 s
+ Training data cleaned from memory
+----- Testing...
+---------- Processing 118730
+---------- Processing 117122
+---------- Processing 120111
+---------- Processing 122620
+---------- Processing 124422
+---------- Processing 118528
+---------- Processing 123117
+---------- Processing 122317
+---------- Processing 123925
+---------- Processing 118932
+---------- Testing 118730
+ Time elapsed: 7.506208834936842 s
+---------- Testing 117122
+ Time elapsed: 7.181148868985474 s
+---------- Testing 120111
+ Time elapsed: 7.017339120036922 s
+---------- Testing 122620
+ Time elapsed: 7.335424863034859 s
+---------- Testing 124422
+ Time elapsed: 7.334367102012038 s
+---------- Testing 118528
+ Time elapsed: 7.138537690974772 s
+---------- Testing 123117
+ Time elapsed: 7.8462613669689745 s
+---------- Testing 122317
+ Time elapsed: 7.366524987039156 s
+---------- Testing 123925
+ Time elapsed: 7.2882267030654475 s
+---------- Testing 118932
+ Time elapsed: 7.548637131927535 s
+---------- Post-processing 118730
+---------- Post-processing 117122
+---------- Post-processing 120111
+---------- Post-processing 122620
+---------- Post-processing 124422
+---------- Post-processing 118528
+---------- Post-processing 123117
+---------- Post-processing 122317
+---------- Post-processing 123925
+---------- Post-processing 118932
+Results saved to ./ablation_experiments/exp_00_baseline_none/2025-10-26-12-19-15/results.csv with 100 measurements
+
+Subject-wise results...
+SUBJECT    LABEL        DICE   HDRFDST
+117122     Amygdala     0.378  14.595 
+117122     GreyMatter   0.711  10.050 
+117122     Hippocampus  0.460  14.353 
+117122     Thalamus     0.743  8.602  
+117122     WhiteMatter  0.823  11.576 
+117122-PP  Amygdala     0.378  14.595 
+117122-PP  GreyMatter   0.711  10.050 
+117122-PP  Hippocampus  0.460  14.353 
+117122-PP  Thalamus     0.743  8.602  
+117122-PP  WhiteMatter  0.823  11.576 
+118528     Amygdala     0.506  12.410 
+118528     GreyMatter   0.655  10.770 
+118528     Hippocampus  0.464  13.191 
+118528     Thalamus     0.748  6.164  
+118528     WhiteMatter  0.727  13.601 
+118528-PP  Amygdala     0.506  12.410 
+118528-PP  GreyMatter   0.655  10.770 
+118528-PP  Hippocampus  0.464  13.191 
+118528-PP  Thalamus     0.748  6.164  
+118528-PP  WhiteMatter  0.727  13.601 
+118730     Amygdala     0.452  11.662 
+118730     GreyMatter   0.686  10.677 
+118730     Hippocampus  0.400  12.806 
+118730     Thalamus     0.718  7.616  
+118730     WhiteMatter  0.816  16.882 
+118730-PP  Amygdala     0.452  11.662 
+118730-PP  GreyMatter   0.686  10.677 
+118730-PP  Hippocampus  0.400  12.806 
+118730-PP  Thalamus     0.718  7.616  
+118730-PP  WhiteMatter  0.816  16.882 
+118932     Amygdala     0.486  12.530 
+118932     GreyMatter   0.726  9.000  
+118932     Hippocampus  0.482  12.689 
+118932     Thalamus     0.746  7.211  
+118932     WhiteMatter  0.818  13.784 
+118932-PP  Amygdala     0.486  12.530 
+118932-PP  GreyMatter   0.726  9.000  
+118932-PP  Hippocampus  0.482  12.689 
+118932-PP  Thalamus     0.746  7.211  
+118932-PP  WhiteMatter  0.818  13.784 
+120111     Amygdala     0.561  10.630 
+120111     GreyMatter   0.717  9.055  
+120111     Hippocampus  0.497  12.369 
+120111     Thalamus     0.774  6.557  
+120111     WhiteMatter  0.814  9.849  
+120111-PP  Amygdala     0.561  10.630 
+120111-PP  GreyMatter   0.717  9.055  
+120111-PP  Hippocampus  0.497  12.369 
+120111-PP  Thalamus     0.774  6.557  
+120111-PP  WhiteMatter  0.814  9.849  
+122317     Amygdala     0.610  13.077 
+122317     GreyMatter   0.716  10.488 
+122317     Hippocampus  0.508  13.077 
+122317     Thalamus     0.702  9.434  
+122317     WhiteMatter  0.773  14.457 
+122317-PP  Amygdala     0.610  13.077 
+122317-PP  GreyMatter   0.716  10.488 
+122317-PP  Hippocampus  0.508  13.077 
+122317-PP  Thalamus     0.702  9.434  
+122317-PP  WhiteMatter  0.773  14.457 
+122620     Amygdala     0.458  12.083 
+122620     GreyMatter   0.715  10.344 
+122620     Hippocampus  0.367  13.191 
+122620     Thalamus     0.686  8.485  
+122620     WhiteMatter  0.792  15.780 
+122620-PP  Amygdala     0.458  12.083 
+122620-PP  GreyMatter   0.715  10.344 
+122620-PP  Hippocampus  0.367  13.191 
+122620-PP  Thalamus     0.686  8.485  
+122620-PP  WhiteMatter  0.792  15.780 
+123117     Amygdala     0.415  13.601 
+123117     GreyMatter   0.658  16.062 
+123117     Hippocampus  0.343  18.708 
+123117     Thalamus     0.422  14.213 
+123117     WhiteMatter  0.799  22.023 
+123117-PP  Amygdala     0.415  13.601 
+123117-PP  GreyMatter   0.658  16.062 
+123117-PP  Hippocampus  0.343  18.708 
+123117-PP  Thalamus     0.422  14.213 
+123117-PP  WhiteMatter  0.799  22.023 
+123925     Amygdala     0.555  12.042 
+123925     GreyMatter   0.676  14.142 
+123925     Hippocampus  0.383  13.601 
+123925     Thalamus     0.751  8.602  
+123925     WhiteMatter  0.799  16.248 
+123925-PP  Amygdala     0.555  12.042 
+123925-PP  GreyMatter   0.676  14.142 
+123925-PP  Hippocampus  0.383  13.601 
+123925-PP  Thalamus     0.751  8.602  
+123925-PP  WhiteMatter  0.799  16.248 
+124422     Amygdala     0.598  10.817 
+124422     GreyMatter   0.645  12.207 
+124422     Hippocampus  0.499  11.358 
+124422     Thalamus     0.803  6.481  
+124422     WhiteMatter  0.708  14.731 
+124422-PP  Amygdala     0.598  10.817 
+124422-PP  GreyMatter   0.645  12.207 
+124422-PP  Hippocampus  0.499  11.358 
+124422-PP  Thalamus     0.803  6.481  
+124422-PP  WhiteMatter  0.708  14.731 
+
+Aggregated statistic results...
+LABEL        METRIC   STATISTIC  VALUE 
+Amygdala     DICE     MEAN       0.502 
+Amygdala     DICE     STD        0.074 
+Amygdala     HDRFDST  MEAN       12.345
+Amygdala     HDRFDST  STD        1.145 
+GreyMatter   DICE     MEAN       0.690 
+GreyMatter   DICE     STD        0.029 
+GreyMatter   HDRFDST  MEAN       11.280
+GreyMatter   HDRFDST  STD        2.138 
+Hippocampus  DICE     MEAN       0.440 
+Hippocampus  DICE     STD        0.058 
+Hippocampus  HDRFDST  MEAN       13.534
+Hippocampus  HDRFDST  STD        1.877 
+Thalamus     DICE     MEAN       0.709 
+Thalamus     DICE     STD        0.101 
+Thalamus     HDRFDST  MEAN       8.337 
+Thalamus     HDRFDST  STD        2.214 
+WhiteMatter  DICE     MEAN       0.787 
+WhiteMatter  DICE     STD        0.038 
+WhiteMatter  HDRFDST  MEAN       14.893
+WhiteMatter  HDRFDST  STD        3.114 
+Experiment exp_00_baseline_none completed in 270.0 seconds
+✅ Experiment 0 completed successfully
+
+============================================================
+Running Experiment 1/17: normalization_only
+Description: With normalization only
+============================================================
+Running experiment: exp_01_normalization_only
+Description: With normalization only
+----- Training...
+---------- Processing 113922
+---------- Processing 100307
+---------- Processing 110411
+---------- Processing 100408
+---------- Processing 101107
+---------- Processing 101915
+---------- Processing 101309
+---------- Processing 108828
+---------- Processing 103414
+---------- Processing 115320
+---------- Processing 103111
+---------- Processing 113619
+---------- Processing 111312
+---------- Processing 106016
+---------- Processing 111716
+---------- Processing 114419
+---------- Processing 116524
+---------- Processing 105115
+---------- Processing 105014
+---------- Processing 103818
+Training Random Forest with 100 trees, max_depth=None, max_features=sqrt (out of 7 total features)
+ Time elapsed: 0.9649480850202963 s
+ Training data cleaned from memory
+----- Testing...
+---------- Processing 118730
+---------- Processing 117122
+---------- Processing 120111
+---------- Processing 122620
+---------- Processing 124422
+---------- Processing 118528
+---------- Processing 123117
+---------- Processing 122317
+---------- Processing 123925
+---------- Processing 118932
+---------- Testing 118730
+ Time elapsed: 7.425113281002268 s
+---------- Testing 117122
+ Time elapsed: 6.941383737954311 s
+---------- Testing 120111
+ Time elapsed: 7.162931390106678 s
+---------- Testing 122620
+ Time elapsed: 7.156578538939357 s
+---------- Testing 124422
+ Time elapsed: 7.127779956092127 s
+---------- Testing 118528
+ Time elapsed: 7.008207776001655 s
+---------- Testing 123117
+ Time elapsed: 7.307461640913971 s
+---------- Testing 122317
+ Time elapsed: 7.022860512020998 s
+---------- Testing 123925
+ Time elapsed: 6.897941909963265 s
+---------- Testing 118932
+ Time elapsed: 7.126036385074258 s
+---------- Post-processing 118730
+---------- Post-processing 117122
+---------- Post-processing 120111
+---------- Post-processing 122620
+---------- Post-processing 124422
+---------- Post-processing 118528
+---------- Post-processing 123117
+---------- Post-processing 122317
+---------- Post-processing 123925
+---------- Post-processing 118932
+Results saved to ./ablation_experiments/exp_01_normalization_only/2025-10-26-12-23-42/results.csv with 100 measurements
+
+Subject-wise results...
+SUBJECT    LABEL        DICE   HDRFDST
+117122     Amygdala     0.296  15.067 
+117122     GreyMatter   0.637  10.677 
+117122     Hippocampus  0.418  14.353 
+117122     Thalamus     0.719  10.198 
+117122     WhiteMatter  0.808  13.638 
+117122-PP  Amygdala     0.296  15.067 
+117122-PP  GreyMatter   0.637  10.677 
+117122-PP  Hippocampus  0.418  14.353 
+117122-PP  Thalamus     0.719  10.198 
+117122-PP  WhiteMatter  0.808  13.638 
+118528     Amygdala     0.383  13.928 
+118528     GreyMatter   0.601  11.705 
+118528     Hippocampus  0.357  13.191 
+118528     Thalamus     0.711  9.000  
+118528     WhiteMatter  0.810  15.362 
+118528-PP  Amygdala     0.383  13.928 
+118528-PP  GreyMatter   0.601  11.705 
+118528-PP  Hippocampus  0.357  13.191 
+118528-PP  Thalamus     0.711  9.000  
+118528-PP  WhiteMatter  0.810  15.362 
+118730     Amygdala     0.452  12.042 
+118730     GreyMatter   0.687  9.695  
+118730     Hippocampus  0.379  11.790 
+118730     Thalamus     0.664  8.246  
+118730     WhiteMatter  0.766  15.133 
+118730-PP  Amygdala     0.452  12.042 
+118730-PP  GreyMatter   0.687  9.695  
+118730-PP  Hippocampus  0.379  11.790 
+118730-PP  Thalamus     0.664  8.246  
+118730-PP  WhiteMatter  0.766  15.133 
+118932     Amygdala     0.455  13.115 
+118932     GreyMatter   0.692  10.050 
+118932     Hippocampus  0.397  12.689 
+118932     Thalamus     0.727  8.062  
+118932     WhiteMatter  0.821  10.198 
+118932-PP  Amygdala     0.455  13.115 
+118932-PP  GreyMatter   0.692  10.050 
+118932-PP  Hippocampus  0.397  12.689 
+118932-PP  Thalamus     0.727  8.062  
+118932-PP  WhiteMatter  0.821  10.198 
+120111     Amygdala     0.445  11.576 
+120111     GreyMatter   0.649  10.440 
+120111     Hippocampus  0.421  12.649 
+120111     Thalamus     0.764  9.000  
+120111     WhiteMatter  0.840  9.165  
+120111-PP  Amygdala     0.445  11.576 
+120111-PP  GreyMatter   0.649  10.440 
+120111-PP  Hippocampus  0.421  12.649 
+120111-PP  Thalamus     0.764  9.000  
+120111-PP  WhiteMatter  0.840  9.165  
+122317     Amygdala     0.516  13.748 
+122317     GreyMatter   0.669  11.446 
+122317     Hippocampus  0.395  13.454 
+122317     Thalamus     0.635  12.083 
+122317     WhiteMatter  0.815  11.874 
+122317-PP  Amygdala     0.516  13.748 
+122317-PP  GreyMatter   0.669  11.446 
+122317-PP  Hippocampus  0.395  13.454 
+122317-PP  Thalamus     0.635  12.083 
+122317-PP  WhiteMatter  0.815  11.874 
+122620     Amygdala     0.449  12.124 
+122620     GreyMatter   0.666  11.000 
+122620     Hippocampus  0.316  13.115 
+122620     Thalamus     0.684  8.660  
+122620     WhiteMatter  0.784  14.731 
+122620-PP  Amygdala     0.449  12.124 
+122620-PP  GreyMatter   0.666  11.000 
+122620-PP  Hippocampus  0.316  13.115 
+122620-PP  Thalamus     0.684  8.660  
+122620-PP  WhiteMatter  0.784  14.731 
+123117     Amygdala     0.293  13.748 
+123117     GreyMatter   0.568  15.748 
+123117     Hippocampus  0.254  19.621 
+123117     Thalamus     0.466  15.000 
+123117     WhiteMatter  0.790  17.263 
+123117-PP  Amygdala     0.293  13.748 
+123117-PP  GreyMatter   0.568  15.748 
+123117-PP  Hippocampus  0.254  19.621 
+123117-PP  Thalamus     0.466  15.000 
+123117-PP  WhiteMatter  0.790  17.263 
+123925     Amygdala     0.493  11.358 
+123925     GreyMatter   0.630  14.560 
+123925     Hippocampus  0.340  12.570 
+123925     Thalamus     0.663  10.050 
+123925     WhiteMatter  0.792  16.031 
+123925-PP  Amygdala     0.493  11.358 
+123925-PP  GreyMatter   0.630  14.560 
+123925-PP  Hippocampus  0.340  12.570 
+123925-PP  Thalamus     0.663  10.050 
+123925-PP  WhiteMatter  0.792  16.031 
+124422     Amygdala     0.502  11.446 
+124422     GreyMatter   0.633  12.207 
+124422     Hippocampus  0.396  12.207 
+124422     Thalamus     0.757  11.091 
+124422     WhiteMatter  0.761  14.731 
+124422-PP  Amygdala     0.502  11.446 
+124422-PP  GreyMatter   0.633  12.207 
+124422-PP  Hippocampus  0.396  12.207 
+124422-PP  Thalamus     0.757  11.091 
+124422-PP  WhiteMatter  0.761  14.731 
+
+Aggregated statistic results...
+LABEL        METRIC   STATISTIC  VALUE 
+Amygdala     DICE     MEAN       0.428 
+Amygdala     DICE     STD        0.075 
+Amygdala     HDRFDST  MEAN       12.815
+Amygdala     HDRFDST  STD        1.214 
+GreyMatter   DICE     MEAN       0.643 
+GreyMatter   DICE     STD        0.037 
+GreyMatter   HDRFDST  MEAN       11.753
+GreyMatter   HDRFDST  STD        1.863 
+Hippocampus  DICE     MEAN       0.367 
+Hippocampus  DICE     STD        0.049 
+Hippocampus  HDRFDST  MEAN       13.564
+Hippocampus  HDRFDST  STD        2.127 
+Thalamus     DICE     MEAN       0.679 
+Thalamus     DICE     STD        0.081 
+Thalamus     HDRFDST  MEAN       10.139
+Thalamus     HDRFDST  STD        2.025 
+WhiteMatter  DICE     MEAN       0.799 
+WhiteMatter  DICE     STD        0.024 
+WhiteMatter  HDRFDST  MEAN       13.813
+WhiteMatter  HDRFDST  STD        2.472 
+Experiment exp_01_normalization_only completed in 267.2 seconds
+✅ Experiment 1 completed successfully
+
+============================================================
+Running Experiment 2/17: skullstrip_only
+Description: With skull stripping only
+============================================================
+Running experiment: exp_02_skullstrip_only
+Description: With skull stripping only
+----- Training...
+---------- Processing 113922
+---------- Processing 100307
+---------- Processing 110411
+---------- Processing 100408
+---------- Processing 101107
+---------- Processing 101915
+---------- Processing 101309
+---------- Processing 108828
+---------- Processing 103414
+---------- Processing 115320
+---------- Processing 103111
+---------- Processing 113619
+---------- Processing 111312
+---------- Processing 106016
+---------- Processing 111716
+---------- Processing 114419
+---------- Processing 116524
+---------- Processing 105115
+---------- Processing 105014
+---------- Processing 103818
+Training Random Forest with 100 trees, max_depth=None, max_features=sqrt (out of 7 total features)
+ Time elapsed: 2.0043018710566685 s
+ Training data cleaned from memory
+----- Testing...
+---------- Processing 118730
+---------- Processing 117122
+---------- Processing 120111
+---------- Processing 122620
+---------- Processing 124422
+---------- Processing 118528
+---------- Processing 123117
+---------- Processing 122317
+---------- Processing 123925
+---------- Processing 118932
+---------- Testing 118730
+ Time elapsed: 5.865288930013776 s
+---------- Testing 117122
+ Time elapsed: 5.460818910971284 s
+---------- Testing 120111
+ Time elapsed: 5.485977831995115 s
+---------- Testing 122620
+ Time elapsed: 5.649036139948294 s
+---------- Testing 124422
+ Time elapsed: 5.406390547985211 s
+---------- Testing 118528
+ Time elapsed: 5.465360412956215 s
+---------- Testing 123117
+ Time elapsed: 5.506380939972587 s
+---------- Testing 122317
+ Time elapsed: 5.5505379780661315 s
+---------- Testing 123925
+ Time elapsed: 5.7496471219928935 s
+---------- Testing 118932
+ Time elapsed: 5.660042634932324 s
+---------- Post-processing 118730
+---------- Post-processing 117122
+---------- Post-processing 120111
+---------- Post-processing 122620
+---------- Post-processing 124422
+---------- Post-processing 118528
+---------- Post-processing 123117
+---------- Post-processing 122317
+---------- Post-processing 123925
+---------- Post-processing 118932
+Results saved to ./ablation_experiments/exp_02_skullstrip_only/2025-10-26-12-28-10/results.csv with 100 measurements
+
+Subject-wise results...
+SUBJECT    LABEL        DICE   HDRFDST
+117122     Amygdala     0.346  16.310 
+117122     GreyMatter   0.721  2.236  
+117122     Hippocampus  0.456  14.177 
+117122     Thalamus     0.717  8.246  
+117122     WhiteMatter  0.830  4.123  
+117122-PP  Amygdala     0.346  16.310 
+117122-PP  GreyMatter   0.721  2.236  
+117122-PP  Hippocampus  0.456  14.177 
+117122-PP  Thalamus     0.717  8.246  
+117122-PP  WhiteMatter  0.830  4.123  
+118528     Amygdala     0.485  13.191 
+118528     GreyMatter   0.698  2.000  
+118528     Hippocampus  0.474  11.705 
+118528     Thalamus     0.725  6.708  
+118528     WhiteMatter  0.726  4.899  
+118528-PP  Amygdala     0.485  13.191 
+118528-PP  GreyMatter   0.698  2.000  
+118528-PP  Hippocampus  0.474  11.705 
+118528-PP  Thalamus     0.725  6.708  
+118528-PP  WhiteMatter  0.726  4.899  
+118730     Amygdala     0.460  12.530 
+118730     GreyMatter   0.704  3.464  
+118730     Hippocampus  0.405  12.570 
+118730     Thalamus     0.717  7.000  
+118730     WhiteMatter  0.843  3.317  
+118730-PP  Amygdala     0.460  12.530 
+118730-PP  GreyMatter   0.704  3.464  
+118730-PP  Hippocampus  0.405  12.570 
+118730-PP  Thalamus     0.717  7.000  
+118730-PP  WhiteMatter  0.843  3.317  
+118932     Amygdala     0.469  13.601 
+118932     GreyMatter   0.728  2.828  
+118932     Hippocampus  0.471  12.329 
+118932     Thalamus     0.738  6.708  
+118932     WhiteMatter  0.824  3.606  
+118932-PP  Amygdala     0.469  13.601 
+118932-PP  GreyMatter   0.728  2.828  
+118932-PP  Hippocampus  0.471  12.329 
+118932-PP  Thalamus     0.738  6.708  
+118932-PP  WhiteMatter  0.824  3.606  
+120111     Amygdala     0.532  11.045 
+120111     GreyMatter   0.725  1.732  
+120111     Hippocampus  0.489  11.832 
+120111     Thalamus     0.756  7.141  
+120111     WhiteMatter  0.819  3.162  
+120111-PP  Amygdala     0.532  11.045 
+120111-PP  GreyMatter   0.725  1.732  
+120111-PP  Hippocampus  0.489  11.832 
+120111-PP  Thalamus     0.756  7.141  
+120111-PP  WhiteMatter  0.819  3.162  
+122317     Amygdala     0.610  14.177 
+122317     GreyMatter   0.725  2.236  
+122317     Hippocampus  0.476  12.845 
+122317     Thalamus     0.660  9.434  
+122317     WhiteMatter  0.777  5.099  
+122317-PP  Amygdala     0.610  14.177 
+122317-PP  GreyMatter   0.725  2.236  
+122317-PP  Hippocampus  0.476  12.845 
+122317-PP  Thalamus     0.660  9.434  
+122317-PP  WhiteMatter  0.777  5.099  
+122620     Amygdala     0.472  12.530 
+122620     GreyMatter   0.730  3.742  
+122620     Hippocampus  0.367  12.728 
+122620     Thalamus     0.673  8.602  
+122620     WhiteMatter  0.829  4.000  
+122620-PP  Amygdala     0.472  12.530 
+122620-PP  GreyMatter   0.730  3.742  
+122620-PP  Hippocampus  0.367  12.728 
+122620-PP  Thalamus     0.673  8.602  
+122620-PP  WhiteMatter  0.829  4.000  
+123117     Amygdala     0.446  12.450 
+123117     GreyMatter   0.680  6.708  
+123117     Hippocampus  0.311  19.105 
+123117     Thalamus     0.396  14.457 
+123117     WhiteMatter  0.857  4.583  
+123117-PP  Amygdala     0.446  12.450 
+123117-PP  GreyMatter   0.680  6.708  
+123117-PP  Hippocampus  0.311  19.105 
+123117-PP  Thalamus     0.396  14.457 
+123117-PP  WhiteMatter  0.857  4.583  
+123925     Amygdala     0.539  12.689 
+123925     GreyMatter   0.718  2.000  
+123925     Hippocampus  0.388  12.689 
+123925     Thalamus     0.720  9.000  
+123925     WhiteMatter  0.825  4.000  
+123925-PP  Amygdala     0.539  12.689 
+123925-PP  GreyMatter   0.718  2.000  
+123925-PP  Hippocampus  0.388  12.689 
+123925-PP  Thalamus     0.720  9.000  
+123925-PP  WhiteMatter  0.825  4.000  
+124422     Amygdala     0.571  12.570 
+124422     GreyMatter   0.688  2.000  
+124422     Hippocampus  0.470  11.045 
+124422     Thalamus     0.780  5.385  
+124422     WhiteMatter  0.723  4.472  
+124422-PP  Amygdala     0.571  12.570 
+124422-PP  GreyMatter   0.688  2.000  
+124422-PP  Hippocampus  0.470  11.045 
+124422-PP  Thalamus     0.780  5.385  
+124422-PP  WhiteMatter  0.723  4.472  
+
+Aggregated statistic results...
+LABEL        METRIC   STATISTIC  VALUE 
+Amygdala     DICE     MEAN       0.493 
+Amygdala     DICE     STD        0.070 
+Amygdala     HDRFDST  MEAN       13.109
+Amygdala     HDRFDST  STD        1.322 
+GreyMatter   DICE     MEAN       0.712 
+GreyMatter   DICE     STD        0.017 
+GreyMatter   HDRFDST  MEAN       2.895 
+GreyMatter   HDRFDST  STD        1.422 
+Hippocampus  DICE     MEAN       0.431 
+Hippocampus  DICE     STD        0.057 
+Hippocampus  HDRFDST  MEAN       13.103
+Hippocampus  HDRFDST  STD        2.150 
+Thalamus     DICE     MEAN       0.688 
+Thalamus     DICE     STD        0.103 
+Thalamus     HDRFDST  MEAN       8.268 
+Thalamus     HDRFDST  STD        2.374 
+WhiteMatter  DICE     MEAN       0.805 
+WhiteMatter  DICE     STD        0.045 
+WhiteMatter  HDRFDST  MEAN       4.126 
+WhiteMatter  HDRFDST  STD        0.613 
+Experiment exp_02_skullstrip_only completed in 233.1 seconds
+✅ Experiment 2 completed successfully
+
+============================================================
+Running Experiment 3/17: registration_only
+Description: With registration only
+============================================================
+Running experiment: exp_03_registration_only
+Description: With registration only
+----- Training...
+---------- Processing 113922
+---------- Processing 100307
+---------- Processing 110411
+---------- Processing 100408
+---------- Processing 101107
+---------- Processing 101915
+---------- Processing 101309
+---------- Processing 108828
+---------- Processing 103414
+---------- Processing 115320
+---------- Processing 103111
+---------- Processing 113619
+---------- Processing 111312
+---------- Processing 106016
+---------- Processing 111716
+---------- Processing 114419
+---------- Processing 116524
+---------- Processing 105115
+---------- Processing 105014
+---------- Processing 103818
+Training Random Forest with 100 trees, max_depth=None, max_features=sqrt (out of 7 total features)
+ Time elapsed: 3.3711243940051645 s
+ Training data cleaned from memory
+----- Testing...
+---------- Processing 118730
+---------- Processing 117122
+---------- Processing 120111
+---------- Processing 122620
+---------- Processing 124422
+---------- Processing 118528
+---------- Processing 123117
+---------- Processing 122317
+---------- Processing 123925
+---------- Processing 118932
+---------- Testing 118730
+ Time elapsed: 9.336819258052856 s
+---------- Testing 117122
+ Time elapsed: 8.942282691015862 s
+---------- Testing 120111
+ Time elapsed: 8.783773266011849 s
+---------- Testing 122620
+ Time elapsed: 8.960985190002248 s
+---------- Testing 124422
+ Time elapsed: 9.173964277957566 s
+---------- Testing 118528
+ Time elapsed: 9.20283725101035 s
+---------- Testing 123117
+ Time elapsed: 9.048958116909489 s
+---------- Testing 122317
+ Time elapsed: 9.127413079957478 s
+---------- Testing 123925
+ Time elapsed: 9.238795256009325 s
+---------- Testing 118932
+ Time elapsed: 9.132228140952066 s
+---------- Post-processing 118730
+---------- Post-processing 117122
+---------- Post-processing 120111
+---------- Post-processing 122620
+---------- Post-processing 124422
+---------- Post-processing 118528
+---------- Post-processing 123117
+---------- Post-processing 122317
+---------- Post-processing 123925
+---------- Post-processing 118932
+Results saved to ./ablation_experiments/exp_03_registration_only/2025-10-26-12-32-32/results.csv with 100 measurements
+
+Subject-wise results...
+SUBJECT    LABEL        DICE   HDRFDST
+117122     Amygdala     0.469  13.038 
+117122     GreyMatter   0.697  11.358 
+117122     Hippocampus  0.512  13.153 
+117122     Thalamus     0.778  7.874  
+117122     WhiteMatter  0.817  9.849  
+117122-PP  Amygdala     0.469  13.038 
+117122-PP  GreyMatter   0.697  11.358 
+117122-PP  Hippocampus  0.512  13.153 
+117122-PP  Thalamus     0.778  7.874  
+117122-PP  WhiteMatter  0.817  9.849  
+118528     Amygdala     0.508  13.342 
+118528     GreyMatter   0.664  10.817 
+118528     Hippocampus  0.553  13.416 
+118528     Thalamus     0.757  6.403  
+118528     WhiteMatter  0.720  14.071 
+118528-PP  Amygdala     0.508  13.342 
+118528-PP  GreyMatter   0.664  10.817 
+118528-PP  Hippocampus  0.553  13.416 
+118528-PP  Thalamus     0.757  6.403  
+118528-PP  WhiteMatter  0.720  14.071 
+118730     Amygdala     0.480  11.576 
+118730     GreyMatter   0.679  11.402 
+118730     Hippocampus  0.414  12.083 
+118730     Thalamus     0.738  12.530 
+118730     WhiteMatter  0.805  17.720 
+118730-PP  Amygdala     0.480  11.576 
+118730-PP  GreyMatter   0.679  11.402 
+118730-PP  Hippocampus  0.414  12.083 
+118730-PP  Thalamus     0.738  12.530 
+118730-PP  WhiteMatter  0.805  17.720 
+118932     Amygdala     0.524  12.410 
+118932     GreyMatter   0.713  9.695  
+118932     Hippocampus  0.511  11.790 
+118932     Thalamus     0.778  7.071  
+118932     WhiteMatter  0.804  13.491 
+118932-PP  Amygdala     0.524  12.410 
+118932-PP  GreyMatter   0.713  9.695  
+118932-PP  Hippocampus  0.511  11.790 
+118932-PP  Thalamus     0.778  7.071  
+118932-PP  WhiteMatter  0.804  13.491 
+120111     Amygdala     0.530  10.247 
+120111     GreyMatter   0.696  10.050 
+120111     Hippocampus  0.509  11.747 
+120111     Thalamus     0.729  10.954 
+120111     WhiteMatter  0.807  10.817 
+120111-PP  Amygdala     0.530  10.247 
+120111-PP  GreyMatter   0.696  10.050 
+120111-PP  Hippocampus  0.509  11.747 
+120111-PP  Thalamus     0.729  10.954 
+120111-PP  WhiteMatter  0.807  10.817 
+122317     Amygdala     0.608  13.379 
+122317     GreyMatter   0.697  10.863 
+122317     Hippocampus  0.540  11.705 
+122317     Thalamus     0.789  10.050 
+122317     WhiteMatter  0.760  15.684 
+122317-PP  Amygdala     0.608  13.379 
+122317-PP  GreyMatter   0.697  10.863 
+122317-PP  Hippocampus  0.540  11.705 
+122317-PP  Thalamus     0.789  10.050 
+122317-PP  WhiteMatter  0.760  15.684 
+122620     Amygdala     0.522  13.491 
+122620     GreyMatter   0.708  11.045 
+122620     Hippocampus  0.488  13.964 
+122620     Thalamus     0.769  8.124  
+122620     WhiteMatter  0.796  17.088 
+122620-PP  Amygdala     0.522  13.491 
+122620-PP  GreyMatter   0.708  11.045 
+122620-PP  Hippocampus  0.488  13.964 
+122620-PP  Thalamus     0.769  8.124  
+122620-PP  WhiteMatter  0.796  17.088 
+123117     Amygdala     0.484  13.000 
+123117     GreyMatter   0.671  14.457 
+123117     Hippocampus  0.513  12.689 
+123117     Thalamus     0.728  13.928 
+123117     WhiteMatter  0.815  21.932 
+123117-PP  Amygdala     0.484  13.000 
+123117-PP  GreyMatter   0.671  14.457 
+123117-PP  Hippocampus  0.513  12.689 
+123117-PP  Thalamus     0.728  13.928 
+123117-PP  WhiteMatter  0.815  21.932 
+123925     Amygdala     0.526  11.446 
+123925     GreyMatter   0.680  14.036 
+123925     Hippocampus  0.487  13.601 
+123925     Thalamus     0.785  6.403  
+123925     WhiteMatter  0.805  17.378 
+123925-PP  Amygdala     0.526  11.446 
+123925-PP  GreyMatter   0.680  14.036 
+123925-PP  Hippocampus  0.487  13.601 
+123925-PP  Thalamus     0.785  6.403  
+123925-PP  WhiteMatter  0.805  17.378 
+124422     Amygdala     0.653  10.440 
+124422     GreyMatter   0.640  12.806 
+124422     Hippocampus  0.545  10.677 
+124422     Thalamus     0.820  11.358 
+124422     WhiteMatter  0.707  14.900 
+124422-PP  Amygdala     0.653  10.440 
+124422-PP  GreyMatter   0.640  12.806 
+124422-PP  Hippocampus  0.545  10.677 
+124422-PP  Thalamus     0.820  11.358 
+124422-PP  WhiteMatter  0.707  14.900 
+
+Aggregated statistic results...
+LABEL        METRIC   STATISTIC  VALUE 
+Amygdala     DICE     MEAN       0.530 
+Amygdala     DICE     STD        0.055 
+Amygdala     HDRFDST  MEAN       12.237
+Amygdala     HDRFDST  STD        1.166 
+GreyMatter   DICE     MEAN       0.685 
+GreyMatter   DICE     STD        0.021 
+GreyMatter   HDRFDST  MEAN       11.653
+GreyMatter   HDRFDST  STD        1.520 
+Hippocampus  DICE     MEAN       0.507 
+Hippocampus  DICE     STD        0.038 
+Hippocampus  HDRFDST  MEAN       12.483
+Hippocampus  HDRFDST  STD        0.993 
+Thalamus     DICE     MEAN       0.767 
+Thalamus     DICE     STD        0.028 
+Thalamus     HDRFDST  MEAN       9.470 
+Thalamus     HDRFDST  STD        2.535 
+WhiteMatter  DICE     MEAN       0.784 
+WhiteMatter  DICE     STD        0.038 
+WhiteMatter  HDRFDST  MEAN       15.293
+WhiteMatter  HDRFDST  STD        3.350 
+Experiment exp_03_registration_only completed in 334.8 seconds
+✅ Experiment 3 completed successfully
+
+============================================================
+Running Experiment 4/17: norm_skull
+Description: With normalization + skull stripping
+============================================================
+Running experiment: exp_04_norm_skull
+Description: With normalization + skull stripping
+----- Training...
+---------- Processing 113922
+---------- Processing 100307
+---------- Processing 110411
+---------- Processing 100408
+---------- Processing 101107
+---------- Processing 101915
+---------- Processing 101309
+---------- Processing 108828
+---------- Processing 103414
+---------- Processing 115320
+---------- Processing 103111
+---------- Processing 113619
+---------- Processing 111312
+---------- Processing 106016
+---------- Processing 111716
+---------- Processing 114419
+---------- Processing 116524
+---------- Processing 105115
+---------- Processing 105014
+---------- Processing 103818
+Training Random Forest with 100 trees, max_depth=None, max_features=sqrt (out of 7 total features)
+ Time elapsed: 0.9434652749914676 s
+ Training data cleaned from memory
+----- Testing...
+---------- Processing 118730
+---------- Processing 117122
+---------- Processing 120111
+---------- Processing 122620
+---------- Processing 124422
+---------- Processing 118528
+---------- Processing 123117
+---------- Processing 122317
+---------- Processing 123925
+---------- Processing 118932
+---------- Testing 118730
+ Time elapsed: 7.182753233006224 s
+---------- Testing 117122
+ Time elapsed: 6.863264880026691 s
+---------- Testing 120111
+ Time elapsed: 7.137690504081547 s
+---------- Testing 122620
+ Time elapsed: 7.148292299010791 s
+---------- Testing 124422
+ Time elapsed: 7.119956537033431 s
+---------- Testing 118528
+ Time elapsed: 7.1023703690152615 s
+---------- Testing 123117
+ Time elapsed: 7.150011359946802 s
+---------- Testing 122317
+ Time elapsed: 7.007354839937761 s
+---------- Testing 123925
+ Time elapsed: 7.109610722982325 s
+---------- Testing 118932
+ Time elapsed: 7.238744226982817 s
+---------- Post-processing 118730
+---------- Post-processing 117122
+---------- Post-processing 120111
+---------- Post-processing 122620
+---------- Post-processing 124422
+---------- Post-processing 118528
+---------- Post-processing 123117
+---------- Post-processing 122317
+---------- Post-processing 123925
+---------- Post-processing 118932
+Results saved to ./ablation_experiments/exp_04_norm_skull/2025-10-26-12-37-36/results.csv with 100 measurements
+
+Subject-wise results...
+SUBJECT    LABEL        DICE   HDRFDST
+117122     Amygdala     0.211  17.378 
+117122     GreyMatter   0.545  7.348  
+117122     Hippocampus  0.435  14.799 
+117122     Thalamus     0.689  12.166 
+117122     WhiteMatter  0.754  8.062  
+117122-PP  Amygdala     0.211  17.378 
+117122-PP  GreyMatter   0.545  7.348  
+117122-PP  Hippocampus  0.435  14.799 
+117122-PP  Thalamus     0.689  12.166 
+117122-PP  WhiteMatter  0.754  8.062  
+118528     Amygdala     0.308  14.318 
+118528     GreyMatter   0.562  7.550  
+118528     Hippocampus  0.415  13.191 
+118528     Thalamus     0.670  8.367  
+118528     WhiteMatter  0.757  8.602  
+118528-PP  Amygdala     0.308  14.318 
+118528-PP  GreyMatter   0.562  7.550  
+118528-PP  Hippocampus  0.415  13.191 
+118528-PP  Thalamus     0.670  8.367  
+118528-PP  WhiteMatter  0.757  8.602  
+118730     Amygdala     0.382  12.083 
+118730     GreyMatter   0.627  3.742  
+118730     Hippocampus  0.441  11.446 
+118730     Thalamus     0.685  7.483  
+118730     WhiteMatter  0.756  5.099  
+118730-PP  Amygdala     0.382  12.083 
+118730-PP  GreyMatter   0.627  3.742  
+118730-PP  Hippocampus  0.441  11.446 
+118730-PP  Thalamus     0.685  7.483  
+118730-PP  WhiteMatter  0.756  5.099  
+118932     Amygdala     0.378  13.153 
+118932     GreyMatter   0.640  3.742  
+118932     Hippocampus  0.441  12.207 
+118932     Thalamus     0.721  7.616  
+118932     WhiteMatter  0.771  5.000  
+118932-PP  Amygdala     0.378  13.153 
+118932-PP  GreyMatter   0.640  3.742  
+118932-PP  Hippocampus  0.441  12.207 
+118932-PP  Thalamus     0.721  7.616  
+118932-PP  WhiteMatter  0.771  5.000  
+120111     Amygdala     0.352  14.177 
+120111     GreyMatter   0.575  5.657  
+120111     Hippocampus  0.453  12.806 
+120111     Thalamus     0.723  8.124  
+120111     WhiteMatter  0.779  5.745  
+120111-PP  Amygdala     0.352  14.177 
+120111-PP  GreyMatter   0.575  5.657  
+120111-PP  Hippocampus  0.453  12.806 
+120111-PP  Thalamus     0.723  8.124  
+120111-PP  WhiteMatter  0.779  5.745  
+122317     Amygdala     0.448  15.556 
+122317     GreyMatter   0.580  6.164  
+122317     Hippocampus  0.477  13.638 
+122317     Thalamus     0.631  12.042 
+122317     WhiteMatter  0.755  8.246  
+122317-PP  Amygdala     0.448  15.556 
+122317-PP  GreyMatter   0.580  6.164  
+122317-PP  Hippocampus  0.477  13.638 
+122317-PP  Thalamus     0.631  12.042 
+122317-PP  WhiteMatter  0.755  8.246  
+122620     Amygdala     0.352  12.083 
+122620     GreyMatter   0.579  7.071  
+122620     Hippocampus  0.351  12.329 
+122620     Thalamus     0.683  7.280  
+122620     WhiteMatter  0.741  7.348  
+122620-PP  Amygdala     0.352  12.083 
+122620-PP  GreyMatter   0.579  7.071  
+122620-PP  Hippocampus  0.351  12.329 
+122620-PP  Thalamus     0.683  7.280  
+122620-PP  WhiteMatter  0.741  7.348  
+123117     Amygdala     0.272  16.882 
+123117     GreyMatter   0.510  10.817 
+123117     Hippocampus  0.294  17.550 
+123117     Thalamus     0.398  15.067 
+123117     WhiteMatter  0.757  8.660  
+123117-PP  Amygdala     0.272  16.882 
+123117-PP  GreyMatter   0.510  10.817 
+123117-PP  Hippocampus  0.294  17.550 
+123117-PP  Thalamus     0.398  15.067 
+123117-PP  WhiteMatter  0.757  8.660  
+123925     Amygdala     0.390  14.000 
+123925     GreyMatter   0.511  8.062  
+123925     Hippocampus  0.388  12.369 
+123925     Thalamus     0.705  8.602  
+123925     WhiteMatter  0.760  7.550  
+123925-PP  Amygdala     0.390  14.000 
+123925-PP  GreyMatter   0.511  8.062  
+123925-PP  Hippocampus  0.388  12.369 
+123925-PP  Thalamus     0.705  8.602  
+123925-PP  WhiteMatter  0.760  7.550  
+124422     Amygdala     0.386  14.866 
+124422     GreyMatter   0.559  7.000  
+124422     Hippocampus  0.444  12.961 
+124422     Thalamus     0.759  11.180 
+124422     WhiteMatter  0.747  7.280  
+124422-PP  Amygdala     0.386  14.866 
+124422-PP  GreyMatter   0.559  7.000  
+124422-PP  Hippocampus  0.444  12.961 
+124422-PP  Thalamus     0.759  11.180 
+124422-PP  WhiteMatter  0.747  7.280  
+
+Aggregated statistic results...
+LABEL        METRIC   STATISTIC  VALUE 
+Amygdala     DICE     MEAN       0.348 
+Amygdala     DICE     STD        0.064 
+Amygdala     HDRFDST  MEAN       14.450
+Amygdala     HDRFDST  STD        1.705 
+GreyMatter   DICE     MEAN       0.569 
+GreyMatter   DICE     STD        0.040 
+GreyMatter   HDRFDST  MEAN       6.715 
+GreyMatter   HDRFDST  STD        1.976 
+Hippocampus  DICE     MEAN       0.414 
+Hippocampus  DICE     STD        0.052 
+Hippocampus  HDRFDST  MEAN       13.330
+Hippocampus  HDRFDST  STD        1.650 
+Thalamus     DICE     MEAN       0.666 
+Thalamus     DICE     STD        0.095 
+Thalamus     HDRFDST  MEAN       9.793 
+Thalamus     HDRFDST  STD        2.511 
+WhiteMatter  DICE     MEAN       0.758 
+WhiteMatter  DICE     STD        0.010 
+WhiteMatter  HDRFDST  MEAN       7.159 
+WhiteMatter  HDRFDST  STD        1.321 
+Experiment exp_04_norm_skull completed in 260.5 seconds
+✅ Experiment 4 completed successfully
+
+============================================================
+Running Experiment 5/17: norm_reg
+Description: With normalization + registration
+============================================================
+Running experiment: exp_05_norm_reg
+Description: With normalization + registration
+----- Training...
+---------- Processing 113922
+---------- Processing 100307
+---------- Processing 110411
+---------- Processing 100408
+---------- Processing 101107
+---------- Processing 101915
+---------- Processing 101309
+---------- Processing 108828
+---------- Processing 103414
+---------- Processing 115320
+---------- Processing 103111
+---------- Processing 113619
+---------- Processing 111312
+---------- Processing 106016
+---------- Processing 111716
+---------- Processing 114419
+---------- Processing 116524
+---------- Processing 105115
+---------- Processing 105014
+---------- Processing 103818
+Training Random Forest with 100 trees, max_depth=None, max_features=sqrt (out of 7 total features)
+ Time elapsed: 1.2426706909900531 s
+ Training data cleaned from memory
+----- Testing...
+---------- Processing 118730
+---------- Processing 117122
+---------- Processing 120111
+---------- Processing 122620
+---------- Processing 124422
+---------- Processing 118528
+---------- Processing 123117
+---------- Processing 122317
+---------- Processing 123925
+---------- Processing 118932
+---------- Testing 118730
+ Time elapsed: 8.446920144022442 s
+---------- Testing 117122
+ Time elapsed: 8.419191132066771 s
+---------- Testing 120111
+ Time elapsed: 8.559175960952416 s
+---------- Testing 122620
+ Time elapsed: 8.356915716081858 s
+---------- Testing 124422
+ Time elapsed: 8.698181659914553 s
+---------- Testing 118528
+ Time elapsed: 8.858953966060653 s
+---------- Testing 123117
+ Time elapsed: 8.669638097053394 s
+---------- Testing 122317
+ Time elapsed: 8.281563644995913 s
+---------- Testing 123925
+ Time elapsed: 8.29253622109536 s
+---------- Testing 118932
+ Time elapsed: 8.824399152072147 s
+---------- Post-processing 118730
+---------- Post-processing 117122
+---------- Post-processing 120111
+---------- Post-processing 122620
+---------- Post-processing 124422
+---------- Post-processing 118528
+---------- Post-processing 123117
+---------- Post-processing 122317
+---------- Post-processing 123925
+---------- Post-processing 118932
+Results saved to ./ablation_experiments/exp_05_norm_reg/2025-10-26-12-42-27/results.csv with 100 measurements
+
+Subject-wise results...
+SUBJECT    LABEL        DICE   HDRFDST
+117122     Amygdala     0.406  13.077 
+117122     GreyMatter   0.647  10.770 
+117122     Hippocampus  0.445  13.000 
+117122     Thalamus     0.769  11.180 
+117122     WhiteMatter  0.804  12.728 
+117122-PP  Amygdala     0.406  13.077 
+117122-PP  GreyMatter   0.647  10.770 
+117122-PP  Hippocampus  0.445  13.000 
+117122-PP  Thalamus     0.769  11.180 
+117122-PP  WhiteMatter  0.804  12.728 
+118528     Amygdala     0.394  14.213 
+118528     GreyMatter   0.654  11.489 
+118528     Hippocampus  0.434  14.560 
+118528     Thalamus     0.749  9.950  
+118528     WhiteMatter  0.811  14.036 
+118528-PP  Amygdala     0.394  14.213 
+118528-PP  GreyMatter   0.654  11.489 
+118528-PP  Hippocampus  0.434  14.560 
+118528-PP  Thalamus     0.749  9.950  
+118528-PP  WhiteMatter  0.811  14.036 
+118730     Amygdala     0.486  11.402 
+118730     GreyMatter   0.676  10.198 
+118730     Hippocampus  0.405  12.000 
+118730     Thalamus     0.740  7.550  
+118730     WhiteMatter  0.765  14.799 
+118730-PP  Amygdala     0.486  11.402 
+118730-PP  GreyMatter   0.676  10.198 
+118730-PP  Hippocampus  0.405  12.000 
+118730-PP  Thalamus     0.740  7.550  
+118730-PP  WhiteMatter  0.765  14.799 
+118932     Amygdala     0.454  12.207 
+118932     GreyMatter   0.681  10.770 
+118932     Hippocampus  0.414  13.416 
+118932     Thalamus     0.756  10.770 
+118932     WhiteMatter  0.815  11.000 
+118932-PP  Amygdala     0.454  12.207 
+118932-PP  GreyMatter   0.681  10.770 
+118932-PP  Hippocampus  0.414  13.416 
+118932-PP  Thalamus     0.756  10.770 
+118932-PP  WhiteMatter  0.815  11.000 
+120111     Amygdala     0.437  9.539  
+120111     GreyMatter   0.640  10.863 
+120111     Hippocampus  0.413  12.410 
+120111     Thalamus     0.720  14.177 
+120111     WhiteMatter  0.832  8.602  
+120111-PP  Amygdala     0.437  9.539  
+120111-PP  GreyMatter   0.640  10.863 
+120111-PP  Hippocampus  0.413  12.410 
+120111-PP  Thalamus     0.720  14.177 
+120111-PP  WhiteMatter  0.832  8.602  
+122317     Amygdala     0.496  12.530 
+122317     GreyMatter   0.677  11.747 
+122317     Hippocampus  0.408  12.806 
+122317     Thalamus     0.756  9.000  
+122317     WhiteMatter  0.809  13.038 
+122317-PP  Amygdala     0.496  12.530 
+122317-PP  GreyMatter   0.677  11.747 
+122317-PP  Hippocampus  0.408  12.806 
+122317-PP  Thalamus     0.756  9.000  
+122317-PP  WhiteMatter  0.809  13.038 
+122620     Amygdala     0.482  13.038 
+122620     GreyMatter   0.681  11.045 
+122620     Hippocampus  0.420  13.784 
+122620     Thalamus     0.763  7.348  
+122620     WhiteMatter  0.779  15.652 
+122620-PP  Amygdala     0.482  13.038 
+122620-PP  GreyMatter   0.681  11.045 
+122620-PP  Hippocampus  0.420  13.784 
+122620-PP  Thalamus     0.763  7.348  
+122620-PP  WhiteMatter  0.779  15.652 
+123117     Amygdala     0.406  13.342 
+123117     GreyMatter   0.585  11.874 
+123117     Hippocampus  0.420  13.784 
+123117     Thalamus     0.719  11.091 
+123117     WhiteMatter  0.825  14.036 
+123117-PP  Amygdala     0.406  13.342 
+123117-PP  GreyMatter   0.585  11.874 
+123117-PP  Hippocampus  0.420  13.784 
+123117-PP  Thalamus     0.719  11.091 
+123117-PP  WhiteMatter  0.825  14.036 
+123925     Amygdala     0.474  11.747 
+123925     GreyMatter   0.662  11.358 
+123925     Hippocampus  0.445  13.038 
+123925     Thalamus     0.774  6.708  
+123925     WhiteMatter  0.791  12.124 
+123925-PP  Amygdala     0.474  11.747 
+123925-PP  GreyMatter   0.662  11.358 
+123925-PP  Hippocampus  0.445  13.038 
+123925-PP  Thalamus     0.774  6.708  
+123925-PP  WhiteMatter  0.791  12.124 
+124422     Amygdala     0.571  11.225 
+124422     GreyMatter   0.641  12.247 
+124422     Hippocampus  0.454  11.576 
+124422     Thalamus     0.811  7.000  
+124422     WhiteMatter  0.750  12.083 
+124422-PP  Amygdala     0.571  11.225 
+124422-PP  GreyMatter   0.641  12.247 
+124422-PP  Hippocampus  0.454  11.576 
+124422-PP  Thalamus     0.811  7.000  
+124422-PP  WhiteMatter  0.750  12.083 
+
+Aggregated statistic results...
+LABEL        METRIC   STATISTIC  VALUE 
+Amygdala     DICE     MEAN       0.461 
+Amygdala     DICE     STD        0.051 
+Amygdala     HDRFDST  MEAN       12.232
+Amygdala     HDRFDST  STD        1.257 
+GreyMatter   DICE     MEAN       0.654 
+GreyMatter   DICE     STD        0.028 
+GreyMatter   HDRFDST  MEAN       11.236
+GreyMatter   HDRFDST  STD        0.588 
+Hippocampus  DICE     MEAN       0.426 
+Hippocampus  DICE     STD        0.016 
+Hippocampus  HDRFDST  MEAN       13.037
+Hippocampus  HDRFDST  STD        0.851 
+Thalamus     DICE     MEAN       0.756 
+Thalamus     DICE     STD        0.026 
+Thalamus     HDRFDST  MEAN       9.478 
+Thalamus     HDRFDST  STD        2.275 
+WhiteMatter  DICE     MEAN       0.798 
+WhiteMatter  DICE     STD        0.025 
+WhiteMatter  HDRFDST  MEAN       12.810
+WhiteMatter  HDRFDST  STD        1.926 
+Experiment exp_05_norm_reg completed in 327.7 seconds
+✅ Experiment 5 completed successfully
+
+============================================================
+Running Experiment 6/17: reg_skull
+Description: With registration + skull stripping
+============================================================
+Running experiment: exp_06_reg_skull
+Description: With registration + skull stripping
+----- Training...
+---------- Processing 113922
+---------- Processing 100307
+---------- Processing 110411
+---------- Processing 100408
+---------- Processing 101107
+---------- Processing 101915
+---------- Processing 101309
+---------- Processing 108828
+---------- Processing 103414
+---------- Processing 115320
+---------- Processing 103111
+---------- Processing 113619
+---------- Processing 111312
+---------- Processing 106016
+---------- Processing 111716
+---------- Processing 114419
+---------- Processing 116524
+---------- Processing 105115
+---------- Processing 105014
+---------- Processing 103818
+Training Random Forest with 100 trees, max_depth=None, max_features=sqrt (out of 7 total features)
+ Time elapsed: 2.6810452500358224 s
+ Training data cleaned from memory
+----- Testing...
+---------- Processing 118730
+---------- Processing 117122
+---------- Processing 120111
+---------- Processing 122620
+---------- Processing 124422
+---------- Processing 118528
+---------- Processing 123117
+---------- Processing 122317
+---------- Processing 123925
+---------- Processing 118932
+---------- Testing 118730
+ Time elapsed: 6.823587588965893 s
+---------- Testing 117122
+ Time elapsed: 6.79146321490407 s
+---------- Testing 120111
+ Time elapsed: 6.7032856500009075 s
+---------- Testing 122620
+ Time elapsed: 6.873443535994738 s
+---------- Testing 124422
+ Time elapsed: 7.072041854029521 s
+---------- Testing 118528
+ Time elapsed: 6.8412046619923785 s
+---------- Testing 123117
+ Time elapsed: 6.878804381005466 s
+---------- Testing 122317
+ Time elapsed: 6.911544495029375 s
+---------- Testing 123925
+ Time elapsed: 6.9533304459182546 s
+---------- Testing 118932
+ Time elapsed: 7.04714729601983 s
+---------- Post-processing 118730
+---------- Post-processing 117122
+---------- Post-processing 120111
+---------- Post-processing 122620
+---------- Post-processing 124422
+---------- Post-processing 118528
+---------- Post-processing 123117
+---------- Post-processing 122317
+---------- Post-processing 123925
+---------- Post-processing 118932
+Results saved to ./ablation_experiments/exp_06_reg_skull/2025-10-26-12-47-58/results.csv with 100 measurements
+
+Subject-wise results...
+SUBJECT    LABEL        DICE   HDRFDST
+117122     Amygdala     0.460  13.038 
+117122     GreyMatter   0.708  2.236  
+117122     Hippocampus  0.510  13.454 
+117122     Thalamus     0.763  7.141  
+117122     WhiteMatter  0.824  4.000  
+117122-PP  Amygdala     0.460  13.038 
+117122-PP  GreyMatter   0.708  2.236  
+117122-PP  Hippocampus  0.510  13.454 
+117122-PP  Thalamus     0.763  7.141  
+117122-PP  WhiteMatter  0.824  4.000  
+118528     Amygdala     0.503  13.638 
+118528     GreyMatter   0.689  2.000  
+118528     Hippocampus  0.544  13.153 
+118528     Thalamus     0.758  5.831  
+118528     WhiteMatter  0.723  5.099  
+118528-PP  Amygdala     0.503  13.638 
+118528-PP  GreyMatter   0.689  2.000  
+118528-PP  Hippocampus  0.544  13.153 
+118528-PP  Thalamus     0.758  5.831  
+118528-PP  WhiteMatter  0.723  5.099  
+118730     Amygdala     0.500  11.358 
+118730     GreyMatter   0.699  3.162  
+118730     Hippocampus  0.419  12.410 
+118730     Thalamus     0.731  11.576 
+118730     WhiteMatter  0.836  3.162  
+118730-PP  Amygdala     0.500  11.358 
+118730-PP  GreyMatter   0.699  3.162  
+118730-PP  Hippocampus  0.419  12.410 
+118730-PP  Thalamus     0.731  11.576 
+118730-PP  WhiteMatter  0.836  3.162  
+118932     Amygdala     0.527  12.083 
+118932     GreyMatter   0.720  2.236  
+118932     Hippocampus  0.497  11.790 
+118932     Thalamus     0.761  7.348  
+118932     WhiteMatter  0.820  3.000  
+118932-PP  Amygdala     0.527  12.083 
+118932-PP  GreyMatter   0.720  2.236  
+118932-PP  Hippocampus  0.497  11.790 
+118932-PP  Thalamus     0.761  7.348  
+118932-PP  WhiteMatter  0.820  3.000  
+120111     Amygdala     0.538  9.487  
+120111     GreyMatter   0.714  2.000  
+120111     Hippocampus  0.505  11.402 
+120111     Thalamus     0.730  9.950  
+120111     WhiteMatter  0.811  3.162  
+120111-PP  Amygdala     0.538  9.487  
+120111-PP  GreyMatter   0.714  2.000  
+120111-PP  Hippocampus  0.505  11.402 
+120111-PP  Thalamus     0.730  9.950  
+120111-PP  WhiteMatter  0.811  3.162  
+122317     Amygdala     0.633  12.845 
+122317     GreyMatter   0.712  2.000  
+122317     Hippocampus  0.516  11.662 
+122317     Thalamus     0.759  7.810  
+122317     WhiteMatter  0.774  4.123  
+122317-PP  Amygdala     0.633  12.845 
+122317-PP  GreyMatter   0.712  2.000  
+122317-PP  Hippocampus  0.516  11.662 
+122317-PP  Thalamus     0.759  7.810  
+122317-PP  WhiteMatter  0.774  4.123  
+122620     Amygdala     0.538  13.416 
+122620     GreyMatter   0.720  3.606  
+122620     Hippocampus  0.480  14.071 
+122620     Thalamus     0.758  8.000  
+122620     WhiteMatter  0.822  4.123  
+122620-PP  Amygdala     0.538  13.416 
+122620-PP  GreyMatter   0.720  3.606  
+122620-PP  Hippocampus  0.480  14.071 
+122620-PP  Thalamus     0.758  8.000  
+122620-PP  WhiteMatter  0.822  4.123  
+123117     Amygdala     0.470  12.530 
+123117     GreyMatter   0.678  5.477  
+123117     Hippocampus  0.471  12.884 
+123117     Thalamus     0.695  14.491 
+123117     WhiteMatter  0.848  3.742  
+123117-PP  Amygdala     0.470  12.530 
+123117-PP  GreyMatter   0.678  5.477  
+123117-PP  Hippocampus  0.471  12.884 
+123117-PP  Thalamus     0.695  14.491 
+123117-PP  WhiteMatter  0.848  3.742  
+123925     Amygdala     0.539  11.225 
+123925     GreyMatter   0.705  2.000  
+123925     Hippocampus  0.485  13.491 
+123925     Thalamus     0.773  6.403  
+123925     WhiteMatter  0.820  4.123  
+123925-PP  Amygdala     0.539  11.225 
+123925-PP  GreyMatter   0.705  2.000  
+123925-PP  Hippocampus  0.485  13.491 
+123925-PP  Thalamus     0.773  6.403  
+123925-PP  WhiteMatter  0.820  4.123  
+124422     Amygdala     0.636  10.677 
+124422     GreyMatter   0.671  2.000  
+124422     Hippocampus  0.520  10.817 
+124422     Thalamus     0.805  6.164  
+124422     WhiteMatter  0.717  4.899  
+124422-PP  Amygdala     0.636  10.677 
+124422-PP  GreyMatter   0.671  2.000  
+124422-PP  Hippocampus  0.520  10.817 
+124422-PP  Thalamus     0.805  6.164  
+124422-PP  WhiteMatter  0.717  4.899  
+
+Aggregated statistic results...
+LABEL        METRIC   STATISTIC  VALUE 
+Amygdala     DICE     MEAN       0.534 
+Amygdala     DICE     STD        0.057 
+Amygdala     HDRFDST  MEAN       12.030
+Amygdala     HDRFDST  STD        1.259 
+GreyMatter   DICE     MEAN       0.702 
+GreyMatter   DICE     STD        0.016 
+GreyMatter   HDRFDST  MEAN       2.672 
+GreyMatter   HDRFDST  STD        1.078 
+Hippocampus  DICE     MEAN       0.495 
+Hippocampus  DICE     STD        0.032 
+Hippocampus  HDRFDST  MEAN       12.513
+Hippocampus  HDRFDST  STD        1.009 
+Thalamus     DICE     MEAN       0.753 
+Thalamus     DICE     STD        0.028 
+Thalamus     HDRFDST  MEAN       8.472 
+Thalamus     HDRFDST  STD        2.614 
+WhiteMatter  DICE     MEAN       0.800 
+WhiteMatter  DICE     STD        0.044 
+WhiteMatter  HDRFDST  MEAN       3.943 
+WhiteMatter  HDRFDST  STD        0.671 
+Experiment exp_06_reg_skull completed in 300.2 seconds
+✅ Experiment 6 completed successfully
+
+============================================================
+Running Experiment 7/17: all_preprocessing
+Description: With normalization + skull stripping + registration
+============================================================
+Running experiment: exp_07_all_preprocessing
+Description: With normalization + skull stripping + registration
+----- Training...
+---------- Processing 113922
+---------- Processing 100307
+---------- Processing 110411
+---------- Processing 100408
+---------- Processing 101107
+---------- Processing 101915
+---------- Processing 101309
+---------- Processing 108828
+---------- Processing 103414
+---------- Processing 115320
+---------- Processing 103111
+---------- Processing 113619
+---------- Processing 111312
+---------- Processing 106016
+---------- Processing 111716
+---------- Processing 114419
+---------- Processing 116524
+---------- Processing 105115
+---------- Processing 105014
+---------- Processing 103818
+Training Random Forest with 100 trees, max_depth=None, max_features=sqrt (out of 7 total features)
+ Time elapsed: 1.2399561390047893 s
+ Training data cleaned from memory
+----- Testing...
+---------- Processing 118730
+---------- Processing 117122
+---------- Processing 120111
+---------- Processing 122620
+---------- Processing 124422
+---------- Processing 118528
+---------- Processing 123117
+---------- Processing 122317
+---------- Processing 123925
+---------- Processing 118932
+---------- Testing 118730
+ Time elapsed: 8.416435124934651 s
+---------- Testing 117122
+ Time elapsed: 8.593620190047659 s
+---------- Testing 120111
+ Time elapsed: 8.501639110967517 s
+---------- Testing 122620
+ Time elapsed: 8.80087952897884 s
+---------- Testing 124422
+ Time elapsed: 8.395080594928004 s
+---------- Testing 118528
+ Time elapsed: 9.07626923697535 s
+---------- Testing 123117
+ Time elapsed: 8.786058092024177 s
+---------- Testing 122317
+ Time elapsed: 9.037998409941792 s
+---------- Testing 123925
+ Time elapsed: 8.694345992989838 s
+---------- Testing 118932
+ Time elapsed: 8.744582084938884 s
+---------- Post-processing 118730
+---------- Post-processing 117122
+---------- Post-processing 120111
+---------- Post-processing 122620
+---------- Post-processing 124422
+---------- Post-processing 118528
+---------- Post-processing 123117
+---------- Post-processing 122317
+---------- Post-processing 123925
+---------- Post-processing 118932
+Results saved to ./ablation_experiments/exp_07_all_preprocessing/2025-10-26-12-52-58/results.csv with 100 measurements
+
+Subject-wise results...
+SUBJECT    LABEL        DICE   HDRFDST
+117122     Amygdala     0.393  13.153 
+117122     GreyMatter   0.597  3.742  
+117122     Hippocampus  0.516  12.728 
+117122     Thalamus     0.759  6.164  
+117122     WhiteMatter  0.771  4.123  
+117122-PP  Amygdala     0.393  13.153 
+117122-PP  GreyMatter   0.597  3.742  
+117122-PP  Hippocampus  0.516  12.728 
+117122-PP  Thalamus     0.759  6.164  
+117122-PP  WhiteMatter  0.771  4.123  
+118528     Amygdala     0.404  13.342 
+118528     GreyMatter   0.631  3.606  
+118528     Hippocampus  0.512  14.318 
+118528     Thalamus     0.757  5.385  
+118528     WhiteMatter  0.783  3.606  
+118528-PP  Amygdala     0.404  13.342 
+118528-PP  GreyMatter   0.631  3.606  
+118528-PP  Hippocampus  0.512  14.318 
+118528-PP  Thalamus     0.757  5.385  
+118528-PP  WhiteMatter  0.783  3.606  
+118730     Amygdala     0.469  11.402 
+118730     GreyMatter   0.630  3.162  
+118730     Hippocampus  0.476  12.083 
+118730     Thalamus     0.742  5.831  
+118730     WhiteMatter  0.758  4.000  
+118730-PP  Amygdala     0.469  11.402 
+118730-PP  GreyMatter   0.630  3.162  
+118730-PP  Hippocampus  0.476  12.083 
+118730-PP  Thalamus     0.742  5.831  
+118730-PP  WhiteMatter  0.758  4.000  
+118932     Amygdala     0.451  12.247 
+118932     GreyMatter   0.638  3.162  
+118932     Hippocampus  0.496  11.916 
+118932     Thalamus     0.763  5.000  
+118932     WhiteMatter  0.773  3.742  
+118932-PP  Amygdala     0.451  12.247 
+118932-PP  GreyMatter   0.638  3.162  
+118932-PP  Hippocampus  0.496  11.916 
+118932-PP  Thalamus     0.763  5.000  
+118932-PP  WhiteMatter  0.773  3.742  
+120111     Amygdala     0.438  9.487  
+120111     GreyMatter   0.593  3.742  
+120111     Hippocampus  0.483  11.576 
+120111     Thalamus     0.736  7.810  
+120111     WhiteMatter  0.788  3.162  
+120111-PP  Amygdala     0.438  9.487  
+120111-PP  GreyMatter   0.593  3.742  
+120111-PP  Hippocampus  0.483  11.576 
+120111-PP  Thalamus     0.736  7.810  
+120111-PP  WhiteMatter  0.788  3.162  
+122317     Amygdala     0.457  13.000 
+122317     GreyMatter   0.606  3.742  
+122317     Hippocampus  0.502  12.884 
+122317     Thalamus     0.759  6.000  
+122317     WhiteMatter  0.774  4.123  
+122317-PP  Amygdala     0.457  13.000 
+122317-PP  GreyMatter   0.606  3.742  
+122317-PP  Hippocampus  0.502  12.884 
+122317-PP  Thalamus     0.759  6.000  
+122317-PP  WhiteMatter  0.774  4.123  
+122620     Amygdala     0.479  12.689 
+122620     GreyMatter   0.605  5.099  
+122620     Hippocampus  0.501  13.601 
+122620     Thalamus     0.764  5.385  
+122620     WhiteMatter  0.757  5.831  
+122620-PP  Amygdala     0.479  12.689 
+122620-PP  GreyMatter   0.605  5.099  
+122620-PP  Hippocampus  0.501  13.601 
+122620-PP  Thalamus     0.764  5.385  
+122620-PP  WhiteMatter  0.757  5.831  
+123117     Amygdala     0.443  12.728 
+123117     GreyMatter   0.617  4.000  
+123117     Hippocampus  0.531  12.369 
+123117     Thalamus     0.743  5.916  
+123117     WhiteMatter  0.781  4.123  
+123117-PP  Amygdala     0.443  12.728 
+123117-PP  GreyMatter   0.617  4.000  
+123117-PP  Hippocampus  0.531  12.369 
+123117-PP  Thalamus     0.743  5.916  
+123117-PP  WhiteMatter  0.781  4.123  
+123925     Amygdala     0.452  11.402 
+123925     GreyMatter   0.588  4.123  
+123925     Hippocampus  0.492  12.207 
+123925     Thalamus     0.785  5.385  
+123925     WhiteMatter  0.778  3.742  
+123925-PP  Amygdala     0.452  11.402 
+123925-PP  GreyMatter   0.588  4.123  
+123925-PP  Hippocampus  0.492  12.207 
+123925-PP  Thalamus     0.785  5.385  
+123925-PP  WhiteMatter  0.778  3.742  
+124422     Amygdala     0.531  10.296 
+124422     GreyMatter   0.598  4.123  
+124422     Hippocampus  0.515  11.533 
+124422     Thalamus     0.796  5.477  
+124422     WhiteMatter  0.765  3.742  
+124422-PP  Amygdala     0.531  10.296 
+124422-PP  GreyMatter   0.598  4.123  
+124422-PP  Hippocampus  0.515  11.533 
+124422-PP  Thalamus     0.796  5.477  
+124422-PP  WhiteMatter  0.765  3.742  
+
+Aggregated statistic results...
+LABEL        METRIC   STATISTIC  VALUE 
+Amygdala     DICE     MEAN       0.452 
+Amygdala     DICE     STD        0.037 
+Amygdala     HDRFDST  MEAN       11.974
+Amygdala     HDRFDST  STD        1.230 
+GreyMatter   DICE     MEAN       0.610 
+GreyMatter   DICE     STD        0.017 
+GreyMatter   HDRFDST  MEAN       3.850 
+GreyMatter   HDRFDST  STD        0.527 
+Hippocampus  DICE     MEAN       0.502 
+Hippocampus  DICE     STD        0.016 
+Hippocampus  HDRFDST  MEAN       12.522
+Hippocampus  HDRFDST  STD        0.844 
+Thalamus     DICE     MEAN       0.760 
+Thalamus     DICE     STD        0.018 
+Thalamus     HDRFDST  MEAN       5.835 
+Thalamus     HDRFDST  STD        0.740 
+WhiteMatter  DICE     MEAN       0.773 
+WhiteMatter  DICE     STD        0.010 
+WhiteMatter  HDRFDST  MEAN       4.019 
+WhiteMatter  HDRFDST  STD        0.667 
+Experiment exp_07_all_preprocessing completed in 328.6 seconds
+✅ Experiment 7 completed successfully
+
+============================================================
+Running Experiment 8/17: all_preprocessing_postprocessing
+Description: With all preprocessing + postprocessing
+============================================================
+Running experiment: exp_08_all_preprocessing_postprocessing
+Description: With all preprocessing + postprocessing
+----- Training...
+---------- Processing 113922
+---------- Processing 100307
+---------- Processing 110411
+---------- Processing 100408
+---------- Processing 101107
+---------- Processing 101915
+---------- Processing 101309
+---------- Processing 108828
+---------- Processing 103414
+---------- Processing 115320
+---------- Processing 103111
+---------- Processing 113619
+---------- Processing 111312
+---------- Processing 106016
+---------- Processing 111716
+---------- Processing 114419
+---------- Processing 116524
+---------- Processing 105115
+---------- Processing 105014
+---------- Processing 103818
+Training Random Forest with 100 trees, max_depth=None, max_features=sqrt (out of 7 total features)
+ Time elapsed: 1.2674855720251799 s
+ Training data cleaned from memory
+----- Testing...
+---------- Processing 118730
+---------- Processing 117122
+---------- Processing 120111
+---------- Processing 122620
+---------- Processing 124422
+---------- Processing 118528
+---------- Processing 123117
+---------- Processing 122317
+---------- Processing 123925
+---------- Processing 118932
+---------- Testing 118730
+ Time elapsed: 8.470510066952556 s
+---------- Testing 117122
+ Time elapsed: 8.50893998297397 s
+---------- Testing 120111
+ Time elapsed: 8.605781594989821 s
+---------- Testing 122620
+ Time elapsed: 8.509525673929602 s
+---------- Testing 124422
+ Time elapsed: 8.739205691963434 s
+---------- Testing 118528
+ Time elapsed: 8.348965325043537 s
+---------- Testing 123117
+ Time elapsed: 9.356866477057338 s
+---------- Testing 122317
+ Time elapsed: 8.896667139953934 s
+---------- Testing 123925
+ Time elapsed: 8.834392213029787 s
+---------- Testing 118932
+ Time elapsed: 8.749812877038494 s
+---------- Post-processing 118730
+---------- Post-processing 117122
+---------- Post-processing 120111
+---------- Post-processing 122620
+---------- Post-processing 124422
+---------- Post-processing 118528
+---------- Post-processing 123117
+---------- Post-processing 122317
+---------- Post-processing 123925
+---------- Post-processing 118932
+Results saved to ./ablation_experiments/exp_08_all_preprocessing_postprocessing/2025-10-26-12-58-25/results.csv with 100 measurements
+
+Subject-wise results...
+SUBJECT    LABEL        DICE   HDRFDST
+117122     Amygdala     0.394  13.077 
+117122     GreyMatter   0.600  3.606  
+117122     Hippocampus  0.516  12.689 
+117122     Thalamus     0.763  7.211  
+117122     WhiteMatter  0.770  4.243  
+117122-PP  Amygdala     0.378  13.000 
+117122-PP  GreyMatter   0.573  5.000  
+117122-PP  Hippocampus  0.497  12.207 
+117122-PP  Thalamus     0.750  7.071  
+117122-PP  WhiteMatter  0.778  4.000  
+118528     Amygdala     0.408  13.491 
+118528     GreyMatter   0.632  3.606  
+118528     Hippocampus  0.503  13.601 
+118528     Thalamus     0.752  6.403  
+118528     WhiteMatter  0.782  3.606  
+118528-PP  Amygdala     0.380  13.342 
+118528-PP  GreyMatter   0.602  4.243  
+118528-PP  Hippocampus  0.478  13.342 
+118528-PP  Thalamus     0.734  6.708  
+118528-PP  WhiteMatter  0.795  3.000  
+118730     Amygdala     0.468  11.180 
+118730     GreyMatter   0.635  3.162  
+118730     Hippocampus  0.466  12.000 
+118730     Thalamus     0.744  7.071  
+118730     WhiteMatter  0.759  4.000  
+118730-PP  Amygdala     0.437  11.225 
+118730-PP  GreyMatter   0.610  4.583  
+118730-PP  Hippocampus  0.433  11.358 
+118730-PP  Thalamus     0.730  7.141  
+118730-PP  WhiteMatter  0.775  3.317  
+118932     Amygdala     0.463  12.166 
+118932     GreyMatter   0.640  3.162  
+118932     Hippocampus  0.488  11.446 
+118932     Thalamus     0.770  5.745  
+118932     WhiteMatter  0.771  4.000  
+118932-PP  Amygdala     0.429  12.207 
+118932-PP  GreyMatter   0.614  5.196  
+118932-PP  Hippocampus  0.454  11.091 
+118932-PP  Thalamus     0.755  5.657  
+118932-PP  WhiteMatter  0.781  4.123  
+120111     Amygdala     0.431  9.487  
+120111     GreyMatter   0.596  3.742  
+120111     Hippocampus  0.482  11.180 
+120111     Thalamus     0.726  9.644  
+120111     WhiteMatter  0.788  3.162  
+120111-PP  Amygdala     0.409  9.434  
+120111-PP  GreyMatter   0.568  5.000  
+120111-PP  Hippocampus  0.450  10.440 
+120111-PP  Thalamus     0.707  10.100 
+120111-PP  WhiteMatter  0.791  4.243  
+122317     Amygdala     0.450  12.689 
+122317     GreyMatter   0.609  3.606  
+122317     Hippocampus  0.494  12.450 
+122317     Thalamus     0.770  6.403  
+122317     WhiteMatter  0.774  4.000  
+122317-PP  Amygdala     0.430  12.689 
+122317-PP  GreyMatter   0.580  5.000  
+122317-PP  Hippocampus  0.469  12.124 
+122317-PP  Thalamus     0.754  6.325  
+122317-PP  WhiteMatter  0.779  4.690  
+122620     Amygdala     0.465  12.689 
+122620     GreyMatter   0.609  5.000  
+122620     Hippocampus  0.493  13.153 
+122620     Thalamus     0.766  6.083  
+122620     WhiteMatter  0.759  5.916  
+122620-PP  Amygdala     0.438  12.649 
+122620-PP  GreyMatter   0.589  5.657  
+122620-PP  Hippocampus  0.466  12.884 
+122620-PP  Thalamus     0.750  6.164  
+122620-PP  WhiteMatter  0.777  4.000  
+123117     Amygdala     0.448  12.689 
+123117     GreyMatter   0.619  4.000  
+123117     Hippocampus  0.522  11.576 
+123117     Thalamus     0.746  8.124  
+123117     WhiteMatter  0.780  4.123  
+123117-PP  Amygdala     0.422  12.166 
+123117-PP  GreyMatter   0.589  5.000  
+123117-PP  Hippocampus  0.496  11.045 
+123117-PP  Thalamus     0.725  8.544  
+123117-PP  WhiteMatter  0.784  4.123  
+123925     Amygdala     0.452  11.358 
+123925     GreyMatter   0.590  4.123  
+123925     Hippocampus  0.498  11.446 
+123925     Thalamus     0.788  6.164  
+123925     WhiteMatter  0.778  3.606  
+123925-PP  Amygdala     0.432  11.358 
+123925-PP  GreyMatter   0.559  5.099  
+123925-PP  Hippocampus  0.467  11.402 
+123925-PP  Thalamus     0.774  6.164  
+123925-PP  WhiteMatter  0.784  4.690  
+124422     Amygdala     0.540  10.247 
+124422     GreyMatter   0.601  4.000  
+124422     Hippocampus  0.514  11.000 
+124422     Thalamus     0.805  6.164  
+124422     WhiteMatter  0.766  4.000  
+124422-PP  Amygdala     0.511  10.344 
+124422-PP  GreyMatter   0.571  4.690  
+124422-PP  Hippocampus  0.491  9.950  
+124422-PP  Thalamus     0.792  6.325  
+124422-PP  WhiteMatter  0.784  3.000  
+
+Aggregated statistic results...
+LABEL        METRIC   STATISTIC  VALUE 
+Amygdala     DICE     MEAN       0.439 
+Amygdala     DICE     STD        0.038 
+Amygdala     HDRFDST  MEAN       11.874
+Amygdala     HDRFDST  STD        1.206 
+GreyMatter   DICE     MEAN       0.599 
+GreyMatter   DICE     STD        0.022 
+GreyMatter   HDRFDST  MEAN       4.374 
+GreyMatter   HDRFDST  STD        0.722 
+Hippocampus  DICE     MEAN       0.484 
+Hippocampus  DICE     STD        0.023 
+Hippocampus  HDRFDST  MEAN       11.819
+Hippocampus  HDRFDST  STD        0.953 
+Thalamus     DICE     MEAN       0.755 
+Thalamus     DICE     STD        0.024 
+Thalamus     HDRFDST  MEAN       6.961 
+Thalamus     HDRFDST  STD        1.204 
+WhiteMatter  DICE     MEAN       0.778 
+WhiteMatter  DICE     STD        0.009 
+WhiteMatter  HDRFDST  MEAN       3.992 
+WhiteMatter  HDRFDST  STD        0.643 
+Experiment exp_08_all_preprocessing_postprocessing completed in 395.9 seconds
+✅ Experiment 8 completed successfully
+
+============================================================
+Running Experiment 9/17: baseline_none_with_post
+Description: Baseline without any preprocessing + optimal postprocessing
+============================================================
+Running experiment: exp_09_baseline_none_with_post
+Description: Baseline without any preprocessing + optimal postprocessing
+----- Training...
+---------- Processing 113922
+---------- Processing 100307
+---------- Processing 110411
+---------- Processing 100408
+---------- Processing 101107
+---------- Processing 101915
+---------- Processing 101309
+---------- Processing 108828
+---------- Processing 103414
+---------- Processing 115320
+---------- Processing 103111
+---------- Processing 113619
+---------- Processing 111312
+---------- Processing 106016
+---------- Processing 111716
+---------- Processing 114419
+---------- Processing 116524
+---------- Processing 105115
+---------- Processing 105014
+---------- Processing 103818
+Training Random Forest with 100 trees, max_depth=None, max_features=sqrt (out of 7 total features)
+ Time elapsed: 2.74784600303974 s
+ Training data cleaned from memory
+----- Testing...
+---------- Processing 118730
+---------- Processing 117122
+---------- Processing 120111
+---------- Processing 122620
+---------- Processing 124422
+---------- Processing 118528
+---------- Processing 123117
+---------- Processing 122317
+---------- Processing 123925
+---------- Processing 118932
+---------- Testing 118730
+ Time elapsed: 7.857219618046656 s
+---------- Testing 117122
+ Time elapsed: 7.119238449959084 s
+---------- Testing 120111
+ Time elapsed: 7.324196398956701 s
+---------- Testing 122620
+ Time elapsed: 7.423159205005504 s
+---------- Testing 124422
+ Time elapsed: 7.282910100999288 s
+---------- Testing 118528
+ Time elapsed: 7.124047044082545 s
+---------- Testing 123117
+ Time elapsed: 8.053754000924528 s
+---------- Testing 122317
+ Time elapsed: 7.657124703051522 s
+---------- Testing 123925
+ Time elapsed: 7.592774949036539 s
+---------- Testing 118932
+ Time elapsed: 7.723017078009434 s
+---------- Post-processing 118730
+---------- Post-processing 117122
+---------- Post-processing 120111
+---------- Post-processing 122620
+---------- Post-processing 124422
+---------- Post-processing 118528
+---------- Post-processing 123117
+---------- Post-processing 122317
+---------- Post-processing 123925
+---------- Post-processing 118932
+Results saved to ./ablation_experiments/exp_09_baseline_none_with_post/2025-10-26-13-04-30/results.csv with 100 measurements
+
+Subject-wise results...
+SUBJECT    LABEL        DICE   HDRFDST
+117122     Amygdala     0.369  14.526 
+117122     GreyMatter   0.708  10.247 
+117122     Hippocampus  0.442  14.866 
+117122     Thalamus     0.732  8.660  
+117122     WhiteMatter  0.820  11.662 
+117122-PP  Amygdala     0.349  14.353 
+117122-PP  GreyMatter   0.647  10.440 
+117122-PP  Hippocampus  0.417  14.353 
+117122-PP  Thalamus     0.725  8.307  
+117122-PP  WhiteMatter  0.815  9.110  
+118528     Amygdala     0.535  12.166 
+118528     GreyMatter   0.660  11.000 
+118528     Hippocampus  0.447  13.416 
+118528     Thalamus     0.735  7.071  
+118528     WhiteMatter  0.732  13.416 
+118528-PP  Amygdala     0.554  11.874 
+118528-PP  GreyMatter   0.649  11.180 
+118528-PP  Hippocampus  0.405  12.884 
+118528-PP  Thalamus     0.712  6.164  
+118528-PP  WhiteMatter  0.757  11.874 
+118730     Amygdala     0.469  11.705 
+118730     GreyMatter   0.685  10.863 
+118730     Hippocampus  0.397  12.689 
+118730     Thalamus     0.720  7.000  
+118730     WhiteMatter  0.814  17.029 
+118730-PP  Amygdala     0.442  11.446 
+118730-PP  GreyMatter   0.629  11.358 
+118730-PP  Hippocampus  0.353  12.369 
+118730-PP  Thalamus     0.707  6.164  
+118730-PP  WhiteMatter  0.778  17.493 
+118932     Amygdala     0.507  12.728 
+118932     GreyMatter   0.724  9.110  
+118932     Hippocampus  0.475  12.689 
+118932     Thalamus     0.743  7.071  
+118932     WhiteMatter  0.819  13.601 
+118932-PP  Amygdala     0.488  12.410 
+118932-PP  GreyMatter   0.677  8.775  
+118932-PP  Hippocampus  0.432  12.207 
+118932-PP  Thalamus     0.727  6.708  
+118932-PP  WhiteMatter  0.818  11.180 
+120111     Amygdala     0.563  11.358 
+120111     GreyMatter   0.715  9.381  
+120111     Hippocampus  0.477  12.689 
+120111     Thalamus     0.760  7.000  
+120111     WhiteMatter  0.817  9.899  
+120111-PP  Amygdala     0.561  11.045 
+120111-PP  GreyMatter   0.673  9.434  
+120111-PP  Hippocampus  0.439  12.570 
+120111-PP  Thalamus     0.742  6.403  
+120111-PP  WhiteMatter  0.827  7.141  
+122317     Amygdala     0.624  13.454 
+122317     GreyMatter   0.715  10.440 
+122317     Hippocampus  0.482  13.601 
+122317     Thalamus     0.692  9.695  
+122317     WhiteMatter  0.769  14.900 
+122317-PP  Amygdala     0.623  12.767 
+122317-PP  GreyMatter   0.684  10.630 
+122317-PP  Hippocampus  0.443  13.491 
+122317-PP  Thalamus     0.681  9.165  
+122317-PP  WhiteMatter  0.793  14.071 
+122620     Amygdala     0.477  12.207 
+122620     GreyMatter   0.714  10.440 
+122620     Hippocampus  0.361  13.342 
+122620     Thalamus     0.687  8.307  
+122620     WhiteMatter  0.789  15.937 
+122620-PP  Amygdala     0.452  11.576 
+122620-PP  GreyMatter   0.657  10.488 
+122620-PP  Hippocampus  0.328  13.115 
+122620-PP  Thalamus     0.687  8.124  
+122620-PP  WhiteMatter  0.782  16.155 
+123117     Amygdala     0.411  12.530 
+123117     GreyMatter   0.648  16.583 
+123117     Hippocampus  0.332  19.105 
+123117     Thalamus     0.431  14.036 
+123117     WhiteMatter  0.793  22.045 
+123117-PP  Amygdala     0.384  12.806 
+123117-PP  GreyMatter   0.596  16.882 
+123117-PP  Hippocampus  0.300  19.261 
+123117-PP  Thalamus     0.450  14.000 
+123117-PP  WhiteMatter  0.753  22.383 
+123925     Amygdala     0.566  12.083 
+123925     GreyMatter   0.671  14.560 
+123925     Hippocampus  0.370  13.638 
+123925     Thalamus     0.738  8.246  
+123925     WhiteMatter  0.799  16.432 
+123925-PP  Amygdala     0.554  11.705 
+123925-PP  GreyMatter   0.616  14.866 
+123925-PP  Hippocampus  0.320  13.416 
+123925-PP  Thalamus     0.716  7.681  
+123925-PP  WhiteMatter  0.805  15.067 
+124422     Amygdala     0.589  11.402 
+124422     GreyMatter   0.648  12.124 
+124422     Hippocampus  0.471  11.874 
+124422     Thalamus     0.798  8.000  
+124422     WhiteMatter  0.709  14.765 
+124422-PP  Amygdala     0.585  10.770 
+124422-PP  GreyMatter   0.623  12.450 
+124422-PP  Hippocampus  0.437  12.207 
+124422-PP  Thalamus     0.785  4.583  
+124422-PP  WhiteMatter  0.739  13.675 
+
+Aggregated statistic results...
+LABEL        METRIC   STATISTIC  VALUE 
+Amygdala     DICE     MEAN       0.505 
+Amygdala     DICE     STD        0.081 
+Amygdala     HDRFDST  MEAN       12.245
+Amygdala     HDRFDST  STD        0.974 
+GreyMatter   DICE     MEAN       0.667 
+GreyMatter   DICE     STD        0.035 
+GreyMatter   HDRFDST  MEAN       11.563
+GreyMatter   HDRFDST  STD        2.303 
+Hippocampus  DICE     MEAN       0.406 
+Hippocampus  DICE     STD        0.056 
+Hippocampus  HDRFDST  MEAN       13.689
+Hippocampus  HDRFDST  STD        1.965 
+Thalamus     DICE     MEAN       0.698 
+Thalamus     DICE     STD        0.091 
+Thalamus     HDRFDST  MEAN       8.119 
+Thalamus     HDRFDST  STD        2.275 
+WhiteMatter  DICE     MEAN       0.786 
+WhiteMatter  DICE     STD        0.033 
+WhiteMatter  HDRFDST  MEAN       14.392
+WhiteMatter  HDRFDST  STD        3.718 
+Experiment exp_09_baseline_none_with_post completed in 339.1 seconds
+✅ Experiment 9 completed successfully
+
+============================================================
+Running Experiment 10/17: normalization_only_with_post
+Description: With normalization only + optimal postprocessing
+============================================================
+Running experiment: exp_10_normalization_only_with_post
+Description: With normalization only + optimal postprocessing
+----- Training...
+---------- Processing 113922
+---------- Processing 100307
+---------- Processing 110411
+---------- Processing 100408
+---------- Processing 101107
+---------- Processing 101915
+---------- Processing 101309
+---------- Processing 108828
+---------- Processing 103414
+---------- Processing 115320
+---------- Processing 103111
+---------- Processing 113619
+---------- Processing 111312
+---------- Processing 106016
+---------- Processing 111716
+---------- Processing 114419
+---------- Processing 116524
+---------- Processing 105115
+---------- Processing 105014
+---------- Processing 103818
+Training Random Forest with 100 trees, max_depth=None, max_features=sqrt (out of 7 total features)
+ Time elapsed: 1.0656617200002074 s
+ Training data cleaned from memory
+----- Testing...
+---------- Processing 118730
+---------- Processing 117122
+---------- Processing 120111
+---------- Processing 122620
+---------- Processing 124422
+---------- Processing 118528
+---------- Processing 123117
+---------- Processing 122317
+---------- Processing 123925
+---------- Processing 118932
+---------- Testing 118730
+ Time elapsed: 7.407487750984728 s
+---------- Testing 117122
+ Time elapsed: 6.970781502081081 s
+---------- Testing 120111
+ Time elapsed: 7.3011408529710025 s
+---------- Testing 122620
+ Time elapsed: 7.0985118160024285 s
+---------- Testing 124422
+ Time elapsed: 7.028361942968331 s
+---------- Testing 118528
+ Time elapsed: 7.320938676013611 s
+---------- Testing 123117
+ Time elapsed: 7.800655191065744 s
+---------- Testing 122317
+ Time elapsed: 7.540206153062172 s
+---------- Testing 123925
+ Time elapsed: 7.4911082360195 s
+---------- Testing 118932
+ Time elapsed: 8.353555193985812 s
+---------- Post-processing 118730
+---------- Post-processing 117122
+---------- Post-processing 120111
+---------- Post-processing 122620
+---------- Post-processing 124422
+---------- Post-processing 118528
+---------- Post-processing 123117
+---------- Post-processing 122317
+---------- Post-processing 123925
+---------- Post-processing 118932
+Results saved to ./ablation_experiments/exp_10_normalization_only_with_post/2025-10-26-13-10-11/results.csv with 100 measurements
+
+Subject-wise results...
+SUBJECT    LABEL        DICE   HDRFDST
+117122     Amygdala     0.260  15.000 
+117122     GreyMatter   0.635  10.724 
+117122     Hippocampus  0.423  14.036 
+117122     Thalamus     0.722  10.677 
+117122     WhiteMatter  0.807  13.675 
+117122-PP  Amygdala     0.243  14.765 
+117122-PP  GreyMatter   0.582  11.180 
+117122-PP  Hippocampus  0.391  13.748 
+117122-PP  Thalamus     0.713  10.198 
+117122-PP  WhiteMatter  0.794  13.416 
+118528     Amygdala     0.359  13.784 
+118528     GreyMatter   0.601  11.832 
+118528     Hippocampus  0.365  13.038 
+118528     Thalamus     0.719  8.307  
+118528     WhiteMatter  0.810  15.166 
+118528-PP  Amygdala     0.330  13.153 
+118528-PP  GreyMatter   0.536  12.247 
+118528-PP  Hippocampus  0.324  12.806 
+118528-PP  Thalamus     0.699  7.483  
+118528-PP  WhiteMatter  0.797  15.652 
+118730     Amygdala     0.423  11.662 
+118730     GreyMatter   0.686  9.899  
+118730     Hippocampus  0.388  11.790 
+118730     Thalamus     0.675  8.062  
+118730     WhiteMatter  0.769  14.866 
+118730-PP  Amygdala     0.396  11.225 
+118730-PP  GreyMatter   0.643  10.050 
+118730-PP  Hippocampus  0.358  12.042 
+118730-PP  Thalamus     0.654  7.874  
+118730-PP  WhiteMatter  0.780  15.395 
+118932     Amygdala     0.425  13.000 
+118932     GreyMatter   0.695  10.000 
+118932     Hippocampus  0.409  12.767 
+118932     Thalamus     0.725  8.062  
+118932     WhiteMatter  0.819  10.296 
+118932-PP  Amygdala     0.405  12.806 
+118932-PP  GreyMatter   0.649  10.247 
+118932-PP  Hippocampus  0.370  12.570 
+118932-PP  Thalamus     0.705  8.124  
+118932-PP  WhiteMatter  0.819  8.185  
+120111     Amygdala     0.425  11.402 
+120111     GreyMatter   0.648  10.630 
+120111     Hippocampus  0.425  12.649 
+120111     Thalamus     0.771  7.810  
+120111     WhiteMatter  0.838  9.000  
+120111-PP  Amygdala     0.402  11.000 
+120111-PP  GreyMatter   0.598  10.863 
+120111-PP  Hippocampus  0.390  12.530 
+120111-PP  Thalamus     0.756  7.071  
+120111-PP  WhiteMatter  0.829  8.062  
+122317     Amygdala     0.481  13.416 
+122317     GreyMatter   0.670  11.662 
+122317     Hippocampus  0.397  13.491 
+122317     Thalamus     0.625  11.576 
+122317     WhiteMatter  0.813  11.045 
+122317-PP  Amygdala     0.454  12.369 
+122317-PP  GreyMatter   0.621  11.916 
+122317-PP  Hippocampus  0.356  13.601 
+122317-PP  Thalamus     0.600  11.747 
+122317-PP  WhiteMatter  0.823  7.874  
+122620     Amygdala     0.425  12.042 
+122620     GreyMatter   0.665  11.045 
+122620     Hippocampus  0.320  13.038 
+122620     Thalamus     0.689  8.660  
+122620     WhiteMatter  0.782  14.560 
+122620-PP  Amygdala     0.395  11.446 
+122620-PP  GreyMatter   0.613  11.358 
+122620-PP  Hippocampus  0.285  13.038 
+122620-PP  Thalamus     0.674  8.832  
+122620-PP  WhiteMatter  0.785  14.697 
+123117     Amygdala     0.266  14.866 
+123117     GreyMatter   0.548  15.556 
+123117     Hippocampus  0.256  19.209 
+123117     Thalamus     0.440  14.000 
+123117     WhiteMatter  0.787  16.031 
+123117-PP  Amygdala     0.246  15.000 
+123117-PP  GreyMatter   0.546  17.292 
+123117-PP  Hippocampus  0.234  19.849 
+123117-PP  Thalamus     0.477  14.697 
+123117-PP  WhiteMatter  0.743  16.733 
+123925     Amygdala     0.473  11.358 
+123925     GreyMatter   0.629  14.765 
+123925     Hippocampus  0.343  12.450 
+123925     Thalamus     0.661  9.849  
+123925     WhiteMatter  0.791  15.811 
+123925-PP  Amygdala     0.448  11.358 
+123925-PP  GreyMatter   0.581  14.866 
+123925-PP  Hippocampus  0.307  12.410 
+123925-PP  Thalamus     0.633  9.849  
+123925-PP  WhiteMatter  0.804  15.395 
+124422     Amygdala     0.481  11.358 
+124422     GreyMatter   0.628  12.369 
+124422     Hippocampus  0.402  12.369 
+124422     Thalamus     0.750  11.000 
+124422     WhiteMatter  0.756  15.067 
+124422-PP  Amygdala     0.451  10.863 
+124422-PP  GreyMatter   0.581  12.689 
+124422-PP  Hippocampus  0.368  12.410 
+124422-PP  Thalamus     0.737  10.954 
+124422-PP  WhiteMatter  0.787  14.731 
+
+Aggregated statistic results...
+LABEL        METRIC   STATISTIC  VALUE 
+Amygdala     DICE     MEAN       0.389 
+Amygdala     DICE     STD        0.077 
+Amygdala     HDRFDST  MEAN       12.594
+Amygdala     HDRFDST  STD        1.415 
+GreyMatter   DICE     MEAN       0.618 
+GreyMatter   DICE     STD        0.045 
+GreyMatter   HDRFDST  MEAN       12.060
+GreyMatter   HDRFDST  STD        1.992 
+Hippocampus  DICE     MEAN       0.356 
+Hippocampus  DICE     STD        0.052 
+Hippocampus  HDRFDST  MEAN       13.492
+Hippocampus  HDRFDST  STD        2.089 
+Thalamus     DICE     MEAN       0.671 
+Thalamus     DICE     STD        0.084 
+Thalamus     HDRFDST  MEAN       9.742 
+Thalamus     HDRFDST  STD        2.074 
+WhiteMatter  DICE     MEAN       0.797 
+WhiteMatter  DICE     STD        0.024 
+WhiteMatter  HDRFDST  MEAN       13.283
+WhiteMatter  HDRFDST  STD        2.918 
+Experiment exp_10_normalization_only_with_post completed in 355.9 seconds
+✅ Experiment 10 completed successfully
+
+============================================================
+Running Experiment 11/17: skullstrip_only_with_post
+Description: With skull stripping only + optimal postprocessing
+============================================================
+Running experiment: exp_11_skullstrip_only_with_post
+Description: With skull stripping only + optimal postprocessing
+----- Training...
+---------- Processing 113922
+---------- Processing 100307
+---------- Processing 110411
+---------- Processing 100408
+---------- Processing 101107
+---------- Processing 101915
+---------- Processing 101309
+---------- Processing 108828
+---------- Processing 103414
+---------- Processing 115320
+---------- Processing 103111
+---------- Processing 113619
+---------- Processing 111312
+---------- Processing 106016
+---------- Processing 111716
+---------- Processing 114419
+---------- Processing 116524
+---------- Processing 105115
+---------- Processing 105014
+---------- Processing 103818
+Training Random Forest with 100 trees, max_depth=None, max_features=sqrt (out of 7 total features)
+ Time elapsed: 2.054344546981156 s
+ Training data cleaned from memory
+----- Testing...
+---------- Processing 118730
+---------- Processing 117122
+---------- Processing 120111
+---------- Processing 122620
+---------- Processing 124422
+---------- Processing 118528
+---------- Processing 123117
+---------- Processing 122317
+---------- Processing 123925
+---------- Processing 118932
+---------- Testing 118730
+ Time elapsed: 5.950798340025358 s
+---------- Testing 117122
+ Time elapsed: 5.819398450083099 s
+---------- Testing 120111
+ Time elapsed: 5.937815920100547 s
+---------- Testing 122620
+ Time elapsed: 5.845538950059563 s
+---------- Testing 124422
+ Time elapsed: 5.637020871043205 s
+---------- Testing 118528
+ Time elapsed: 5.805203748983331 s
+---------- Testing 123117
+ Time elapsed: 5.756523582036607 s
+---------- Testing 122317
+ Time elapsed: 5.923460440011695 s
+---------- Testing 123925
+ Time elapsed: 5.737339257961139 s
+---------- Testing 118932
+ Time elapsed: 6.0129417680436745 s
+---------- Post-processing 118730
+---------- Post-processing 117122
+---------- Post-processing 120111
+---------- Post-processing 122620
+---------- Post-processing 124422
+---------- Post-processing 118528
+---------- Post-processing 123117
+---------- Post-processing 122317
+---------- Post-processing 123925
+---------- Post-processing 118932
+Results saved to ./ablation_experiments/exp_11_skullstrip_only_with_post/2025-10-26-13-16-06/results.csv with 100 measurements
+
+Subject-wise results...
+SUBJECT    LABEL        DICE   HDRFDST
+117122     Amygdala     0.358  14.900 
+117122     GreyMatter   0.722  2.236  
+117122     Hippocampus  0.445  14.422 
+117122     Thalamus     0.716  8.124  
+117122     WhiteMatter  0.837  3.317  
+117122-PP  Amygdala     0.334  14.900 
+117122-PP  GreyMatter   0.656  4.000  
+117122-PP  Hippocampus  0.412  14.283 
+117122-PP  Thalamus     0.701  7.874  
+117122-PP  WhiteMatter  0.830  3.162  
+118528     Amygdala     0.488  13.000 
+118528     GreyMatter   0.701  2.000  
+118528     Hippocampus  0.451  12.767 
+118528     Thalamus     0.730  6.000  
+118528     WhiteMatter  0.725  4.583  
+118528-PP  Amygdala     0.512  12.728 
+118528-PP  GreyMatter   0.684  3.000  
+118528-PP  Hippocampus  0.413  12.247 
+118528-PP  Thalamus     0.700  5.831  
+118528-PP  WhiteMatter  0.759  3.000  
+118730     Amygdala     0.471  11.790 
+118730     GreyMatter   0.704  3.162  
+118730     Hippocampus  0.402  12.649 
+118730     Thalamus     0.723  6.164  
+118730     WhiteMatter  0.846  3.000  
+118730-PP  Amygdala     0.440  11.489 
+118730-PP  GreyMatter   0.646  5.000  
+118730-PP  Hippocampus  0.362  12.247 
+118730-PP  Thalamus     0.706  5.831  
+118730-PP  WhiteMatter  0.805  5.477  
+118932     Amygdala     0.504  12.728 
+118932     GreyMatter   0.731  2.236  
+118932     Hippocampus  0.467  12.247 
+118932     Thalamus     0.746  7.211  
+118932     WhiteMatter  0.830  3.162  
+118932-PP  Amygdala     0.469  12.689 
+118932-PP  GreyMatter   0.683  4.472  
+118932-PP  Hippocampus  0.425  11.832 
+118932-PP  Thalamus     0.731  6.708  
+118932-PP  WhiteMatter  0.828  3.317  
+120111     Amygdala     0.558  10.817 
+120111     GreyMatter   0.728  1.732  
+120111     Hippocampus  0.479  12.247 
+120111     Thalamus     0.757  5.831  
+120111     WhiteMatter  0.820  3.000  
+120111-PP  Amygdala     0.559  10.247 
+120111-PP  GreyMatter   0.684  3.162  
+120111-PP  Hippocampus  0.443  12.083 
+120111-PP  Thalamus     0.735  5.657  
+120111-PP  WhiteMatter  0.832  2.449  
+122317     Amygdala     0.624  14.142 
+122317     GreyMatter   0.731  2.000  
+122317     Hippocampus  0.467  12.884 
+122317     Thalamus     0.657  9.220  
+122317     WhiteMatter  0.787  4.000  
+122317-PP  Amygdala     0.610  13.416 
+122317-PP  GreyMatter   0.694  3.162  
+122317-PP  Hippocampus  0.427  13.266 
+122317-PP  Thalamus     0.635  9.000  
+122317-PP  WhiteMatter  0.811  2.828  
+122620     Amygdala     0.492  11.402 
+122620     GreyMatter   0.731  3.742  
+122620     Hippocampus  0.359  12.806 
+122620     Thalamus     0.689  8.062  
+122620     WhiteMatter  0.833  3.606  
+122620-PP  Amygdala     0.460  10.677 
+122620-PP  GreyMatter   0.670  4.583  
+122620-PP  Hippocampus  0.321  12.728 
+122620-PP  Thalamus     0.686  7.810  
+122620-PP  WhiteMatter  0.825  3.606  
+123117     Amygdala     0.452  11.446 
+123117     GreyMatter   0.676  6.403  
+123117     Hippocampus  0.301  19.672 
+123117     Thalamus     0.406  14.142 
+123117     WhiteMatter  0.854  4.899  
+123117-PP  Amygdala     0.437  11.358 
+123117-PP  GreyMatter   0.626  7.810  
+123117-PP  Hippocampus  0.265  19.545 
+123117-PP  Thalamus     0.428  14.318 
+123117-PP  WhiteMatter  0.815  6.083  
+123925     Amygdala     0.576  11.790 
+123925     GreyMatter   0.723  2.000  
+123925     Hippocampus  0.387  13.153 
+123925     Thalamus     0.724  8.660  
+123925     WhiteMatter  0.828  3.606  
+123925-PP  Amygdala     0.560  11.446 
+123925-PP  GreyMatter   0.666  3.464  
+123925-PP  Hippocampus  0.339  12.884 
+123925-PP  Thalamus     0.702  8.246  
+123925-PP  WhiteMatter  0.832  3.000  
+124422     Amygdala     0.584  12.124 
+124422     GreyMatter   0.696  2.000  
+124422     Hippocampus  0.466  11.446 
+124422     Thalamus     0.778  5.385  
+124422     WhiteMatter  0.730  4.123  
+124422-PP  Amygdala     0.575  12.042 
+124422-PP  GreyMatter   0.664  3.000  
+124422-PP  Hippocampus  0.432  11.705 
+124422-PP  Thalamus     0.759  4.690  
+124422-PP  WhiteMatter  0.766  2.828  
+
+Aggregated statistic results...
+LABEL        METRIC   STATISTIC  VALUE 
+Amygdala     DICE     MEAN       0.503 
+Amygdala     DICE     STD        0.077 
+Amygdala     HDRFDST  MEAN       12.256
+Amygdala     HDRFDST  STD        1.277 
+GreyMatter   DICE     MEAN       0.691 
+GreyMatter   DICE     STD        0.030 
+GreyMatter   HDRFDST  MEAN       3.458 
+GreyMatter   HDRFDST  STD        1.546 
+Hippocampus  DICE     MEAN       0.403 
+Hippocampus  DICE     STD        0.059 
+Hippocampus  HDRFDST  MEAN       13.356
+Hippocampus  HDRFDST  STD        2.208 
+Thalamus     DICE     MEAN       0.685 
+Thalamus     DICE     STD        0.095 
+Thalamus     HDRFDST  MEAN       7.738 
+Thalamus     HDRFDST  STD        2.514 
+WhiteMatter  DICE     MEAN       0.810 
+WhiteMatter  DICE     STD        0.036 
+WhiteMatter  HDRFDST  MEAN       3.652 
+WhiteMatter  HDRFDST  STD        0.928 
+Experiment exp_11_skullstrip_only_with_post completed in 281.8 seconds
+✅ Experiment 11 completed successfully
+
+============================================================
+Running Experiment 12/17: registration_only_with_post
+Description: With registration only + optimal postprocessing
+============================================================
+Running experiment: exp_12_registration_only_with_post
+Description: With registration only + optimal postprocessing
+----- Training...
+---------- Processing 113922
+---------- Processing 100307
+---------- Processing 110411
+---------- Processing 100408
+---------- Processing 101107
+---------- Processing 101915
+---------- Processing 101309
+---------- Processing 108828
+---------- Processing 103414
+---------- Processing 115320
+---------- Processing 103111
+---------- Processing 113619
+---------- Processing 111312
+---------- Processing 106016
+---------- Processing 111716
+---------- Processing 114419
+---------- Processing 116524
+---------- Processing 105115
+---------- Processing 105014
+---------- Processing 103818
+Training Random Forest with 100 trees, max_depth=None, max_features=sqrt (out of 7 total features)
+ Time elapsed: 3.653504743007943 s
+ Training data cleaned from memory
+----- Testing...
+---------- Processing 118730
+---------- Processing 117122
+---------- Processing 120111
+---------- Processing 122620
+---------- Processing 124422
+---------- Processing 118528
+---------- Processing 123117
+---------- Processing 122317
+---------- Processing 123925
+---------- Processing 118932
+---------- Testing 118730
+ Time elapsed: 9.242037821095437 s
+---------- Testing 117122
+ Time elapsed: 8.705007156007923 s
+---------- Testing 120111
+ Time elapsed: 8.854593274998479 s
+---------- Testing 122620
+ Time elapsed: 9.108370289904997 s
+---------- Testing 124422
+ Time elapsed: 9.253820037003607 s
+---------- Testing 118528
+ Time elapsed: 9.141487977001816 s
+---------- Testing 123117
+ Time elapsed: 9.055124901933596 s
+---------- Testing 122317
+ Time elapsed: 8.989108426030725 s
+---------- Testing 123925
+ Time elapsed: 9.892640245030634 s
+---------- Testing 118932
+ Time elapsed: 9.118867735029198 s
+---------- Post-processing 118730
+---------- Post-processing 117122
+---------- Post-processing 120111
+---------- Post-processing 122620
+---------- Post-processing 124422
+---------- Post-processing 118528
+---------- Post-processing 123117
+---------- Post-processing 122317
+---------- Post-processing 123925
+---------- Post-processing 118932
+Results saved to ./ablation_experiments/exp_12_registration_only_with_post/2025-10-26-13-21-17/results.csv with 100 measurements
+
+Subject-wise results...
+SUBJECT    LABEL        DICE   HDRFDST
+117122     Amygdala     0.458  13.077 
+117122     GreyMatter   0.695  11.225 
+117122     Hippocampus  0.526  13.342 
+117122     Thalamus     0.774  6.708  
+117122     WhiteMatter  0.819  9.899  
+117122-PP  Amygdala     0.442  13.000 
+117122-PP  GreyMatter   0.652  11.358 
+117122-PP  Hippocampus  0.492  13.153 
+117122-PP  Thalamus     0.763  6.164  
+117122-PP  WhiteMatter  0.821  8.124  
+118528     Amygdala     0.481  13.342 
+118528     GreyMatter   0.660  11.091 
+118528     Hippocampus  0.552  13.601 
+118528     Thalamus     0.768  5.916  
+118528     WhiteMatter  0.719  14.318 
+118528-PP  Amygdala     0.476  13.000 
+118528-PP  GreyMatter   0.655  11.180 
+118528-PP  Hippocampus  0.523  13.038 
+118528-PP  Thalamus     0.753  5.099  
+118528-PP  WhiteMatter  0.736  12.369 
+118730     Amygdala     0.487  11.402 
+118730     GreyMatter   0.676  11.446 
+118730     Hippocampus  0.427  12.247 
+118730     Thalamus     0.741  11.000 
+118730     WhiteMatter  0.807  17.944 
+118730-PP  Amygdala     0.462  11.402 
+118730-PP  GreyMatter   0.631  11.747 
+118730-PP  Hippocampus  0.392  12.450 
+118730-PP  Thalamus     0.721  10.296 
+118730-PP  WhiteMatter  0.785  18.138 
+118932     Amygdala     0.521  12.207 
+118932     GreyMatter   0.710  9.695  
+118932     Hippocampus  0.515  11.705 
+118932     Thalamus     0.780  6.164  
+118932     WhiteMatter  0.808  13.601 
+118932-PP  Amygdala     0.495  12.124 
+118932-PP  GreyMatter   0.676  9.798  
+118932-PP  Hippocampus  0.472  11.916 
+118932-PP  Thalamus     0.768  6.083  
+118932-PP  WhiteMatter  0.810  11.874 
+120111     Amygdala     0.526  9.487  
+120111     GreyMatter   0.694  10.296 
+120111     Hippocampus  0.512  11.705 
+120111     Thalamus     0.734  10.100 
+120111     WhiteMatter  0.808  10.770 
+120111-PP  Amygdala     0.521  9.220  
+120111-PP  GreyMatter   0.666  10.296 
+120111-PP  Hippocampus  0.476  11.576 
+120111-PP  Thalamus     0.714  9.110  
+120111-PP  WhiteMatter  0.819  7.874  
+122317     Amygdala     0.601  13.038 
+122317     GreyMatter   0.692  11.358 
+122317     Hippocampus  0.543  11.705 
+122317     Thalamus     0.782  7.000  
+122317     WhiteMatter  0.761  15.652 
+122317-PP  Amygdala     0.588  13.038 
+122317-PP  GreyMatter   0.674  11.576 
+122317-PP  Hippocampus  0.514  11.446 
+122317-PP  Thalamus     0.767  6.481  
+122317-PP  WhiteMatter  0.781  15.100 
+122620     Amygdala     0.534  13.077 
+122620     GreyMatter   0.705  11.000 
+122620     Hippocampus  0.503  14.142 
+122620     Thalamus     0.773  8.000  
+122620     WhiteMatter  0.801  17.059 
+122620-PP  Amygdala     0.513  12.649 
+122620-PP  GreyMatter   0.664  11.180 
+122620-PP  Hippocampus  0.470  14.177 
+122620-PP  Thalamus     0.761  8.367  
+122620-PP  WhiteMatter  0.802  17.146 
+123117     Amygdala     0.481  12.689 
+123117     GreyMatter   0.662  14.526 
+123117     Hippocampus  0.518  12.689 
+123117     Thalamus     0.724  14.177 
+123117     WhiteMatter  0.809  22.136 
+123117-PP  Amygdala     0.468  12.083 
+123117-PP  GreyMatter   0.621  14.900 
+123117-PP  Hippocampus  0.482  12.767 
+123117-PP  Thalamus     0.697  14.000 
+123117-PP  WhiteMatter  0.784  22.450 
+123925     Amygdala     0.530  11.446 
+123925     GreyMatter   0.679  13.784 
+123925     Hippocampus  0.488  13.748 
+123925     Thalamus     0.789  5.916  
+123925     WhiteMatter  0.810  17.234 
+123925-PP  Amygdala     0.516  11.446 
+123925-PP  GreyMatter   0.642  13.964 
+123925-PP  Hippocampus  0.451  12.884 
+123925-PP  Thalamus     0.770  5.385  
+123925-PP  WhiteMatter  0.820  15.033 
+124422     Amygdala     0.646  10.296 
+124422     GreyMatter   0.636  12.806 
+124422     Hippocampus  0.550  10.770 
+124422     Thalamus     0.815  8.062  
+124422     WhiteMatter  0.707  15.684 
+124422-PP  Amygdala     0.641  10.247 
+124422-PP  GreyMatter   0.627  13.038 
+124422-PP  Hippocampus  0.519  10.724 
+124422-PP  Thalamus     0.804  5.831  
+124422-PP  WhiteMatter  0.732  14.071 
+
+Aggregated statistic results...
+LABEL        METRIC   STATISTIC  VALUE 
+Amygdala     DICE     MEAN       0.519 
+Amygdala     DICE     STD        0.057 
+Amygdala     HDRFDST  MEAN       11.913
+Amygdala     HDRFDST  STD        1.234 
+GreyMatter   DICE     MEAN       0.666 
+GreyMatter   DICE     STD        0.025 
+GreyMatter   HDRFDST  MEAN       11.813
+GreyMatter   HDRFDST  STD        1.483 
+Hippocampus  DICE     MEAN       0.496 
+Hippocampus  DICE     STD        0.040 
+Hippocampus  HDRFDST  MEAN       12.489
+Hippocampus  HDRFDST  STD        1.009 
+Thalamus     DICE     MEAN       0.760 
+Thalamus     DICE     STD        0.029 
+Thalamus     HDRFDST  MEAN       7.993 
+Thalamus     HDRFDST  STD        2.629 
+WhiteMatter  DICE     MEAN       0.787 
+WhiteMatter  DICE     STD        0.035 
+WhiteMatter  HDRFDST  MEAN       14.824
+WhiteMatter  HDRFDST  STD        3.879 
+Experiment exp_12_registration_only_with_post completed in 416.5 seconds
+✅ Experiment 12 completed successfully
+
+============================================================
+Running Experiment 13/17: norm_skull_with_post
+Description: With normalization + skull stripping + optimal postprocessing
+============================================================
+Running experiment: exp_13_norm_skull_with_post
+Description: With normalization + skull stripping + optimal postprocessing
+----- Training...
+---------- Processing 113922
+---------- Processing 100307
+---------- Processing 110411
+---------- Processing 100408
+---------- Processing 101107
+---------- Processing 101915
+---------- Processing 101309
+---------- Processing 108828
+---------- Processing 103414
+---------- Processing 115320
+---------- Processing 103111
+---------- Processing 113619
+---------- Processing 111312
+---------- Processing 106016
+---------- Processing 111716
+---------- Processing 114419
+---------- Processing 116524
+---------- Processing 105115
+---------- Processing 105014
+---------- Processing 103818
+Training Random Forest with 100 trees, max_depth=None, max_features=sqrt (out of 7 total features)
+ Time elapsed: 1.1373116420581937 s
+ Training data cleaned from memory
+----- Testing...
+---------- Processing 118730
+---------- Processing 117122
+---------- Processing 120111
+---------- Processing 122620
+---------- Processing 124422
+---------- Processing 118528
+---------- Processing 123117
+---------- Processing 122317
+---------- Processing 123925
+---------- Processing 118932
+---------- Testing 118730
+ Time elapsed: 7.1313334529986605 s
+---------- Testing 117122
+ Time elapsed: 7.109885359997861 s
+---------- Testing 120111
+ Time elapsed: 7.249253183952533 s
+---------- Testing 122620
+ Time elapsed: 7.132593241054565 s
+---------- Testing 124422
+ Time elapsed: 7.122312454972416 s
+---------- Testing 118528
+ Time elapsed: 7.132078479975462 s
+---------- Testing 123117
+ Time elapsed: 7.419387402012944 s
+---------- Testing 122317
+ Time elapsed: 7.322358557954431 s
+---------- Testing 123925
+ Time elapsed: 6.962753842002712 s
+---------- Testing 118932
+ Time elapsed: 7.306826960993931 s
+---------- Post-processing 118730
+---------- Post-processing 117122
+---------- Post-processing 120111
+---------- Post-processing 122620
+---------- Post-processing 124422
+---------- Post-processing 118528
+---------- Post-processing 123117
+---------- Post-processing 122317
+---------- Post-processing 123925
+---------- Post-processing 118932
+Results saved to ./ablation_experiments/exp_13_norm_skull_with_post/2025-10-26-13-27-42/results.csv with 100 measurements
+
+Subject-wise results...
+SUBJECT    LABEL        DICE   HDRFDST
+117122     Amygdala     0.215  16.733 
+117122     GreyMatter   0.542  7.348  
+117122     Hippocampus  0.422  15.033 
+117122     Thalamus     0.682  11.180 
+117122     WhiteMatter  0.753  8.602  
+117122-PP  Amygdala     0.216  16.793 
+117122-PP  GreyMatter   0.499  8.775  
+117122-PP  Hippocampus  0.408  14.765 
+117122-PP  Thalamus     0.669  11.000 
+117122-PP  WhiteMatter  0.764  8.832  
+118528     Amygdala     0.299  14.000 
+118528     GreyMatter   0.560  7.616  
+118528     Hippocampus  0.397  14.036 
+118528     Thalamus     0.670  8.246  
+118528     WhiteMatter  0.755  9.165  
+118528-PP  Amygdala     0.285  14.213 
+118528-PP  GreyMatter   0.512  8.944  
+118528-PP  Hippocampus  0.363  13.638 
+118528-PP  Thalamus     0.636  8.124  
+118528-PP  WhiteMatter  0.776  9.110  
+118730     Amygdala     0.367  12.042 
+118730     GreyMatter   0.624  3.742  
+118730     Hippocampus  0.420  11.874 
+118730     Thalamus     0.686  7.280  
+118730     WhiteMatter  0.755  5.657  
+118730-PP  Amygdala     0.349  12.083 
+118730-PP  GreyMatter   0.598  4.899  
+118730-PP  Hippocampus  0.391  11.576 
+118730-PP  Thalamus     0.663  7.211  
+118730-PP  WhiteMatter  0.770  5.099  
+118932     Amygdala     0.369  12.728 
+118932     GreyMatter   0.637  4.000  
+118932     Hippocampus  0.423  12.649 
+118932     Thalamus     0.722  7.000  
+118932     WhiteMatter  0.768  5.196  
+118932-PP  Amygdala     0.354  12.845 
+118932-PP  GreyMatter   0.605  5.099  
+118932-PP  Hippocampus  0.391  12.806 
+118932-PP  Thalamus     0.703  6.403  
+118932-PP  WhiteMatter  0.774  5.099  
+120111     Amygdala     0.348  13.491 
+120111     GreyMatter   0.572  5.657  
+120111     Hippocampus  0.439  12.884 
+120111     Thalamus     0.723  7.810  
+120111     WhiteMatter  0.777  6.083  
+120111-PP  Amygdala     0.341  13.892 
+120111-PP  GreyMatter   0.536  7.000  
+120111-PP  Hippocampus  0.407  12.649 
+120111-PP  Thalamus     0.696  7.550  
+120111-PP  WhiteMatter  0.776  6.325  
+122317     Amygdala     0.412  15.652 
+122317     GreyMatter   0.576  6.403  
+122317     Hippocampus  0.452  14.213 
+122317     Thalamus     0.623  11.705 
+122317     WhiteMatter  0.754  8.602  
+122317-PP  Amygdala     0.388  15.264 
+122317-PP  GreyMatter   0.539  7.810  
+122317-PP  Hippocampus  0.424  13.748 
+122317-PP  Thalamus     0.603  11.705 
+122317-PP  WhiteMatter  0.755  8.944  
+122620     Amygdala     0.339  11.874 
+122620     GreyMatter   0.576  7.348  
+122620     Hippocampus  0.339  13.038 
+122620     Thalamus     0.676  7.681  
+122620     WhiteMatter  0.739  8.062  
+122620-PP  Amygdala     0.315  11.874 
+122620-PP  GreyMatter   0.539  8.485  
+122620-PP  Hippocampus  0.305  12.530 
+122620-PP  Thalamus     0.657  7.280  
+122620-PP  WhiteMatter  0.760  7.141  
+123117     Amygdala     0.266  17.117 
+123117     GreyMatter   0.509  10.630 
+123117     Hippocampus  0.287  18.385 
+123117     Thalamus     0.384  15.524 
+123117     WhiteMatter  0.759  8.062  
+123117-PP  Amygdala     0.249  17.833 
+123117-PP  GreyMatter   0.491  12.329 
+123117-PP  Hippocampus  0.255  18.385 
+123117-PP  Thalamus     0.410  16.000 
+123117-PP  WhiteMatter  0.765  5.831  
+123925     Amygdala     0.378  13.748 
+123925     GreyMatter   0.506  8.185  
+123925     Hippocampus  0.371  13.342 
+123925     Thalamus     0.702  8.062  
+123925     WhiteMatter  0.753  8.246  
+123925-PP  Amygdala     0.362  13.928 
+123925-PP  GreyMatter   0.465  9.539  
+123925-PP  Hippocampus  0.325  13.454 
+123925-PP  Thalamus     0.680  7.810  
+123925-PP  WhiteMatter  0.761  8.602  
+124422     Amygdala     0.370  14.491 
+124422     GreyMatter   0.554  7.071  
+124422     Hippocampus  0.429  13.964 
+124422     Thalamus     0.747  10.630 
+124422     WhiteMatter  0.745  7.810  
+124422-PP  Amygdala     0.353  14.765 
+124422-PP  GreyMatter   0.511  8.307  
+124422-PP  Hippocampus  0.399  14.177 
+124422-PP  Thalamus     0.734  10.247 
+124422-PP  WhiteMatter  0.771  7.681  
+
+Aggregated statistic results...
+LABEL        METRIC   STATISTIC  VALUE 
+Amygdala     DICE     MEAN       0.329 
+Amygdala     DICE     STD        0.055 
+Amygdala     HDRFDST  MEAN       14.268
+Amygdala     HDRFDST  STD        1.779 
+GreyMatter   DICE     MEAN       0.548 
+GreyMatter   DICE     STD        0.045 
+GreyMatter   HDRFDST  MEAN       7.459 
+GreyMatter   HDRFDST  STD        2.087 
+Hippocampus  DICE     MEAN       0.382 
+Hippocampus  DICE     STD        0.053 
+Hippocampus  HDRFDST  MEAN       13.857
+Hippocampus  HDRFDST  STD        1.739 
+Thalamus     DICE     MEAN       0.653 
+Thalamus     DICE     STD        0.092 
+Thalamus     HDRFDST  MEAN       9.422 
+Thalamus     HDRFDST  STD        2.686 
+WhiteMatter  DICE     MEAN       0.761 
+WhiteMatter  DICE     STD        0.010 
+WhiteMatter  HDRFDST  MEAN       7.408 
+WhiteMatter  HDRFDST  STD        1.424 
+Experiment exp_13_norm_skull_with_post completed in 319.3 seconds
+✅ Experiment 13 completed successfully
+
+============================================================
+Running Experiment 14/17: norm_reg_with_post
+Description: With normalization + registration + optimal postprocessing
+============================================================
+Running experiment: exp_14_norm_reg_with_post
+Description: With normalization + registration + optimal postprocessing
+----- Training...
+---------- Processing 113922
+---------- Processing 100307
+---------- Processing 110411
+---------- Processing 100408
+---------- Processing 101107
+---------- Processing 101915
+---------- Processing 101309
+---------- Processing 108828
+---------- Processing 103414
+---------- Processing 115320
+---------- Processing 103111
+---------- Processing 113619
+---------- Processing 111312
+---------- Processing 106016
+---------- Processing 111716
+---------- Processing 114419
+---------- Processing 116524
+---------- Processing 105115
+---------- Processing 105014
+---------- Processing 103818
+Training Random Forest with 100 trees, max_depth=None, max_features=sqrt (out of 7 total features)
+ Time elapsed: 1.3379234049934894 s
+ Training data cleaned from memory
+----- Testing...
+---------- Processing 118730
+---------- Processing 117122
+---------- Processing 120111
+---------- Processing 122620
+---------- Processing 124422
+---------- Processing 118528
+---------- Processing 123117
+---------- Processing 122317
+---------- Processing 123925
+---------- Processing 118932
+---------- Testing 118730
+ Time elapsed: 8.7203614609316 s
+---------- Testing 117122
+ Time elapsed: 8.676494600018486 s
+---------- Testing 120111
+ Time elapsed: 8.308099030982703 s
+---------- Testing 122620
+ Time elapsed: 8.73706256900914 s
+---------- Testing 124422
+ Time elapsed: 8.82697090797592 s
+---------- Testing 118528
+ Time elapsed: 8.864776786998846 s
+---------- Testing 123117
+ Time elapsed: 8.496332908049226 s
+---------- Testing 122317
+ Time elapsed: 8.824974267976359 s
+---------- Testing 123925
+ Time elapsed: 8.793605464044958 s
+---------- Testing 118932
+ Time elapsed: 8.711178386001848 s
+---------- Post-processing 118730
+---------- Post-processing 117122
+---------- Post-processing 120111
+---------- Post-processing 122620
+---------- Post-processing 124422
+---------- Post-processing 118528
+---------- Post-processing 123117
+---------- Post-processing 122317
+---------- Post-processing 123925
+---------- Post-processing 118932
+Results saved to ./ablation_experiments/exp_14_norm_reg_with_post/2025-10-26-13-33-32/results.csv with 100 measurements
+
+Subject-wise results...
+SUBJECT    LABEL        DICE   HDRFDST
+117122     Amygdala     0.410  13.038 
+117122     GreyMatter   0.653  10.488 
+117122     Hippocampus  0.454  13.000 
+117122     Thalamus     0.768  9.220  
+117122     WhiteMatter  0.810  13.000 
+117122-PP  Amygdala     0.387  13.077 
+117122-PP  GreyMatter   0.616  10.817 
+117122-PP  Hippocampus  0.428  12.649 
+117122-PP  Thalamus     0.757  8.602  
+117122-PP  WhiteMatter  0.809  12.247 
+118528     Amygdala     0.388  13.892 
+118528     GreyMatter   0.661  11.358 
+118528     Hippocampus  0.440  14.491 
+118528     Thalamus     0.749  7.211  
+118528     WhiteMatter  0.814  13.601 
+118528-PP  Amygdala     0.363  13.416 
+118528-PP  GreyMatter   0.621  11.533 
+118528-PP  Hippocampus  0.410  14.318 
+118528-PP  Thalamus     0.729  7.810  
+118528-PP  WhiteMatter  0.818  10.954 
+118730     Amygdala     0.488  11.402 
+118730     GreyMatter   0.677  10.100 
+118730     Hippocampus  0.417  11.747 
+118730     Thalamus     0.736  8.246  
+118730     WhiteMatter  0.764  14.491 
+118730-PP  Amygdala     0.458  11.402 
+118730-PP  GreyMatter   0.645  10.247 
+118730-PP  Hippocampus  0.385  11.874 
+118730-PP  Thalamus     0.721  7.681  
+118730-PP  WhiteMatter  0.778  14.799 
+118932     Amygdala     0.459  12.083 
+118932     GreyMatter   0.684  10.630 
+118932     Hippocampus  0.427  13.416 
+118932     Thalamus     0.758  7.810  
+118932     WhiteMatter  0.818  11.045 
+118932-PP  Amygdala     0.432  12.000 
+118932-PP  GreyMatter   0.649  10.677 
+118932-PP  Hippocampus  0.392  12.845 
+118932-PP  Thalamus     0.738  8.246  
+118932-PP  WhiteMatter  0.815  8.944  
+120111     Amygdala     0.440  9.487  
+120111     GreyMatter   0.643  10.817 
+120111     Hippocampus  0.426  12.369 
+120111     Thalamus     0.721  11.662 
+120111     WhiteMatter  0.835  8.124  
+120111-PP  Amygdala     0.419  9.434  
+120111-PP  GreyMatter   0.606  11.045 
+120111-PP  Hippocampus  0.392  12.042 
+120111-PP  Thalamus     0.708  11.747 
+120111-PP  WhiteMatter  0.831  6.708  
+122317     Amygdala     0.478  12.450 
+122317     GreyMatter   0.681  11.576 
+122317     Hippocampus  0.426  12.728 
+122317     Thalamus     0.758  7.681  
+122317     WhiteMatter  0.811  12.530 
+122317-PP  Amygdala     0.444  12.530 
+122317-PP  GreyMatter   0.647  12.083 
+122317-PP  Hippocampus  0.393  12.450 
+122317-PP  Thalamus     0.734  7.874  
+122317-PP  WhiteMatter  0.822  11.358 
+122620     Amygdala     0.483  12.845 
+122620     GreyMatter   0.681  11.000 
+122620     Hippocampus  0.435  13.491 
+122620     Thalamus     0.767  6.403  
+122620     WhiteMatter  0.783  15.166 
+122620-PP  Amygdala     0.458  12.689 
+122620-PP  GreyMatter   0.644  11.358 
+122620-PP  Hippocampus  0.404  12.806 
+122620-PP  Thalamus     0.741  6.782  
+122620-PP  WhiteMatter  0.794  15.100 
+123117     Amygdala     0.400  13.748 
+123117     GreyMatter   0.598  11.790 
+123117     Hippocampus  0.441  13.601 
+123117     Thalamus     0.716  9.000  
+123117     WhiteMatter  0.827  13.784 
+123117-PP  Amygdala     0.376  13.416 
+123117-PP  GreyMatter   0.592  12.450 
+123117-PP  Hippocampus  0.417  12.806 
+123117-PP  Thalamus     0.724  8.544  
+123117-PP  WhiteMatter  0.801  12.689 
+123925     Amygdala     0.475  11.402 
+123925     GreyMatter   0.665  11.045 
+123925     Hippocampus  0.457  12.689 
+123925     Thalamus     0.772  6.000  
+123925     WhiteMatter  0.791  11.790 
+123925-PP  Amygdala     0.453  11.705 
+123925-PP  GreyMatter   0.639  10.863 
+123925-PP  Hippocampus  0.431  12.083 
+123925-PP  Thalamus     0.752  5.831  
+123925-PP  WhiteMatter  0.807  6.325  
+124422     Amygdala     0.573  10.817 
+124422     GreyMatter   0.643  12.369 
+124422     Hippocampus  0.466  11.358 
+124422     Thalamus     0.804  7.280  
+124422     WhiteMatter  0.749  10.954 
+124422-PP  Amygdala     0.546  10.630 
+124422-PP  GreyMatter   0.615  12.450 
+124422-PP  Hippocampus  0.433  10.677 
+124422-PP  Thalamus     0.790  6.708  
+124422-PP  WhiteMatter  0.774  5.831  
+
+Aggregated statistic results...
+LABEL        METRIC   STATISTIC  VALUE 
+Amygdala     DICE     MEAN       0.446 
+Amygdala     DICE     STD        0.052 
+Amygdala     HDRFDST  MEAN       12.073
+Amygdala     HDRFDST  STD        1.261 
+GreyMatter   DICE     MEAN       0.643 
+GreyMatter   DICE     STD        0.027 
+GreyMatter   HDRFDST  MEAN       11.235
+GreyMatter   HDRFDST  STD        0.693 
+Hippocampus  DICE     MEAN       0.424 
+Hippocampus  DICE     STD        0.022 
+Hippocampus  HDRFDST  MEAN       12.672
+Hippocampus  HDRFDST  STD        0.905 
+Thalamus     DICE     MEAN       0.747 
+Thalamus     DICE     STD        0.024 
+Thalamus     HDRFDST  MEAN       8.017 
+Thalamus     HDRFDST  STD        1.526 
+WhiteMatter  DICE     MEAN       0.803 
+WhiteMatter  DICE     STD        0.022 
+WhiteMatter  HDRFDST  MEAN       11.472
+WhiteMatter  HDRFDST  STD        2.845 
+Experiment exp_14_norm_reg_with_post completed in 414.2 seconds
+✅ Experiment 14 completed successfully
+
+============================================================
+Running Experiment 15/17: reg_skull_with_post
+Description: With registration + skull stripping + optimal postprocessing
+============================================================
+Running experiment: exp_15_reg_skull_with_post
+Description: With registration + skull stripping + optimal postprocessing
+----- Training...
+---------- Processing 113922
+---------- Processing 100307
+---------- Processing 110411
+---------- Processing 100408
+---------- Processing 101107
+---------- Processing 101915
+---------- Processing 101309
+---------- Processing 108828
+---------- Processing 103414
+---------- Processing 115320
+---------- Processing 103111
+---------- Processing 113619
+---------- Processing 111312
+---------- Processing 106016
+---------- Processing 111716
+---------- Processing 114419
+---------- Processing 116524
+---------- Processing 105115
+---------- Processing 105014
+---------- Processing 103818
+Training Random Forest with 100 trees, max_depth=None, max_features=sqrt (out of 7 total features)
+ Time elapsed: 2.6522599259624258 s
+ Training data cleaned from memory
+----- Testing...
+---------- Processing 118730
+---------- Processing 117122
+---------- Processing 120111
+---------- Processing 122620
+---------- Processing 124422
+---------- Processing 118528
+---------- Processing 123117
+---------- Processing 122317
+---------- Processing 123925
+---------- Processing 118932
+---------- Testing 118730
+ Time elapsed: 6.969048361061141 s
+---------- Testing 117122
+ Time elapsed: 7.308043063967489 s
+---------- Testing 120111
+ Time elapsed: 7.266613714047708 s
+---------- Testing 122620
+ Time elapsed: 7.340518960962072 s
+---------- Testing 124422
+ Time elapsed: 7.268195395008661 s
+---------- Testing 118528
+ Time elapsed: 6.8615533070405945 s
+---------- Testing 123117
+ Time elapsed: 7.380116522079334 s
+---------- Testing 122317
+ Time elapsed: 7.318175739957951 s
+---------- Testing 123925
+ Time elapsed: 7.289895744994283 s
+---------- Testing 118932
+ Time elapsed: 7.475201669964008 s
+---------- Post-processing 118730
+---------- Post-processing 117122
+---------- Post-processing 120111
+---------- Post-processing 122620
+---------- Post-processing 124422
+---------- Post-processing 118528
+---------- Post-processing 123117
+---------- Post-processing 122317
+---------- Post-processing 123925
+---------- Post-processing 118932
+Results saved to ./ablation_experiments/exp_15_reg_skull_with_post/2025-10-26-13-40-27/results.csv with 100 measurements
+
+Subject-wise results...
+SUBJECT    LABEL        DICE   HDRFDST
+117122     Amygdala     0.464  13.000 
+117122     GreyMatter   0.709  2.236  
+117122     Hippocampus  0.502  13.191 
+117122     Thalamus     0.759  10.863 
+117122     WhiteMatter  0.819  4.123  
+117122-PP  Amygdala     0.441  12.649 
+117122-PP  GreyMatter   0.664  4.000  
+117122-PP  Hippocampus  0.470  13.038 
+117122-PP  Thalamus     0.746  7.348  
+117122-PP  WhiteMatter  0.818  3.000  
+118528     Amygdala     0.501  13.000 
+118528     GreyMatter   0.686  2.000  
+118528     Hippocampus  0.535  13.000 
+118528     Thalamus     0.756  5.477  
+118528     WhiteMatter  0.716  5.000  
+118528-PP  Amygdala     0.503  12.570 
+118528-PP  GreyMatter   0.682  3.000  
+118528-PP  Hippocampus  0.505  12.689 
+118528-PP  Thalamus     0.739  5.477  
+118528-PP  WhiteMatter  0.738  3.162  
+118730     Amygdala     0.497  11.358 
+118730     GreyMatter   0.698  3.000  
+118730     Hippocampus  0.411  12.369 
+118730     Thalamus     0.730  10.050 
+118730     WhiteMatter  0.831  3.162  
+118730-PP  Amygdala     0.468  11.225 
+118730-PP  GreyMatter   0.653  5.000  
+118730-PP  Hippocampus  0.375  12.530 
+118730-PP  Thalamus     0.714  9.487  
+118730-PP  WhiteMatter  0.802  5.099  
+118932     Amygdala     0.515  12.083 
+118932     GreyMatter   0.717  2.236  
+118932     Hippocampus  0.483  12.042 
+118932     Thalamus     0.769  6.481  
+118932     WhiteMatter  0.816  3.162  
+118932-PP  Amygdala     0.484  12.042 
+118932-PP  GreyMatter   0.684  4.472  
+118932-PP  Hippocampus  0.444  12.247 
+118932-PP  Thalamus     0.756  6.000  
+118932-PP  WhiteMatter  0.816  3.317  
+120111     Amygdala     0.549  9.000  
+120111     GreyMatter   0.716  2.000  
+120111     Hippocampus  0.497  11.358 
+120111     Thalamus     0.725  10.630 
+120111     WhiteMatter  0.810  3.000  
+120111-PP  Amygdala     0.547  8.775  
+120111-PP  GreyMatter   0.686  3.162  
+120111-PP  Hippocampus  0.461  11.180 
+120111-PP  Thalamus     0.708  9.274  
+120111-PP  WhiteMatter  0.818  2.236  
+122317     Amygdala     0.634  12.450 
+122317     GreyMatter   0.709  2.000  
+122317     Hippocampus  0.508  11.180 
+122317     Thalamus     0.763  7.874  
+122317     WhiteMatter  0.775  4.899  
+122317-PP  Amygdala     0.622  12.207 
+122317-PP  GreyMatter   0.689  3.000  
+122317-PP  Hippocampus  0.478  11.180 
+122317-PP  Thalamus     0.745  7.483  
+122317-PP  WhiteMatter  0.796  3.000  
+122620     Amygdala     0.552  12.689 
+122620     GreyMatter   0.720  4.000  
+122620     Hippocampus  0.473  13.928 
+122620     Thalamus     0.760  8.544  
+122620     WhiteMatter  0.817  3.742  
+122620-PP  Amygdala     0.530  12.329 
+122620-PP  GreyMatter   0.678  4.472  
+122620-PP  Hippocampus  0.438  14.177 
+122620-PP  Thalamus     0.747  6.557  
+122620-PP  WhiteMatter  0.815  3.000  
+123117     Amygdala     0.458  12.530 
+123117     GreyMatter   0.672  5.657  
+123117     Hippocampus  0.481  12.570 
+123117     Thalamus     0.714  13.077 
+123117     WhiteMatter  0.846  3.000  
+123117-PP  Amygdala     0.436  12.042 
+123117-PP  GreyMatter   0.635  6.481  
+123117-PP  Hippocampus  0.444  12.728 
+123117-PP  Thalamus     0.687  12.689 
+123117-PP  WhiteMatter  0.819  5.385  
+123925     Amygdala     0.549  11.225 
+123925     GreyMatter   0.708  2.000  
+123925     Hippocampus  0.469  12.884 
+123925     Thalamus     0.773  7.000  
+123925     WhiteMatter  0.815  4.123  
+123925-PP  Amygdala     0.536  11.000 
+123925-PP  GreyMatter   0.671  3.606  
+123925-PP  Hippocampus  0.438  12.728 
+123925-PP  Thalamus     0.755  6.000  
+123925-PP  WhiteMatter  0.822  3.162  
+124422     Amygdala     0.647  10.344 
+124422     GreyMatter   0.673  2.000  
+124422     Hippocampus  0.521  10.488 
+124422     Thalamus     0.803  7.681  
+124422     WhiteMatter  0.718  4.690  
+124422-PP  Amygdala     0.641  10.000 
+124422-PP  GreyMatter   0.658  3.000  
+124422-PP  Hippocampus  0.495  10.440 
+124422-PP  Thalamus     0.790  5.745  
+124422-PP  WhiteMatter  0.744  3.000  
+
+Aggregated statistic results...
+LABEL        METRIC   STATISTIC  VALUE 
+Amygdala     DICE     MEAN       0.529 
+Amygdala     DICE     STD        0.064 
+Amygdala     HDRFDST  MEAN       11.626
+Amygdala     HDRFDST  STD        1.221 
+GreyMatter   DICE     MEAN       0.685 
+GreyMatter   DICE     STD        0.023 
+GreyMatter   HDRFDST  MEAN       3.366 
+GreyMatter   HDRFDST  STD        1.292 
+Hippocampus  DICE     MEAN       0.471 
+Hippocampus  DICE     STD        0.037 
+Hippocampus  HDRFDST  MEAN       12.297
+Hippocampus  HDRFDST  STD        1.011 
+Thalamus     DICE     MEAN       0.747 
+Thalamus     DICE     STD        0.027 
+Thalamus     HDRFDST  MEAN       8.187 
+Thalamus     HDRFDST  STD        2.264 
+WhiteMatter  DICE     MEAN       0.798 
+WhiteMatter  DICE     STD        0.037 
+WhiteMatter  HDRFDST  MEAN       3.663 
+WhiteMatter  HDRFDST  STD        0.884 
+Experiment exp_15_reg_skull_with_post completed in 355.3 seconds
+✅ Experiment 15 completed successfully
+
+============================================================
+Running Experiment 16/17: all_preprocessing_with_post
+Description: With normalization + skull stripping + registration + optimal postprocessing
+============================================================
+Running experiment: exp_16_all_preprocessing_with_post
+Description: With normalization + skull stripping + registration + optimal postprocessing
+----- Training...
+---------- Processing 113922
+---------- Processing 100307
+---------- Processing 110411
+---------- Processing 100408
+---------- Processing 101107
+---------- Processing 101915
+---------- Processing 101309
+---------- Processing 108828
+---------- Processing 103414
+---------- Processing 115320
+---------- Processing 103111
+---------- Processing 113619
+---------- Processing 111312
+---------- Processing 106016
+---------- Processing 111716
+---------- Processing 114419
+---------- Processing 116524
+---------- Processing 105115
+---------- Processing 105014
+---------- Processing 103818
+Training Random Forest with 100 trees, max_depth=None, max_features=sqrt (out of 7 total features)
+ Time elapsed: 1.216541112982668 s
+ Training data cleaned from memory
+----- Testing...
+---------- Processing 118730
+---------- Processing 117122
+---------- Processing 120111
+---------- Processing 122620
+---------- Processing 124422
+---------- Processing 118528
+---------- Processing 123117
+---------- Processing 122317
+---------- Processing 123925
+---------- Processing 118932
+---------- Testing 118730
+ Time elapsed: 8.752010497963056 s
+---------- Testing 117122
+ Time elapsed: 8.701037131017074 s
+---------- Testing 120111
+ Time elapsed: 8.722171192988753 s
+---------- Testing 122620
+ Time elapsed: 8.772293648100458 s
+---------- Testing 124422
+ Time elapsed: 8.715067429002374 s
+---------- Testing 118528
+ Time elapsed: 8.449317133054137 s
+---------- Testing 123117
+ Time elapsed: 8.796724371029995 s
+---------- Testing 122317
+ Time elapsed: 8.661459261900745 s
+---------- Testing 123925
+ Time elapsed: 8.621779061970301 s
+---------- Testing 118932
+ Time elapsed: 8.423547170008533 s
+---------- Post-processing 118730
+---------- Post-processing 117122
+---------- Post-processing 120111
+---------- Post-processing 122620
+---------- Post-processing 124422
+---------- Post-processing 118528
+---------- Post-processing 123117
+---------- Post-processing 122317
+---------- Post-processing 123925
+---------- Post-processing 118932
+Results saved to ./ablation_experiments/exp_16_all_preprocessing_with_post/2025-10-26-13-46-22/results.csv with 100 measurements
+
+Subject-wise results...
+SUBJECT    LABEL        DICE   HDRFDST
+117122     Amygdala     0.387  13.191 
+117122     GreyMatter   0.596  3.606  
+117122     Hippocampus  0.517  12.884 
+117122     Thalamus     0.764  6.164  
+117122     WhiteMatter  0.767  4.243  
+117122-PP  Amygdala     0.362  13.038 
+117122-PP  GreyMatter   0.571  5.000  
+117122-PP  Hippocampus  0.506  12.207 
+117122-PP  Thalamus     0.750  5.831  
+117122-PP  WhiteMatter  0.778  4.123  
+118528     Amygdala     0.396  13.342 
+118528     GreyMatter   0.629  3.606  
+118528     Hippocampus  0.501  14.318 
+118528     Thalamus     0.757  5.657  
+118528     WhiteMatter  0.781  4.000  
+118528-PP  Amygdala     0.368  13.416 
+118528-PP  GreyMatter   0.600  4.472  
+118528-PP  Hippocampus  0.477  13.748 
+118528-PP  Thalamus     0.743  5.657  
+118528-PP  WhiteMatter  0.794  3.162  
+118730     Amygdala     0.457  11.402 
+118730     GreyMatter   0.629  3.162  
+118730     Hippocampus  0.473  12.166 
+118730     Thalamus     0.749  6.164  
+118730     WhiteMatter  0.757  4.123  
+118730-PP  Amygdala     0.424  11.358 
+118730-PP  GreyMatter   0.607  4.690  
+118730-PP  Hippocampus  0.446  11.402 
+118730-PP  Thalamus     0.735  5.831  
+118730-PP  WhiteMatter  0.774  3.606  
+118932     Amygdala     0.445  12.247 
+118932     GreyMatter   0.637  3.162  
+118932     Hippocampus  0.488  11.705 
+118932     Thalamus     0.770  5.385  
+118932     WhiteMatter  0.769  4.123  
+118932-PP  Amygdala     0.412  12.410 
+118932-PP  GreyMatter   0.613  5.196  
+118932-PP  Hippocampus  0.460  11.358 
+118932-PP  Thalamus     0.754  5.099  
+118932-PP  WhiteMatter  0.779  4.123  
+120111     Amygdala     0.424  9.434  
+120111     GreyMatter   0.592  3.742  
+120111     Hippocampus  0.479  11.662 
+120111     Thalamus     0.733  8.775  
+120111     WhiteMatter  0.786  3.606  
+120111-PP  Amygdala     0.401  9.434  
+120111-PP  GreyMatter   0.567  5.000  
+120111-PP  Hippocampus  0.451  11.358 
+120111-PP  Thalamus     0.714  9.110  
+120111-PP  WhiteMatter  0.791  4.123  
+122317     Amygdala     0.435  13.038 
+122317     GreyMatter   0.605  3.742  
+122317     Hippocampus  0.493  13.379 
+122317     Thalamus     0.768  6.164  
+122317     WhiteMatter  0.771  4.243  
+122317-PP  Amygdala     0.409  12.884 
+122317-PP  GreyMatter   0.579  5.000  
+122317-PP  Hippocampus  0.474  12.530 
+122317-PP  Thalamus     0.753  5.831  
+122317-PP  WhiteMatter  0.779  4.359  
+122620     Amygdala     0.461  12.728 
+122620     GreyMatter   0.602  5.099  
+122620     Hippocampus  0.492  13.601 
+122620     Thalamus     0.767  5.477  
+122620     WhiteMatter  0.756  7.071  
+122620-PP  Amygdala     0.437  12.689 
+122620-PP  GreyMatter   0.585  5.831  
+122620-PP  Hippocampus  0.470  13.342 
+122620-PP  Thalamus     0.753  5.385  
+122620-PP  WhiteMatter  0.776  4.899  
+123117     Amygdala     0.437  12.689 
+123117     GreyMatter   0.615  4.000  
+123117     Hippocampus  0.523  12.530 
+123117     Thalamus     0.745  6.325  
+123117     WhiteMatter  0.779  5.000  
+123117-PP  Amygdala     0.411  12.247 
+123117-PP  GreyMatter   0.587  5.000  
+123117-PP  Hippocampus  0.495  12.042 
+123117-PP  Thalamus     0.725  6.325  
+123117-PP  WhiteMatter  0.783  4.123  
+123925     Amygdala     0.437  11.576 
+123925     GreyMatter   0.586  4.123  
+123925     Hippocampus  0.487  11.916 
+123925     Thalamus     0.784  5.831  
+123925     WhiteMatter  0.776  4.123  
+123925-PP  Amygdala     0.412  11.489 
+123925-PP  GreyMatter   0.556  5.099  
+123925-PP  Hippocampus  0.459  11.358 
+123925-PP  Thalamus     0.770  5.831  
+123925-PP  WhiteMatter  0.781  4.690  
+124422     Amygdala     0.524  10.296 
+124422     GreyMatter   0.597  4.000  
+124422     Hippocampus  0.513  12.083 
+124422     Thalamus     0.801  5.831  
+124422     WhiteMatter  0.763  4.243  
+124422-PP  Amygdala     0.492  10.050 
+124422-PP  GreyMatter   0.570  4.690  
+124422-PP  Hippocampus  0.492  11.225 
+124422-PP  Thalamus     0.790  5.385  
+124422-PP  WhiteMatter  0.782  3.162  
+
+Aggregated statistic results...
+LABEL        METRIC   STATISTIC  VALUE 
+Amygdala     DICE     MEAN       0.427 
+Amygdala     DICE     STD        0.038 
+Amygdala     HDRFDST  MEAN       11.948
+Amygdala     HDRFDST  STD        1.244 
+GreyMatter   DICE     MEAN       0.596 
+GreyMatter   DICE     STD        0.021 
+GreyMatter   HDRFDST  MEAN       4.411 
+GreyMatter   HDRFDST  STD        0.737 
+Hippocampus  DICE     MEAN       0.485 
+Hippocampus  DICE     STD        0.021 
+Hippocampus  HDRFDST  MEAN       12.341
+Hippocampus  HDRFDST  STD        0.900 
+Thalamus     DICE     MEAN       0.756 
+Thalamus     DICE     STD        0.021 
+Thalamus     HDRFDST  MEAN       6.103 
+Thalamus     HDRFDST  STD        1.002 
+WhiteMatter  DICE     MEAN       0.776 
+WhiteMatter  DICE     STD        0.010 
+WhiteMatter  HDRFDST  MEAN       4.257 
+WhiteMatter  HDRFDST  STD        0.791 
+Experiment exp_16_all_preprocessing_with_post completed in 390.9 seconds
+✅ Experiment 16 completed successfully
+
+============================================================
+Running Experiment 17/17: all_preprocessing_postprocessing_with_post
+Description: With all preprocessing + postprocessing + optimal postprocessing
+============================================================
+Running experiment: exp_17_all_preprocessing_postprocessing_with_post
+Description: With all preprocessing + postprocessing + optimal postprocessing
+----- Training...
+---------- Processing 113922
+---------- Processing 100307
+---------- Processing 110411
+---------- Processing 100408
+---------- Processing 101107
+---------- Processing 101915
+---------- Processing 101309
+---------- Processing 108828
+---------- Processing 103414
+---------- Processing 115320
+---------- Processing 103111
+---------- Processing 113619
+---------- Processing 111312
+---------- Processing 106016
+---------- Processing 111716
+---------- Processing 114419
+---------- Processing 116524
+---------- Processing 105115
+---------- Processing 105014
+---------- Processing 103818
+Training Random Forest with 100 trees, max_depth=None, max_features=sqrt (out of 7 total features)
+ Time elapsed: 1.4322338129859418 s
+ Training data cleaned from memory
+----- Testing...
+---------- Processing 118730
+---------- Processing 117122
+---------- Processing 120111
+---------- Processing 122620
+---------- Processing 124422
+---------- Processing 118528
+---------- Processing 123117
+---------- Processing 122317
+---------- Processing 123925
+---------- Processing 118932
+---------- Testing 118730
+ Time elapsed: 8.669766717008315 s
+---------- Testing 117122
+ Time elapsed: 8.71181140805129 s
+---------- Testing 120111
+ Time elapsed: 8.699583211913705 s
+---------- Testing 122620
+ Time elapsed: 8.737024900969118 s
+---------- Testing 124422
+ Time elapsed: 8.757722272071987 s
+---------- Testing 118528
+ Time elapsed: 8.860652564908378 s
+---------- Testing 123117
+ Time elapsed: 8.806818896904588 s
+---------- Testing 122317
+ Time elapsed: 8.825812636991031 s
+---------- Testing 123925
+ Time elapsed: 8.377258025924675 s
+---------- Testing 118932
+ Time elapsed: 9.15151661389973 s
+---------- Post-processing 118730
+---------- Post-processing 117122
+---------- Post-processing 120111
+---------- Post-processing 122620
+---------- Post-processing 124422
+---------- Post-processing 118528
+---------- Post-processing 123117
+---------- Post-processing 122317
+---------- Post-processing 123925
+---------- Post-processing 118932
+Results saved to ./ablation_experiments/exp_17_all_preprocessing_postprocessing_with_post/2025-10-26-13-52-52/results.csv with 100 measurements
+
+Subject-wise results...
+SUBJECT    LABEL        DICE   HDRFDST
+117122     Amygdala     0.378  13.115 
+117122     GreyMatter   0.598  3.606  
+117122     Hippocampus  0.512  13.038 
+117122     Thalamus     0.754  7.071  
+117122     WhiteMatter  0.770  4.123  
+117122-PP  Amygdala     0.361  12.806 
+117122-PP  GreyMatter   0.572  5.000  
+117122-PP  Hippocampus  0.502  12.207 
+117122-PP  Thalamus     0.740  6.708  
+117122-PP  WhiteMatter  0.779  4.123  
+118528     Amygdala     0.391  13.379 
+118528     GreyMatter   0.629  3.606  
+118528     Hippocampus  0.496  14.457 
+118528     Thalamus     0.751  6.164  
+118528     WhiteMatter  0.782  3.606  
+118528-PP  Amygdala     0.365  13.379 
+118528-PP  GreyMatter   0.600  4.583  
+118528-PP  Hippocampus  0.474  14.213 
+118528-PP  Thalamus     0.734  6.000  
+118528-PP  WhiteMatter  0.795  3.000  
+118730     Amygdala     0.450  11.446 
+118730     GreyMatter   0.631  3.162  
+118730     Hippocampus  0.467  12.689 
+118730     Thalamus     0.740  7.141  
+118730     WhiteMatter  0.759  3.742  
+118730-PP  Amygdala     0.419  11.358 
+118730-PP  GreyMatter   0.608  4.690  
+118730-PP  Hippocampus  0.438  11.874 
+118730-PP  Thalamus     0.724  7.071  
+118730-PP  WhiteMatter  0.776  3.464  
+118932     Amygdala     0.441  12.369 
+118932     GreyMatter   0.640  3.162  
+118932     Hippocampus  0.485  12.042 
+118932     Thalamus     0.760  5.831  
+118932     WhiteMatter  0.771  4.000  
+118932-PP  Amygdala     0.409  12.369 
+118932-PP  GreyMatter   0.614  5.385  
+118932-PP  Hippocampus  0.454  11.225 
+118932-PP  Thalamus     0.743  5.657  
+118932-PP  WhiteMatter  0.781  4.123  
+120111     Amygdala     0.423  9.899  
+120111     GreyMatter   0.594  3.742  
+120111     Hippocampus  0.476  12.042 
+120111     Thalamus     0.723  8.775  
+120111     WhiteMatter  0.788  3.162  
+120111-PP  Amygdala     0.402  9.695  
+120111-PP  GreyMatter   0.566  5.099  
+120111-PP  Hippocampus  0.448  11.402 
+120111-PP  Thalamus     0.704  9.000  
+120111-PP  WhiteMatter  0.792  4.123  
+122317     Amygdala     0.437  12.806 
+122317     GreyMatter   0.607  3.742  
+122317     Hippocampus  0.493  13.601 
+122317     Thalamus     0.755  6.403  
+122317     WhiteMatter  0.776  4.123  
+122317-PP  Amygdala     0.409  12.689 
+122317-PP  GreyMatter   0.579  5.000  
+122317-PP  Hippocampus  0.470  12.884 
+122317-PP  Thalamus     0.738  6.325  
+122317-PP  WhiteMatter  0.783  4.899  
+122620     Amygdala     0.448  13.000 
+122620     GreyMatter   0.605  5.000  
+122620     Hippocampus  0.485  13.928 
+122620     Thalamus     0.763  6.000  
+122620     WhiteMatter  0.757  6.325  
+122620-PP  Amygdala     0.415  12.845 
+122620-PP  GreyMatter   0.586  5.831  
+122620-PP  Hippocampus  0.463  13.638 
+122620-PP  Thalamus     0.746  6.000  
+122620-PP  WhiteMatter  0.776  4.243  
+123117     Amygdala     0.427  13.000 
+123117     GreyMatter   0.617  4.000  
+123117     Hippocampus  0.513  12.689 
+123117     Thalamus     0.737  7.071  
+123117     WhiteMatter  0.779  4.583  
+123117-PP  Amygdala     0.405  12.166 
+123117-PP  GreyMatter   0.587  5.000  
+123117-PP  Hippocampus  0.487  11.747 
+123117-PP  Thalamus     0.715  7.071  
+123117-PP  WhiteMatter  0.784  4.123  
+123925     Amygdala     0.434  11.576 
+123925     GreyMatter   0.588  4.123  
+123925     Hippocampus  0.479  12.530 
+123925     Thalamus     0.780  6.000  
+123925     WhiteMatter  0.778  4.000  
+123925-PP  Amygdala     0.411  11.358 
+123925-PP  GreyMatter   0.556  5.099  
+123925-PP  Hippocampus  0.454  12.042 
+123925-PP  Thalamus     0.765  5.831  
+123925-PP  WhiteMatter  0.783  5.000  
+124422     Amygdala     0.519  10.296 
+124422     GreyMatter   0.599  4.000  
+124422     Hippocampus  0.511  12.207 
+124422     Thalamus     0.800  6.083  
+124422     WhiteMatter  0.765  4.000  
+124422-PP  Amygdala     0.483  10.050 
+124422-PP  GreyMatter   0.570  4.899  
+124422-PP  Hippocampus  0.491  11.045 
+124422-PP  Thalamus     0.789  5.831  
+124422-PP  WhiteMatter  0.784  3.000  
+
+Aggregated statistic results...
+LABEL        METRIC   STATISTIC  VALUE 
+Amygdala     DICE     MEAN       0.421 
+Amygdala     DICE     STD        0.036 
+Amygdala     HDRFDST  MEAN       11.980
+Amygdala     HDRFDST  STD        1.174 
+GreyMatter   DICE     MEAN       0.597 
+GreyMatter   DICE     STD        0.022 
+GreyMatter   HDRFDST  MEAN       4.436 
+GreyMatter   HDRFDST  STD        0.754 
+Hippocampus  DICE     MEAN       0.480 
+Hippocampus  DICE     STD        0.021 
+Hippocampus  HDRFDST  MEAN       12.575
+Hippocampus  HDRFDST  STD        0.960 
+Thalamus     DICE     MEAN       0.748 
+Thalamus     DICE     STD        0.023 
+Thalamus     HDRFDST  MEAN       6.602 
+Thalamus     HDRFDST  STD        0.904 
+WhiteMatter  DICE     MEAN       0.778 
+WhiteMatter  DICE     STD        0.010 
+WhiteMatter  HDRFDST  MEAN       4.088 
+WhiteMatter  HDRFDST  STD        0.733 
+Experiment exp_17_all_preprocessing_postprocessing_with_post completed in 391.2 seconds
+✅ Experiment 17 completed successfully
+
+============================================================
+ANALYZING RESULTS
+============================================================
+Loaded 18 experiments for analysis
+
+Analysis complete! Results saved to: ./ablation_experiments/analysis_none
+
+Key files generated:
+  📄 component_contributions: component_contributions.png
+  📄 pairwise_tests: pairwise_tests.csv
+  📄 confidence_intervals: confidence_intervals.csv
+  📄 summary_statistics: summary_statistics.csv
+  📄 performance_analysis: performance_analysis.json
+  📄 overall_performance: overall_performance.png
+  📄 component_effects: component_effects.png
+  📄 tissue_analysis: tissue_analysis.png
+  📄 statistical_significance: statistical_significance.png
+
+🎉 ABLATION STUDY COMPLETED!
+============================================================
+Study type: combined
+Total experiments: 18
+Successful: 18
+Failed: 0
+Results directory: ./ablation_experiments
+
+============================================================
+ABLATION STUDY COMPLETED
+Results saved to: ./ablation_experiments
+============================================================
+Done!

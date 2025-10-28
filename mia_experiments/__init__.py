@@ -4,6 +4,8 @@ A comprehensive framework for running ablation studies and experiments on brain
 tissue segmentation pipelines with systematic analysis and visualization.
 """
 
+import os
+
 from .core.data import ExperimentData, DataLoader, ExperimentCollection
 from .core.analysis import ComponentAnalyzer, StatisticalAnalyzer, PerformanceAnalyzer, ResultsExporter
 from .core.visualization import ExperimentVisualizer, PlotStyle
@@ -18,9 +20,10 @@ __author__ = "MIA Lab"
 
 # Main entry points
 def run_ablation_study(data_atlas_dir: str, data_train_dir: str, data_test_dir: str,
-                      optimization_level: str = "quick", output_dir: str = "./ablation_experiments"):
+                      optimization_level: str = "quick", output_dir: str = "./ablation_experiments",
+                      study_type: str = "preprocessing"):
     """
-    Run a complete 9-experiment ablation study.
+    Run ablation study with configurable study type.
     
     Args:
         data_atlas_dir: Path to atlas data directory
@@ -28,13 +31,14 @@ def run_ablation_study(data_atlas_dir: str, data_train_dir: str, data_test_dir: 
         data_test_dir: Path to test data directory
         optimization_level: 'none', 'quick', or 'full'
         output_dir: Output directory for results
+        study_type: Type of ablation study ('preprocessing', 'postprocessing', or 'combined')
     
     Returns:
         Dictionary with experiment results
     """
     level = OptimizationLevel(optimization_level)
     manager = AblationStudyManager(output_dir)
-    return manager.run_ablation_study(data_atlas_dir, data_train_dir, data_test_dir, level)
+    return manager.run_ablation_study(data_atlas_dir, data_train_dir, data_test_dir, level, study_type)
 
 
 def analyze_results(experiment_dir: str, optimization_level: str = "quick"):

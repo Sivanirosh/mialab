@@ -1,5 +1,6 @@
 {
-  "start_time": "2025-10-16T12:57:06.591804",
+  "start_time": "2025-10-26T13:57:09.112363",
+  "study_type": "combined",
   "optimization_level": "none",
   "forest_config": {
     "n_estimators": 100,
@@ -56,9 +57,54 @@
       "name": "all_preprocessing_postprocessing",
       "success": true,
       "directory": "./ablation_experiments/exp_08_all_preprocessing_postprocessing"
+    },
+    "9": {
+      "name": "baseline_none_with_post",
+      "success": true,
+      "directory": "./ablation_experiments/exp_09_baseline_none_with_post"
+    },
+    "10": {
+      "name": "normalization_only_with_post",
+      "success": true,
+      "directory": "./ablation_experiments/exp_10_normalization_only_with_post"
+    },
+    "11": {
+      "name": "skullstrip_only_with_post",
+      "success": true,
+      "directory": "./ablation_experiments/exp_11_skullstrip_only_with_post"
+    },
+    "12": {
+      "name": "registration_only_with_post",
+      "success": true,
+      "directory": "./ablation_experiments/exp_12_registration_only_with_post"
+    },
+    "13": {
+      "name": "norm_skull_with_post",
+      "success": true,
+      "directory": "./ablation_experiments/exp_13_norm_skull_with_post"
+    },
+    "14": {
+      "name": "norm_reg_with_post",
+      "success": true,
+      "directory": "./ablation_experiments/exp_14_norm_reg_with_post"
+    },
+    "15": {
+      "name": "reg_skull_with_post",
+      "success": true,
+      "directory": "./ablation_experiments/exp_15_reg_skull_with_post"
+    },
+    "16": {
+      "name": "all_preprocessing_with_post",
+      "success": true,
+      "directory": "./ablation_experiments/exp_16_all_preprocessing_with_post"
+    },
+    "17": {
+      "name": "all_preprocessing_postprocessing_with_post",
+      "success": true,
+      "directory": "./ablation_experiments/exp_17_all_preprocessing_postprocessing_with_post"
     }
   },
-  "total_experiments": 9,
-  "successful_experiments": 9,
+  "total_experiments": 18,
+  "successful_experiments": 18,
   "failed_experiments": 0
 }

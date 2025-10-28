@@ -85,8 +85,28 @@ def run_ablation_study_interactive():
     print("\nABLATION STUDY SETUP")
     print("-" * 30)
     
+    # Get study type
+    print("Choose study type:")
+    print("1. Preprocessing ablation (9 experiments)")
+    print("2. Postprocessing ablation (9 experiments)")
+    print("3. Combined preprocessing + postprocessing (18 experiments)")
+    
+    while True:
+        type_choice = input("Enter choice (1-3): ").strip()
+        if type_choice == '1':
+            study_type = 'preprocessing'
+            break
+        elif type_choice == '2':
+            study_type = 'postprocessing'
+            break
+        elif type_choice == '3':
+            study_type = 'combined'
+            break
+        else:
+            print("Please enter 1, 2, or 3")
+    
     # Get optimization level
-    print("Choose optimization level:")
+    print("\nChoose optimization level:")
     print("1. None (use sklearn defaults, fastest)")
     print("2. Quick (small grid search, ~2-3 hours)")
     print("3. Full (large grid search, ~4-6 hours)")
@@ -107,6 +127,7 @@ def run_ablation_study_interactive():
     
     # Confirm
     print(f"\nConfiguration:")
+    print(f"  Study type: {study_type}")
     print(f"  Atlas: ./data/atlas")
     print(f"  Training: ./data/train")
     print(f"  Test: ./data/test")
@@ -125,7 +146,8 @@ def run_ablation_study_interactive():
             './data/train', 
             './data/test',
             optimization,
-            './ablation_experiments'
+            './ablation_experiments',
+            study_type
         )
         print("Ablation study completed! Check ./ablation_experiments/ for results.")
     except Exception as e:
@@ -183,15 +205,26 @@ def show_experiment_plan():
     """Show the experiment plan."""
     from mia_experiments import AblationStudyConfigurator
     
-    print("\nABLATION STUDY EXPERIMENT PLAN")
+    print("\nABLATION STUDY EXPERIMENT PLANS")
     print("-" * 40)
     
+    print("\n1. PREPROCESSING ABLATION (9 experiments):")
     experiments = AblationStudyConfigurator.get_experiment_summary()
     for exp_id, description in experiments.items():
         print(f"  {exp_id}: {description}")
     
-    print("\nThis systematic approach tests the contribution of each")
-    print("preprocessing component to brain tissue segmentation performance.")
+    print("\n2. POSTPROCESSING ABLATION (9 experiments):")
+    post_experiments = AblationStudyConfigurator.get_postprocessing_experiment_summary()
+    for exp_id, description in post_experiments.items():
+        print(f"  {exp_id}: {description}")
+    
+    print("\n3. COMBINED ABLATION (18 experiments):")
+    print("  Experiments 0-8: Preprocessing ablation without postprocessing")
+    print("  Experiments 9-17: Same preprocessing ablation WITH optimal postprocessing")
+    print("  This tests the effect of postprocessing on each preprocessing configuration")
+    
+    print("\nThese systematic approaches test the contribution of each")
+    print("component to brain tissue segmentation performance.")
     
 
 def show_cli_help():
