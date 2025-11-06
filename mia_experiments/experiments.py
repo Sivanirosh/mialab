@@ -233,7 +233,7 @@ class AblationStudyManager:
         }
         
         # Process images
-        images = putil.pre_process_batch(crawler.data, opt_preprocessing, multi_process=False)
+        images = putil.pre_process_batch(crawler.data, opt_preprocessing, multi_process=True)
         
         # Extract features
         data_train = np.concatenate([img.feature_matrix[0] for img in images])
@@ -280,8 +280,8 @@ class AblationStudyManager:
         opt_results = {
             'optimization_level': optimization_level.value,
             'best_parameters': grid_search.best_params_,
-            'best_score': grid_search.best_score_,
-            'n_combinations_tested': n_combinations,
+            'best_score': float(grid_search.best_score_),
+            'n_combinations_tested': int(n_combinations),
             'optimization_timestamp': datetime.datetime.now().isoformat()
         }
         
@@ -323,7 +323,7 @@ class AblationStudyManager:
         
         if study_type == 'preprocessing':
             ablation_configs = AblationStudyConfigurator.create_ablation_configs(forest_config)
-            n_experiments = 9
+            n_experiments = 8
             get_summary = AblationStudyConfigurator.get_experiment_summary
         elif study_type == 'postprocessing':
             ablation_configs = AblationStudyConfigurator.create_postprocessing_ablation_configs(forest_config)
@@ -331,7 +331,7 @@ class AblationStudyManager:
             get_summary = AblationStudyConfigurator.get_postprocessing_experiment_summary
         elif study_type == 'combined':
             ablation_configs = AblationStudyConfigurator.create_combined_ablation_configs(forest_config)
-            n_experiments = 18
+            n_experiments = 16
             get_summary = AblationStudyConfigurator.get_combined_experiment_summary
         else:
             raise ValueError(f"Unknown study_type: {study_type}. Must be 'preprocessing', 'postprocessing', or 'combined'")

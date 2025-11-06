@@ -253,7 +253,7 @@ class MultiProcessor:
     """Class managing multiprocessing"""
 
     @staticmethod
-    def run(fn: callable, param_list: iter, fn_kwargs: dict = None, pickle_helper_cls: type = DefaultPickleHelper):
+    def run(fn: callable, param_list: iter, fn_kwargs: dict = None, pickle_helper_cls: type = DefaultPickleHelper, processes: int = None):
         """ Executes the function ``fn`` in parallel (different processes) for each parameter in the parameter list.
 
         Args:
@@ -261,6 +261,8 @@ class MultiProcessor:
             param_list (List[tuple]): List containing the parameters for each ``fn`` call.
             fn_kwargs (dict): kwargs for the ``fn`` function call.
             pickle_helper_cls: Class responsible for the pickling of the parameters
+            processes (int): Number of worker processes to use. If None, uses os.cpu_count().
+                            Use a smaller number (e.g., 4) to reduce memory usage.
 
         Returns:
             list: A list of all return values of the ``fn`` calls
@@ -273,7 +275,13 @@ class MultiProcessor:
         param_list = ((*p, fn_kwargs) for p in param_list)
         param_list = (helper.make_params_picklable(params) for params in param_list)
 
-        with pmp.Pool() as p:
+        # Limit processes to reduce memory usage (default to 4 if not specified)
+        if processes is None:
+            import os
+            # Use half the available CPUs to reduce memory pressure
+            processes = max(1, os.cpu_count() // 2)
+        
+        with pmp.Pool(processes=processes) as p:
             ret_vals = p.starmap(MultiProcessor._wrap_fn(fn, pickle_helper_cls), param_list)
         ret_vals = [helper.recover_return_value(ret_val) for ret_val in ret_vals]
         return ret_vals

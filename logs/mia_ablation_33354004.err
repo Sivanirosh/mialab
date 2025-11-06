@@ -1,2 +1,0 @@
-/var/spool/slurmd.spool/job33354004/slurm_script: line 64: 1940007 Killed                  python -m mia_experiments.cli run --data-atlas ./data/atlas --data-train ./data/train --data-test ./data/test --optimization none --study-type postprocessing --output-dir ./ablation_experiments
-slurmstepd: error: Detected 1 oom_kill event in StepId=33354004.batch. Some of the step tasks have been OOM Killed.

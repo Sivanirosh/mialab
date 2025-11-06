@@ -3,9 +3,12 @@
 data/atlas/*
 data/train/*
 data/test/*
+ablation_experiments/*
 ablation_experiments/exp_*
 ablation_experiments/temp_*
-
+PRESENTATION_NARRATIVE.md
+logs/
+analyze_ablation.py
 
 ### Python template
 # Byte-compiled / optimized / DLL files

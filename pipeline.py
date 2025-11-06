@@ -63,6 +63,7 @@ def main(result_dir: str, data_atlas_dir: str, data_train_dir: str, data_test_di
                 'skullstrip_pre': True,
                 'normalization_pre': True,
                 'registration_pre': True,
+                'biascorrection_pre': False,
                 'coordinates_feature': True,
                 'intensity_feature': True,
                 'gradient_intensity_feature': True
@@ -71,9 +72,12 @@ def main(result_dir: str, data_atlas_dir: str, data_train_dir: str, data_test_di
                 'simple_post': True
             },
             'forest': {
-                'n_estimators': 10,
-                'max_depth': 10,
-                'max_features': None
+                'n_estimators': 100,
+                'max_depth': None,
+                'max_features': 'sqrt',
+                'min_samples_split': 2,
+                'min_samples_leaf': 1,
+                'bootstrap': True
             }
         }
 
@@ -94,7 +98,7 @@ def main(result_dir: str, data_atlas_dir: str, data_train_dir: str, data_test_di
                                           futil.DataDirectoryFilter())
 
     # load images for training and pre-process
-    images = putil.pre_process_batch(crawler.data, pre_process_params, multi_process=False)
+    images = putil.pre_process_batch(crawler.data, pre_process_params, multi_process=True)
 
     # generate feature matrix and label vector
     data_train = np.concatenate([img.feature_matrix[0] for img in images])
@@ -102,20 +106,27 @@ def main(result_dir: str, data_atlas_dir: str, data_train_dir: str, data_test_di
 
     # Setup random forest with configurable parameters
     n_features = images[0].feature_matrix[0].shape[1]
-    max_features = forest_params.get('max_features', n_features)
+    max_features = forest_params.get('max_features', 'sqrt')
     if max_features is None:
         max_features = n_features
+    elif max_features == 'sqrt':
+        max_features = int(np.sqrt(n_features))
+    elif max_features == 'log2':
+        max_features = int(np.log2(n_features))
     
     forest = sk_ensemble.RandomForestClassifier(
         max_features=max_features,
-        n_estimators=forest_params.get('n_estimators', 10),
-        max_depth=forest_params.get('max_depth', 10),
+        n_estimators=forest_params.get('n_estimators', 100),
+        max_depth=forest_params.get('max_depth', None),
+        min_samples_split=forest_params.get('min_samples_split', 2),
+        min_samples_leaf=forest_params.get('min_samples_leaf', 1),
+        bootstrap=forest_params.get('bootstrap', True),
         random_state=42,  # For reproducibility
         n_jobs=-1  # Use all available cores
     )
 
-    print(f'Training Random Forest with {forest_params.get("n_estimators", 10)} trees, '
-          f'max_depth={forest_params.get("max_depth", 10)}, '
+    print(f'Training Random Forest with {forest_params.get("n_estimators", 100)} trees, '
+          f'max_depth={forest_params.get("max_depth", "None")}, '
           f'max_features={max_features} (out of {n_features} total features)')
 
     start_time = timeit.default_timer()
@@ -153,7 +164,7 @@ def main(result_dir: str, data_atlas_dir: str, data_train_dir: str, data_test_di
 
     # load images for testing and pre-process
     pre_process_params['training'] = False
-    images_test = putil.pre_process_batch(crawler.data, pre_process_params, multi_process=False)
+    images_test = putil.pre_process_batch(crawler.data, pre_process_params, multi_process=True)
 
     images_prediction = []
     images_probabilities = []
@@ -178,7 +189,7 @@ def main(result_dir: str, data_atlas_dir: str, data_train_dir: str, data_test_di
         images_probabilities.append(image_probabilities)
 
     # post-process segmentation and evaluate with post-processing
-    # Changed multi_process to False to reduce memory consumption
+    # Disabled multiprocessing for post-processing to reduce memory consumption
     images_post_processed = putil.post_process_batch(images_test, images_prediction, images_probabilities,
                                                      post_process_params, multi_process=False)
 
@@ -253,6 +264,7 @@ def write_custom_results_csv(results, result_file: str, config_dict: dict):
                 'DICE': dice_value if dice_value is not None else '',
                 'HDRFDST': hausdorff_value if hausdorff_value is not None else '',
                 'normalization': preprocessing.get('normalization_pre', False),
+                'bias_correction': preprocessing.get('biascorrection_pre', False),
                 'skull_stripping': preprocessing.get('skullstrip_pre', False),
                 'registration': preprocessing.get('registration_pre', False),
                 'postprocessing': postprocessing.get('simple_post', False),

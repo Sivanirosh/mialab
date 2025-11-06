@@ -25,6 +25,7 @@ class PreprocessingConfig:
     skullstrip_pre: bool = True
     normalization_pre: bool = True
     registration_pre: bool = True
+    biascorrection_pre: bool = False
     coordinates_feature: bool = True
     intensity_feature: bool = True
     gradient_intensity_feature: bool = True
@@ -45,7 +46,7 @@ class RandomForestConfig:
     """Configuration for Random Forest parameters."""
     n_estimators: int = 100
     max_depth: Optional[int] = None
-    max_features: str = 'sqrt'
+    max_features: str = None
     min_samples_split: int = 2
     min_samples_leaf: int = 1
     bootstrap: bool = True
@@ -127,7 +128,7 @@ class RandomForestOptimizer:
             return {
                 'n_estimators': [50, 100],
                 'max_depth': [10, 15, 20],
-                'max_features': ['sqrt', 'log2'],
+                'max_features': [None, None],
                 'min_samples_split': [5, 10],
                 'min_samples_leaf': [2, 5]
             }
@@ -136,7 +137,7 @@ class RandomForestOptimizer:
             return {
                 'n_estimators': [50, 100, 200],
                 'max_depth': [10, 15, 20, 25],
-                'max_features': ['sqrt', 'log2', None],
+                'max_features': [None, None, None],
                 'min_samples_split': [2, 5, 10],
                 'min_samples_leaf': [1, 2, 4, 5],
                 'bootstrap': [True, False]
@@ -176,7 +177,7 @@ class AblationStudyConfigurator:
     
     @staticmethod
     def create_ablation_configs(forest_config: RandomForestConfig) -> Dict[int, ExperimentConfig]:
-        """Create all 9 preprocessing ablation study configurations."""
+        """Create 8 preprocessing ablation study configurations with decoupled normalization and bias correction."""
         
         configs = {}
         
@@ -188,6 +189,7 @@ class AblationStudyConfigurator:
                 skullstrip_pre=False,
                 normalization_pre=False,
                 registration_pre=False,
+                biascorrection_pre=False,
                 coordinates_feature=True,
                 intensity_feature=True,
                 gradient_intensity_feature=True
@@ -196,14 +198,15 @@ class AblationStudyConfigurator:
             forest=forest_config
         )
         
-        # Experiment 1: Normalization only
+        # Experiment 1: Normalization only (no bias correction)
         configs[1] = ExperimentConfig(
             name="normalization_only",
-            description="With normalization only",
+            description="With normalization only (no bias correction)",
             preprocessing=PreprocessingConfig(
                 skullstrip_pre=False,
                 normalization_pre=True,
                 registration_pre=False,
+                biascorrection_pre=False,
                 coordinates_feature=True,
                 intensity_feature=True,
                 gradient_intensity_feature=True
@@ -212,14 +215,49 @@ class AblationStudyConfigurator:
             forest=forest_config
         )
         
-        # Experiment 2: Skull stripping only
+        # Experiment 2: Bias correction only (no normalization)
         configs[2] = ExperimentConfig(
+            name="bias_correction_only",
+            description="With bias correction only (no normalization)",
+            preprocessing=PreprocessingConfig(
+                skullstrip_pre=False,
+                normalization_pre=False,
+                registration_pre=False,
+                biascorrection_pre=True,
+                coordinates_feature=True,
+                intensity_feature=True,
+                gradient_intensity_feature=True
+            ),
+            postprocessing=PostprocessingConfig(simple_post=False),
+            forest=forest_config
+        )
+        
+        # Experiment 3: Normalization + Bias correction together
+        configs[3] = ExperimentConfig(
+            name="normalization_bias",
+            description="With normalization + bias correction together",
+            preprocessing=PreprocessingConfig(
+                skullstrip_pre=False,
+                normalization_pre=True,
+                registration_pre=False,
+                biascorrection_pre=True,
+                coordinates_feature=True,
+                intensity_feature=True,
+                gradient_intensity_feature=True
+            ),
+            postprocessing=PostprocessingConfig(simple_post=False),
+            forest=forest_config
+        )
+        
+        # Experiment 4: Skull stripping only
+        configs[4] = ExperimentConfig(
             name="skullstrip_only",
             description="With skull stripping only",
             preprocessing=PreprocessingConfig(
                 skullstrip_pre=True,
                 normalization_pre=False,
                 registration_pre=False,
+                biascorrection_pre=False,
                 coordinates_feature=True,
                 intensity_feature=True,
                 gradient_intensity_feature=True
@@ -228,14 +266,15 @@ class AblationStudyConfigurator:
             forest=forest_config
         )
         
-        # Experiment 3: Registration only
-        configs[3] = ExperimentConfig(
+        # Experiment 5: Registration only
+        configs[5] = ExperimentConfig(
             name="registration_only",
             description="With registration only",
             preprocessing=PreprocessingConfig(
                 skullstrip_pre=False,
                 normalization_pre=False,
                 registration_pre=True,
+                biascorrection_pre=False,
                 coordinates_feature=True,
                 intensity_feature=True,
                 gradient_intensity_feature=True
@@ -244,62 +283,15 @@ class AblationStudyConfigurator:
             forest=forest_config
         )
         
-        # Experiment 4: Normalization + Skull stripping
-        configs[4] = ExperimentConfig(
-            name="norm_skull",
-            description="With normalization + skull stripping",
-            preprocessing=PreprocessingConfig(
-                skullstrip_pre=True,
-                normalization_pre=True,
-                registration_pre=False,
-                coordinates_feature=True,
-                intensity_feature=True,
-                gradient_intensity_feature=True
-            ),
-            postprocessing=PostprocessingConfig(simple_post=False),
-            forest=forest_config
-        )
-        
-        # Experiment 5: Normalization + Registration
-        configs[5] = ExperimentConfig(
-            name="norm_reg",
-            description="With normalization + registration",
-            preprocessing=PreprocessingConfig(
-                skullstrip_pre=False,
-                normalization_pre=True,
-                registration_pre=True,
-                coordinates_feature=True,
-                intensity_feature=True,
-                gradient_intensity_feature=True
-            ),
-            postprocessing=PostprocessingConfig(simple_post=False),
-            forest=forest_config
-        )
-        
-        # Experiment 6: Registration + Skull stripping
+        # Experiment 6: All preprocessing
         configs[6] = ExperimentConfig(
-            name="reg_skull",
-            description="With registration + skull stripping",
-            preprocessing=PreprocessingConfig(
-                skullstrip_pre=True,
-                normalization_pre=False,
-                registration_pre=True,
-                coordinates_feature=True,
-                intensity_feature=True,
-                gradient_intensity_feature=True
-            ),
-            postprocessing=PostprocessingConfig(simple_post=False),
-            forest=forest_config
-        )
-        
-        # Experiment 7: All preprocessing
-        configs[7] = ExperimentConfig(
             name="all_preprocessing",
-            description="With normalization + skull stripping + registration",
+            description="With normalization + bias correction + skull stripping + registration",
             preprocessing=PreprocessingConfig(
                 skullstrip_pre=True,
                 normalization_pre=True,
                 registration_pre=True,
+                biascorrection_pre=True,
                 coordinates_feature=True,
                 intensity_feature=True,
                 gradient_intensity_feature=True
@@ -308,14 +300,15 @@ class AblationStudyConfigurator:
             forest=forest_config
         )
         
-        # Experiment 8: All preprocessing + postprocessing
-        configs[8] = ExperimentConfig(
+        # Experiment 7: All preprocessing + postprocessing
+        configs[7] = ExperimentConfig(
             name="all_preprocessing_postprocessing",
             description="With all preprocessing + postprocessing",
             preprocessing=PreprocessingConfig(
                 skullstrip_pre=True,
                 normalization_pre=True,
                 registration_pre=True,
+                biascorrection_pre=True,
                 coordinates_feature=True,
                 intensity_feature=True,
                 gradient_intensity_feature=True
@@ -342,6 +335,7 @@ class AblationStudyConfigurator:
             skullstrip_pre=True,
             normalization_pre=True,
             registration_pre=True,
+            biascorrection_pre=True,
             coordinates_feature=True,
             intensity_feature=True,
             gradient_intensity_feature=True
@@ -494,20 +488,20 @@ class AblationStudyConfigurator:
     def create_combined_ablation_configs(forest_config: RandomForestConfig) -> Dict[int, ExperimentConfig]:
         """Create combined preprocessing + postprocessing ablation study.
         
-        This extends the original 9 experiments with the best postprocessing configurations.
-        Total: 18 experiments (9 preprocessing variations × 2 postprocessing states).
+        This extends the 8 preprocessing experiments with the best postprocessing configurations.
+        Total: 16 experiments (8 preprocessing variations × 2 postprocessing states).
         
         Returns:
             Dictionary mapping experiment IDs to configurations.
         """
         configs = {}
         
-        # First 9: Original preprocessing ablation (no postprocessing)
+        # First 8: Original preprocessing ablation (no postprocessing)
         preprocessing_configs = AblationStudyConfigurator.create_ablation_configs(forest_config)
-        for i in range(9):
+        for i in range(8):
             configs[i] = preprocessing_configs[i]
         
-        # Next 9: Same preprocessing ablation but with optimal postprocessing
+        # Next 8: Same preprocessing ablation but with optimal postprocessing
         optimal_postprocessing = PostprocessingConfig(
             simple_post=True,
             min_component_size=5,
@@ -522,9 +516,9 @@ class AblationStudyConfigurator:
             retention_threshold=0.55
         )
         
-        for i in range(9):
+        for i in range(8):
             orig_config = preprocessing_configs[i]
-            configs[i + 9] = ExperimentConfig(
+            configs[i + 8] = ExperimentConfig(
                 name=f"{orig_config.name}_with_post",
                 description=f"{orig_config.description} + optimal postprocessing",
                 preprocessing=orig_config.preprocessing,
@@ -540,13 +534,12 @@ class AblationStudyConfigurator:
         return {
             0: "Baseline (no preprocessing)",
             1: "Normalization only",
-            2: "Skull stripping only", 
-            3: "Registration only",
-            4: "Normalization + Skull stripping",
-            5: "Normalization + Registration",
-            6: "Registration + Skull stripping", 
-            7: "All preprocessing (Norm + Skull + Reg)",
-            8: "All preprocessing + Post-processing"
+            2: "Bias correction only",
+            3: "Normalization + Bias correction",
+            4: "Skull stripping only", 
+            5: "Registration only",
+            6: "All preprocessing (Norm + Bias + Skull + Reg)",
+            7: "All preprocessing + Post-processing"
         }
     
     @staticmethod
@@ -570,13 +563,13 @@ class AblationStudyConfigurator:
         base_summary = AblationStudyConfigurator.get_experiment_summary()
         combined_summary = {}
         
-        # First 9: without postprocessing
-        for i in range(9):
+        # First 8: without postprocessing
+        for i in range(8):
             combined_summary[i] = base_summary[i]
         
-        # Next 9: with optimal postprocessing
-        for i in range(9):
-            combined_summary[i + 9] = f"{base_summary[i]} + Optimal Post"
+        # Next 8: with optimal postprocessing
+        for i in range(8):
+            combined_summary[i + 8] = f"{base_summary[i]} + Optimal Post"
         
         return combined_summary
 
@@ -670,7 +663,7 @@ def create_default_config(name: str = "default",
         forest_config = RandomForestConfig(
             n_estimators=100,
             max_depth=15,
-            max_features='sqrt',
+            max_features=None,
             min_samples_split=5,
             min_samples_leaf=2
         )

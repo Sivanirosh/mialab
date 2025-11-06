@@ -206,6 +206,8 @@ def pre_process(id_: str, paths: dict, **kwargs) -> structure.BrainImage:
         pipeline_t1.add_filter(fltr_prep.ImageRegistration())
         pipeline_t1.set_param(fltr_prep.ImageRegistrationParameters(atlas_t1, img.transformation),
                               len(pipeline_t1.filters) - 1)
+    if kwargs.get('biascorrection_pre', False):
+        pipeline_t1.add_filter(fltr_prep.BiasFieldCorrection())
     if kwargs.get('skullstrip_pre', False):
         pipeline_t1.add_filter(fltr_prep.SkullStripping())
         pipeline_t1.set_param(fltr_prep.SkullStrippingParameters(img.images[structure.BrainImageTypes.BrainMask]),
@@ -222,6 +224,8 @@ def pre_process(id_: str, paths: dict, **kwargs) -> structure.BrainImage:
         pipeline_t2.add_filter(fltr_prep.ImageRegistration())
         pipeline_t2.set_param(fltr_prep.ImageRegistrationParameters(atlas_t2, img.transformation),
                               len(pipeline_t2.filters) - 1)
+    if kwargs.get('biascorrection_pre', False):
+        pipeline_t2.add_filter(fltr_prep.BiasFieldCorrection())
     if kwargs.get('skullstrip_pre', False):
         pipeline_t2.add_filter(fltr_prep.SkullStripping())
         pipeline_t2.set_param(fltr_prep.SkullStrippingParameters(img.images[structure.BrainImageTypes.BrainMask]),
@@ -274,7 +278,24 @@ def post_process(img: structure.BrainImage, segmentation: sitk.Image, probabilit
     # construct pipeline
     pipeline = fltr.FilterPipeline()
     if kwargs.get('simple_post', False):
-        pipeline.add_filter(fltr_postp.ImagePostProcessing())
+        # Use tissue-specific postprocessing parameters if configured, otherwise use defaults
+        if kwargs.get('tissue_specific_post', False):
+            tissue_params = fltr_postp.PostProcessingParams(
+                min_component_size=kwargs.get('min_component_size', 5),
+                per_tissue_sizes=kwargs.get('per_tissue_sizes', {
+                    'WhiteMatter': 50,
+                    'GreyMatter': 30,
+                    'Thalamus': 20,
+                    'Hippocampus': 5,
+                    'Amygdala': 3
+                }),
+                kernel_radius=kwargs.get('kernel_radius', (1, 1, 1)),
+                retention_threshold=kwargs.get('retention_threshold', 0.5)
+            )
+            pipeline.add_filter(fltr_postp.ImagePostProcessing())
+            pipeline.set_param(tissue_params, len(pipeline.filters) - 1)
+        else:
+            pipeline.add_filter(fltr_postp.ImagePostProcessing())
     if kwargs.get('crf_post', False):
         pipeline.add_filter(fltr_postp.DenseCRF())
         pipeline.set_param(fltr_postp.DenseCRFParams(img.images[structure.BrainImageTypes.T1w],

@@ -169,3 +169,73 @@ class ImageRegistration(pymia_fltr.Filter):
         """
         return 'ImageRegistration:\n' \
             .format(self=self)
+
+
+class BiasFieldCorrectionParameters(pymia_fltr.FilterParams):
+    """Bias field correction parameters."""
+
+    def __init__(self, convergence_threshold: float = 0.01,
+                 max_iterations: int = 20,
+                 number_fitting_levels: int = 3):
+        """Initializes a new instance of the BiasFieldCorrectionParameters.
+
+        Args:
+            convergence_threshold (float): The convergence threshold for N4 correction. Default is 0.01 (more lenient for speed).
+            max_iterations (int): The maximum number of iterations per fitting level. Default is 20 (reduced for speed).
+            number_fitting_levels (int): The number of fitting levels. Default is 3 (reduced for speed).
+        """
+        self.convergence_threshold = convergence_threshold
+        self.max_iterations = max_iterations
+        self.number_fitting_levels = number_fitting_levels
+
+
+class BiasFieldCorrection(pymia_fltr.Filter):
+    """Represents a bias field correction filter."""
+
+    def __init__(self):
+        """Initializes a new instance of the BiasFieldCorrection class."""
+        super().__init__()
+
+    def execute(self, image: sitk.Image, params: BiasFieldCorrectionParameters = None) -> sitk.Image:
+        """Executes bias field correction using N4ITK.
+
+        Args:
+            image (sitk.Image): The image.
+            params (BiasFieldCorrectionParameters): The parameters for bias field correction.
+
+        Returns:
+            sitk.Image: The bias field corrected image.
+        """
+        if params is None:
+            params = BiasFieldCorrectionParameters()
+
+        # Cast to float
+        image_float = sitk.Cast(image, sitk.sitkFloat32)
+
+        # Create mask
+        mask_filter = sitk.OtsuThresholdImageFilter()
+        mask = mask_filter.Execute(image_float)
+
+        # Apply N4 correction
+        # Note: The number of fitting levels is determined by the length of the iterations list
+        # N4 bias correction can be slow - using optimized parameters for reasonable speed
+        print(f"  Applying N4 bias field correction (max_iter={params.max_iterations}, levels={params.number_fitting_levels})...")
+        corrector = sitk.N4BiasFieldCorrectionImageFilter()
+        corrector.SetConvergenceThreshold(params.convergence_threshold)
+        # Set iterations for each fitting level - the list length determines number of levels
+        corrector.SetMaximumNumberOfIterations([params.max_iterations] * params.number_fitting_levels)
+        # Note: SetShrinkFactor is not available in all SimpleITK versions, using default shrink factor
+
+        corrected = corrector.Execute(image_float, mask)
+        print(f"  N4 bias field correction completed.")
+
+        return corrected
+
+    def __str__(self):
+        """Gets a printable string representation.
+
+        Returns:
+            str: String representation.
+        """
+        return 'BiasFieldCorrection:\n' \
+            .format(self=self)

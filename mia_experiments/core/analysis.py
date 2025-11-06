@@ -19,18 +19,193 @@ class ComponentAnalyzer:
     def __init__(self, experiments: ExperimentCollection):
         self.experiments = experiments
         
-        # Define experiment configurations for ablation study
+        # Define experiment configurations for ablation study (8 experiments with decoupled normalization and bias correction)
         self.ablation_configs = {
-            0: {'normalization': False, 'skull_stripping': False, 'registration': False, 'postprocessing': False},
-            1: {'normalization': True, 'skull_stripping': False, 'registration': False, 'postprocessing': False},
-            2: {'normalization': False, 'skull_stripping': True, 'registration': False, 'postprocessing': False},
-            3: {'normalization': False, 'skull_stripping': False, 'registration': True, 'postprocessing': False},
-            4: {'normalization': True, 'skull_stripping': True, 'registration': False, 'postprocessing': False},
-            5: {'normalization': True, 'skull_stripping': False, 'registration': True, 'postprocessing': False},
-            6: {'normalization': False, 'skull_stripping': True, 'registration': True, 'postprocessing': False},
-            7: {'normalization': True, 'skull_stripping': True, 'registration': True, 'postprocessing': False},
-            8: {'normalization': True, 'skull_stripping': True, 'registration': True, 'postprocessing': True},
+            0: {'normalization': False, 'bias_correction': False, 'skull_stripping': False, 'registration': False, 'postprocessing': False},
+            1: {'normalization': True, 'bias_correction': False, 'skull_stripping': False, 'registration': False, 'postprocessing': False},
+            2: {'normalization': False, 'bias_correction': True, 'skull_stripping': False, 'registration': False, 'postprocessing': False},
+            3: {'normalization': True, 'bias_correction': True, 'skull_stripping': False, 'registration': False, 'postprocessing': False},
+            4: {'normalization': False, 'bias_correction': False, 'skull_stripping': True, 'registration': False, 'postprocessing': False},
+            5: {'normalization': False, 'bias_correction': False, 'skull_stripping': False, 'registration': True, 'postprocessing': False},
+            6: {'normalization': True, 'bias_correction': True, 'skull_stripping': True, 'registration': True, 'postprocessing': False},
+            7: {'normalization': True, 'bias_correction': True, 'skull_stripping': True, 'registration': True, 'postprocessing': True},
         }
+    
+    def answer_question_1_component_importance(self) -> Dict:
+        """
+        Question 1: What is the importance of each preprocessing component?
+        
+        Key experiments to analyze:
+        - Baseline (exp 0) vs Single components (exp 1, 2, 3)
+        - Best combination (exp 6) vs all (exp 7)
+        """
+        results = {}
+        
+        # Get performance for each experiment
+        exp_performance = {}
+        for exp_id in self.experiments.get_experiment_ids():
+            exp = self.experiments.get_experiment(exp_id)
+            if exp:
+                dice_scores = exp.get_dice_scores()
+                if len(dice_scores) > 0:
+                    exp_performance[exp_id] = np.mean(dice_scores)
+        
+        if not exp_performance:
+            return {'error': 'No performance data available'}
+        
+        baseline_dice = exp_performance.get(0, 0)
+        
+        # Individual contributions (decoupled normalization and bias correction)
+        if 1 in exp_performance:
+            results['normalization_only'] = exp_performance[1] - baseline_dice
+        if 2 in exp_performance:
+            results['bias_correction_only'] = exp_performance[2] - baseline_dice
+        if 3 in exp_performance:
+            results['normalization_bias_combined'] = exp_performance[3] - baseline_dice
+        if 4 in exp_performance:
+            results['skull_stripping_only'] = exp_performance[4] - baseline_dice
+        if 5 in exp_performance:
+            results['registration_only'] = exp_performance[5] - baseline_dice
+        
+        # All preprocessing
+        if 6 in exp_performance:
+            results['all_preprocessing_dice'] = exp_performance[6]
+        
+        results['baseline_dice'] = baseline_dice
+        
+        return results
+    
+    def answer_question_2_postprocessing_necessity(self) -> Dict:
+        """
+        Question 2: Is postprocessing necessary and when?
+        
+        Compare: same preprocessing WITH vs WITHOUT postprocessing
+        """
+        results = {
+            'comparisons': [],
+            'average_effect': 0,
+            'beneficial_count': 0
+        }
+        
+        # Compare experiments 0-7 (no post) vs 8-15 (with post) for combined study
+        # or single comparison 0 vs 7 for preprocessing study
+        max_exp_id = max(self.experiments.get_experiment_ids()) if self.experiments.get_experiment_ids() else 0
+        
+        if max_exp_id >= 15:  # Combined study (16 experiments: 0-7 vs 8-15)
+            for exp_id in range(8):
+                no_post_exp = self.experiments.get_experiment(exp_id)
+                with_post_exp = self.experiments.get_experiment(exp_id + 8)
+                if no_post_exp and with_post_exp:
+                    no_post_dice = np.mean(no_post_exp.get_dice_scores())
+                    with_post_dice = np.mean(with_post_exp.get_dice_scores())
+                    delta = with_post_dice - no_post_dice
+                    
+                    results['comparisons'].append({
+                        'experiment_id': exp_id,
+                        'name': no_post_exp.name,
+                        'no_postprocessing': no_post_dice,
+                        'with_postprocessing': with_post_dice,
+                        'difference': delta,
+                        'improves': delta > 0
+                    })
+        elif 7 in self.experiments.get_experiment_ids():  # Preprocessing study (8 experiments: 0-7)
+            for exp_id in range(8):
+                no_post_exp = self.experiments.get_experiment(exp_id)
+                if no_post_exp:
+                    no_post_dice = np.mean(no_post_exp.get_dice_scores())
+                    # For preprocessing study, only exp 7 has postprocessing
+                    if exp_id == 7:
+                        with_post_dice = no_post_dice  # Already has post
+                    else:
+                        with_post_exp = self.experiments.get_experiment(7)
+                        with_post_dice = np.mean(with_post_exp.get_dice_scores()) if with_post_exp else no_post_dice
+                        # Only compare the difference if we're comparing to the "all preprocessing" baseline
+                        continue
+                    
+            # Just compare baseline vs all+post for simplicity in preprocessing study
+            baseline_exp = self.experiments.get_experiment(0)
+            all_post_exp = self.experiments.get_experiment(7)
+            if baseline_exp and all_post_exp:
+                no_post_dice = np.mean(baseline_exp.get_dice_scores())
+                with_post_dice = np.mean(all_post_exp.get_dice_scores())
+                delta = with_post_dice - no_post_dice
+                
+                results['comparisons'].append({
+                    'experiment_id': 0,
+                    'name': 'Baseline vs All+Post',
+                    'no_postprocessing': no_post_dice,
+                    'with_postprocessing': with_post_dice,
+                    'difference': delta,
+                    'improves': delta > 0
+                })
+        
+        if results['comparisons']:
+            results['average_effect'] = np.mean([c['difference'] for c in results['comparisons']])
+            results['beneficial_count'] = sum(1 for c in results['comparisons'] if c['improves'])
+        
+        return results
+    
+    def answer_question_3_label_dependency(self) -> Dict:
+        """
+        Question 3: Is postprocessing label-dependent?
+        
+        Analyze tissue-specific performance with vs without postprocessing
+        """
+        results = {
+            'tissue_effects': []
+        }
+        
+        # Get all tissues
+        combined_data = self.experiments.get_combined_data()
+        if 'LABEL' not in combined_data.columns:
+            return results
+        
+        tissues = sorted(combined_data['LABEL'].unique())
+        
+        max_exp_id = max(self.experiments.get_experiment_ids()) if self.experiments.get_experiment_ids() else 0
+        
+        for tissue in tissues:
+            no_post_dice = []
+            with_post_dice = []
+            
+            if max_exp_id >= 15:  # Combined study (16 experiments: 0-7 vs 8-15)
+                # Collect data from experiments 0-7 (no post)
+                for exp_id in range(8):
+                    exp = self.experiments.get_experiment(exp_id)
+                    if exp:
+                        tissue_scores = exp.get_dice_scores(tissue)
+                        no_post_dice.extend(tissue_scores.tolist())
+                
+                # Collect data from experiments 8-15 (with post)
+                for exp_id in range(8, 16):
+                    exp = self.experiments.get_experiment(exp_id)
+                    if exp:
+                        tissue_scores = exp.get_dice_scores(tissue)
+                        with_post_dice.extend(tissue_scores.tolist())
+            elif 7 in self.experiments.get_experiment_ids():  # Preprocessing study (8 experiments)
+                # Collect data from experiments 0-6 (no post)
+                for exp_id in range(7):
+                    exp = self.experiments.get_experiment(exp_id)
+                    if exp:
+                        tissue_scores = exp.get_dice_scores(tissue)
+                        no_post_dice.extend(tissue_scores.tolist())
+                
+                # Collect data from experiment 7 (with post)
+                exp = self.experiments.get_experiment(7)
+                if exp:
+                    tissue_scores = exp.get_dice_scores(tissue)
+                    with_post_dice.extend(tissue_scores.tolist())
+            
+            if no_post_dice and with_post_dice:
+                delta = np.mean(with_post_dice) - np.mean(no_post_dice)
+                results['tissue_effects'].append({
+                    'tissue': tissue,
+                    'no_post_mean': np.mean(no_post_dice),
+                    'with_post_mean': np.mean(with_post_dice),
+                    'difference': delta
+                })
+        
+        return results
     
     def analyze_component_contributions(self) -> Dict:
         """Analyze the contribution of each preprocessing component."""
@@ -54,23 +229,19 @@ class ComponentAnalyzer:
             'experiment_performance': exp_performance.copy()
         }
         
-        # Individual component effects (isolated)
+        # Individual component effects (isolated) - decoupled normalization and bias correction
         if 1 in exp_performance:
             contributions['normalization_isolated'] = exp_performance[1] - baseline_score
         if 2 in exp_performance:
-            contributions['skull_stripping_isolated'] = exp_performance[2] - baseline_score
-        if 3 in exp_performance:
-            contributions['registration_isolated'] = exp_performance[3] - baseline_score
+            contributions['bias_correction_isolated'] = exp_performance[2] - baseline_score
+        if 4 in exp_performance:
+            contributions['skull_stripping_isolated'] = exp_performance[4] - baseline_score
+        if 5 in exp_performance:
+            contributions['registration_isolated'] = exp_performance[5] - baseline_score
         
         # Component effects in context (marginal contributions)
         if 7 in exp_performance and 6 in exp_performance:
-            contributions['normalization_marginal'] = exp_performance[7] - exp_performance[6]
-        if 7 in exp_performance and 5 in exp_performance:
-            contributions['skull_stripping_marginal'] = exp_performance[7] - exp_performance[5]
-        if 7 in exp_performance and 4 in exp_performance:
-            contributions['registration_marginal'] = exp_performance[7] - exp_performance[4]
-        if 8 in exp_performance and 7 in exp_performance:
-            contributions['postprocessing_effect'] = exp_performance[8] - exp_performance[7]
+            contributions['postprocessing_effect'] = exp_performance[7] - exp_performance[6]
         
         # Interaction effects
         contributions['interactions'] = self._analyze_interactions(exp_performance)
@@ -81,24 +252,29 @@ class ComponentAnalyzer:
         """Analyze interaction effects between components."""
         interactions = {}
         
-        # Two-way interactions
-        if all(exp_id in exp_performance for exp_id in [0, 1, 2, 4]):
-            # Normalization × Skull stripping interaction
+        # Normalization × Bias correction interaction
+        if all(exp_id in exp_performance for exp_id in [0, 1, 2, 3]):
             expected_additive = exp_performance[0] + (exp_performance[1] - exp_performance[0]) + (exp_performance[2] - exp_performance[0])
-            actual = exp_performance[4]
+            actual = exp_performance[3]
+            interactions['norm_bias_interaction'] = actual - expected_additive
+        
+        # Normalization × Skull stripping interaction (using exp 1, 4, 6)
+        if all(exp_id in exp_performance for exp_id in [0, 1, 4, 6]):
+            expected_additive = exp_performance[0] + (exp_performance[1] - exp_performance[0]) + (exp_performance[4] - exp_performance[0])
+            actual = exp_performance[6]
             interactions['norm_skull_interaction'] = actual - expected_additive
         
-        if all(exp_id in exp_performance for exp_id in [0, 1, 3, 5]):
-            # Normalization × Registration interaction
-            expected_additive = exp_performance[0] + (exp_performance[1] - exp_performance[0]) + (exp_performance[3] - exp_performance[0])
-            actual = exp_performance[5]
-            interactions['norm_reg_interaction'] = actual - expected_additive
-        
-        if all(exp_id in exp_performance for exp_id in [0, 2, 3, 6]):
-            # Skull stripping × Registration interaction
-            expected_additive = exp_performance[0] + (exp_performance[2] - exp_performance[0]) + (exp_performance[3] - exp_performance[0])
+        # Bias correction × Skull stripping interaction (using exp 2, 4, 6)
+        if all(exp_id in exp_performance for exp_id in [0, 2, 4, 6]):
+            expected_additive = exp_performance[0] + (exp_performance[2] - exp_performance[0]) + (exp_performance[4] - exp_performance[0])
             actual = exp_performance[6]
-            interactions['skull_reg_interaction'] = actual - expected_additive
+            interactions['bias_skull_interaction'] = actual - expected_additive
+        
+        # Normalization × Registration interaction (using exp 1, 5, 6)
+        if all(exp_id in exp_performance for exp_id in [0, 1, 5, 6]):
+            expected_additive = exp_performance[0] + (exp_performance[1] - exp_performance[0]) + (exp_performance[5] - exp_performance[0])
+            actual = exp_performance[6]
+            interactions['norm_reg_interaction'] = actual - expected_additive
         
         return interactions
     
@@ -109,6 +285,8 @@ class ComponentAnalyzer:
         component_effects = []
         if 'normalization_isolated' in contributions:
             component_effects.append(('normalization', contributions['normalization_isolated']))
+        if 'bias_correction_isolated' in contributions:
+            component_effects.append(('bias_correction', contributions['bias_correction_isolated']))
         if 'skull_stripping_isolated' in contributions:
             component_effects.append(('skull_stripping', contributions['skull_stripping_isolated']))
         if 'registration_isolated' in contributions:
