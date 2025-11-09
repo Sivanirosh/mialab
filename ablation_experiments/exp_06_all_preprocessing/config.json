@@ -1,0 +1,34 @@
+{
+  "name": "all_preprocessing",
+  "description": "With normalization + bias correction + skull stripping + registration",
+  "preprocessing": {
+    "skullstrip_pre": true,
+    "normalization_pre": true,
+    "registration_pre": true,
+    "biascorrection_pre": true,
+    "coordinates_feature": true,
+    "intensity_feature": true,
+    "gradient_intensity_feature": true
+  },
+  "postprocessing": {
+    "simple_post": false,
+    "min_component_size": 5,
+    "per_tissue_sizes": null,
+    "kernel_radius": [
+      1,
+      1,
+      1
+    ],
+    "retention_threshold": 0.5
+  },
+  "forest": {
+    "n_estimators": 100,
+    "max_depth": null,
+    "max_features": null,
+    "min_samples_split": 2,
+    "min_samples_leaf": 1,
+    "bootstrap": true,
+    "random_state": 42,
+    "n_jobs": -1
+  }
+}

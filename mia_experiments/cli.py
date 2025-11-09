@@ -106,6 +106,87 @@ def visualize_command(args):
     return 0
 
 
+def view3d_command(args):
+    """View 3D segmentation visualization."""
+    try:
+        from mia_experiments.core.segmentation_visualizer import (
+            SegmentationVisualizer, find_segmentation_files
+        )
+        import os
+        import glob
+        import numpy as np
+    except ImportError as e:
+        print(f"Error importing visualization modules: {e}")
+        print("Make sure VTK is installed: pip install vtk")
+        return 1
+    
+    # Determine segmentation file
+    seg_file = None
+    
+    if args.file:
+        seg_file = args.file
+    elif args.experiment_dir:
+        files = find_segmentation_files(args.experiment_dir, args.subject)
+        if args.postprocessed and 'segmentation_pp' in files:
+            seg_file = files['segmentation_pp']
+        elif 'segmentation' in files:
+            seg_file = files['segmentation']
+        else:
+            print(f"Error: No segmentation files found in {args.experiment_dir}")
+            if args.subject:
+                print(f"  Looking for subject: {args.subject}")
+            else:
+                print("  Available segmentation files:")
+                seg_files = glob.glob(os.path.join(args.experiment_dir, "*_SEG*.mha"))
+                for f in seg_files:
+                    print(f"    {os.path.basename(f)}")
+            return 1
+    else:
+        print("Error: Must specify either --file or --experiment-dir")
+        return 1
+    
+    if not seg_file or not os.path.exists(seg_file):
+        print(f"Error: Segmentation file not found: {seg_file}")
+        return 1
+    
+    # Parse labels
+    if 'all' in args.labels:
+        labels_to_show = None
+    else:
+        labels_to_show = [int(l) for l in args.labels]
+    
+    # Create visualizer
+    visualizer = SegmentationVisualizer(spacing=tuple(args.spacing))
+    
+    # Load segmentation
+    print(f"Loading segmentation from: {seg_file}")
+    seg_array = visualizer.load_segmentation(seg_file)
+    print(f"Segmentation shape: {seg_array.shape}")
+    print(f"Unique labels: {sorted(np.unique(seg_array))}")
+    
+    # Load ground truth if provided
+    if args.ground_truth:
+        if not os.path.exists(args.ground_truth):
+            print(f"Warning: Ground truth file not found: {args.ground_truth}")
+            print("Displaying prediction only...")
+            visualizer.visualize(seg_array, labels_to_show, 
+                               title=os.path.basename(seg_file))
+        else:
+            print(f"Loading ground truth from: {args.ground_truth}")
+            gt_array = visualizer.load_segmentation(args.ground_truth)
+            print(f"Ground truth shape: {gt_array.shape}")
+            visualizer.visualize_comparison(seg_array, gt_array, labels_to_show,
+                                          title=f"Comparison: {os.path.basename(seg_file)}")
+    else:
+        # Visualize single segmentation
+        title = os.path.basename(seg_file)
+        if args.subject:
+            title = f"{args.subject} - {title}"
+        visualizer.visualize(seg_array, labels_to_show, title=title)
+    
+    return 0
+
+
 def report_command(args):
     """Create comprehensive analysis report."""
     print("=" * 60)
@@ -204,6 +285,11 @@ Examples:
   python -m mia_experiments.cli visualize \\
     --experiment-dir ./ablation_experiments
 
+  # View 3D segmentation
+  python -m mia_experiments.cli view3d \\
+    --experiment-dir ./ablation_experiments/exp_00_baseline_none \\
+    --subject 118528
+
   # Create comprehensive report
   python -m mia_experiments.cli report \\
     --experiment-dir ./ablation_experiments
@@ -245,6 +331,26 @@ Examples:
     viz_parser.add_argument('--experiment-dir', default='./ablation_experiments',
                            help='Experiment directory (default: ./ablation_experiments)')
     
+    # View3D command
+    view3d_parser = subparsers.add_parser('view3d', help='View 3D segmentation visualization')
+    view3d_parser.add_argument('--experiment-dir', type=str,
+                              help='Path to experiment directory containing segmentation files')
+    view3d_parser.add_argument('--subject', type=str,
+                              help='Subject ID to visualize (optional)')
+    view3d_parser.add_argument('--file', type=str,
+                              help='Direct path to segmentation .mha file')
+    view3d_parser.add_argument('--ground-truth', type=str,
+                              help='Path to ground truth segmentation file for comparison')
+    view3d_parser.add_argument('--postprocessed', action='store_true',
+                              help='Use postprocessed segmentation (SEG-PP.mha) instead of SEG.mha')
+    view3d_parser.add_argument('--labels', type=str, nargs='+',
+                              choices=['1', '2', '3', '4', '5', 'all'],
+                              default=['all'],
+                              help='Labels to visualize (1=WhiteMatter, 2=GreyMatter, 3=Hippocampus, 4=Amygdala, 5=Thalamus)')
+    view3d_parser.add_argument('--spacing', type=float, nargs=3,
+                              default=[1.0, 1.0, 1.0],
+                              help='Voxel spacing in mm (default: 1.0 1.0 1.0)')
+    
     # Report command
     report_parser = subparsers.add_parser('report', help='Create comprehensive analysis report')
     report_parser.add_argument('--experiment-dir', required=True,
@@ -269,6 +375,8 @@ Examples:
         return analyze_command(args)
     elif args.command == 'visualize':
         return visualize_command(args)
+    elif args.command == 'view3d':
+        return view3d_command(args)
     elif args.command == 'report':
         return report_command(args)
     

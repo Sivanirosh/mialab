@@ -5,3 +5,7 @@ numpy~=2.0.2
 Pillow~=10.0.1
 scikit-learn~=1.5.2
 SimpleITK~=2.1.1.2
+vtk~=9.3.0
+pandas~=2.3.3
+seaborn~=0.13.2
+ipykernel~=6.31.0

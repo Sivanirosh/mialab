@@ -1,0 +1,4268 @@
+Python: /storage/homefs/ms23d081/.conda/envs/mialab/bin/python
+Environment: mialab
+==========================================
+Starting ablation experiments...
+==========================================
+Timestamp: Sun Nov  9 02:16:02 PM CET 2025
+Working directory: /storage/homefs/ms23d081/mialab
+PYTHONPATH: /storage/homefs/ms23d081/mialab:
+
+============================================================
+STARTING ABLATION STUDY
+============================================================
+Timestamp: 2025-11-09 14:16:29
+Atlas data: ./data/atlas
+Training data: ./data/train
+Test data: ./data/test
+Optimization: none
+Study type: combined
+Output directory: ./ablation_experiments
+
+Checking data directories...
+  ✓ Atlas: ./data/atlas (exists)
+  ✓ Training: ./data/train (exists)
+  ✓ Test: ./data/test (exists)
+============================================================
+Starting Comprehensive Ablation Study
+============================================================
+Study type: combined
+Optimization level: none
+Using default Random Forest parameters (no optimization)
+
+Running 16 experiments
+
+Experiment Plan:
+  0: Baseline (no preprocessing)
+  1: Normalization only
+  2: Bias correction only
+  3: Normalization + Bias correction
+  4: Skull stripping only
+  5: Registration only
+  6: All preprocessing (Norm + Bias + Skull + Reg)
+  7: All preprocessing + Post-processing
+  8: Baseline (no preprocessing) + Optimal Post
+  9: Normalization only + Optimal Post
+  10: Bias correction only + Optimal Post
+  11: Normalization + Bias correction + Optimal Post
+  12: Skull stripping only + Optimal Post
+  13: Registration only + Optimal Post
+  14: All preprocessing (Norm + Bias + Skull + Reg) + Optimal Post
+  15: All preprocessing + Post-processing + Optimal Post
+
+============================================================
+Running Experiment 0/15: baseline_none
+Description: Baseline without any preprocessing
+============================================================
+Running experiment: exp_00_baseline_none
+Description: Baseline without any preprocessing
+----- Training...
+--------------------  ProcessingProcessing  113922100307
+
+---------- Processing 110411
+---------- Processing 100408
+---------- Processing 101107
+---------- Processing 101915
+---------- Processing 101309
+---------- Processing 108828
+---------- Processing 103414
+---------- Processing 115320
+---------- Processing 103111
+---------- Processing 113619
+---------- Processing 111312
+---------- Processing 106016
+---------- Processing 111716
+---------- Processing 114419
+---------- Processing 116524
+---------- Processing 105115
+---------- Processing 105014
+---------- Processing 103818
+Training Random Forest with 100 trees, max_depth=None, max_features=7 (out of 7 total features)
+ Time elapsed: 7.649307598825544 s
+ Training data cleaned from memory
+----- Testing...
+---------- Processing 118730
+---------- Processing 117122
+---------- Processing 120111
+---------- Processing 122620
+---------- Processing 124422
+---------- Processing 118528
+---------- Processing 123117
+---------- Processing 122317
+---------- Processing 123925
+---------- Processing 118932
+---------- Testing 118730
+ Time elapsed: 6.925358719658107 s
+---------- Testing 117122
+ Time elapsed: 6.358077639713883 s
+---------- Testing 120111
+ Time elapsed: 6.4957773690111935 s
+---------- Testing 122620
+ Time elapsed: 7.298456963151693 s
+---------- Testing 124422
+ Time elapsed: 7.189464635681361 s
+---------- Testing 118528
+ Time elapsed: 6.983003465924412 s
+---------- Testing 123117
+ Time elapsed: 7.596796290948987 s
+---------- Testing 122317
+ Time elapsed: 7.952870395965874 s
+---------- Testing 123925
+ Time elapsed: 7.428061299026012 s
+---------- Testing 118932
+ Time elapsed: 7.174233726225793 s
+---------- Post-processing 118730
+---------- Post-processing 117122
+---------- Post-processing 120111
+---------- Post-processing 122620
+---------- Post-processing 124422
+---------- Post-processing 118528
+---------- Post-processing 123117
+---------- Post-processing 122317
+---------- Post-processing 123925
+---------- Post-processing 118932
+Results saved to ./ablation_experiments/exp_00_baseline_none/2025-11-09-14-17-13/results.csv with 100 measurements
+
+Subject-wise results...
+SUBJECT    LABEL        DICE   HDRFDST
+117122     Amygdala     0.349  20.224 
+117122     GreyMatter   0.705  10.630 
+117122     Hippocampus  0.456  14.900 
+117122     Thalamus     0.737  9.798  
+117122     WhiteMatter  0.824  13.038 
+117122-PP  Amygdala     0.349  20.224 
+117122-PP  GreyMatter   0.705  10.630 
+117122-PP  Hippocampus  0.456  14.900 
+117122-PP  Thalamus     0.737  9.798  
+117122-PP  WhiteMatter  0.824  13.038 
+118528     Amygdala     0.459  27.875 
+118528     GreyMatter   0.645  11.402 
+118528     Hippocampus  0.487  17.117 
+118528     Thalamus     0.750  6.782  
+118528     WhiteMatter  0.734  14.799 
+118528-PP  Amygdala     0.459  27.875 
+118528-PP  GreyMatter   0.645  11.402 
+118528-PP  Hippocampus  0.487  17.117 
+118528-PP  Thalamus     0.750  6.782  
+118528-PP  WhiteMatter  0.734  14.799 
+118730     Amygdala     0.444  13.153 
+118730     GreyMatter   0.682  11.747 
+118730     Hippocampus  0.401  13.153 
+118730     Thalamus     0.723  13.000 
+118730     WhiteMatter  0.819  16.733 
+118730-PP  Amygdala     0.444  13.153 
+118730-PP  GreyMatter   0.682  11.747 
+118730-PP  Hippocampus  0.401  13.153 
+118730-PP  Thalamus     0.723  13.000 
+118730-PP  WhiteMatter  0.819  16.733 
+118932     Amygdala     0.450  43.000 
+118932     GreyMatter   0.722  9.899  
+118932     Hippocampus  0.450  13.892 
+118932     Thalamus     0.752  8.602  
+118932     WhiteMatter  0.816  14.036 
+118932-PP  Amygdala     0.450  43.000 
+118932-PP  GreyMatter   0.722  9.899  
+118932-PP  Hippocampus  0.450  13.892 
+118932-PP  Thalamus     0.752  8.602  
+118932-PP  WhiteMatter  0.816  14.036 
+120111     Amygdala     0.528  40.423 
+120111     GreyMatter   0.709  9.644  
+120111     Hippocampus  0.522  13.565 
+120111     Thalamus     0.779  10.050 
+120111     WhiteMatter  0.820  10.770 
+120111-PP  Amygdala     0.528  40.423 
+120111-PP  GreyMatter   0.709  9.644  
+120111-PP  Hippocampus  0.522  13.565 
+120111-PP  Thalamus     0.779  10.050 
+120111-PP  WhiteMatter  0.820  10.770 
+122317     Amygdala     0.607  16.401 
+122317     GreyMatter   0.699  11.402 
+122317     Hippocampus  0.500  13.601 
+122317     Thalamus     0.674  10.724 
+122317     WhiteMatter  0.774  14.457 
+122317-PP  Amygdala     0.607  16.401 
+122317-PP  GreyMatter   0.699  11.402 
+122317-PP  Hippocampus  0.500  13.601 
+122317-PP  Thalamus     0.674  10.724 
+122317-PP  WhiteMatter  0.774  14.457 
+122620     Amygdala     0.444  18.248 
+122620     GreyMatter   0.710  11.000 
+122620     Hippocampus  0.372  13.153 
+122620     Thalamus     0.687  10.630 
+122620     WhiteMatter  0.797  15.937 
+122620-PP  Amygdala     0.444  18.248 
+122620-PP  GreyMatter   0.710  11.000 
+122620-PP  Hippocampus  0.372  13.153 
+122620-PP  Thalamus     0.687  10.630 
+122620-PP  WhiteMatter  0.797  15.937 
+123117     Amygdala     0.362  44.822 
+123117     GreyMatter   0.644  18.248 
+123117     Hippocampus  0.312  18.788 
+123117     Thalamus     0.415  53.694 
+123117     WhiteMatter  0.784  21.863 
+123117-PP  Amygdala     0.362  44.822 
+123117-PP  GreyMatter   0.644  18.248 
+123117-PP  Hippocampus  0.312  18.788 
+123117-PP  Thalamus     0.415  53.694 
+123117-PP  WhiteMatter  0.784  21.863 
+123925     Amygdala     0.545  15.297 
+123925     GreyMatter   0.666  16.031 
+123925     Hippocampus  0.418  15.843 
+123925     Thalamus     0.728  10.954 
+123925     WhiteMatter  0.799  17.804 
+123925-PP  Amygdala     0.545  15.297 
+123925-PP  GreyMatter   0.666  16.031 
+123925-PP  Hippocampus  0.418  15.843 
+123925-PP  Thalamus     0.728  10.954 
+123925-PP  WhiteMatter  0.799  17.804 
+124422     Amygdala     0.581  17.889 
+124422     GreyMatter   0.637  12.247 
+124422     Hippocampus  0.499  12.806 
+124422     Thalamus     0.791  11.402 
+124422     WhiteMatter  0.710  16.093 
+124422-PP  Amygdala     0.581  17.889 
+124422-PP  GreyMatter   0.637  12.247 
+124422-PP  Hippocampus  0.499  12.806 
+124422-PP  Thalamus     0.791  11.402 
+124422-PP  WhiteMatter  0.710  16.093 
+
+Aggregated statistic results...
+LABEL        METRIC   STATISTIC  VALUE 
+Amygdala     DICE     MEAN       0.477 
+Amygdala     DICE     STD        0.082 
+Amygdala     HDRFDST  MEAN       25.733
+Amygdala     HDRFDST  STD        11.769
+GreyMatter   DICE     MEAN       0.682 
+GreyMatter   DICE     STD        0.030 
+GreyMatter   HDRFDST  MEAN       12.225
+GreyMatter   HDRFDST  STD        2.617 
+Hippocampus  DICE     MEAN       0.442 
+Hippocampus  DICE     STD        0.063 
+Hippocampus  HDRFDST  MEAN       14.682
+Hippocampus  HDRFDST  STD        1.882 
+Thalamus     DICE     MEAN       0.704 
+Thalamus     DICE     STD        0.102 
+Thalamus     HDRFDST  MEAN       14.564
+Thalamus     HDRFDST  STD        13.138
+WhiteMatter  DICE     MEAN       0.788 
+WhiteMatter  DICE     STD        0.037 
+WhiteMatter  HDRFDST  MEAN       15.553
+WhiteMatter  HDRFDST  STD        2.828 
+Experiment exp_00_baseline_none completed in 218.6 seconds
+✅ Experiment 0 completed successfully
+
+============================================================
+Running Experiment 1/15: normalization_only
+Description: With normalization only (no bias correction)
+============================================================
+Running experiment: exp_01_normalization_only
+Description: With normalization only (no bias correction)
+----- Training...
+---------- Processing 113922
+---------- Processing 100307
+---------- Processing 110411
+---------- Processing 100408
+---------- Processing 101107
+---------- Processing 101915
+---------- Processing 101309
+---------- Processing 108828
+---------- Processing 103414
+---------- Processing 115320
+---------- Processing 103111
+---------- Processing 113619
+---------- Processing 111312
+---------- Processing 106016
+---------- Processing 111716
+---------- Processing 114419
+---------- Processing 116524
+---------- Processing 105115
+---------- Processing 105014
+---------- Processing 103818
+Training Random Forest with 100 trees, max_depth=None, max_features=7 (out of 7 total features)
+ Time elapsed: 2.335142325144261 s
+ Training data cleaned from memory
+----- Testing...
+---------- Processing 118730
+---------- Processing 117122
+---------- Processing 120111
+---------- Processing 122620
+---------- Processing 124422
+---------- Processing 118528
+---------- Processing 123117
+---------- Processing 122317
+---------- Processing 123925
+---------- Processing 118932
+---------- Testing 118730
+ Time elapsed: 6.950679101981223 s
+---------- Testing 117122
+ Time elapsed: 6.856767714954913 s
+---------- Testing 120111
+ Time elapsed: 6.696003855206072 s
+---------- Testing 122620
+ Time elapsed: 6.7659500180743635 s
+---------- Testing 124422
+ Time elapsed: 6.988491310738027 s
+---------- Testing 118528
+ Time elapsed: 6.695208493154496 s
+---------- Testing 123117
+ Time elapsed: 6.994892526883632 s
+---------- Testing 122317
+ Time elapsed: 6.940626115072519 s
+---------- Testing 123925
+ Time elapsed: 6.487141650170088 s
+---------- Testing 118932
+ Time elapsed: 6.802071212790906 s
+---------- Post-processing 118730
+---------- Post-processing 117122
+---------- Post-processing 120111
+---------- Post-processing 122620
+---------- Post-processing 124422
+---------- Post-processing 118528
+---------- Post-processing 123117
+---------- Post-processing 122317
+---------- Post-processing 123925
+---------- Post-processing 118932
+Results saved to ./ablation_experiments/exp_01_normalization_only/2025-11-09-14-20-32/results.csv with 100 measurements
+
+Subject-wise results...
+SUBJECT    LABEL        DICE   HDRFDST
+117122     Amygdala     0.255  15.843 
+117122     GreyMatter   0.632  10.677 
+117122     Hippocampus  0.408  14.142 
+117122     Thalamus     0.737  9.899  
+117122     WhiteMatter  0.801  13.379 
+117122-PP  Amygdala     0.255  15.843 
+117122-PP  GreyMatter   0.632  10.677 
+117122-PP  Hippocampus  0.408  14.142 
+117122-PP  Thalamus     0.737  9.899  
+117122-PP  WhiteMatter  0.801  13.379 
+118528     Amygdala     0.359  14.629 
+118528     GreyMatter   0.600  11.790 
+118528     Hippocampus  0.370  13.379 
+118528     Thalamus     0.708  8.944  
+118528     WhiteMatter  0.805  15.067 
+118528-PP  Amygdala     0.359  14.629 
+118528-PP  GreyMatter   0.600  11.790 
+118528-PP  Hippocampus  0.370  13.379 
+118528-PP  Thalamus     0.708  8.944  
+118528-PP  WhiteMatter  0.805  15.067 
+118730     Amygdala     0.443  13.379 
+118730     GreyMatter   0.683  10.344 
+118730     Hippocampus  0.380  12.207 
+118730     Thalamus     0.686  8.775  
+118730     WhiteMatter  0.767  15.264 
+118730-PP  Amygdala     0.443  13.379 
+118730-PP  GreyMatter   0.683  10.344 
+118730-PP  Hippocampus  0.380  12.207 
+118730-PP  Thalamus     0.686  8.775  
+118730-PP  WhiteMatter  0.767  15.264 
+118932     Amygdala     0.426  14.866 
+118932     GreyMatter   0.690  10.392 
+118932     Hippocampus  0.406  12.884 
+118932     Thalamus     0.739  8.544  
+118932     WhiteMatter  0.819  9.434  
+118932-PP  Amygdala     0.426  14.866 
+118932-PP  GreyMatter   0.690  10.392 
+118932-PP  Hippocampus  0.406  12.884 
+118932-PP  Thalamus     0.739  8.544  
+118932-PP  WhiteMatter  0.819  9.434  
+120111     Amygdala     0.416  13.038 
+120111     GreyMatter   0.648  10.630 
+120111     Hippocampus  0.440  12.689 
+120111     Thalamus     0.766  8.307  
+120111     WhiteMatter  0.834  8.602  
+120111-PP  Amygdala     0.416  13.038 
+120111-PP  GreyMatter   0.648  10.630 
+120111-PP  Hippocampus  0.440  12.689 
+120111-PP  Thalamus     0.766  8.307  
+120111-PP  WhiteMatter  0.834  8.602  
+122317     Amygdala     0.479  18.000 
+122317     GreyMatter   0.667  11.747 
+122317     Hippocampus  0.390  13.491 
+122317     Thalamus     0.613  12.083 
+122317     WhiteMatter  0.812  12.410 
+122317-PP  Amygdala     0.479  18.000 
+122317-PP  GreyMatter   0.667  11.747 
+122317-PP  Hippocampus  0.390  13.491 
+122317-PP  Thalamus     0.613  12.083 
+122317-PP  WhiteMatter  0.812  12.410 
+122620     Amygdala     0.411  13.153 
+122620     GreyMatter   0.666  11.225 
+122620     Hippocampus  0.316  13.153 
+122620     Thalamus     0.689  9.899  
+122620     WhiteMatter  0.781  14.731 
+122620-PP  Amygdala     0.411  13.153 
+122620-PP  GreyMatter   0.666  11.225 
+122620-PP  Hippocampus  0.316  13.153 
+122620-PP  Thalamus     0.689  9.899  
+122620-PP  WhiteMatter  0.781  14.731 
+123117     Amygdala     0.254  15.524 
+123117     GreyMatter   0.552  18.439 
+123117     Hippocampus  0.251  19.849 
+123117     Thalamus     0.437  17.493 
+123117     WhiteMatter  0.780  21.024 
+123117-PP  Amygdala     0.254  15.524 
+123117-PP  GreyMatter   0.552  18.439 
+123117-PP  Hippocampus  0.251  19.849 
+123117-PP  Thalamus     0.437  17.493 
+123117-PP  WhiteMatter  0.780  21.024 
+123925     Amygdala     0.465  13.491 
+123925     GreyMatter   0.621  15.297 
+123925     Hippocampus  0.353  12.845 
+123925     Thalamus     0.674  10.954 
+123925     WhiteMatter  0.786  16.912 
+123925-PP  Amygdala     0.465  13.491 
+123925-PP  GreyMatter   0.621  15.297 
+123925-PP  Hippocampus  0.353  12.845 
+123925-PP  Thalamus     0.674  10.954 
+123925-PP  WhiteMatter  0.786  16.912 
+124422     Amygdala     0.484  14.560 
+124422     GreyMatter   0.625  12.689 
+124422     Hippocampus  0.398  13.638 
+124422     Thalamus     0.762  11.576 
+124422     WhiteMatter  0.756  15.524 
+124422-PP  Amygdala     0.484  14.560 
+124422-PP  GreyMatter   0.625  12.689 
+124422-PP  Hippocampus  0.398  13.638 
+124422-PP  Thalamus     0.762  11.576 
+124422-PP  WhiteMatter  0.756  15.524 
+
+Aggregated statistic results...
+LABEL        METRIC   STATISTIC  VALUE 
+Amygdala     DICE     MEAN       0.399 
+Amygdala     DICE     STD        0.080 
+Amygdala     HDRFDST  MEAN       14.648
+Amygdala     HDRFDST  STD        1.458 
+GreyMatter   DICE     MEAN       0.638 
+GreyMatter   DICE     STD        0.040 
+GreyMatter   HDRFDST  MEAN       12.323
+GreyMatter   HDRFDST  STD        2.478 
+Hippocampus  DICE     MEAN       0.371 
+Hippocampus  DICE     STD        0.051 
+Hippocampus  HDRFDST  MEAN       13.828
+Hippocampus  HDRFDST  STD        2.072 
+Thalamus     DICE     MEAN       0.681 
+Thalamus     DICE     STD        0.092 
+Thalamus     HDRFDST  MEAN       10.648
+Thalamus     HDRFDST  STD        2.594 
+WhiteMatter  DICE     MEAN       0.794 
+WhiteMatter  DICE     STD        0.023 
+WhiteMatter  HDRFDST  MEAN       14.235
+WhiteMatter  HDRFDST  STD        3.402 
+Experiment exp_01_normalization_only completed in 187.3 seconds
+✅ Experiment 1 completed successfully
+
+============================================================
+Running Experiment 2/15: bias_correction_only
+Description: With bias correction only (no normalization)
+============================================================
+Running experiment: exp_02_bias_correction_only
+Description: With bias correction only (no normalization)
+----- Training...
+---------- Processing 113922
+---------- Processing 100307
+---------- Processing 110411
+---------- Processing 100408
+---------- Processing 101107
+---------- Processing 101915
+---------- Processing 101309
+---------- Processing 108828
+---------- Processing 103414
+---------- Processing 115320
+---------- Processing 103111
+---------- Processing 113619
+---------- Processing 111312
+---------- Processing 106016
+---------- Processing 111716
+---------- Processing 114419
+---------- Processing 116524
+---------- Processing 105115
+---------- Processing 105014
+---------- Processing 103818
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  N4 bias field correction completed.
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  N4 bias field correction completed.
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  N4 bias field correction completed.
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  N4 bias field correction completed.
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  N4 bias field correction completed.
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  N4 bias field correction completed.
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  N4 bias field correction completed.
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  N4 bias field correction completed.
+  N4 bias field correction completed.
+  N4 bias field correction completed.
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  N4 bias field correction completed.
+  N4 bias field correction completed.
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  N4 bias field correction completed.
+  N4 bias field correction completed.
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  N4 bias field correction completed.
+  N4 bias field correction completed.
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  N4 bias field correction completed.
+  N4 bias field correction completed.
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  N4 bias field correction completed.
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  N4 bias field correction completed.
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  N4 bias field correction completed.
+  N4 bias field correction completed.
+  N4 bias field correction completed.
+  N4 bias field correction completed.
+  N4 bias field correction completed.
+  N4 bias field correction completed.
+  N4 bias field correction completed.
+  N4 bias field correction completed.
+  N4 bias field correction completed.
+  N4 bias field correction completed.
+  N4 bias field correction completed.
+  N4 bias field correction completed.
+  N4 bias field correction completed.
+  N4 bias field correction completed.
+  N4 bias field correction completed.
+  N4 bias field correction completed.
+  N4 bias field correction completed.
+  N4 bias field correction completed.
+  N4 bias field correction completed.
+  N4 bias field correction completed.
+Training Random Forest with 100 trees, max_depth=None, max_features=7 (out of 7 total features)
+ Time elapsed: 8.52921576378867 s
+ Training data cleaned from memory
+----- Testing...
+---------- Processing 118730
+---------- Processing 117122
+---------- Processing 120111
+---------- Processing 122620
+---------- Processing 124422
+---------- Processing 118528
+---------- Processing 123117
+---------- Processing 122317
+---------- Processing 123925
+---------- Processing 118932
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  N4 bias field correction completed.
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  N4 bias field correction completed.
+  N4 bias field correction completed.
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  N4 bias field correction completed.
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  N4 bias field correction completed.
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  N4 bias field correction completed.
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  N4 bias field correction completed.
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  N4 bias field correction completed.
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  N4 bias field correction completed.
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  N4 bias field correction completed.
+  N4 bias field correction completed.
+  N4 bias field correction completed.
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  N4 bias field correction completed.
+  N4 bias field correction completed.
+  N4 bias field correction completed.
+  N4 bias field correction completed.
+  N4 bias field correction completed.
+  N4 bias field correction completed.
+  N4 bias field correction completed.
+  N4 bias field correction completed.
+---------- Testing 118730
+ Time elapsed: 7.40068977791816 s
+---------- Testing 117122
+ Time elapsed: 6.744411285035312 s
+---------- Testing 120111
+ Time elapsed: 7.3299830430187285 s
+---------- Testing 122620
+ Time elapsed: 7.149734243284911 s
+---------- Testing 124422
+ Time elapsed: 7.183496540877968 s
+---------- Testing 118528
+ Time elapsed: 7.165521454997361 s
+---------- Testing 123117
+ Time elapsed: 7.842480539809912 s
+---------- Testing 122317
+ Time elapsed: 7.427728921175003 s
+---------- Testing 123925
+ Time elapsed: 7.270671685691923 s
+---------- Testing 118932
+ Time elapsed: 7.096303370781243 s
+---------- Post-processing 118730
+---------- Post-processing 117122
+---------- Post-processing 120111
+---------- Post-processing 122620
+---------- Post-processing 124422
+---------- Post-processing 118528
+---------- Post-processing 123117
+---------- Post-processing 122317
+---------- Post-processing 123925
+---------- Post-processing 118932
+Results saved to ./ablation_experiments/exp_02_bias_correction_only/2025-11-09-14-27-51/results.csv with 100 measurements
+
+Subject-wise results...
+SUBJECT    LABEL        DICE   HDRFDST
+117122     Amygdala     0.352  19.131 
+117122     GreyMatter   0.704  10.630 
+117122     Hippocampus  0.455  15.000 
+117122     Thalamus     0.739  9.695  
+117122     WhiteMatter  0.825  12.884 
+117122-PP  Amygdala     0.352  19.131 
+117122-PP  GreyMatter   0.704  10.630 
+117122-PP  Hippocampus  0.455  15.000 
+117122-PP  Thalamus     0.739  9.695  
+117122-PP  WhiteMatter  0.825  12.884 
+118528     Amygdala     0.465  23.791 
+118528     GreyMatter   0.646  11.358 
+118528     Hippocampus  0.487  18.055 
+118528     Thalamus     0.749  6.403  
+118528     WhiteMatter  0.732  14.526 
+118528-PP  Amygdala     0.465  23.791 
+118528-PP  GreyMatter   0.646  11.358 
+118528-PP  Hippocampus  0.487  18.055 
+118528-PP  Thalamus     0.749  6.403  
+118528-PP  WhiteMatter  0.732  14.526 
+118730     Amygdala     0.447  13.000 
+118730     GreyMatter   0.681  11.832 
+118730     Hippocampus  0.399  13.342 
+118730     Thalamus     0.721  14.071 
+118730     WhiteMatter  0.820  16.401 
+118730-PP  Amygdala     0.447  13.000 
+118730-PP  GreyMatter   0.681  11.832 
+118730-PP  Hippocampus  0.399  13.342 
+118730-PP  Thalamus     0.721  14.071 
+118730-PP  WhiteMatter  0.820  16.401 
+118932     Amygdala     0.453  19.416 
+118932     GreyMatter   0.721  9.899  
+118932     Hippocampus  0.447  13.928 
+118932     Thalamus     0.753  8.602  
+118932     WhiteMatter  0.816  13.748 
+118932-PP  Amygdala     0.453  19.416 
+118932-PP  GreyMatter   0.721  9.899  
+118932-PP  Hippocampus  0.447  13.928 
+118932-PP  Thalamus     0.753  8.602  
+118932-PP  WhiteMatter  0.816  13.748 
+120111     Amygdala     0.527  30.017 
+120111     GreyMatter   0.708  9.695  
+120111     Hippocampus  0.522  14.353 
+120111     Thalamus     0.778  9.000  
+120111     WhiteMatter  0.820  10.488 
+120111-PP  Amygdala     0.527  30.017 
+120111-PP  GreyMatter   0.708  9.695  
+120111-PP  Hippocampus  0.522  14.353 
+120111-PP  Thalamus     0.778  9.000  
+120111-PP  WhiteMatter  0.820  10.488 
+122317     Amygdala     0.606  15.843 
+122317     GreyMatter   0.699  11.402 
+122317     Hippocampus  0.499  13.601 
+122317     Thalamus     0.676  11.045 
+122317     WhiteMatter  0.775  14.457 
+122317-PP  Amygdala     0.606  15.843 
+122317-PP  GreyMatter   0.699  11.402 
+122317-PP  Hippocampus  0.499  13.601 
+122317-PP  Thalamus     0.676  11.045 
+122317-PP  WhiteMatter  0.775  14.457 
+122620     Amygdala     0.444  14.765 
+122620     GreyMatter   0.709  11.000 
+122620     Hippocampus  0.370  13.342 
+122620     Thalamus     0.686  11.000 
+122620     WhiteMatter  0.798  15.843 
+122620-PP  Amygdala     0.444  14.765 
+122620-PP  GreyMatter   0.709  11.000 
+122620-PP  Hippocampus  0.370  13.342 
+122620-PP  Thalamus     0.686  11.000 
+122620-PP  WhiteMatter  0.798  15.843 
+123117     Amygdala     0.366  20.125 
+123117     GreyMatter   0.640  18.330 
+123117     Hippocampus  0.310  19.131 
+123117     Thalamus     0.414  53.235 
+123117     WhiteMatter  0.782  21.840 
+123117-PP  Amygdala     0.366  20.125 
+123117-PP  GreyMatter   0.640  18.330 
+123117-PP  Hippocampus  0.310  19.131 
+123117-PP  Thalamus     0.414  53.235 
+123117-PP  WhiteMatter  0.782  21.840 
+123925     Amygdala     0.545  13.638 
+123925     GreyMatter   0.666  16.155 
+123925     Hippocampus  0.416  16.155 
+123925     Thalamus     0.727  11.180 
+123925     WhiteMatter  0.800  17.607 
+123925-PP  Amygdala     0.545  13.638 
+123925-PP  GreyMatter   0.666  16.155 
+123925-PP  Hippocampus  0.416  16.155 
+123925-PP  Thalamus     0.727  11.180 
+123925-PP  WhiteMatter  0.800  17.607 
+124422     Amygdala     0.583  14.142 
+124422     GreyMatter   0.639  12.207 
+124422     Hippocampus  0.497  12.570 
+124422     Thalamus     0.789  15.000 
+124422     WhiteMatter  0.711  15.811 
+124422-PP  Amygdala     0.583  14.142 
+124422-PP  GreyMatter   0.639  12.207 
+124422-PP  Hippocampus  0.497  12.570 
+124422-PP  Thalamus     0.789  15.000 
+124422-PP  WhiteMatter  0.711  15.811 
+
+Aggregated statistic results...
+LABEL        METRIC   STATISTIC  VALUE 
+Amygdala     DICE     MEAN       0.479 
+Amygdala     DICE     STD        0.081 
+Amygdala     HDRFDST  MEAN       18.387
+Amygdala     HDRFDST  STD        5.082 
+GreyMatter   DICE     MEAN       0.681 
+GreyMatter   DICE     STD        0.030 
+GreyMatter   HDRFDST  MEAN       12.251
+GreyMatter   HDRFDST  STD        2.649 
+Hippocampus  DICE     MEAN       0.440 
+Hippocampus  DICE     STD        0.063 
+Hippocampus  HDRFDST  MEAN       14.948
+Hippocampus  HDRFDST  STD        2.065 
+Thalamus     DICE     MEAN       0.703 
+Thalamus     DICE     STD        0.102 
+Thalamus     HDRFDST  MEAN       14.923
+Thalamus     HDRFDST  STD        12.992
+WhiteMatter  DICE     MEAN       0.788 
+WhiteMatter  DICE     STD        0.037 
+WhiteMatter  HDRFDST  MEAN       15.361
+WhiteMatter  HDRFDST  STD        2.873 
+Experiment exp_02_bias_correction_only completed in 567.2 seconds
+✅ Experiment 2 completed successfully
+
+============================================================
+Running Experiment 3/15: normalization_bias
+Description: With normalization + bias correction together
+============================================================
+Running experiment: exp_03_normalization_bias
+Description: With normalization + bias correction together
+----- Training...
+---------- Processing 113922
+---------- Processing 100307
+---------- Processing 110411
+---------- Processing 100408
+---------- Processing 101107
+---------- Processing 101915
+---------- Processing 101309
+---------- Processing 108828
+---------- Processing 103414
+---------- Processing 115320
+---------- Processing 103111
+---------- Processing 113619
+---------- Processing 111312
+---------- Processing 106016
+---------- Processing 111716
+---------- Processing 114419
+---------- Processing 116524
+---------- Processing 105115
+---------- Processing 105014
+---------- Processing 103818
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  N4 bias field correction completed.
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  N4 bias field correction completed.
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  N4 bias field correction completed.
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  N4 bias field correction completed.
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  N4 bias field correction completed.
+  N4 bias field correction completed.
+  N4 bias field correction completed.
+  N4 bias field correction completed.
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  N4 bias field correction completed.
+  N4 bias field correction completed.
+  N4 bias field correction completed.
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  N4 bias field correction completed.
+  N4 bias field correction completed.
+  N4 bias field correction completed.
+  N4 bias field correction completed.
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  N4 bias field correction completed.
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  N4 bias field correction completed.
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  N4 bias field correction completed.
+  N4 bias field correction completed.
+  N4 bias field correction completed.
+  N4 bias field correction completed.
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  N4 bias field correction completed.
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  N4 bias field correction completed.
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  N4 bias field correction completed.
+  N4 bias field correction completed.
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  N4 bias field correction completed.
+  N4 bias field correction completed.
+  N4 bias field correction completed.
+  N4 bias field correction completed.
+  N4 bias field correction completed.
+  N4 bias field correction completed.
+  N4 bias field correction completed.
+  N4 bias field correction completed.
+  N4 bias field correction completed.
+  N4 bias field correction completed.
+  N4 bias field correction completed.
+  N4 bias field correction completed.
+  N4 bias field correction completed.
+  N4 bias field correction completed.
+  N4 bias field correction completed.
+Training Random Forest with 100 trees, max_depth=None, max_features=7 (out of 7 total features)
+ Time elapsed: 8.94354319665581 s
+ Training data cleaned from memory
+----- Testing...
+---------- Processing 118730
+---------- Processing 117122
+---------- Processing 120111
+---------- Processing 122620
+---------- Processing 124422
+---------- Processing 118528
+---------- Processing 123117
+---------- Processing 122317
+---------- Processing 123925
+---------- Processing 118932
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  N4 bias field correction completed.
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  N4 bias field correction completed.
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  N4 bias field correction completed.
+  N4 bias field correction completed.
+  N4 bias field correction completed.
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  N4 bias field correction completed.
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  N4 bias field correction completed.
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  N4 bias field correction completed.
+  N4 bias field correction completed.
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  N4 bias field correction completed.
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  N4 bias field correction completed.
+  N4 bias field correction completed.
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  N4 bias field correction completed.
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  N4 bias field correction completed.
+  N4 bias field correction completed.
+  N4 bias field correction completed.
+  N4 bias field correction completed.
+  N4 bias field correction completed.
+  N4 bias field correction completed.
+  N4 bias field correction completed.
+---------- Testing 118730
+ Time elapsed: 7.115803164895624 s
+---------- Testing 117122
+ Time elapsed: 6.405278977006674 s
+---------- Testing 120111
+ Time elapsed: 6.86194455018267 s
+---------- Testing 122620
+ Time elapsed: 6.787068136036396 s
+---------- Testing 124422
+ Time elapsed: 6.929976226296276 s
+---------- Testing 118528
+ Time elapsed: 6.863773725461215 s
+---------- Testing 123117
+ Time elapsed: 6.607866664882749 s
+---------- Testing 122317
+ Time elapsed: 6.990569642744958 s
+---------- Testing 123925
+ Time elapsed: 6.209465274121612 s
+---------- Testing 118932
+ Time elapsed: 7.257929453626275 s
+---------- Post-processing 118730
+---------- Post-processing 117122
+---------- Post-processing 120111
+---------- Post-processing 122620
+---------- Post-processing 124422
+---------- Post-processing 118528
+---------- Post-processing 123117
+---------- Post-processing 122317
+---------- Post-processing 123925
+---------- Post-processing 118932
+Results saved to ./ablation_experiments/exp_03_normalization_bias/2025-11-09-14-37-19/results.csv with 100 measurements
+
+Subject-wise results...
+SUBJECT    LABEL        DICE   HDRFDST
+117122     Amygdala     0.350  17.117 
+117122     GreyMatter   0.711  10.488 
+117122     Hippocampus  0.486  15.395 
+117122     Thalamus     0.754  10.488 
+117122     WhiteMatter  0.808  12.329 
+117122-PP  Amygdala     0.350  17.117 
+117122-PP  GreyMatter   0.711  10.488 
+117122-PP  Hippocampus  0.486  15.395 
+117122-PP  Thalamus     0.754  10.488 
+117122-PP  WhiteMatter  0.808  12.329 
+118528     Amygdala     0.408  15.232 
+118528     GreyMatter   0.684  11.446 
+118528     Hippocampus  0.473  15.000 
+118528     Thalamus     0.720  12.166 
+118528     WhiteMatter  0.815  16.031 
+118528-PP  Amygdala     0.408  15.232 
+118528-PP  GreyMatter   0.684  11.446 
+118528-PP  Hippocampus  0.473  15.000 
+118528-PP  Thalamus     0.720  12.166 
+118528-PP  WhiteMatter  0.815  16.031 
+118730     Amygdala     0.438  15.906 
+118730     GreyMatter   0.705  11.091 
+118730     Hippocampus  0.434  14.457 
+118730     Thalamus     0.697  11.916 
+118730     WhiteMatter  0.809  17.464 
+118730-PP  Amygdala     0.438  15.906 
+118730-PP  GreyMatter   0.705  11.091 
+118730-PP  Hippocampus  0.434  14.457 
+118730-PP  Thalamus     0.697  11.916 
+118730-PP  WhiteMatter  0.809  17.464 
+118932     Amygdala     0.449  14.866 
+118932     GreyMatter   0.724  9.644  
+118932     Hippocampus  0.481  13.964 
+118932     Thalamus     0.745  8.775  
+118932     WhiteMatter  0.838  12.806 
+118932-PP  Amygdala     0.449  14.866 
+118932-PP  GreyMatter   0.724  9.644  
+118932-PP  Hippocampus  0.481  13.964 
+118932-PP  Thalamus     0.745  8.775  
+118932-PP  WhiteMatter  0.838  12.806 
+120111     Amygdala     0.478  14.799 
+120111     GreyMatter   0.705  9.899  
+120111     Hippocampus  0.526  13.565 
+120111     Thalamus     0.768  13.153 
+120111     WhiteMatter  0.836  11.446 
+120111-PP  Amygdala     0.478  14.799 
+120111-PP  GreyMatter   0.705  9.899  
+120111-PP  Hippocampus  0.526  13.565 
+120111-PP  Thalamus     0.768  13.153 
+120111-PP  WhiteMatter  0.836  11.446 
+122317     Amygdala     0.521  20.640 
+122317     GreyMatter   0.714  11.747 
+122317     Hippocampus  0.501  14.353 
+122317     Thalamus     0.684  11.402 
+122317     WhiteMatter  0.828  14.731 
+122317-PP  Amygdala     0.521  20.640 
+122317-PP  GreyMatter   0.714  11.747 
+122317-PP  Hippocampus  0.501  14.353 
+122317-PP  Thalamus     0.684  11.402 
+122317-PP  WhiteMatter  0.828  14.731 
+122620     Amygdala     0.438  14.866 
+122620     GreyMatter   0.721  10.770 
+122620     Hippocampus  0.398  13.077 
+122620     Thalamus     0.689  10.863 
+122620     WhiteMatter  0.792  15.937 
+122620-PP  Amygdala     0.438  14.866 
+122620-PP  GreyMatter   0.721  10.770 
+122620-PP  Hippocampus  0.398  13.077 
+122620-PP  Thalamus     0.689  10.863 
+122620-PP  WhiteMatter  0.792  15.937 
+123117     Amygdala     0.353  23.367 
+123117     GreyMatter   0.548  17.720 
+123117     Hippocampus  0.317  19.596 
+123117     Thalamus     0.435  36.056 
+123117     WhiteMatter  0.637  22.561 
+123117-PP  Amygdala     0.353  23.367 
+123117-PP  GreyMatter   0.548  17.720 
+123117-PP  Hippocampus  0.317  19.596 
+123117-PP  Thalamus     0.435  36.056 
+123117-PP  WhiteMatter  0.637  22.561 
+123925     Amygdala     0.474  15.067 
+123925     GreyMatter   0.666  16.553 
+123925     Hippocampus  0.392  14.457 
+123925     Thalamus     0.713  12.884 
+123925     WhiteMatter  0.814  20.469 
+123925-PP  Amygdala     0.474  15.067 
+123925-PP  GreyMatter   0.666  16.553 
+123925-PP  Hippocampus  0.392  14.457 
+123925-PP  Thalamus     0.713  12.884 
+123925-PP  WhiteMatter  0.814  20.469 
+124422     Amygdala     0.488  18.028 
+124422     GreyMatter   0.673  12.689 
+124422     Hippocampus  0.471  14.765 
+124422     Thalamus     0.781  12.000 
+124422     WhiteMatter  0.797  16.248 
+124422-PP  Amygdala     0.488  18.028 
+124422-PP  GreyMatter   0.673  12.689 
+124422-PP  Hippocampus  0.471  14.765 
+124422-PP  Thalamus     0.781  12.000 
+124422-PP  WhiteMatter  0.797  16.248 
+
+Aggregated statistic results...
+LABEL        METRIC   STATISTIC  VALUE 
+Amygdala     DICE     MEAN       0.440 
+Amygdala     DICE     STD        0.053 
+Amygdala     HDRFDST  MEAN       16.989
+Amygdala     HDRFDST  STD        2.772 
+GreyMatter   DICE     MEAN       0.685 
+GreyMatter   DICE     STD        0.049 
+GreyMatter   HDRFDST  MEAN       12.205
+GreyMatter   HDRFDST  STD        2.617 
+Hippocampus  DICE     MEAN       0.448 
+Hippocampus  DICE     STD        0.060 
+Hippocampus  HDRFDST  MEAN       14.863
+Hippocampus  HDRFDST  STD        1.703 
+Thalamus     DICE     MEAN       0.699 
+Thalamus     DICE     STD        0.094 
+Thalamus     HDRFDST  MEAN       13.970
+Thalamus     HDRFDST  STD        7.459 
+WhiteMatter  DICE     MEAN       0.797 
+WhiteMatter  DICE     STD        0.055 
+WhiteMatter  HDRFDST  MEAN       16.002
+WhiteMatter  HDRFDST  STD        3.336 
+Experiment exp_03_normalization_bias completed in 564.7 seconds
+✅ Experiment 3 completed successfully
+
+============================================================
+Running Experiment 4/15: skullstrip_only
+Description: With skull stripping only
+============================================================
+Running experiment: exp_04_skullstrip_only
+Description: With skull stripping only
+----- Training...
+---------- Processing 113922
+---------- Processing 100307
+---------- Processing 110411
+---------- Processing 100408
+---------- Processing 101107
+---------- Processing 101915
+---------- Processing 101309
+---------- Processing 108828
+---------- Processing 103414
+---------- Processing 115320
+---------- Processing 103111
+---------- Processing 113619
+---------- Processing 111312
+---------- Processing 106016
+---------- Processing 111716
+---------- Processing 114419
+---------- Processing 116524
+---------- Processing 105115
+---------- Processing 105014
+---------- Processing 103818
+Training Random Forest with 100 trees, max_depth=None, max_features=7 (out of 7 total features)
+ Time elapsed: 5.745157503988594 s
+ Training data cleaned from memory
+----- Testing...
+---------- Processing 118730
+---------- Processing 117122
+---------- Processing 120111
+---------- Processing 122620
+---------- Processing 124422
+---------- Processing 118528
+---------- Processing 123117
+---------- Processing 122317
+---------- Processing 123925
+---------- Processing 118932
+---------- Testing 118730
+ Time elapsed: 5.656923342030495 s
+---------- Testing 117122
+ Time elapsed: 5.639280864037573 s
+---------- Testing 120111
+ Time elapsed: 5.747883171308786 s
+---------- Testing 122620
+ Time elapsed: 6.002677728887647 s
+---------- Testing 124422
+ Time elapsed: 6.06119086779654 s
+---------- Testing 118528
+ Time elapsed: 5.652504900004715 s
+---------- Testing 123117
+ Time elapsed: 5.657862394116819 s
+---------- Testing 122317
+ Time elapsed: 5.69882757589221 s
+---------- Testing 123925
+ Time elapsed: 5.74732883926481 s
+---------- Testing 118932
+ Time elapsed: 5.840993843972683 s
+---------- Post-processing 118730
+---------- Post-processing 117122
+---------- Post-processing 120111
+---------- Post-processing 122620
+---------- Post-processing 124422
+---------- Post-processing 118528
+---------- Post-processing 123117
+---------- Post-processing 122317
+---------- Post-processing 123925
+---------- Post-processing 118932
+Results saved to ./ablation_experiments/exp_04_skullstrip_only/2025-11-09-14-42-33/results.csv with 100 measurements
+
+Subject-wise results...
+SUBJECT    LABEL        DICE   HDRFDST
+117122     Amygdala     0.352  18.385 
+117122     GreyMatter   0.729  2.000  
+117122     Hippocampus  0.442  15.264 
+117122     Thalamus     0.732  9.000  
+117122     WhiteMatter  0.839  3.000  
+117122-PP  Amygdala     0.352  18.385 
+117122-PP  GreyMatter   0.729  2.000  
+117122-PP  Hippocampus  0.442  15.264 
+117122-PP  Thalamus     0.732  9.000  
+117122-PP  WhiteMatter  0.839  3.000  
+118528     Amygdala     0.465  18.138 
+118528     GreyMatter   0.703  2.000  
+118528     Hippocampus  0.452  20.125 
+118528     Thalamus     0.743  6.325  
+118528     WhiteMatter  0.736  4.000  
+118528-PP  Amygdala     0.465  18.138 
+118528-PP  GreyMatter   0.703  2.000  
+118528-PP  Hippocampus  0.452  20.125 
+118528-PP  Thalamus     0.743  6.325  
+118528-PP  WhiteMatter  0.736  4.000  
+118730     Amygdala     0.460  13.601 
+118730     GreyMatter   0.711  3.162  
+118730     Hippocampus  0.397  13.379 
+118730     Thalamus     0.720  10.440 
+118730     WhiteMatter  0.850  2.828  
+118730-PP  Amygdala     0.460  13.601 
+118730-PP  GreyMatter   0.711  3.162  
+118730-PP  Hippocampus  0.397  13.379 
+118730-PP  Thalamus     0.720  10.440 
+118730-PP  WhiteMatter  0.850  2.828  
+118932     Amygdala     0.466  15.166 
+118932     GreyMatter   0.733  2.236  
+118932     Hippocampus  0.440  13.784 
+118932     Thalamus     0.746  8.246  
+118932     WhiteMatter  0.831  3.000  
+118932-PP  Amygdala     0.466  15.166 
+118932-PP  GreyMatter   0.733  2.236  
+118932-PP  Hippocampus  0.440  13.784 
+118932-PP  Thalamus     0.746  8.246  
+118932-PP  WhiteMatter  0.831  3.000  
+120111     Amygdala     0.537  13.928 
+120111     GreyMatter   0.731  1.732  
+120111     Hippocampus  0.504  14.422 
+120111     Thalamus     0.775  7.681  
+120111     WhiteMatter  0.824  2.449  
+120111-PP  Amygdala     0.537  13.928 
+120111-PP  GreyMatter   0.731  1.732  
+120111-PP  Hippocampus  0.504  14.422 
+120111-PP  Thalamus     0.775  7.681  
+120111-PP  WhiteMatter  0.824  2.449  
+122317     Amygdala     0.619  16.155 
+122317     GreyMatter   0.727  2.236  
+122317     Hippocampus  0.482  14.142 
+122317     Thalamus     0.663  10.050 
+122317     WhiteMatter  0.785  4.000  
+122317-PP  Amygdala     0.619  16.155 
+122317-PP  GreyMatter   0.727  2.236  
+122317-PP  Hippocampus  0.482  14.142 
+122317-PP  Thalamus     0.663  10.050 
+122317-PP  WhiteMatter  0.785  4.000  
+122620     Amygdala     0.475  13.342 
+122620     GreyMatter   0.737  3.317  
+122620     Hippocampus  0.368  13.153 
+122620     Thalamus     0.685  9.165  
+122620     WhiteMatter  0.833  3.000  
+122620-PP  Amygdala     0.475  13.342 
+122620-PP  GreyMatter   0.737  3.317  
+122620-PP  Hippocampus  0.368  13.153 
+122620-PP  Thalamus     0.685  9.165  
+122620-PP  WhiteMatter  0.833  3.000  
+123117     Amygdala     0.430  14.765 
+123117     GreyMatter   0.688  5.745  
+123117     Hippocampus  0.298  19.209 
+123117     Thalamus     0.412  14.036 
+123117     WhiteMatter  0.849  5.099  
+123117-PP  Amygdala     0.430  14.765 
+123117-PP  GreyMatter   0.688  5.745  
+123117-PP  Hippocampus  0.298  19.209 
+123117-PP  Thalamus     0.412  14.036 
+123117-PP  WhiteMatter  0.849  5.099  
+123925     Amygdala     0.555  13.928 
+123925     GreyMatter   0.725  2.000  
+123925     Hippocampus  0.404  14.491 
+123925     Thalamus     0.724  9.274  
+123925     WhiteMatter  0.829  3.000  
+123925-PP  Amygdala     0.555  13.928 
+123925-PP  GreyMatter   0.725  2.000  
+123925-PP  Hippocampus  0.404  14.491 
+123925-PP  Thalamus     0.724  9.274  
+123925-PP  WhiteMatter  0.829  3.000  
+124422     Amygdala     0.595  14.142 
+124422     GreyMatter   0.691  2.000  
+124422     Hippocampus  0.480  12.806 
+124422     Thalamus     0.787  8.775  
+124422     WhiteMatter  0.725  4.123  
+124422-PP  Amygdala     0.595  14.142 
+124422-PP  GreyMatter   0.691  2.000  
+124422-PP  Hippocampus  0.480  12.806 
+124422-PP  Thalamus     0.787  8.775  
+124422-PP  WhiteMatter  0.725  4.123  
+
+Aggregated statistic results...
+LABEL        METRIC   STATISTIC  VALUE 
+Amygdala     DICE     MEAN       0.495 
+Amygdala     DICE     STD        0.077 
+Amygdala     HDRFDST  MEAN       15.155
+Amygdala     HDRFDST  STD        1.738 
+GreyMatter   DICE     MEAN       0.717 
+GreyMatter   DICE     STD        0.017 
+GreyMatter   HDRFDST  MEAN       2.643 
+GreyMatter   HDRFDST  STD        1.147 
+Hippocampus  DICE     MEAN       0.427 
+Hippocampus  DICE     STD        0.058 
+Hippocampus  HDRFDST  MEAN       15.078
+Hippocampus  HDRFDST  STD        2.401 
+Thalamus     DICE     MEAN       0.699 
+Thalamus     DICE     STD        0.102 
+Thalamus     HDRFDST  MEAN       9.299 
+Thalamus     HDRFDST  STD        1.930 
+WhiteMatter  DICE     MEAN       0.810 
+WhiteMatter  DICE     STD        0.043 
+WhiteMatter  HDRFDST  MEAN       3.450 
+WhiteMatter  HDRFDST  STD        0.773 
+Experiment exp_04_skullstrip_only completed in 164.2 seconds
+✅ Experiment 4 completed successfully
+
+============================================================
+Running Experiment 5/15: registration_only
+Description: With registration only
+============================================================
+Running experiment: exp_05_registration_only
+Description: With registration only
+----- Training...
+---------- Processing 113922
+---------- Processing 100307
+---------- Processing 110411
+---------- Processing 100408
+---------- Processing 101107
+---------- Processing 101915
+---------- Processing 101309
+---------- Processing 108828
+---------- Processing 103414
+---------- Processing 115320
+---------- Processing 103111
+---------- Processing 113619
+---------- Processing 111312
+---------- Processing 106016
+---------- Processing 111716
+---------- Processing 114419
+---------- Processing 116524
+---------- Processing 105115
+---------- Processing 105014
+---------- Processing 103818
+Training Random Forest with 100 trees, max_depth=None, max_features=7 (out of 7 total features)
+ Time elapsed: 10.46115494100377 s
+ Training data cleaned from memory
+----- Testing...
+---------- Processing 118730
+---------- Processing 117122
+---------- Processing 120111
+---------- Processing 122620
+---------- Processing 124422
+---------- Processing 118528
+---------- Processing 123117
+---------- Processing 122317
+---------- Processing 123925
+---------- Processing 118932
+---------- Testing 118730
+ Time elapsed: 8.866877770982683 s
+---------- Testing 117122
+ Time elapsed: 8.809431067667902 s
+---------- Testing 120111
+ Time elapsed: 8.63418795214966 s
+---------- Testing 122620
+ Time elapsed: 8.934886381961405 s
+---------- Testing 124422
+ Time elapsed: 8.92488818615675 s
+---------- Testing 118528
+ Time elapsed: 8.91682753385976 s
+---------- Testing 123117
+ Time elapsed: 8.59038867522031 s
+---------- Testing 122317
+ Time elapsed: 8.934298921376467 s
+---------- Testing 123925
+ Time elapsed: 9.021014900878072 s
+---------- Testing 118932
+ Time elapsed: 8.448964710347354 s
+---------- Post-processing 118730
+---------- Post-processing 117122
+---------- Post-processing 120111
+---------- Post-processing 122620
+---------- Post-processing 124422
+---------- Post-processing 118528
+---------- Post-processing 123117
+---------- Post-processing 122317
+---------- Post-processing 123925
+---------- Post-processing 118932
+Results saved to ./ablation_experiments/exp_05_registration_only/2025-11-09-14-45-35/results.csv with 100 measurements
+
+Subject-wise results...
+SUBJECT    LABEL        DICE   HDRFDST
+117122     Amygdala     0.463  13.748 
+117122     GreyMatter   0.689  11.358 
+117122     Hippocampus  0.527  15.362 
+117122     Thalamus     0.768  10.488 
+117122     WhiteMatter  0.812  13.077 
+117122-PP  Amygdala     0.463  13.748 
+117122-PP  GreyMatter   0.689  11.358 
+117122-PP  Hippocampus  0.527  15.362 
+117122-PP  Thalamus     0.768  10.488 
+117122-PP  WhiteMatter  0.812  13.077 
+118528     Amygdala     0.480  21.048 
+118528     GreyMatter   0.643  12.042 
+118528     Hippocampus  0.553  22.913 
+118528     Thalamus     0.750  17.292 
+118528     WhiteMatter  0.715  15.524 
+118528-PP  Amygdala     0.480  21.048 
+118528-PP  GreyMatter   0.643  12.042 
+118528-PP  Hippocampus  0.553  22.913 
+118528-PP  Thalamus     0.750  17.292 
+118528-PP  WhiteMatter  0.715  15.524 
+118730     Amygdala     0.509  12.083 
+118730     GreyMatter   0.670  13.342 
+118730     Hippocampus  0.435  13.153 
+118730     Thalamus     0.734  12.369 
+118730     WhiteMatter  0.804  18.028 
+118730-PP  Amygdala     0.509  12.083 
+118730-PP  GreyMatter   0.670  13.342 
+118730-PP  Hippocampus  0.435  13.153 
+118730-PP  Thalamus     0.734  12.369 
+118730-PP  WhiteMatter  0.804  18.028 
+118932     Amygdala     0.513  13.077 
+118932     GreyMatter   0.704  10.770 
+118932     Hippocampus  0.512  12.450 
+118932     Thalamus     0.779  9.434  
+118932     WhiteMatter  0.804  15.588 
+118932-PP  Amygdala     0.513  13.077 
+118932-PP  GreyMatter   0.704  10.770 
+118932-PP  Hippocampus  0.512  12.450 
+118932-PP  Thalamus     0.779  9.434  
+118932-PP  WhiteMatter  0.804  15.588 
+120111     Amygdala     0.542  12.410 
+120111     GreyMatter   0.680  11.000 
+120111     Hippocampus  0.527  13.000 
+120111     Thalamus     0.736  15.843 
+120111     WhiteMatter  0.809  11.747 
+120111-PP  Amygdala     0.542  12.410 
+120111-PP  GreyMatter   0.680  11.000 
+120111-PP  Hippocampus  0.527  13.000 
+120111-PP  Thalamus     0.736  15.843 
+120111-PP  WhiteMatter  0.809  11.747 
+122317     Amygdala     0.583  13.454 
+122317     GreyMatter   0.679  13.077 
+122317     Hippocampus  0.537  13.038 
+122317     Thalamus     0.762  6.782  
+122317     WhiteMatter  0.761  16.553 
+122317-PP  Amygdala     0.583  13.454 
+122317-PP  GreyMatter   0.679  13.077 
+122317-PP  Hippocampus  0.537  13.038 
+122317-PP  Thalamus     0.762  6.782  
+122317-PP  WhiteMatter  0.761  16.553 
+122620     Amygdala     0.538  13.601 
+122620     GreyMatter   0.699  11.576 
+122620     Hippocampus  0.504  15.232 
+122620     Thalamus     0.772  8.062  
+122620     WhiteMatter  0.794  17.550 
+122620-PP  Amygdala     0.538  13.601 
+122620-PP  GreyMatter   0.699  11.576 
+122620-PP  Hippocampus  0.504  15.232 
+122620-PP  Thalamus     0.772  8.062  
+122620-PP  WhiteMatter  0.794  17.550 
+123117     Amygdala     0.493  25.318 
+123117     GreyMatter   0.649  16.401 
+123117     Hippocampus  0.550  17.804 
+123117     Thalamus     0.667  64.023 
+123117     WhiteMatter  0.780  22.650 
+123117-PP  Amygdala     0.493  25.318 
+123117-PP  GreyMatter   0.649  16.401 
+123117-PP  Hippocampus  0.550  17.804 
+123117-PP  Thalamus     0.667  64.023 
+123117-PP  WhiteMatter  0.780  22.650 
+123925     Amygdala     0.515  12.369 
+123925     GreyMatter   0.659  16.912 
+123925     Hippocampus  0.507  15.843 
+123925     Thalamus     0.779  12.000 
+123925     WhiteMatter  0.805  19.261 
+123925-PP  Amygdala     0.515  12.369 
+123925-PP  GreyMatter   0.659  16.912 
+123925-PP  Hippocampus  0.507  15.843 
+123925-PP  Thalamus     0.779  12.000 
+123925-PP  WhiteMatter  0.805  19.261 
+124422     Amygdala     0.635  12.410 
+124422     GreyMatter   0.624  13.601 
+124422     Hippocampus  0.550  12.450 
+124422     Thalamus     0.786  15.652 
+124422     WhiteMatter  0.707  17.029 
+124422-PP  Amygdala     0.635  12.410 
+124422-PP  GreyMatter   0.624  13.601 
+124422-PP  Hippocampus  0.550  12.450 
+124422-PP  Thalamus     0.786  15.652 
+124422-PP  WhiteMatter  0.707  17.029 
+
+Aggregated statistic results...
+LABEL        METRIC   STATISTIC  VALUE 
+Amygdala     DICE     MEAN       0.527 
+Amygdala     DICE     STD        0.048 
+Amygdala     HDRFDST  MEAN       14.952
+Amygdala     HDRFDST  STD        4.260 
+GreyMatter   DICE     MEAN       0.670 
+GreyMatter   DICE     STD        0.024 
+GreyMatter   HDRFDST  MEAN       13.008
+GreyMatter   HDRFDST  STD        2.049 
+Hippocampus  DICE     MEAN       0.520 
+Hippocampus  DICE     STD        0.033 
+Hippocampus  HDRFDST  MEAN       15.125
+Hippocampus  HDRFDST  STD        3.090 
+Thalamus     DICE     MEAN       0.753 
+Thalamus     DICE     STD        0.033 
+Thalamus     HDRFDST  MEAN       17.195
+Thalamus     HDRFDST  STD        15.951
+WhiteMatter  DICE     MEAN       0.779 
+WhiteMatter  DICE     STD        0.037 
+WhiteMatter  HDRFDST  MEAN       16.701
+WhiteMatter  HDRFDST  STD        2.913 
+Experiment exp_05_registration_only completed in 260.0 seconds
+✅ Experiment 5 completed successfully
+
+============================================================
+Running Experiment 6/15: all_preprocessing
+Description: With normalization + bias correction + skull stripping + registration
+============================================================
+Running experiment: exp_06_all_preprocessing
+Description: With normalization + bias correction + skull stripping + registration
+----- Training...
+---------- Processing 113922
+---------- Processing 100307
+---------- Processing 110411
+---------- Processing 100408
+---------- Processing 101107
+---------- Processing 101915
+---------- Processing 101309
+---------- Processing 108828
+---------- Processing 103414
+---------- Processing 115320
+---------- Processing 103111
+---------- Processing 113619
+---------- Processing 111312
+---------- Processing 106016
+---------- Processing 111716
+---------- Processing 114419
+---------- Processing 116524
+---------- Processing 105115
+---------- Processing 105014
+---------- Processing 103818
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  N4 bias field correction completed.
+  N4 bias field correction completed.
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  N4 bias field correction completed.
+  N4 bias field correction completed.
+  N4 bias field correction completed.
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  N4 bias field correction completed.
+  N4 bias field correction completed.
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  N4 bias field correction completed.
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  N4 bias field correction completed.
+  N4 bias field correction completed.
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  N4 bias field correction completed.
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  N4 bias field correction completed.
+  N4 bias field correction completed.
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  N4 bias field correction completed.
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  N4 bias field correction completed.
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  N4 bias field correction completed.
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  N4 bias field correction completed.
+  N4 bias field correction completed.
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  N4 bias field correction completed.
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  N4 bias field correction completed.
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  N4 bias field correction completed.
+  N4 bias field correction completed.
+  N4 bias field correction completed.
+  N4 bias field correction completed.
+  N4 bias field correction completed.
+  N4 bias field correction completed.
+  N4 bias field correction completed.
+  N4 bias field correction completed.
+  N4 bias field correction completed.
+  N4 bias field correction completed.
+  N4 bias field correction completed.
+  N4 bias field correction completed.
+  N4 bias field correction completed.
+  N4 bias field correction completed.
+  N4 bias field correction completed.
+  N4 bias field correction completed.
+  N4 bias field correction completed.
+  N4 bias field correction completed.
+  N4 bias field correction completed.
+  N4 bias field correction completed.
+Training Random Forest with 100 trees, max_depth=None, max_features=7 (out of 7 total features)
+ Time elapsed: 8.041342459153384 s
+ Training data cleaned from memory
+----- Testing...
+---------- Processing 118730
+---------- Processing 117122
+---------- Processing 120111
+---------- Processing 122620
+---------- Processing 124422
+---------- Processing 118528
+---------- Processing 123117
+---------- Processing 122317
+---------- Processing 123925
+---------- Processing 118932
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  N4 bias field correction completed.
+  N4 bias field correction completed.
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  N4 bias field correction completed.
+  N4 bias field correction completed.
+  N4 bias field correction completed.
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  N4 bias field correction completed.
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  N4 bias field correction completed.
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  N4 bias field correction completed.
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  N4 bias field correction completed.
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  N4 bias field correction completed.
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  N4 bias field correction completed.
+  N4 bias field correction completed.
+  N4 bias field correction completed.
+  N4 bias field correction completed.
+  N4 bias field correction completed.
+  N4 bias field correction completed.
+  N4 bias field correction completed.
+  N4 bias field correction completed.
+  N4 bias field correction completed.
+  N4 bias field correction completed.
+---------- Testing 118730
+ Time elapsed: 6.998346725013107 s
+---------- Testing 117122
+ Time elapsed: 7.163673672359437 s
+---------- Testing 120111
+ Time elapsed: 7.330663452856243 s
+---------- Testing 122620
+ Time elapsed: 7.336031976621598 s
+---------- Testing 124422
+ Time elapsed: 6.876332167070359 s
+---------- Testing 118528
+ Time elapsed: 7.073329351842403 s
+---------- Testing 123117
+ Time elapsed: 7.147013345733285 s
+---------- Testing 122317
+ Time elapsed: 7.153340152930468 s
+---------- Testing 123925
+ Time elapsed: 6.85381571482867 s
+---------- Testing 118932
+ Time elapsed: 7.050572709180415 s
+---------- Post-processing 118730
+---------- Post-processing 117122
+---------- Post-processing 120111
+---------- Post-processing 122620
+---------- Post-processing 124422
+---------- Post-processing 118528
+---------- Post-processing 123117
+---------- Post-processing 122317
+---------- Post-processing 123925
+---------- Post-processing 118932
+Results saved to ./ablation_experiments/exp_06_all_preprocessing/2025-11-09-14-54-44/results.csv with 100 measurements
+
+Subject-wise results...
+SUBJECT    LABEL        DICE   HDRFDST
+117122     Amygdala     0.459  12.649 
+117122     GreyMatter   0.711  2.000  
+117122     Hippocampus  0.566  12.450 
+117122     Thalamus     0.771  13.928 
+117122     WhiteMatter  0.822  2.828  
+117122-PP  Amygdala     0.459  12.649 
+117122-PP  GreyMatter   0.711  2.000  
+117122-PP  Hippocampus  0.566  12.450 
+117122-PP  Thalamus     0.771  13.928 
+117122-PP  WhiteMatter  0.822  2.828  
+118528     Amygdala     0.453  13.342 
+118528     GreyMatter   0.725  2.236  
+118528     Hippocampus  0.563  13.191 
+118528     Thalamus     0.746  15.297 
+118528     WhiteMatter  0.823  2.236  
+118528-PP  Amygdala     0.453  13.342 
+118528-PP  GreyMatter   0.725  2.236  
+118528-PP  Hippocampus  0.563  13.191 
+118528-PP  Thalamus     0.746  15.297 
+118528-PP  WhiteMatter  0.823  2.236  
+118730     Amygdala     0.543  11.358 
+118730     GreyMatter   0.731  2.000  
+118730     Hippocampus  0.517  10.770 
+118730     Thalamus     0.745  15.937 
+118730     WhiteMatter  0.808  2.236  
+118730-PP  Amygdala     0.543  11.358 
+118730-PP  GreyMatter   0.731  2.000  
+118730-PP  Hippocampus  0.517  10.770 
+118730-PP  Thalamus     0.745  15.937 
+118730-PP  WhiteMatter  0.808  2.236  
+118932     Amygdala     0.512  12.247 
+118932     GreyMatter   0.737  2.000  
+118932     Hippocampus  0.544  11.180 
+118932     Thalamus     0.763  15.166 
+118932     WhiteMatter  0.831  2.449  
+118932-PP  Amygdala     0.512  12.247 
+118932-PP  GreyMatter   0.737  2.000  
+118932-PP  Hippocampus  0.544  11.180 
+118932-PP  Thalamus     0.763  15.166 
+118932-PP  WhiteMatter  0.831  2.449  
+120111     Amygdala     0.504  9.110  
+120111     GreyMatter   0.713  2.000  
+120111     Hippocampus  0.530  10.296 
+120111     Thalamus     0.722  16.673 
+120111     WhiteMatter  0.851  2.236  
+120111-PP  Amygdala     0.504  9.110  
+120111-PP  GreyMatter   0.713  2.000  
+120111-PP  Hippocampus  0.530  10.296 
+120111-PP  Thalamus     0.722  16.673 
+120111-PP  WhiteMatter  0.851  2.236  
+122317     Amygdala     0.545  12.689 
+122317     GreyMatter   0.729  2.000  
+122317     Hippocampus  0.552  11.358 
+122317     Thalamus     0.766  13.892 
+122317     WhiteMatter  0.838  2.449  
+122317-PP  Amygdala     0.545  12.689 
+122317-PP  GreyMatter   0.729  2.000  
+122317-PP  Hippocampus  0.552  11.358 
+122317-PP  Thalamus     0.766  13.892 
+122317-PP  WhiteMatter  0.838  2.449  
+122620     Amygdala     0.553  13.000 
+122620     GreyMatter   0.732  2.236  
+122620     Hippocampus  0.545  13.000 
+122620     Thalamus     0.765  14.595 
+122620     WhiteMatter  0.810  2.828  
+122620-PP  Amygdala     0.553  13.000 
+122620-PP  GreyMatter   0.732  2.236  
+122620-PP  Hippocampus  0.545  13.000 
+122620-PP  Thalamus     0.765  14.595 
+122620-PP  WhiteMatter  0.810  2.828  
+123117     Amygdala     0.517  12.410 
+123117     GreyMatter   0.726  2.236  
+123117     Hippocampus  0.569  11.662 
+123117     Thalamus     0.737  16.763 
+123117     WhiteMatter  0.848  2.828  
+123117-PP  Amygdala     0.517  12.410 
+123117-PP  GreyMatter   0.726  2.236  
+123117-PP  Hippocampus  0.569  11.662 
+123117-PP  Thalamus     0.737  16.763 
+123117-PP  WhiteMatter  0.848  2.828  
+123925     Amygdala     0.518  11.180 
+123925     GreyMatter   0.710  2.000  
+123925     Hippocampus  0.551  12.083 
+123925     Thalamus     0.782  16.062 
+123925     WhiteMatter  0.841  3.000  
+123925-PP  Amygdala     0.518  11.180 
+123925-PP  GreyMatter   0.710  2.000  
+123925-PP  Hippocampus  0.551  12.083 
+123925-PP  Thalamus     0.782  16.062 
+123925-PP  WhiteMatter  0.841  3.000  
+124422     Amygdala     0.593  10.724 
+124422     GreyMatter   0.705  2.000  
+124422     Hippocampus  0.563  10.440 
+124422     Thalamus     0.800  15.133 
+124422     WhiteMatter  0.793  2.828  
+124422-PP  Amygdala     0.593  10.724 
+124422-PP  GreyMatter   0.705  2.000  
+124422-PP  Hippocampus  0.563  10.440 
+124422-PP  Thalamus     0.800  15.133 
+124422-PP  WhiteMatter  0.793  2.828  
+
+Aggregated statistic results...
+LABEL        METRIC   STATISTIC  VALUE 
+Amygdala     DICE     MEAN       0.520 
+Amygdala     DICE     STD        0.040 
+Amygdala     HDRFDST  MEAN       11.871
+Amygdala     HDRFDST  STD        1.217 
+GreyMatter   DICE     MEAN       0.722 
+GreyMatter   DICE     STD        0.010 
+GreyMatter   HDRFDST  MEAN       2.071 
+GreyMatter   HDRFDST  STD        0.108 
+Hippocampus  DICE     MEAN       0.550 
+Hippocampus  DICE     STD        0.016 
+Hippocampus  HDRFDST  MEAN       11.643
+Hippocampus  HDRFDST  STD        0.970 
+Thalamus     DICE     MEAN       0.760 
+Thalamus     DICE     STD        0.022 
+Thalamus     HDRFDST  MEAN       15.345
+Thalamus     HDRFDST  STD        0.970 
+WhiteMatter  DICE     MEAN       0.826 
+WhiteMatter  DICE     STD        0.018 
+WhiteMatter  HDRFDST  MEAN       2.592 
+WhiteMatter  HDRFDST  STD        0.285 
+Experiment exp_06_all_preprocessing completed in 646.9 seconds
+✅ Experiment 6 completed successfully
+
+============================================================
+Running Experiment 7/15: all_preprocessing_postprocessing
+Description: With all preprocessing + postprocessing
+============================================================
+Running experiment: exp_07_all_preprocessing_postprocessing
+Description: With all preprocessing + postprocessing
+----- Training...
+---------- Processing 113922
+---------- Processing 100307
+---------- Processing 110411
+---------- Processing 100408
+---------- Processing 101107
+---------- Processing 101915
+---------- Processing 101309
+---------- Processing 108828
+---------- Processing 103414
+---------- Processing 115320
+---------- Processing 103111
+---------- Processing 113619
+---------- Processing 111312
+---------- Processing 106016
+---------- Processing 111716
+---------- Processing 114419
+---------- Processing 116524
+---------- Processing 105115
+---------- Processing 105014
+---------- Processing 103818
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  N4 bias field correction completed.
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  N4 bias field correction completed.
+  N4 bias field correction completed.
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  N4 bias field correction completed.
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  N4 bias field correction completed.
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  N4 bias field correction completed.
+  N4 bias field correction completed.
+  N4 bias field correction completed.
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  N4 bias field correction completed.
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  N4 bias field correction completed.
+  N4 bias field correction completed.
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  N4 bias field correction completed.
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  N4 bias field correction completed.
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  N4 bias field correction completed.
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  N4 bias field correction completed.
+  N4 bias field correction completed.
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  N4 bias field correction completed.
+  N4 bias field correction completed.
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  N4 bias field correction completed.
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  N4 bias field correction completed.
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  N4 bias field correction completed.
+  N4 bias field correction completed.
+  N4 bias field correction completed.
+  N4 bias field correction completed.
+  N4 bias field correction completed.
+  N4 bias field correction completed.
+  N4 bias field correction completed.
+  N4 bias field correction completed.
+  N4 bias field correction completed.
+  N4 bias field correction completed.
+  N4 bias field correction completed.
+  N4 bias field correction completed.
+  N4 bias field correction completed.
+  N4 bias field correction completed.
+  N4 bias field correction completed.
+  N4 bias field correction completed.
+  N4 bias field correction completed.
+  N4 bias field correction completed.
+  N4 bias field correction completed.
+  N4 bias field correction completed.
+Training Random Forest with 100 trees, max_depth=None, max_features=7 (out of 7 total features)
+ Time elapsed: 7.9361983318813145 s
+ Training data cleaned from memory
+----- Testing...
+---------- Processing 118730
+---------- Processing 117122
+---------- Processing 120111
+---------- Processing 122620
+---------- Processing 124422
+---------- Processing 118528
+---------- Processing 123117
+---------- Processing 122317
+---------- Processing 123925
+---------- Processing 118932
+  Applying N4 bias field correction (max_iter=20, levels=3)...  Applying N4 bias field correction (max_iter=20, levels=3)...
+
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  N4 bias field correction completed.
+  N4 bias field correction completed.
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  N4 bias field correction completed.
+  N4 bias field correction completed.
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  N4 bias field correction completed.
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  N4 bias field correction completed.
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  N4 bias field correction completed.
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  N4 bias field correction completed.
+  N4 bias field correction completed.
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  N4 bias field correction completed.
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  N4 bias field correction completed.
+  N4 bias field correction completed.
+  N4 bias field correction completed.
+  N4 bias field correction completed.
+  N4 bias field correction completed.
+  N4 bias field correction completed.
+  N4 bias field correction completed.
+  N4 bias field correction completed.
+  N4 bias field correction completed.
+  N4 bias field correction completed.
+---------- Testing 118730
+ Time elapsed: 7.215107867028564 s
+---------- Testing 117122
+ Time elapsed: 7.156553915236145 s
+---------- Testing 120111
+ Time elapsed: 7.3156385268084705 s
+---------- Testing 122620
+ Time elapsed: 6.913015408907086 s
+---------- Testing 124422
+ Time elapsed: 7.055947056040168 s
+---------- Testing 118528
+ Time elapsed: 6.898049437440932 s
+---------- Testing 123117
+ Time elapsed: 7.093300410080701 s
+---------- Testing 122317
+ Time elapsed: 6.959424627944827 s
+---------- Testing 123925
+ Time elapsed: 7.218269455712289 s
+---------- Testing 118932
+ Time elapsed: 7.157850889023393 s
+---------- Post-processing 118730
+---------- Post-processing 117122
+---------- Post-processing 120111
+---------- Post-processing 122620
+---------- Post-processing 124422
+---------- Post-processing 118528
+---------- Post-processing 123117
+---------- Post-processing 122317
+---------- Post-processing 123925
+---------- Post-processing 118932
+Results saved to ./ablation_experiments/exp_07_all_preprocessing_postprocessing/2025-11-09-15-05-29/results.csv with 100 measurements
+
+Subject-wise results...
+SUBJECT    LABEL        DICE   HDRFDST
+117122     Amygdala     0.459  12.649 
+117122     GreyMatter   0.711  2.000  
+117122     Hippocampus  0.566  12.450 
+117122     Thalamus     0.771  13.928 
+117122     WhiteMatter  0.822  2.828  
+117122-PP  Amygdala     0.438  12.207 
+117122-PP  GreyMatter   0.667  3.742  
+117122-PP  Hippocampus  0.557  12.207 
+117122-PP  Thalamus     0.758  11.358 
+117122-PP  WhiteMatter  0.826  2.828  
+118528     Amygdala     0.453  13.342 
+118528     GreyMatter   0.725  2.236  
+118528     Hippocampus  0.563  13.191 
+118528     Thalamus     0.746  15.297 
+118528     WhiteMatter  0.823  2.236  
+118528-PP  Amygdala     0.432  13.266 
+118528-PP  GreyMatter   0.679  3.742  
+118528-PP  Hippocampus  0.549  12.728 
+118528-PP  Thalamus     0.736  14.457 
+118528-PP  WhiteMatter  0.830  2.449  
+118730     Amygdala     0.543  11.358 
+118730     GreyMatter   0.731  2.000  
+118730     Hippocampus  0.517  10.770 
+118730     Thalamus     0.745  15.937 
+118730     WhiteMatter  0.808  2.236  
+118730-PP  Amygdala     0.514  11.045 
+118730-PP  GreyMatter   0.685  3.742  
+118730-PP  Hippocampus  0.483  10.488 
+118730-PP  Thalamus     0.735  15.264 
+118730-PP  WhiteMatter  0.817  2.449  
+118932     Amygdala     0.512  12.247 
+118932     GreyMatter   0.737  2.000  
+118932     Hippocampus  0.544  11.180 
+118932     Thalamus     0.763  15.166 
+118932     WhiteMatter  0.831  2.449  
+118932-PP  Amygdala     0.478  12.207 
+118932-PP  GreyMatter   0.694  4.000  
+118932-PP  Hippocampus  0.519  10.817 
+118932-PP  Thalamus     0.752  13.454 
+118932-PP  WhiteMatter  0.831  2.828  
+120111     Amygdala     0.504  9.110  
+120111     GreyMatter   0.713  2.000  
+120111     Hippocampus  0.530  10.296 
+120111     Thalamus     0.722  16.673 
+120111     WhiteMatter  0.851  2.236  
+120111-PP  Amygdala     0.490  8.944  
+120111-PP  GreyMatter   0.669  3.606  
+120111-PP  Hippocampus  0.499  10.050 
+120111-PP  Thalamus     0.705  16.401 
+120111-PP  WhiteMatter  0.849  2.828  
+122317     Amygdala     0.545  12.689 
+122317     GreyMatter   0.729  2.000  
+122317     Hippocampus  0.552  11.358 
+122317     Thalamus     0.766  13.892 
+122317     WhiteMatter  0.838  2.449  
+122317-PP  Amygdala     0.526  12.166 
+122317-PP  GreyMatter   0.683  3.464  
+122317-PP  Hippocampus  0.521  11.091 
+122317-PP  Thalamus     0.754  7.810  
+122317-PP  WhiteMatter  0.843  2.449  
+122620     Amygdala     0.553  13.000 
+122620     GreyMatter   0.732  2.236  
+122620     Hippocampus  0.545  13.000 
+122620     Thalamus     0.765  14.595 
+122620     WhiteMatter  0.810  2.828  
+122620-PP  Amygdala     0.530  12.649 
+122620-PP  GreyMatter   0.690  3.742  
+122620-PP  Hippocampus  0.520  12.728 
+122620-PP  Thalamus     0.755  13.928 
+122620-PP  WhiteMatter  0.818  2.236  
+123117     Amygdala     0.517  12.410 
+123117     GreyMatter   0.726  2.236  
+123117     Hippocampus  0.569  11.662 
+123117     Thalamus     0.737  16.763 
+123117     WhiteMatter  0.848  2.828  
+123117-PP  Amygdala     0.491  12.166 
+123117-PP  GreyMatter   0.683  4.000  
+123117-PP  Hippocampus  0.548  11.358 
+123117-PP  Thalamus     0.721  16.062 
+123117-PP  WhiteMatter  0.849  2.828  
+123925     Amygdala     0.518  11.180 
+123925     GreyMatter   0.710  2.000  
+123925     Hippocampus  0.551  12.083 
+123925     Thalamus     0.782  16.062 
+123925     WhiteMatter  0.841  3.000  
+123925-PP  Amygdala     0.492  11.045 
+123925-PP  GreyMatter   0.666  3.606  
+123925-PP  Hippocampus  0.535  11.747 
+123925-PP  Thalamus     0.772  13.748 
+123925-PP  WhiteMatter  0.841  3.000  
+124422     Amygdala     0.593  10.724 
+124422     GreyMatter   0.705  2.000  
+124422     Hippocampus  0.563  10.440 
+124422     Thalamus     0.800  15.133 
+124422     WhiteMatter  0.793  2.828  
+124422-PP  Amygdala     0.562  10.344 
+124422-PP  GreyMatter   0.664  3.606  
+124422-PP  Hippocampus  0.534  9.950  
+124422-PP  Thalamus     0.789  13.638 
+124422-PP  WhiteMatter  0.811  2.000  
+
+Aggregated statistic results...
+LABEL        METRIC   STATISTIC  VALUE 
+Amygdala     DICE     MEAN       0.507 
+Amygdala     DICE     STD        0.041 
+Amygdala     HDRFDST  MEAN       11.737
+Amygdala     HDRFDST  STD        1.218 
+GreyMatter   DICE     MEAN       0.700 
+GreyMatter   DICE     STD        0.024 
+GreyMatter   HDRFDST  MEAN       2.898 
+GreyMatter   HDRFDST  STD        0.838 
+Hippocampus  DICE     MEAN       0.538 
+Hippocampus  DICE     STD        0.022 
+Hippocampus  HDRFDST  MEAN       11.480
+Hippocampus  HDRFDST  STD        0.984 
+Thalamus     DICE     MEAN       0.754 
+Thalamus     DICE     STD        0.023 
+Thalamus     HDRFDST  MEAN       14.478
+Thalamus     HDRFDST  STD        2.007 
+WhiteMatter  DICE     MEAN       0.829 
+WhiteMatter  DICE     STD        0.016 
+WhiteMatter  HDRFDST  MEAN       2.591 
+WhiteMatter  HDRFDST  STD        0.295 
+Experiment exp_07_all_preprocessing_postprocessing completed in 709.5 seconds
+✅ Experiment 7 completed successfully
+
+============================================================
+Running Experiment 8/15: baseline_none_with_post
+Description: Baseline without any preprocessing + optimal postprocessing
+============================================================
+Running experiment: exp_08_baseline_none_with_post
+Description: Baseline without any preprocessing + optimal postprocessing
+----- Training...
+---------- Processing 113922
+---------- Processing 100307
+---------- Processing 110411
+---------- Processing 100408
+---------- Processing 101107
+---------- Processing 101915
+---------- Processing 101309
+---------- Processing 108828
+---------- Processing 103414
+---------- Processing 115320
+---------- Processing 103111
+---------- Processing 113619
+---------- Processing 111312
+---------- Processing 106016
+---------- Processing 111716
+---------- Processing 114419
+---------- Processing 116524
+---------- Processing 105115
+---------- Processing 105014
+---------- Processing 103818
+Training Random Forest with 100 trees, max_depth=None, max_features=7 (out of 7 total features)
+ Time elapsed: 7.490669257938862 s
+ Training data cleaned from memory
+----- Testing...
+---------- Processing 118730
+---------- Processing 117122
+---------- Processing 120111
+---------- Processing 122620
+---------- Processing 124422
+---------- Processing 118528
+---------- Processing 123117
+---------- Processing 122317
+---------- Processing 123925
+---------- Processing 118932
+---------- Testing 118730
+ Time elapsed: 7.200526745058596 s
+---------- Testing 117122
+ Time elapsed: 6.616584728937596 s
+---------- Testing 120111
+ Time elapsed: 6.544034688267857 s
+---------- Testing 122620
+ Time elapsed: 6.801611031871289 s
+---------- Testing 124422
+ Time elapsed: 6.770049383863807 s
+---------- Testing 118528
+ Time elapsed: 6.533919740002602 s
+---------- Testing 123117
+ Time elapsed: 6.966740278061479 s
+---------- Testing 122317
+ Time elapsed: 6.913173629902303 s
+---------- Testing 123925
+ Time elapsed: 6.931871891953051 s
+---------- Testing 118932
+ Time elapsed: 7.069016194436699 s
+---------- Post-processing 118730
+---------- Post-processing 117122
+---------- Post-processing 120111
+---------- Post-processing 122620
+---------- Post-processing 124422
+---------- Post-processing 118528
+---------- Post-processing 123117
+---------- Post-processing 122317
+---------- Post-processing 123925
+---------- Post-processing 118932
+Results saved to ./ablation_experiments/exp_08_baseline_none_with_post/2025-11-09-15-12-15/results.csv with 100 measurements
+
+Subject-wise results...
+SUBJECT    LABEL        DICE   HDRFDST
+117122     Amygdala     0.349  20.224 
+117122     GreyMatter   0.705  10.630 
+117122     Hippocampus  0.456  14.900 
+117122     Thalamus     0.737  9.798  
+117122     WhiteMatter  0.824  13.038 
+117122-PP  Amygdala     0.344  18.974 
+117122-PP  GreyMatter   0.646  10.630 
+117122-PP  Hippocampus  0.440  14.697 
+117122-PP  Thalamus     0.727  9.220  
+117122-PP  WhiteMatter  0.828  10.100 
+118528     Amygdala     0.459  27.875 
+118528     GreyMatter   0.645  11.402 
+118528     Hippocampus  0.487  17.117 
+118528     Thalamus     0.750  6.782  
+118528     WhiteMatter  0.734  14.799 
+118528-PP  Amygdala     0.508  37.135 
+118528-PP  GreyMatter   0.637  11.489 
+118528-PP  Hippocampus  0.476  15.067 
+118528-PP  Thalamus     0.732  5.745  
+118528-PP  WhiteMatter  0.763  13.342 
+118730     Amygdala     0.444  13.153 
+118730     GreyMatter   0.682  11.747 
+118730     Hippocampus  0.401  13.153 
+118730     Thalamus     0.723  13.000 
+118730     WhiteMatter  0.819  16.733 
+118730-PP  Amygdala     0.421  12.845 
+118730-PP  GreyMatter   0.626  12.083 
+118730-PP  Hippocampus  0.360  12.806 
+118730-PP  Thalamus     0.713  11.489 
+118730-PP  WhiteMatter  0.792  16.763 
+118932     Amygdala     0.450  43.000 
+118932     GreyMatter   0.722  9.899  
+118932     Hippocampus  0.450  13.892 
+118932     Thalamus     0.752  8.602  
+118932     WhiteMatter  0.816  14.036 
+118932-PP  Amygdala     0.427  43.186 
+118932-PP  GreyMatter   0.678  9.487  
+118932-PP  Hippocampus  0.403  13.601 
+118932-PP  Thalamus     0.740  7.616  
+118932-PP  WhiteMatter  0.823  12.369 
+120111     Amygdala     0.528  40.423 
+120111     GreyMatter   0.709  9.644  
+120111     Hippocampus  0.522  13.565 
+120111     Thalamus     0.779  10.050 
+120111     WhiteMatter  0.820  10.770 
+120111-PP  Amygdala     0.528  40.620 
+120111-PP  GreyMatter   0.668  9.539  
+120111-PP  Hippocampus  0.496  11.747 
+120111-PP  Thalamus     0.763  8.000  
+120111-PP  WhiteMatter  0.836  5.385  
+122317     Amygdala     0.607  16.401 
+122317     GreyMatter   0.699  11.402 
+122317     Hippocampus  0.500  13.601 
+122317     Thalamus     0.674  10.724 
+122317     WhiteMatter  0.774  14.457 
+122317-PP  Amygdala     0.601  14.491 
+122317-PP  GreyMatter   0.673  11.576 
+122317-PP  Hippocampus  0.466  13.601 
+122317-PP  Thalamus     0.659  10.000 
+122317-PP  WhiteMatter  0.804  13.304 
+122620     Amygdala     0.444  18.248 
+122620     GreyMatter   0.710  11.000 
+122620     Hippocampus  0.372  13.153 
+122620     Thalamus     0.687  10.630 
+122620     WhiteMatter  0.797  15.937 
+122620-PP  Amygdala     0.420  15.000 
+122620-PP  GreyMatter   0.655  10.817 
+122620-PP  Hippocampus  0.338  12.884 
+122620-PP  Thalamus     0.684  8.718  
+122620-PP  WhiteMatter  0.799  16.031 
+123117     Amygdala     0.362  44.822 
+123117     GreyMatter   0.644  18.248 
+123117     Hippocampus  0.312  18.788 
+123117     Thalamus     0.415  53.694 
+123117     WhiteMatter  0.784  21.863 
+123117-PP  Amygdala     0.347  47.434 
+123117-PP  GreyMatter   0.600  18.111 
+123117-PP  Hippocampus  0.272  18.708 
+123117-PP  Thalamus     0.428  52.877 
+123117-PP  WhiteMatter  0.752  21.954 
+123925     Amygdala     0.545  15.297 
+123925     GreyMatter   0.666  16.031 
+123925     Hippocampus  0.418  15.843 
+123925     Thalamus     0.728  10.954 
+123925     WhiteMatter  0.799  17.804 
+123925-PP  Amygdala     0.536  13.342 
+123925-PP  GreyMatter   0.615  16.186 
+123925-PP  Hippocampus  0.375  14.595 
+123925-PP  Thalamus     0.703  10.050 
+123925-PP  WhiteMatter  0.814  17.029 
+124422     Amygdala     0.581  17.889 
+124422     GreyMatter   0.637  12.247 
+124422     Hippocampus  0.499  12.806 
+124422     Thalamus     0.791  11.402 
+124422     WhiteMatter  0.710  16.093 
+124422-PP  Amygdala     0.598  11.446 
+124422-PP  GreyMatter   0.620  12.530 
+124422-PP  Hippocampus  0.471  12.207 
+124422-PP  Thalamus     0.778  7.810  
+124422-PP  WhiteMatter  0.747  15.264 
+
+Aggregated statistic results...
+LABEL        METRIC   STATISTIC  VALUE 
+Amygdala     DICE     MEAN       0.475 
+Amygdala     DICE     STD        0.086 
+Amygdala     HDRFDST  MEAN       25.590
+Amygdala     HDRFDST  STD        12.890
+GreyMatter   DICE     MEAN       0.662 
+GreyMatter   DICE     STD        0.034 
+GreyMatter   HDRFDST  MEAN       12.235
+GreyMatter   HDRFDST  STD        2.637 
+Hippocampus  DICE     MEAN       0.426 
+Hippocampus  DICE     STD        0.068 
+Hippocampus  HDRFDST  MEAN       14.337
+Hippocampus  HDRFDST  STD        1.913 
+Thalamus     DICE     MEAN       0.698 
+Thalamus     DICE     STD        0.099 
+Thalamus     HDRFDST  MEAN       13.858
+Thalamus     HDRFDST  STD        13.252
+WhiteMatter  DICE     MEAN       0.792 
+WhiteMatter  DICE     STD        0.034 
+WhiteMatter  HDRFDST  MEAN       14.854
+WhiteMatter  HDRFDST  STD        3.663 
+Experiment exp_08_baseline_none_with_post completed in 264.1 seconds
+✅ Experiment 8 completed successfully
+
+============================================================
+Running Experiment 9/15: normalization_only_with_post
+Description: With normalization only (no bias correction) + optimal postprocessing
+============================================================
+Running experiment: exp_09_normalization_only_with_post
+Description: With normalization only (no bias correction) + optimal postprocessing
+----- Training...
+---------- Processing 113922
+---------- Processing 100307
+---------- Processing 110411
+---------- Processing 100408
+---------- Processing 101107
+---------- Processing 101915
+---------- Processing 101309
+---------- Processing 108828
+---------- Processing 103414
+---------- Processing 115320
+---------- Processing 103111
+---------- Processing 113619
+---------- Processing 111312
+---------- Processing 106016
+---------- Processing 111716
+---------- Processing 114419
+---------- Processing 116524
+---------- Processing 105115
+---------- Processing 105014
+---------- Processing 103818
+Training Random Forest with 100 trees, max_depth=None, max_features=7 (out of 7 total features)
+ Time elapsed: 2.32384949689731 s
+ Training data cleaned from memory
+----- Testing...
+---------- Processing 118730
+---------- Processing 117122
+---------- Processing 120111
+---------- Processing 122620
+---------- Processing 124422
+---------- Processing 118528
+---------- Processing 123117
+---------- Processing 122317
+---------- Processing 123925
+---------- Processing 118932
+---------- Testing 118730
+ Time elapsed: 6.9241140675731 s
+---------- Testing 117122
+ Time elapsed: 6.157368290703744 s
+---------- Testing 120111
+ Time elapsed: 6.507268181070685 s
+---------- Testing 122620
+ Time elapsed: 6.633058771025389 s
+---------- Testing 124422
+ Time elapsed: 6.814626983832568 s
+---------- Testing 118528
+ Time elapsed: 6.898242455907166 s
+---------- Testing 123117
+ Time elapsed: 6.770826562773436 s
+---------- Testing 122317
+ Time elapsed: 6.27449502563104 s
+---------- Testing 123925
+ Time elapsed: 6.5350143988616765 s
+---------- Testing 118932
+ Time elapsed: 6.8861745819449425 s
+---------- Post-processing 118730
+---------- Post-processing 117122
+---------- Post-processing 120111
+---------- Post-processing 122620
+---------- Post-processing 124422
+---------- Post-processing 118528
+---------- Post-processing 123117
+---------- Post-processing 122317
+---------- Post-processing 123925
+---------- Post-processing 118932
+Results saved to ./ablation_experiments/exp_09_normalization_only_with_post/2025-11-09-15-16-35/results.csv with 100 measurements
+
+Subject-wise results...
+SUBJECT    LABEL        DICE   HDRFDST
+117122     Amygdala     0.255  15.843 
+117122     GreyMatter   0.632  10.677 
+117122     Hippocampus  0.408  14.142 
+117122     Thalamus     0.737  9.899  
+117122     WhiteMatter  0.801  13.379 
+117122-PP  Amygdala     0.243  14.526 
+117122-PP  GreyMatter   0.584  10.817 
+117122-PP  Hippocampus  0.396  14.036 
+117122-PP  Thalamus     0.727  9.644  
+117122-PP  WhiteMatter  0.795  12.961 
+118528     Amygdala     0.359  14.629 
+118528     GreyMatter   0.600  11.790 
+118528     Hippocampus  0.370  13.379 
+118528     Thalamus     0.708  8.944  
+118528     WhiteMatter  0.805  15.067 
+118528-PP  Amygdala     0.336  13.416 
+118528-PP  GreyMatter   0.539  12.166 
+118528-PP  Hippocampus  0.334  13.266 
+118528-PP  Thalamus     0.687  7.810  
+118528-PP  WhiteMatter  0.794  15.133 
+118730     Amygdala     0.443  13.379 
+118730     GreyMatter   0.683  10.344 
+118730     Hippocampus  0.380  12.207 
+118730     Thalamus     0.686  8.775  
+118730     WhiteMatter  0.767  15.264 
+118730-PP  Amygdala     0.421  11.874 
+118730-PP  GreyMatter   0.645  10.630 
+118730-PP  Hippocampus  0.347  12.530 
+118730-PP  Thalamus     0.672  8.485  
+118730-PP  WhiteMatter  0.779  15.652 
+118932     Amygdala     0.426  14.866 
+118932     GreyMatter   0.690  10.392 
+118932     Hippocampus  0.406  12.884 
+118932     Thalamus     0.739  8.544  
+118932     WhiteMatter  0.819  9.434  
+118932-PP  Amygdala     0.408  13.191 
+118932-PP  GreyMatter   0.650  10.630 
+118932-PP  Hippocampus  0.375  12.806 
+118932-PP  Thalamus     0.729  8.062  
+118932-PP  WhiteMatter  0.822  6.000  
+120111     Amygdala     0.416  13.038 
+120111     GreyMatter   0.648  10.630 
+120111     Hippocampus  0.440  12.689 
+120111     Thalamus     0.766  8.307  
+120111     WhiteMatter  0.834  8.602  
+120111-PP  Amygdala     0.400  12.329 
+120111-PP  GreyMatter   0.603  10.817 
+120111-PP  Hippocampus  0.405  12.329 
+120111-PP  Thalamus     0.752  6.708  
+120111-PP  WhiteMatter  0.827  8.062  
+122317     Amygdala     0.479  18.000 
+122317     GreyMatter   0.667  11.747 
+122317     Hippocampus  0.390  13.491 
+122317     Thalamus     0.613  12.083 
+122317     WhiteMatter  0.812  12.410 
+122317-PP  Amygdala     0.473  15.297 
+122317-PP  GreyMatter   0.621  12.042 
+122317-PP  Hippocampus  0.348  13.601 
+122317-PP  Thalamus     0.589  12.042 
+122317-PP  WhiteMatter  0.823  10.863 
+122620     Amygdala     0.411  13.153 
+122620     GreyMatter   0.666  11.225 
+122620     Hippocampus  0.316  13.153 
+122620     Thalamus     0.689  9.899  
+122620     WhiteMatter  0.781  14.731 
+122620-PP  Amygdala     0.379  12.369 
+122620-PP  GreyMatter   0.619  11.705 
+122620-PP  Hippocampus  0.280  13.601 
+122620-PP  Thalamus     0.680  9.055  
+122620-PP  WhiteMatter  0.785  14.866 
+123117     Amygdala     0.254  15.524 
+123117     GreyMatter   0.552  18.439 
+123117     Hippocampus  0.251  19.849 
+123117     Thalamus     0.437  17.493 
+123117     WhiteMatter  0.780  21.024 
+123117-PP  Amygdala     0.235  15.297 
+123117-PP  GreyMatter   0.544  20.640 
+123117-PP  Hippocampus  0.227  20.616 
+123117-PP  Thalamus     0.446  18.028 
+123117-PP  WhiteMatter  0.730  21.772 
+123925     Amygdala     0.465  13.491 
+123925     GreyMatter   0.621  15.297 
+123925     Hippocampus  0.353  12.845 
+123925     Thalamus     0.674  10.954 
+123925     WhiteMatter  0.786  16.912 
+123925-PP  Amygdala     0.445  11.747 
+123925-PP  GreyMatter   0.576  15.524 
+123925-PP  Hippocampus  0.313  12.845 
+123925-PP  Thalamus     0.650  10.630 
+123925-PP  WhiteMatter  0.797  17.029 
+124422     Amygdala     0.484  14.560 
+124422     GreyMatter   0.625  12.689 
+124422     Hippocampus  0.398  13.638 
+124422     Thalamus     0.762  11.576 
+124422     WhiteMatter  0.756  15.524 
+124422-PP  Amygdala     0.470  11.489 
+124422-PP  GreyMatter   0.579  12.884 
+124422-PP  Hippocampus  0.367  13.491 
+124422-PP  Thalamus     0.751  11.045 
+124422-PP  WhiteMatter  0.785  14.629 
+
+Aggregated statistic results...
+LABEL        METRIC   STATISTIC  VALUE 
+Amygdala     DICE     MEAN       0.390 
+Amygdala     DICE     STD        0.081 
+Amygdala     HDRFDST  MEAN       13.901
+Amygdala     HDRFDST  STD        1.601 
+GreyMatter   DICE     MEAN       0.617 
+GreyMatter   DICE     STD        0.044 
+GreyMatter   HDRFDST  MEAN       12.554
+GreyMatter   HDRFDST  STD        2.746 
+Hippocampus  DICE     MEAN       0.355 
+Hippocampus  DICE     STD        0.054 
+Hippocampus  HDRFDST  MEAN       13.870
+Hippocampus  HDRFDST  STD        2.185 
+Thalamus     DICE     MEAN       0.675 
+Thalamus     DICE     STD        0.090 
+Thalamus     HDRFDST  MEAN       10.399
+Thalamus     HDRFDST  STD        2.838 
+WhiteMatter  DICE     MEAN       0.794 
+WhiteMatter  DICE     STD        0.025 
+WhiteMatter  HDRFDST  MEAN       13.966
+WhiteMatter  HDRFDST  STD        3.881 
+Experiment exp_09_normalization_only_with_post completed in 258.3 seconds
+✅ Experiment 9 completed successfully
+
+============================================================
+Running Experiment 10/15: bias_correction_only_with_post
+Description: With bias correction only (no normalization) + optimal postprocessing
+============================================================
+Running experiment: exp_10_bias_correction_only_with_post
+Description: With bias correction only (no normalization) + optimal postprocessing
+----- Training...
+---------- Processing 113922
+---------- Processing 100307
+---------- Processing 110411
+---------- Processing 100408
+---------- Processing 101107
+---------- Processing 101915
+---------- Processing 101309
+---------- Processing 108828
+---------- Processing 103414
+---------- Processing 115320
+---------- Processing 103111
+---------- Processing 113619
+---------- Processing 111312
+---------- Processing 106016
+---------- Processing 111716
+---------- Processing 114419
+---------- Processing 116524
+---------- Processing 105115
+---------- Processing 105014
+---------- Processing 103818
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  N4 bias field correction completed.
+  N4 bias field correction completed.
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  N4 bias field correction completed.
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  N4 bias field correction completed.
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  N4 bias field correction completed.
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  N4 bias field correction completed.
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  N4 bias field correction completed.
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  N4 bias field correction completed.
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  N4 bias field correction completed.
+  N4 bias field correction completed.
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  N4 bias field correction completed.
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  N4 bias field correction completed.
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  N4 bias field correction completed.
+  N4 bias field correction completed.
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  N4 bias field correction completed.
+  N4 bias field correction completed.
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  N4 bias field correction completed.
+  N4 bias field correction completed.
+  N4 bias field correction completed.
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  N4 bias field correction completed.
+  N4 bias field correction completed.
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  N4 bias field correction completed.
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  N4 bias field correction completed.
+  N4 bias field correction completed.
+  N4 bias field correction completed.
+  N4 bias field correction completed.
+  N4 bias field correction completed.
+  N4 bias field correction completed.
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  N4 bias field correction completed.
+  N4 bias field correction completed.
+  N4 bias field correction completed.
+  N4 bias field correction completed.
+  N4 bias field correction completed.
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  N4 bias field correction completed.
+  N4 bias field correction completed.
+  N4 bias field correction completed.
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  N4 bias field correction completed.
+  N4 bias field correction completed.
+  N4 bias field correction completed.
+  N4 bias field correction completed.
+Training Random Forest with 100 trees, max_depth=None, max_features=7 (out of 7 total features)
+ Time elapsed: 8.572355906944722 s
+ Training data cleaned from memory
+----- Testing...
+---------- Processing 118730
+---------- Processing 117122
+---------- Processing 120111
+---------- Processing 122620
+---------- Processing 124422
+---------- Processing 118528
+---------- Processing 123117
+---------- Processing 122317
+---------- Processing 123925
+---------- Processing 118932
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  N4 bias field correction completed.
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  N4 bias field correction completed.
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  N4 bias field correction completed.
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  N4 bias field correction completed.
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  N4 bias field correction completed.
+  N4 bias field correction completed.
+  N4 bias field correction completed.
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  N4 bias field correction completed.
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  N4 bias field correction completed.
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  N4 bias field correction completed.
+  N4 bias field correction completed.
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  N4 bias field correction completed.
+  N4 bias field correction completed.
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  N4 bias field correction completed.
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  N4 bias field correction completed.
+  N4 bias field correction completed.
+  N4 bias field correction completed.
+  N4 bias field correction completed.
+  N4 bias field correction completed.
+  N4 bias field correction completed.
+---------- Testing 118730
+ Time elapsed: 7.12255923403427 s
+---------- Testing 117122
+ Time elapsed: 6.357459494844079 s
+---------- Testing 120111
+ Time elapsed: 6.795659305993468 s
+---------- Testing 122620
+ Time elapsed: 6.627581223845482 s
+---------- Testing 124422
+ Time elapsed: 6.379752296954393 s
+---------- Testing 118528
+ Time elapsed: 6.678059994708747 s
+---------- Testing 123117
+ Time elapsed: 7.097343972884119 s
+---------- Testing 122317
+ Time elapsed: 6.938823568169028 s
+---------- Testing 123925
+ Time elapsed: 6.649626134894788 s
+---------- Testing 118932
+ Time elapsed: 7.582991076167673 s
+---------- Post-processing 118730
+---------- Post-processing 117122
+---------- Post-processing 120111
+---------- Post-processing 122620
+---------- Post-processing 124422
+---------- Post-processing 118528
+---------- Post-processing 123117
+---------- Post-processing 122317
+---------- Post-processing 123925
+---------- Post-processing 118932
+Results saved to ./ablation_experiments/exp_10_bias_correction_only_with_post/2025-11-09-15-25-11/results.csv with 100 measurements
+
+Subject-wise results...
+SUBJECT    LABEL        DICE   HDRFDST
+117122     Amygdala     0.352  19.131 
+117122     GreyMatter   0.704  10.630 
+117122     Hippocampus  0.455  15.000 
+117122     Thalamus     0.739  9.695  
+117122     WhiteMatter  0.825  12.884 
+117122-PP  Amygdala     0.344  18.788 
+117122-PP  GreyMatter   0.645  10.677 
+117122-PP  Hippocampus  0.440  14.457 
+117122-PP  Thalamus     0.728  9.165  
+117122-PP  WhiteMatter  0.827  10.000 
+118528     Amygdala     0.465  23.791 
+118528     GreyMatter   0.646  11.358 
+118528     Hippocampus  0.487  18.055 
+118528     Thalamus     0.749  6.403  
+118528     WhiteMatter  0.732  14.526 
+118528-PP  Amygdala     0.500  24.779 
+118528-PP  GreyMatter   0.637  11.402 
+118528-PP  Hippocampus  0.474  17.720 
+118528-PP  Thalamus     0.731  5.657  
+118528-PP  WhiteMatter  0.762  13.379 
+118730     Amygdala     0.447  13.000 
+118730     GreyMatter   0.681  11.832 
+118730     Hippocampus  0.399  13.342 
+118730     Thalamus     0.721  14.071 
+118730     WhiteMatter  0.820  16.401 
+118730-PP  Amygdala     0.423  12.884 
+118730-PP  GreyMatter   0.626  12.083 
+118730-PP  Hippocampus  0.358  13.191 
+118730-PP  Thalamus     0.713  10.770 
+118730-PP  WhiteMatter  0.793  16.553 
+118932     Amygdala     0.453  19.416 
+118932     GreyMatter   0.721  9.899  
+118932     Hippocampus  0.447  13.928 
+118932     Thalamus     0.753  8.602  
+118932     WhiteMatter  0.816  13.748 
+118932-PP  Amygdala     0.426  19.209 
+118932-PP  GreyMatter   0.678  9.487  
+118932-PP  Hippocampus  0.400  13.928 
+118932-PP  Thalamus     0.743  7.550  
+118932-PP  WhiteMatter  0.823  12.042 
+120111     Amygdala     0.527  30.017 
+120111     GreyMatter   0.708  9.695  
+120111     Hippocampus  0.522  14.353 
+120111     Thalamus     0.778  9.000  
+120111     WhiteMatter  0.820  10.488 
+120111-PP  Amygdala     0.517  39.459 
+120111-PP  GreyMatter   0.667  9.644  
+120111-PP  Hippocampus  0.495  12.410 
+120111-PP  Thalamus     0.762  8.124  
+120111-PP  WhiteMatter  0.836  5.000  
+122317     Amygdala     0.606  15.843 
+122317     GreyMatter   0.699  11.402 
+122317     Hippocampus  0.499  13.601 
+122317     Thalamus     0.676  11.045 
+122317     WhiteMatter  0.775  14.457 
+122317-PP  Amygdala     0.600  14.248 
+122317-PP  GreyMatter   0.673  11.533 
+122317-PP  Hippocampus  0.461  13.601 
+122317-PP  Thalamus     0.659  10.198 
+122317-PP  WhiteMatter  0.805  13.342 
+122620     Amygdala     0.444  14.765 
+122620     GreyMatter   0.709  11.000 
+122620     Hippocampus  0.370  13.342 
+122620     Thalamus     0.686  11.000 
+122620     WhiteMatter  0.798  15.843 
+122620-PP  Amygdala     0.420  14.697 
+122620-PP  GreyMatter   0.653  10.863 
+122620-PP  Hippocampus  0.337  13.304 
+122620-PP  Thalamus     0.680  9.274  
+122620-PP  WhiteMatter  0.799  15.843 
+123117     Amygdala     0.366  20.125 
+123117     GreyMatter   0.640  18.330 
+123117     Hippocampus  0.310  19.131 
+123117     Thalamus     0.414  53.235 
+123117     WhiteMatter  0.782  21.840 
+123117-PP  Amygdala     0.349  19.339 
+123117-PP  GreyMatter   0.596  18.111 
+123117-PP  Hippocampus  0.271  19.209 
+123117-PP  Thalamus     0.430  53.226 
+123117-PP  WhiteMatter  0.748  21.932 
+123925     Amygdala     0.545  13.638 
+123925     GreyMatter   0.666  16.155 
+123925     Hippocampus  0.416  16.155 
+123925     Thalamus     0.727  11.180 
+123925     WhiteMatter  0.800  17.607 
+123925-PP  Amygdala     0.537  12.329 
+123925-PP  GreyMatter   0.615  16.401 
+123925-PP  Hippocampus  0.374  15.297 
+123925-PP  Thalamus     0.702  10.000 
+123925-PP  WhiteMatter  0.814  16.882 
+124422     Amygdala     0.583  14.142 
+124422     GreyMatter   0.639  12.207 
+124422     Hippocampus  0.497  12.570 
+124422     Thalamus     0.789  15.000 
+124422     WhiteMatter  0.711  15.811 
+124422-PP  Amygdala     0.597  11.314 
+124422-PP  GreyMatter   0.622  12.369 
+124422-PP  Hippocampus  0.468  12.410 
+124422-PP  Thalamus     0.779  11.225 
+124422-PP  WhiteMatter  0.749  15.067 
+
+Aggregated statistic results...
+LABEL        METRIC   STATISTIC  VALUE 
+Amygdala     DICE     MEAN       0.475 
+Amygdala     DICE     STD        0.085 
+Amygdala     HDRFDST  MEAN       18.546
+Amygdala     HDRFDST  STD        6.679 
+GreyMatter   DICE     MEAN       0.661 
+GreyMatter   DICE     STD        0.034 
+GreyMatter   HDRFDST  MEAN       12.254
+GreyMatter   HDRFDST  STD        2.663 
+Hippocampus  DICE     MEAN       0.424 
+Hippocampus  DICE     STD        0.068 
+Hippocampus  HDRFDST  MEAN       14.750
+Hippocampus  HDRFDST  STD        2.117 
+Thalamus     DICE     MEAN       0.698 
+Thalamus     DICE     STD        0.098 
+Thalamus     HDRFDST  MEAN       14.221
+Thalamus     HDRFDST  STD        13.180
+WhiteMatter  DICE     MEAN       0.792 
+WhiteMatter  DICE     STD        0.034 
+WhiteMatter  HDRFDST  MEAN       14.682
+WhiteMatter  HDRFDST  STD        3.713 
+Experiment exp_10_bias_correction_only_with_post completed in 643.6 seconds
+✅ Experiment 10 completed successfully
+
+============================================================
+Running Experiment 11/15: normalization_bias_with_post
+Description: With normalization + bias correction together + optimal postprocessing
+============================================================
+Running experiment: exp_11_normalization_bias_with_post
+Description: With normalization + bias correction together + optimal postprocessing
+----- Training...
+---------- Processing 113922
+---------- Processing 100307
+---------- Processing 110411
+---------- Processing 100408
+---------- Processing 101107
+---------- Processing 101915
+---------- Processing 101309
+---------- Processing 108828
+---------- Processing 103414
+---------- Processing 115320
+---------- Processing 103111
+---------- Processing 113619
+---------- Processing 111312
+---------- Processing 106016
+---------- Processing 111716
+---------- Processing 114419
+---------- Processing 116524----------
+ Processing 105115
+---------- Processing 105014
+---------- Processing 103818
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  N4 bias field correction completed.
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  N4 bias field correction completed.
+  N4 bias field correction completed.
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  N4 bias field correction completed.
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  N4 bias field correction completed.
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  N4 bias field correction completed.
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  N4 bias field correction completed.
+  N4 bias field correction completed.
+  N4 bias field correction completed.
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  N4 bias field correction completed.
+  N4 bias field correction completed.
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  N4 bias field correction completed.
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  N4 bias field correction completed.
+  N4 bias field correction completed.
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  N4 bias field correction completed.
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  N4 bias field correction completed.
+  N4 bias field correction completed.
+  N4 bias field correction completed.
+  N4 bias field correction completed.
+  N4 bias field correction completed.
+  N4 bias field correction completed.
+  N4 bias field correction completed.
+  N4 bias field correction completed.
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  N4 bias field correction completed.
+  N4 bias field correction completed.
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  N4 bias field correction completed.
+  N4 bias field correction completed.
+  N4 bias field correction completed.
+  N4 bias field correction completed.
+  N4 bias field correction completed.
+  N4 bias field correction completed.
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  N4 bias field correction completed.
+  N4 bias field correction completed.
+  N4 bias field correction completed.
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  N4 bias field correction completed.
+  N4 bias field correction completed.
+  N4 bias field correction completed.
+  N4 bias field correction completed.
+  N4 bias field correction completed.
+  N4 bias field correction completed.
+Training Random Forest with 100 trees, max_depth=None, max_features=7 (out of 7 total features)
+ Time elapsed: 8.238812001887709 s
+ Training data cleaned from memory
+----- Testing...
+---------- Processing 118730
+---------- Processing 117122
+---------- Processing 120111
+---------- Processing 122620
+---------- Processing 124422
+---------- Processing 118528
+---------- Processing 123117
+---------- Processing 122317
+---------- Processing 123925
+---------- Processing 118932
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  N4 bias field correction completed.
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  N4 bias field correction completed.
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  N4 bias field correction completed.
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  N4 bias field correction completed.
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  N4 bias field correction completed.
+  N4 bias field correction completed.
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  N4 bias field correction completed.
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  N4 bias field correction completed.
+  N4 bias field correction completed.
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  N4 bias field correction completed.
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  N4 bias field correction completed.
+  N4 bias field correction completed.
+  N4 bias field correction completed.
+  N4 bias field correction completed.
+  N4 bias field correction completed.
+  N4 bias field correction completed.
+  N4 bias field correction completed.
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  N4 bias field correction completed.
+  N4 bias field correction completed.
+  N4 bias field correction completed.
+---------- Testing 118730
+ Time elapsed: 6.87736776098609 s
+---------- Testing 117122
+ Time elapsed: 7.002513860817999 s
+---------- Testing 120111
+ Time elapsed: 6.770776343066245 s
+---------- Testing 122620
+ Time elapsed: 7.042578494176269 s
+---------- Testing 124422
+ Time elapsed: 7.019758699927479 s
+---------- Testing 118528
+ Time elapsed: 6.815936589147896 s
+---------- Testing 123117
+ Time elapsed: 7.012886741198599 s
+---------- Testing 122317
+ Time elapsed: 6.893614946864545 s
+---------- Testing 123925
+ Time elapsed: 6.527269600890577 s
+---------- Testing 118932
+ Time elapsed: 7.056267101783305 s
+---------- Post-processing 118730
+---------- Post-processing 117122
+---------- Post-processing 120111
+---------- Post-processing 122620
+---------- Post-processing 124422
+---------- Post-processing 118528
+---------- Post-processing 123117
+---------- Post-processing 122317
+---------- Post-processing 123925
+---------- Post-processing 118932
+Results saved to ./ablation_experiments/exp_11_normalization_bias_with_post/2025-11-09-15-35-55/results.csv with 100 measurements
+
+Subject-wise results...
+SUBJECT    LABEL        DICE   HDRFDST
+117122     Amygdala     0.350  17.117 
+117122     GreyMatter   0.711  10.488 
+117122     Hippocampus  0.486  15.395 
+117122     Thalamus     0.754  10.488 
+117122     WhiteMatter  0.808  12.329 
+117122-PP  Amygdala     0.344  13.748 
+117122-PP  GreyMatter   0.658  10.440 
+117122-PP  Hippocampus  0.481  13.892 
+117122-PP  Thalamus     0.745  9.434  
+117122-PP  WhiteMatter  0.819  10.817 
+118528     Amygdala     0.408  15.232 
+118528     GreyMatter   0.684  11.446 
+118528     Hippocampus  0.473  15.000 
+118528     Thalamus     0.720  12.166 
+118528     WhiteMatter  0.815  16.031 
+118528-PP  Amygdala     0.388  14.142 
+118528-PP  GreyMatter   0.627  11.446 
+118528-PP  Hippocampus  0.440  14.353 
+118528-PP  Thalamus     0.696  12.410 
+118528-PP  WhiteMatter  0.822  15.000 
+118730     Amygdala     0.438  15.906 
+118730     GreyMatter   0.705  11.091 
+118730     Hippocampus  0.434  14.457 
+118730     Thalamus     0.697  11.916 
+118730     WhiteMatter  0.809  17.464 
+118730-PP  Amygdala     0.418  14.799 
+118730-PP  GreyMatter   0.649  11.358 
+118730-PP  Hippocampus  0.390  13.416 
+118730-PP  Thalamus     0.686  9.434  
+118730-PP  WhiteMatter  0.795  17.720 
+118932     Amygdala     0.449  14.866 
+118932     GreyMatter   0.724  9.644  
+118932     Hippocampus  0.481  13.964 
+118932     Thalamus     0.745  8.775  
+118932     WhiteMatter  0.838  12.806 
+118932-PP  Amygdala     0.426  13.748 
+118932-PP  GreyMatter   0.674  8.832  
+118932-PP  Hippocampus  0.449  13.601 
+118932-PP  Thalamus     0.742  7.348  
+118932-PP  WhiteMatter  0.833  8.367  
+120111     Amygdala     0.478  14.799 
+120111     GreyMatter   0.705  9.899  
+120111     Hippocampus  0.526  13.565 
+120111     Thalamus     0.768  13.153 
+120111     WhiteMatter  0.836  11.446 
+120111-PP  Amygdala     0.479  12.728 
+120111-PP  GreyMatter   0.656  9.899  
+120111-PP  Hippocampus  0.502  12.845 
+120111-PP  Thalamus     0.751  13.191 
+120111-PP  WhiteMatter  0.846  5.831  
+122317     Amygdala     0.521  20.640 
+122317     GreyMatter   0.714  11.747 
+122317     Hippocampus  0.501  14.353 
+122317     Thalamus     0.684  11.402 
+122317     WhiteMatter  0.828  14.731 
+122317-PP  Amygdala     0.507  16.971 
+122317-PP  GreyMatter   0.663  12.042 
+122317-PP  Hippocampus  0.473  13.342 
+122317-PP  Thalamus     0.670  11.000 
+122317-PP  WhiteMatter  0.837  13.266 
+122620     Amygdala     0.438  14.866 
+122620     GreyMatter   0.721  10.770 
+122620     Hippocampus  0.398  13.077 
+122620     Thalamus     0.689  10.863 
+122620     WhiteMatter  0.792  15.937 
+122620-PP  Amygdala     0.416  14.318 
+122620-PP  GreyMatter   0.668  10.770 
+122620-PP  Hippocampus  0.365  12.530 
+122620-PP  Thalamus     0.682  10.677 
+122620-PP  WhiteMatter  0.799  15.937 
+123117     Amygdala     0.353  23.367 
+123117     GreyMatter   0.548  17.720 
+123117     Hippocampus  0.317  19.596 
+123117     Thalamus     0.435  36.056 
+123117     WhiteMatter  0.637  22.561 
+123117-PP  Amygdala     0.358  23.558 
+123117-PP  GreyMatter   0.551  19.647 
+123117-PP  Hippocampus  0.293  19.748 
+123117-PP  Thalamus     0.473  32.772 
+123117-PP  WhiteMatter  0.563  23.022 
+123925     Amygdala     0.474  15.067 
+123925     GreyMatter   0.666  16.553 
+123925     Hippocampus  0.392  14.457 
+123925     Thalamus     0.713  12.884 
+123925     WhiteMatter  0.814  20.469 
+123925-PP  Amygdala     0.458  12.689 
+123925-PP  GreyMatter   0.610  16.763 
+123925-PP  Hippocampus  0.340  13.379 
+123925-PP  Thalamus     0.694  11.747 
+123925-PP  WhiteMatter  0.809  20.616 
+124422     Amygdala     0.488  18.028 
+124422     GreyMatter   0.673  12.689 
+124422     Hippocampus  0.471  14.765 
+124422     Thalamus     0.781  12.000 
+124422     WhiteMatter  0.797  16.248 
+124422-PP  Amygdala     0.472  15.843 
+124422-PP  GreyMatter   0.613  13.038 
+124422-PP  Hippocampus  0.435  13.601 
+124422-PP  Thalamus     0.772  11.225 
+124422-PP  WhiteMatter  0.818  15.133 
+
+Aggregated statistic results...
+LABEL        METRIC   STATISTIC  VALUE 
+Amygdala     DICE     MEAN       0.433 
+Amygdala     DICE     STD        0.052 
+Amygdala     HDRFDST  MEAN       16.121
+Amygdala     HDRFDST  STD        3.033 
+GreyMatter   DICE     MEAN       0.661 
+GreyMatter   DICE     STD        0.049 
+GreyMatter   HDRFDST  MEAN       12.314
+GreyMatter   HDRFDST  STD        2.901 
+Hippocampus  DICE     MEAN       0.432 
+Hippocampus  DICE     STD        0.064 
+Hippocampus  HDRFDST  MEAN       14.467
+Hippocampus  HDRFDST  STD        1.874 
+Thalamus     DICE     MEAN       0.695 
+Thalamus     DICE     STD        0.087 
+Thalamus     HDRFDST  MEAN       13.447
+Thalamus     HDRFDST  STD        7.157 
+WhiteMatter  DICE     MEAN       0.796 
+WhiteMatter  DICE     STD        0.068 
+WhiteMatter  HDRFDST  MEAN       15.287
+WhiteMatter  HDRFDST  STD        4.315 
+Experiment exp_11_normalization_bias_with_post completed in 637.0 seconds
+✅ Experiment 11 completed successfully
+
+============================================================
+Running Experiment 12/15: skullstrip_only_with_post
+Description: With skull stripping only + optimal postprocessing
+============================================================
+Running experiment: exp_12_skullstrip_only_with_post
+Description: With skull stripping only + optimal postprocessing
+----- Training...
+---------- Processing 113922
+---------- Processing 100307
+---------- Processing 110411
+---------- Processing 100408
+---------- Processing 101107
+---------- Processing 101915
+---------- Processing 101309
+---------- ----------Processing 108828 
+Processing 103414
+-------------------- Processing  Processing115320 103111
+
+---------- Processing ----------113619
+ Processing 111312
+---------- Processing 106016
+---------- Processing 111716
+---------- Processing 114419
+---------- Processing 116524
+---------- Processing 105115
+---------- Processing 105014
+---------- Processing 103818
+Training Random Forest with 100 trees, max_depth=None, max_features=7 (out of 7 total features)
+ Time elapsed: 5.669925489928573 s
+ Training data cleaned from memory
+----- Testing...
+---------- Processing 118730
+---------- Processing 117122
+---------- Processing 120111
+---------- Processing 122620
+---------- Processing 124422
+---------- Processing 118528
+---------- Processing 123117
+---------- Processing 122317
+---------- Processing 123925
+---------- Processing 118932
+---------- Testing 118730
+ Time elapsed: 5.918449335265905 s
+---------- Testing 117122
+ Time elapsed: 5.763823642861098 s
+---------- Testing 120111
+ Time elapsed: 5.936481054872274 s
+---------- Testing 122620
+ Time elapsed: 5.887795698828995 s
+---------- Testing 124422
+ Time elapsed: 6.034956621006131 s
+---------- Testing 118528
+ Time elapsed: 5.660067361779511 s
+---------- Testing 123117
+ Time elapsed: 5.889638144988567 s
+---------- Testing 122317
+ Time elapsed: 5.76809449493885 s
+---------- Testing 123925
+ Time elapsed: 5.839529374148697 s
+---------- Testing 118932
+ Time elapsed: 5.767738784197718 s
+---------- Post-processing 118730
+---------- Post-processing 117122
+---------- Post-processing 120111
+---------- Post-processing 122620
+---------- Post-processing 124422
+---------- Post-processing 118528
+---------- Post-processing 123117
+---------- Post-processing 122317
+---------- Post-processing 123925
+---------- Post-processing 118932
+Results saved to ./ablation_experiments/exp_12_skullstrip_only_with_post/2025-11-09-15-42-26/results.csv with 100 measurements
+
+Subject-wise results...
+SUBJECT    LABEL        DICE   HDRFDST
+117122     Amygdala     0.352  18.385 
+117122     GreyMatter   0.729  2.000  
+117122     Hippocampus  0.442  15.264 
+117122     Thalamus     0.732  9.000  
+117122     WhiteMatter  0.839  3.000  
+117122-PP  Amygdala     0.344  17.916 
+117122-PP  GreyMatter   0.663  3.742  
+117122-PP  Hippocampus  0.425  14.526 
+117122-PP  Thalamus     0.724  8.124  
+117122-PP  WhiteMatter  0.836  3.000  
+118528     Amygdala     0.465  18.138 
+118528     GreyMatter   0.703  2.000  
+118528     Hippocampus  0.452  20.125 
+118528     Thalamus     0.743  6.325  
+118528     WhiteMatter  0.736  4.000  
+118528-PP  Amygdala     0.481  17.720 
+118528-PP  GreyMatter   0.685  3.000  
+118528-PP  Hippocampus  0.442  16.523 
+118528-PP  Thalamus     0.718  5.831  
+118528-PP  WhiteMatter  0.769  2.449  
+118730     Amygdala     0.460  13.601 
+118730     GreyMatter   0.711  3.162  
+118730     Hippocampus  0.397  13.379 
+118730     Thalamus     0.720  10.440 
+118730     WhiteMatter  0.850  2.828  
+118730-PP  Amygdala     0.431  13.601 
+118730-PP  GreyMatter   0.650  4.899  
+118730-PP  Hippocampus  0.359  12.530 
+118730-PP  Thalamus     0.710  7.616  
+118730-PP  WhiteMatter  0.815  5.196  
+118932     Amygdala     0.466  15.166 
+118932     GreyMatter   0.733  2.236  
+118932     Hippocampus  0.440  13.784 
+118932     Thalamus     0.746  8.246  
+118932     WhiteMatter  0.831  3.000  
+118932-PP  Amygdala     0.437  14.866 
+118932-PP  GreyMatter   0.685  4.243  
+118932-PP  Hippocampus  0.394  13.638 
+118932-PP  Thalamus     0.733  7.348  
+118932-PP  WhiteMatter  0.833  3.317  
+120111     Amygdala     0.537  13.928 
+120111     GreyMatter   0.731  1.732  
+120111     Hippocampus  0.504  14.422 
+120111     Thalamus     0.775  7.681  
+120111     WhiteMatter  0.824  2.449  
+120111-PP  Amygdala     0.526  12.369 
+120111-PP  GreyMatter   0.687  3.162  
+120111-PP  Hippocampus  0.482  11.832 
+120111-PP  Thalamus     0.758  6.325  
+120111-PP  WhiteMatter  0.837  2.236  
+122317     Amygdala     0.619  16.155 
+122317     GreyMatter   0.727  2.236  
+122317     Hippocampus  0.482  14.142 
+122317     Thalamus     0.663  10.050 
+122317     WhiteMatter  0.785  4.000  
+122317-PP  Amygdala     0.614  14.900 
+122317-PP  GreyMatter   0.692  3.000  
+122317-PP  Hippocampus  0.445  13.892 
+122317-PP  Thalamus     0.647  9.487  
+122317-PP  WhiteMatter  0.812  2.449  
+122620     Amygdala     0.475  13.342 
+122620     GreyMatter   0.737  3.317  
+122620     Hippocampus  0.368  13.153 
+122620     Thalamus     0.685  9.165  
+122620     WhiteMatter  0.833  3.000  
+122620-PP  Amygdala     0.443  12.728 
+122620-PP  GreyMatter   0.675  4.243  
+122620-PP  Hippocampus  0.335  12.961 
+122620-PP  Thalamus     0.678  8.307  
+122620-PP  WhiteMatter  0.831  3.464  
+123117     Amygdala     0.430  14.765 
+123117     GreyMatter   0.688  5.745  
+123117     Hippocampus  0.298  19.209 
+123117     Thalamus     0.412  14.036 
+123117     WhiteMatter  0.849  5.099  
+123117-PP  Amygdala     0.420  13.964 
+123117-PP  GreyMatter   0.633  7.280  
+123117-PP  Hippocampus  0.255  19.026 
+123117-PP  Thalamus     0.427  12.649 
+123117-PP  WhiteMatter  0.815  5.745  
+123925     Amygdala     0.555  13.928 
+123925     GreyMatter   0.725  2.000  
+123925     Hippocampus  0.404  14.491 
+123925     Thalamus     0.724  9.274  
+123925     WhiteMatter  0.829  3.000  
+123925-PP  Amygdala     0.540  13.454 
+123925-PP  GreyMatter   0.670  3.317  
+123925-PP  Hippocampus  0.360  13.892 
+123925-PP  Thalamus     0.699  8.775  
+123925-PP  WhiteMatter  0.838  3.000  
+124422     Amygdala     0.595  14.142 
+124422     GreyMatter   0.691  2.000  
+124422     Hippocampus  0.480  12.806 
+124422     Thalamus     0.787  8.775  
+124422     WhiteMatter  0.725  4.123  
+124422-PP  Amygdala     0.594  12.806 
+124422-PP  GreyMatter   0.667  3.000  
+124422-PP  Hippocampus  0.451  12.247 
+124422-PP  Thalamus     0.771  5.831  
+124422-PP  WhiteMatter  0.765  2.449  
+
+Aggregated statistic results...
+LABEL        METRIC   STATISTIC  VALUE 
+Amygdala     DICE     MEAN       0.489 
+Amygdala     DICE     STD        0.079 
+Amygdala     HDRFDST  MEAN       14.794
+Amygdala     HDRFDST  STD        1.842 
+GreyMatter   DICE     MEAN       0.694 
+GreyMatter   DICE     STD        0.029 
+GreyMatter   HDRFDST  MEAN       3.316 
+GreyMatter   HDRFDST  STD        1.381 
+Hippocampus  DICE     MEAN       0.411 
+Hippocampus  DICE     STD        0.064 
+Hippocampus  HDRFDST  MEAN       14.592
+Hippocampus  HDRFDST  STD        2.295 
+Thalamus     DICE     MEAN       0.693 
+Thalamus     DICE     STD        0.098 
+Thalamus     HDRFDST  MEAN       8.664 
+Thalamus     HDRFDST  STD        2.033 
+WhiteMatter  DICE     MEAN       0.813 
+WhiteMatter  DICE     STD        0.036 
+WhiteMatter  HDRFDST  MEAN       3.390 
+WhiteMatter  HDRFDST  STD        0.978 
+Experiment exp_12_skullstrip_only_with_post completed in 214.6 seconds
+✅ Experiment 12 completed successfully
+
+============================================================
+Running Experiment 13/15: registration_only_with_post
+Description: With registration only + optimal postprocessing
+============================================================
+Running experiment: exp_13_registration_only_with_post
+Description: With registration only + optimal postprocessing
+----- Training...
+---------- Processing 113922
+---------- Processing 100307
+---------- Processing 110411
+---------- Processing 100408
+---------- Processing 101107
+---------- Processing 101915
+---------- Processing 101309
+---------- Processing 108828
+---------- Processing 103414
+---------- Processing 115320
+---------- Processing 103111
+---------- Processing 113619
+---------- Processing 111312
+---------- Processing 106016
+---------- Processing 111716
+---------- Processing 114419
+---------- Processing 116524
+---------- Processing 105115
+---------- Processing 105014
+---------- Processing 103818
+Training Random Forest with 100 trees, max_depth=None, max_features=7 (out of 7 total features)
+ Time elapsed: 11.975339879281819 s
+ Training data cleaned from memory
+----- Testing...
+---------- Processing 118730
+---------- Processing 117122
+---------- Processing 120111
+---------- Processing 122620
+---------- Processing 124422
+---------- Processing 118528
+---------- Processing 123117
+---------- Processing 122317
+---------- Processing 123925
+---------- Processing 118932
+---------- Testing 118730
+ Time elapsed: 8.593308012932539 s
+---------- Testing 117122
+ Time elapsed: 8.518028825055808 s
+---------- Testing 120111
+ Time elapsed: 8.962369004264474 s
+---------- Testing 122620
+ Time elapsed: 8.789599643088877 s
+---------- Testing 124422
+ Time elapsed: 8.747931361198425 s
+---------- Testing 118528
+ Time elapsed: 8.967538038268685 s
+---------- Testing 123117
+ Time elapsed: 8.73058205191046 s
+---------- Testing 122317
+ Time elapsed: 8.98927296185866 s
+---------- Testing 123925
+ Time elapsed: 8.991843689233065 s
+---------- Testing 118932
+ Time elapsed: 8.338713462930173 s
+---------- Post-processing 118730
+---------- Post-processing 117122
+---------- Post-processing 120111
+---------- Post-processing 122620
+---------- Post-processing 124422
+---------- Post-processing 118528
+---------- Post-processing 123117
+---------- Post-processing 122317
+---------- Post-processing 123925
+---------- Post-processing 118932
+Results saved to ./ablation_experiments/exp_13_registration_only_with_post/2025-11-09-15-46-07/results.csv with 100 measurements
+
+Subject-wise results...
+SUBJECT    LABEL        DICE   HDRFDST
+117122     Amygdala     0.463  13.748 
+117122     GreyMatter   0.689  11.358 
+117122     Hippocampus  0.527  15.362 
+117122     Thalamus     0.768  10.488 
+117122     WhiteMatter  0.812  13.077 
+117122-PP  Amygdala     0.443  13.077 
+117122-PP  GreyMatter   0.647  11.402 
+117122-PP  Hippocampus  0.512  13.638 
+117122-PP  Thalamus     0.757  5.831  
+117122-PP  WhiteMatter  0.819  10.440 
+118528     Amygdala     0.480  21.048 
+118528     GreyMatter   0.643  12.042 
+118528     Hippocampus  0.553  22.913 
+118528     Thalamus     0.750  17.292 
+118528     WhiteMatter  0.715  15.524 
+118528-PP  Amygdala     0.472  15.684 
+118528-PP  GreyMatter   0.642  12.083 
+118528-PP  Hippocampus  0.535  19.339 
+118528-PP  Thalamus     0.747  6.403  
+118528-PP  WhiteMatter  0.741  13.928 
+118730     Amygdala     0.509  12.083 
+118730     GreyMatter   0.670  13.342 
+118730     Hippocampus  0.435  13.153 
+118730     Thalamus     0.734  12.369 
+118730     WhiteMatter  0.804  18.028 
+118730-PP  Amygdala     0.486  11.705 
+118730-PP  GreyMatter   0.625  13.601 
+118730-PP  Hippocampus  0.404  12.450 
+118730-PP  Thalamus     0.726  6.557  
+118730-PP  WhiteMatter  0.788  18.166 
+118932     Amygdala     0.513  13.077 
+118932     GreyMatter   0.704  10.770 
+118932     Hippocampus  0.512  12.450 
+118932     Thalamus     0.779  9.434  
+118932     WhiteMatter  0.804  15.588 
+118932-PP  Amygdala     0.480  12.689 
+118932-PP  GreyMatter   0.670  10.770 
+118932-PP  Hippocampus  0.475  11.790 
+118932-PP  Thalamus     0.770  5.831  
+118932-PP  WhiteMatter  0.811  13.928 
+120111     Amygdala     0.542  12.410 
+120111     GreyMatter   0.680  11.000 
+120111     Hippocampus  0.527  13.000 
+120111     Thalamus     0.736  15.843 
+120111     WhiteMatter  0.809  11.747 
+120111-PP  Amygdala     0.534  10.770 
+120111-PP  GreyMatter   0.652  10.954 
+120111-PP  Hippocampus  0.497  11.000 
+120111-PP  Thalamus     0.726  13.416 
+120111-PP  WhiteMatter  0.821  9.274  
+122317     Amygdala     0.583  13.454 
+122317     GreyMatter   0.679  13.077 
+122317     Hippocampus  0.537  13.038 
+122317     Thalamus     0.762  6.782  
+122317     WhiteMatter  0.761  16.553 
+122317-PP  Amygdala     0.559  12.884 
+122317-PP  GreyMatter   0.662  13.038 
+122317-PP  Hippocampus  0.509  11.402 
+122317-PP  Thalamus     0.743  6.083  
+122317-PP  WhiteMatter  0.786  15.780 
+122620     Amygdala     0.538  13.601 
+122620     GreyMatter   0.699  11.576 
+122620     Hippocampus  0.504  15.232 
+122620     Thalamus     0.772  8.062  
+122620     WhiteMatter  0.794  17.550 
+122620-PP  Amygdala     0.516  13.038 
+122620-PP  GreyMatter   0.661  11.576 
+122620-PP  Hippocampus  0.475  13.928 
+122620-PP  Thalamus     0.760  5.099  
+122620-PP  WhiteMatter  0.800  17.349 
+123117     Amygdala     0.493  25.318 
+123117     GreyMatter   0.649  16.401 
+123117     Hippocampus  0.550  17.804 
+123117     Thalamus     0.667  64.023 
+123117     WhiteMatter  0.780  22.650 
+123117-PP  Amygdala     0.481  20.224 
+123117-PP  GreyMatter   0.611  16.401 
+123117-PP  Hippocampus  0.528  14.457 
+123117-PP  Thalamus     0.666  60.745 
+123117-PP  WhiteMatter  0.751  23.000 
+123925     Amygdala     0.515  12.369 
+123925     GreyMatter   0.659  16.912 
+123925     Hippocampus  0.507  15.843 
+123925     Thalamus     0.779  12.000 
+123925     WhiteMatter  0.805  19.261 
+123925-PP  Amygdala     0.497  11.576 
+123925-PP  GreyMatter   0.624  17.292 
+123925-PP  Hippocampus  0.482  14.071 
+123925-PP  Thalamus     0.770  7.000  
+123925-PP  WhiteMatter  0.816  18.028 
+124422     Amygdala     0.635  12.410 
+124422     GreyMatter   0.624  13.601 
+124422     Hippocampus  0.550  12.450 
+124422     Thalamus     0.786  15.652 
+124422     WhiteMatter  0.707  17.029 
+124422-PP  Amygdala     0.629  11.180 
+124422-PP  GreyMatter   0.619  13.856 
+124422-PP  Hippocampus  0.528  10.296 
+124422-PP  Thalamus     0.775  5.916  
+124422-PP  WhiteMatter  0.737  15.811 
+
+Aggregated statistic results...
+LABEL        METRIC   STATISTIC  VALUE 
+Amygdala     DICE     MEAN       0.519 
+Amygdala     DICE     STD        0.050 
+Amygdala     HDRFDST  MEAN       14.117
+Amygdala     HDRFDST  STD        3.648 
+GreyMatter   DICE     MEAN       0.655 
+GreyMatter   DICE     STD        0.026 
+GreyMatter   HDRFDST  MEAN       13.053
+GreyMatter   HDRFDST  STD        2.093 
+Hippocampus  DICE     MEAN       0.507 
+Hippocampus  DICE     STD        0.037 
+Hippocampus  HDRFDST  MEAN       14.181
+Hippocampus  HDRFDST  STD        2.942 
+Thalamus     DICE     MEAN       0.749 
+Thalamus     DICE     STD        0.032 
+Thalamus     HDRFDST  MEAN       14.741
+Thalamus     HDRFDST  STD        16.315
+WhiteMatter  DICE     MEAN       0.783 
+WhiteMatter  DICE     STD        0.034 
+WhiteMatter  HDRFDST  MEAN       16.136
+WhiteMatter  HDRFDST  STD        3.419 
+Experiment exp_13_registration_only_with_post completed in 340.8 seconds
+✅ Experiment 13 completed successfully
+
+============================================================
+Running Experiment 14/15: all_preprocessing_with_post
+Description: With normalization + bias correction + skull stripping + registration + optimal postprocessing
+============================================================
+Running experiment: exp_14_all_preprocessing_with_post
+Description: With normalization + bias correction + skull stripping + registration + optimal postprocessing
+----- Training...
+---------- Processing 113922
+---------- Processing 100307
+---------- Processing 110411
+---------- Processing 100408
+---------- Processing 101107
+---------- Processing 101915
+---------- Processing 101309
+---------- Processing 108828
+---------- Processing 103414
+---------- Processing 115320
+---------- Processing 103111
+---------- Processing 113619
+---------- Processing 111312
+---------- Processing 106016
+---------- Processing 111716
+---------- Processing 114419
+---------- Processing 116524
+---------- Processing 105115
+---------- Processing 105014
+---------- Processing 103818
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  N4 bias field correction completed.
+  N4 bias field correction completed.
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  N4 bias field correction completed.
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  N4 bias field correction completed.
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  N4 bias field correction completed.
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  N4 bias field correction completed.
+  N4 bias field correction completed.
+  N4 bias field correction completed.
+  N4 bias field correction completed.
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  N4 bias field correction completed.
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  N4 bias field correction completed.
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  N4 bias field correction completed.
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  N4 bias field correction completed.
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  N4 bias field correction completed.
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  N4 bias field correction completed.
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  N4 bias field correction completed.
+  N4 bias field correction completed.
+  N4 bias field correction completed.
+  N4 bias field correction completed.
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  N4 bias field correction completed.
+  N4 bias field correction completed.
+  N4 bias field correction completed.
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  N4 bias field correction completed.
+  N4 bias field correction completed.
+  N4 bias field correction completed.
+  N4 bias field correction completed.
+  N4 bias field correction completed.
+  N4 bias field correction completed.
+  N4 bias field correction completed.
+  N4 bias field correction completed.
+  N4 bias field correction completed.
+  N4 bias field correction completed.
+  N4 bias field correction completed.
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  N4 bias field correction completed.
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  N4 bias field correction completed.
+  N4 bias field correction completed.
+  N4 bias field correction completed.
+  N4 bias field correction completed.
+  N4 bias field correction completed.
+  N4 bias field correction completed.
+Training Random Forest with 100 trees, max_depth=None, max_features=7 (out of 7 total features)
+ Time elapsed: 7.8772266819141805 s
+ Training data cleaned from memory
+----- Testing...
+---------- Processing 118730
+---------- Processing 117122
+---------- Processing 120111
+---------- Processing 122620
+---------- Processing 124422
+---------- Processing 118528
+---------- Processing 123117
+---------- Processing 122317
+---------- Processing 123925
+---------- Processing 118932
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  N4 bias field correction completed.
+  N4 bias field correction completed.
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  N4 bias field correction completed.
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  N4 bias field correction completed.
+  N4 bias field correction completed.
+  N4 bias field correction completed.
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  N4 bias field correction completed.
+  N4 bias field correction completed.
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  N4 bias field correction completed.
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  N4 bias field correction completed.
+  N4 bias field correction completed.
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  N4 bias field correction completed.
+  N4 bias field correction completed.
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  N4 bias field correction completed.
+  N4 bias field correction completed.
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  N4 bias field correction completed.
+  N4 bias field correction completed.
+  N4 bias field correction completed.
+  N4 bias field correction completed.
+  N4 bias field correction completed.
+---------- Testing 118730
+ Time elapsed: 6.749640957918018 s
+---------- Testing 117122
+ Time elapsed: 7.212544500827789 s
+---------- Testing 120111
+ Time elapsed: 6.969935565721244 s
+---------- Testing 122620
+ Time elapsed: 7.185079148970544 s
+---------- Testing 124422
+ Time elapsed: 6.732259336858988 s
+---------- Testing 118528
+ Time elapsed: 7.171130537055433 s
+---------- Testing 123117
+ Time elapsed: 6.950969228986651 s
+---------- Testing 122317
+ Time elapsed: 6.863032767083496 s
+---------- Testing 123925
+ Time elapsed: 7.112161511089653 s
+---------- Testing 118932
+ Time elapsed: 7.208992530126125 s
+---------- Post-processing 118730
+---------- Post-processing 117122
+---------- Post-processing 120111
+---------- Post-processing 122620
+---------- Post-processing 124422
+---------- Post-processing 118528
+---------- Post-processing 123117
+---------- Post-processing 122317
+---------- Post-processing 123925
+---------- Post-processing 118932
+Results saved to ./ablation_experiments/exp_14_all_preprocessing_with_post/2025-11-09-15-56-46/results.csv with 100 measurements
+
+Subject-wise results...
+SUBJECT    LABEL        DICE   HDRFDST
+117122     Amygdala     0.459  12.649 
+117122     GreyMatter   0.711  2.000  
+117122     Hippocampus  0.566  12.450 
+117122     Thalamus     0.771  13.928 
+117122     WhiteMatter  0.822  2.828  
+117122-PP  Amygdala     0.438  12.207 
+117122-PP  GreyMatter   0.667  3.742  
+117122-PP  Hippocampus  0.557  12.207 
+117122-PP  Thalamus     0.758  11.358 
+117122-PP  WhiteMatter  0.826  2.828  
+118528     Amygdala     0.453  13.342 
+118528     GreyMatter   0.725  2.236  
+118528     Hippocampus  0.563  13.191 
+118528     Thalamus     0.746  15.297 
+118528     WhiteMatter  0.823  2.236  
+118528-PP  Amygdala     0.432  13.266 
+118528-PP  GreyMatter   0.679  3.742  
+118528-PP  Hippocampus  0.549  12.728 
+118528-PP  Thalamus     0.736  14.457 
+118528-PP  WhiteMatter  0.830  2.449  
+118730     Amygdala     0.543  11.358 
+118730     GreyMatter   0.731  2.000  
+118730     Hippocampus  0.517  10.770 
+118730     Thalamus     0.745  15.937 
+118730     WhiteMatter  0.808  2.236  
+118730-PP  Amygdala     0.514  11.045 
+118730-PP  GreyMatter   0.685  3.742  
+118730-PP  Hippocampus  0.483  10.488 
+118730-PP  Thalamus     0.735  15.264 
+118730-PP  WhiteMatter  0.817  2.449  
+118932     Amygdala     0.512  12.247 
+118932     GreyMatter   0.737  2.000  
+118932     Hippocampus  0.544  11.180 
+118932     Thalamus     0.763  15.166 
+118932     WhiteMatter  0.831  2.449  
+118932-PP  Amygdala     0.478  12.207 
+118932-PP  GreyMatter   0.694  4.000  
+118932-PP  Hippocampus  0.519  10.817 
+118932-PP  Thalamus     0.752  13.454 
+118932-PP  WhiteMatter  0.831  2.828  
+120111     Amygdala     0.504  9.110  
+120111     GreyMatter   0.713  2.000  
+120111     Hippocampus  0.530  10.296 
+120111     Thalamus     0.722  16.673 
+120111     WhiteMatter  0.851  2.236  
+120111-PP  Amygdala     0.490  8.944  
+120111-PP  GreyMatter   0.669  3.606  
+120111-PP  Hippocampus  0.499  10.050 
+120111-PP  Thalamus     0.705  16.401 
+120111-PP  WhiteMatter  0.849  2.828  
+122317     Amygdala     0.545  12.689 
+122317     GreyMatter   0.729  2.000  
+122317     Hippocampus  0.552  11.358 
+122317     Thalamus     0.766  13.892 
+122317     WhiteMatter  0.838  2.449  
+122317-PP  Amygdala     0.526  12.166 
+122317-PP  GreyMatter   0.683  3.464  
+122317-PP  Hippocampus  0.521  11.091 
+122317-PP  Thalamus     0.754  7.810  
+122317-PP  WhiteMatter  0.843  2.449  
+122620     Amygdala     0.553  13.000 
+122620     GreyMatter   0.732  2.236  
+122620     Hippocampus  0.545  13.000 
+122620     Thalamus     0.765  14.595 
+122620     WhiteMatter  0.810  2.828  
+122620-PP  Amygdala     0.530  12.649 
+122620-PP  GreyMatter   0.690  3.742  
+122620-PP  Hippocampus  0.520  12.728 
+122620-PP  Thalamus     0.755  13.928 
+122620-PP  WhiteMatter  0.818  2.236  
+123117     Amygdala     0.517  12.410 
+123117     GreyMatter   0.726  2.236  
+123117     Hippocampus  0.569  11.662 
+123117     Thalamus     0.737  16.763 
+123117     WhiteMatter  0.848  2.828  
+123117-PP  Amygdala     0.491  12.166 
+123117-PP  GreyMatter   0.683  4.000  
+123117-PP  Hippocampus  0.548  11.358 
+123117-PP  Thalamus     0.721  16.062 
+123117-PP  WhiteMatter  0.849  2.828  
+123925     Amygdala     0.518  11.180 
+123925     GreyMatter   0.710  2.000  
+123925     Hippocampus  0.551  12.083 
+123925     Thalamus     0.782  16.062 
+123925     WhiteMatter  0.841  3.000  
+123925-PP  Amygdala     0.492  11.045 
+123925-PP  GreyMatter   0.666  3.606  
+123925-PP  Hippocampus  0.535  11.747 
+123925-PP  Thalamus     0.772  13.748 
+123925-PP  WhiteMatter  0.841  3.000  
+124422     Amygdala     0.593  10.724 
+124422     GreyMatter   0.705  2.000  
+124422     Hippocampus  0.563  10.440 
+124422     Thalamus     0.800  15.133 
+124422     WhiteMatter  0.793  2.828  
+124422-PP  Amygdala     0.562  10.344 
+124422-PP  GreyMatter   0.664  3.606  
+124422-PP  Hippocampus  0.534  9.950  
+124422-PP  Thalamus     0.789  13.638 
+124422-PP  WhiteMatter  0.811  2.000  
+
+Aggregated statistic results...
+LABEL        METRIC   STATISTIC  VALUE 
+Amygdala     DICE     MEAN       0.507 
+Amygdala     DICE     STD        0.041 
+Amygdala     HDRFDST  MEAN       11.737
+Amygdala     HDRFDST  STD        1.218 
+GreyMatter   DICE     MEAN       0.700 
+GreyMatter   DICE     STD        0.024 
+GreyMatter   HDRFDST  MEAN       2.898 
+GreyMatter   HDRFDST  STD        0.838 
+Hippocampus  DICE     MEAN       0.538 
+Hippocampus  DICE     STD        0.022 
+Hippocampus  HDRFDST  MEAN       11.480
+Hippocampus  HDRFDST  STD        0.984 
+Thalamus     DICE     MEAN       0.754 
+Thalamus     DICE     STD        0.023 
+Thalamus     HDRFDST  MEAN       14.478
+Thalamus     HDRFDST  STD        2.007 
+WhiteMatter  DICE     MEAN       0.829 
+WhiteMatter  DICE     STD        0.016 
+WhiteMatter  HDRFDST  MEAN       2.591 
+WhiteMatter  HDRFDST  STD        0.295 
+Experiment exp_14_all_preprocessing_with_post completed in 706.1 seconds
+✅ Experiment 14 completed successfully
+
+============================================================
+Running Experiment 15/15: all_preprocessing_postprocessing_with_post
+Description: With all preprocessing + postprocessing + optimal postprocessing
+============================================================
+Running experiment: exp_15_all_preprocessing_postprocessing_with_post
+Description: With all preprocessing + postprocessing + optimal postprocessing
+----- Training...
+---------- Processing 113922
+---------- Processing 100307
+---------- Processing 110411
+---------- Processing 100408
+---------- Processing 101107
+---------- Processing 101915
+---------- Processing 101309
+---------- Processing 108828
+---------- Processing 103414
+---------- Processing 115320
+---------- Processing 103111
+---------- Processing 113619
+---------- Processing 111312
+---------- Processing 106016
+---------- Processing 111716
+---------- Processing 114419
+---------- Processing 116524
+---------- Processing 105115
+---------- Processing 105014
+---------- Processing 103818
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  N4 bias field correction completed.
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  N4 bias field correction completed.
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  N4 bias field correction completed.
+  N4 bias field correction completed.
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  N4 bias field correction completed.
+  N4 bias field correction completed.
+  N4 bias field correction completed.
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  N4 bias field correction completed.
+  N4 bias field correction completed.
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  N4 bias field correction completed.
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  N4 bias field correction completed.
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  N4 bias field correction completed.
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  N4 bias field correction completed.
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  N4 bias field correction completed.
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  N4 bias field correction completed.
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  N4 bias field correction completed.
+  N4 bias field correction completed.
+  N4 bias field correction completed.
+  N4 bias field correction completed.
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  N4 bias field correction completed.
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  N4 bias field correction completed.
+  N4 bias field correction completed.
+  N4 bias field correction completed.
+  N4 bias field correction completed.
+  N4 bias field correction completed.
+  N4 bias field correction completed.
+  N4 bias field correction completed.
+  N4 bias field correction completed.
+  N4 bias field correction completed.
+  N4 bias field correction completed.
+  N4 bias field correction completed.
+  N4 bias field correction completed.
+  N4 bias field correction completed.
+  N4 bias field correction completed.
+  N4 bias field correction completed.
+  N4 bias field correction completed.
+  N4 bias field correction completed.
+  N4 bias field correction completed.
+  N4 bias field correction completed.
+  N4 bias field correction completed.
+Training Random Forest with 100 trees, max_depth=None, max_features=7 (out of 7 total features)
+ Time elapsed: 7.887857786845416 s
+ Training data cleaned from memory
+----- Testing...
+---------- Processing 118730
+---------- Processing 117122
+---------- Processing 120111
+---------- Processing 122620
+---------- Processing 124422
+---------- Processing 118528
+---------- Processing 123117
+---------- Processing 122317
+---------- Processing 123925
+---------- Processing 118932
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  N4 bias field correction completed.
+  N4 bias field correction completed.
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  N4 bias field correction completed.
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  N4 bias field correction completed.
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  N4 bias field correction completed.
+  N4 bias field correction completed.
+  N4 bias field correction completed.
+  N4 bias field correction completed.
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  N4 bias field correction completed.
+  N4 bias field correction completed.
+  N4 bias field correction completed.
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  N4 bias field correction completed.
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  N4 bias field correction completed.
+  N4 bias field correction completed.
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  Applying N4 bias field correction (max_iter=20, levels=3)...
+  N4 bias field correction completed.
+  N4 bias field correction completed.
+  N4 bias field correction completed.
+  N4 bias field correction completed.
+  N4 bias field correction completed.
+  N4 bias field correction completed.
+---------- Testing 118730
+ Time elapsed: 6.585196721833199 s
+---------- Testing 117122
+ Time elapsed: 6.590271577239037 s
+---------- Testing 120111
+ Time elapsed: 7.032537562772632 s
+---------- Testing 122620
+ Time elapsed: 7.200228875037283 s
+---------- Testing 124422
+ Time elapsed: 7.445047001820058 s
+---------- Testing 118528
+ Time elapsed: 6.949406580068171 s
+---------- Testing 123117
+ Time elapsed: 7.1246464238502085 s
+---------- Testing 122317
+ Time elapsed: 7.115376825910062 s
+---------- Testing 123925
+ Time elapsed: 7.137191193178296 s
+---------- Testing 118932
+ Time elapsed: 6.980898020789027 s
+---------- Post-processing 118730
+---------- Post-processing 117122
+---------- Post-processing 120111
+---------- Post-processing 122620
+---------- Post-processing 124422
+---------- Post-processing 118528
+---------- Post-processing 123117
+---------- Post-processing 122317
+---------- Post-processing 123925
+---------- Post-processing 118932
+Results saved to ./ablation_experiments/exp_15_all_preprocessing_postprocessing_with_post/2025-11-09-16-08-31/results.csv with 100 measurements
+
+Subject-wise results...
+SUBJECT    LABEL        DICE   HDRFDST
+117122     Amygdala     0.459  12.649 
+117122     GreyMatter   0.711  2.000  
+117122     Hippocampus  0.566  12.450 
+117122     Thalamus     0.771  13.928 
+117122     WhiteMatter  0.822  2.828  
+117122-PP  Amygdala     0.438  12.207 
+117122-PP  GreyMatter   0.667  3.742  
+117122-PP  Hippocampus  0.557  12.207 
+117122-PP  Thalamus     0.758  11.358 
+117122-PP  WhiteMatter  0.826  2.828  
+118528     Amygdala     0.453  13.342 
+118528     GreyMatter   0.725  2.236  
+118528     Hippocampus  0.563  13.191 
+118528     Thalamus     0.746  15.297 
+118528     WhiteMatter  0.823  2.236  
+118528-PP  Amygdala     0.432  13.266 
+118528-PP  GreyMatter   0.679  3.742  
+118528-PP  Hippocampus  0.549  12.728 
+118528-PP  Thalamus     0.736  14.457 
+118528-PP  WhiteMatter  0.830  2.449  
+118730     Amygdala     0.543  11.358 
+118730     GreyMatter   0.731  2.000  
+118730     Hippocampus  0.517  10.770 
+118730     Thalamus     0.745  15.937 
+118730     WhiteMatter  0.808  2.236  
+118730-PP  Amygdala     0.514  11.045 
+118730-PP  GreyMatter   0.685  3.742  
+118730-PP  Hippocampus  0.483  10.488 
+118730-PP  Thalamus     0.735  15.264 
+118730-PP  WhiteMatter  0.817  2.449  
+118932     Amygdala     0.512  12.247 
+118932     GreyMatter   0.737  2.000  
+118932     Hippocampus  0.544  11.180 
+118932     Thalamus     0.763  15.166 
+118932     WhiteMatter  0.831  2.449  
+118932-PP  Amygdala     0.478  12.207 
+118932-PP  GreyMatter   0.694  4.000  
+118932-PP  Hippocampus  0.519  10.817 
+118932-PP  Thalamus     0.752  13.454 
+118932-PP  WhiteMatter  0.831  2.828  
+120111     Amygdala     0.504  9.110  
+120111     GreyMatter   0.713  2.000  
+120111     Hippocampus  0.530  10.296 
+120111     Thalamus     0.722  16.673 
+120111     WhiteMatter  0.851  2.236  
+120111-PP  Amygdala     0.490  8.944  
+120111-PP  GreyMatter   0.669  3.606  
+120111-PP  Hippocampus  0.499  10.050 
+120111-PP  Thalamus     0.705  16.401 
+120111-PP  WhiteMatter  0.849  2.828  
+122317     Amygdala     0.545  12.689 
+122317     GreyMatter   0.729  2.000  
+122317     Hippocampus  0.552  11.358 
+122317     Thalamus     0.766  13.892 
+122317     WhiteMatter  0.838  2.449  
+122317-PP  Amygdala     0.526  12.166 
+122317-PP  GreyMatter   0.683  3.464  
+122317-PP  Hippocampus  0.521  11.091 
+122317-PP  Thalamus     0.754  7.810  
+122317-PP  WhiteMatter  0.843  2.449  
+122620     Amygdala     0.553  13.000 
+122620     GreyMatter   0.732  2.236  
+122620     Hippocampus  0.545  13.000 
+122620     Thalamus     0.765  14.595 
+122620     WhiteMatter  0.810  2.828  
+122620-PP  Amygdala     0.530  12.649 
+122620-PP  GreyMatter   0.690  3.742  
+122620-PP  Hippocampus  0.520  12.728 
+122620-PP  Thalamus     0.755  13.928 
+122620-PP  WhiteMatter  0.818  2.236  
+123117     Amygdala     0.517  12.410 
+123117     GreyMatter   0.726  2.236  
+123117     Hippocampus  0.569  11.662 
+123117     Thalamus     0.737  16.763 
+123117     WhiteMatter  0.848  2.828  
+123117-PP  Amygdala     0.491  12.166 
+123117-PP  GreyMatter   0.683  4.000  
+123117-PP  Hippocampus  0.548  11.358 
+123117-PP  Thalamus     0.721  16.062 
+123117-PP  WhiteMatter  0.849  2.828  
+123925     Amygdala     0.518  11.180 
+123925     GreyMatter   0.710  2.000  
+123925     Hippocampus  0.551  12.083 
+123925     Thalamus     0.782  16.062 
+123925     WhiteMatter  0.841  3.000  
+123925-PP  Amygdala     0.492  11.045 
+123925-PP  GreyMatter   0.666  3.606  
+123925-PP  Hippocampus  0.535  11.747 
+123925-PP  Thalamus     0.772  13.748 
+123925-PP  WhiteMatter  0.841  3.000  
+124422     Amygdala     0.593  10.724 
+124422     GreyMatter   0.705  2.000  
+124422     Hippocampus  0.563  10.440 
+124422     Thalamus     0.800  15.133 
+124422     WhiteMatter  0.793  2.828  
+124422-PP  Amygdala     0.562  10.344 
+124422-PP  GreyMatter   0.664  3.606  
+124422-PP  Hippocampus  0.534  9.950  
+124422-PP  Thalamus     0.789  13.638 
+124422-PP  WhiteMatter  0.811  2.000  
+
+Aggregated statistic results...
+LABEL        METRIC   STATISTIC  VALUE 
+Amygdala     DICE     MEAN       0.507 
+Amygdala     DICE     STD        0.041 
+Amygdala     HDRFDST  MEAN       11.737
+Amygdala     HDRFDST  STD        1.218 
+GreyMatter   DICE     MEAN       0.700 
+GreyMatter   DICE     STD        0.024 
+GreyMatter   HDRFDST  MEAN       2.898 
+GreyMatter   HDRFDST  STD        0.838 
+Hippocampus  DICE     MEAN       0.538 
+Hippocampus  DICE     STD        0.022 
+Hippocampus  HDRFDST  MEAN       11.480
+Hippocampus  HDRFDST  STD        0.984 
+Thalamus     DICE     MEAN       0.754 
+Thalamus     DICE     STD        0.023 
+Thalamus     HDRFDST  MEAN       14.478
+Thalamus     HDRFDST  STD        2.007 
+WhiteMatter  DICE     MEAN       0.829 
+WhiteMatter  DICE     STD        0.016 
+WhiteMatter  HDRFDST  MEAN       2.591 
+WhiteMatter  HDRFDST  STD        0.295 
+Experiment exp_15_all_preprocessing_postprocessing_with_post completed in 705.6 seconds
+✅ Experiment 15 completed successfully
+
+============================================================
+ANALYZING RESULTS
+============================================================
+Loaded 16 experiments for analysis
+
+Analysis complete! Results saved to: ./ablation_experiments/analysis_none
+
+Key files generated:
+  📄 component_contributions: component_contributions.png
+  📄 pairwise_tests: pairwise_tests.csv
+  📄 confidence_intervals: confidence_intervals.csv
+  📄 summary_statistics: summary_statistics.csv
+  📄 performance_analysis: performance_analysis.json
+  📄 overall_performance: overall_performance.png
+  📄 component_importance: component_importance.png
+  📄 component_effects: component_effects.png
+  📄 postprocessing_necessity: postprocessing_necessity.png
+  📄 tissue_heatmap: tissue_heatmap.png
+  📄 tissue_analysis: tissue_analysis.png
+  📄 statistical_significance: statistical_significance.png
+
+🎉 ABLATION STUDY COMPLETED!
+============================================================
+Study type: combined
+Total experiments: 16
+Successful: 16
+Failed: 0
+Results directory: ./ablation_experiments
+
+============================================================
+ABLATION STUDY COMPLETED
+Results saved to: ./ablation_experiments
+Total time: 118.3 minutes (7097.7 seconds)
+============================================================
+
+==========================================
+Done!
+==========================================
+Exit code: 0
+Timestamp: Sun Nov  9 04:15:01 PM CET 2025
+✓ Experiment completed successfully

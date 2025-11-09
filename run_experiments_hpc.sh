@@ -8,7 +8,7 @@
 #SBATCH --job-name="mia_ablation_study"
 
 # Runtime and memory
-#SBATCH --time=01:00:00  
+#SBATCH --time=02:00:00
 #SBATCH --cpus-per-task=8
 
 # Partition
@@ -27,7 +27,7 @@
 
 # Create logs directory if it doesn't exist
 mkdir -p logs
-cd /storage/homefs/ns12l060/mialab
+cd /storage/homefs/ns121060/mialab
 
 # Load and activate conda properly
 module load Anaconda3
@@ -43,7 +43,7 @@ echo "Environment: $CONDA_DEFAULT_ENV"
 # python -c "import SimpleITK" 2>/dev/null || pip install SimpleITK scikit-learn pymia
 # pip install scikit-learn pymia pathos pandas matplotlib seaborn 
 
-export PYTHONPATH="/storage/homefs/ns12l060/mialab:$PYTHONPATH"
+export PYTHONPATH="/storage/homefs/ns121060/mialab:$PYTHONPATH"
 
 echo "=========================================="
 echo "Starting ablation experiments..."

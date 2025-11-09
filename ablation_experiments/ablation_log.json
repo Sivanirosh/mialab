@@ -1,0 +1,100 @@
+{
+  "start_time": "2025-11-09T16:14:39.830907",
+  "study_type": "combined",
+  "optimization_level": "none",
+  "forest_config": {
+    "n_estimators": 100,
+    "max_depth": null,
+    "max_features": null,
+    "min_samples_split": 2,
+    "min_samples_leaf": 1,
+    "bootstrap": true,
+    "random_state": 42,
+    "n_jobs": -1
+  },
+  "experiments": {
+    "0": {
+      "name": "baseline_none",
+      "success": true,
+      "directory": "./ablation_experiments/exp_00_baseline_none"
+    },
+    "1": {
+      "name": "normalization_only",
+      "success": true,
+      "directory": "./ablation_experiments/exp_01_normalization_only"
+    },
+    "2": {
+      "name": "bias_correction_only",
+      "success": true,
+      "directory": "./ablation_experiments/exp_02_bias_correction_only"
+    },
+    "3": {
+      "name": "normalization_bias",
+      "success": true,
+      "directory": "./ablation_experiments/exp_03_normalization_bias"
+    },
+    "4": {
+      "name": "skullstrip_only",
+      "success": true,
+      "directory": "./ablation_experiments/exp_04_skullstrip_only"
+    },
+    "5": {
+      "name": "registration_only",
+      "success": true,
+      "directory": "./ablation_experiments/exp_05_registration_only"
+    },
+    "6": {
+      "name": "all_preprocessing",
+      "success": true,
+      "directory": "./ablation_experiments/exp_06_all_preprocessing"
+    },
+    "7": {
+      "name": "all_preprocessing_postprocessing",
+      "success": true,
+      "directory": "./ablation_experiments/exp_07_all_preprocessing_postprocessing"
+    },
+    "8": {
+      "name": "baseline_none_with_post",
+      "success": true,
+      "directory": "./ablation_experiments/exp_08_baseline_none_with_post"
+    },
+    "9": {
+      "name": "normalization_only_with_post",
+      "success": true,
+      "directory": "./ablation_experiments/exp_09_normalization_only_with_post"
+    },
+    "10": {
+      "name": "bias_correction_only_with_post",
+      "success": true,
+      "directory": "./ablation_experiments/exp_10_bias_correction_only_with_post"
+    },
+    "11": {
+      "name": "normalization_bias_with_post",
+      "success": true,
+      "directory": "./ablation_experiments/exp_11_normalization_bias_with_post"
+    },
+    "12": {
+      "name": "skullstrip_only_with_post",
+      "success": true,
+      "directory": "./ablation_experiments/exp_12_skullstrip_only_with_post"
+    },
+    "13": {
+      "name": "registration_only_with_post",
+      "success": true,
+      "directory": "./ablation_experiments/exp_13_registration_only_with_post"
+    },
+    "14": {
+      "name": "all_preprocessing_with_post",
+      "success": true,
+      "directory": "./ablation_experiments/exp_14_all_preprocessing_with_post"
+    },
+    "15": {
+      "name": "all_preprocessing_postprocessing_with_post",
+      "success": true,
+      "directory": "./ablation_experiments/exp_15_all_preprocessing_postprocessing_with_post"
+    }
+  },
+  "total_experiments": 16,
+  "successful_experiments": 16,
+  "failed_experiments": 0
+}
