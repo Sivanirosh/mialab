@@ -18,7 +18,7 @@ from __future__ import annotations
 
 import argparse
 from pathlib import Path
-from typing import Iterable, List, Optional
+from typing import Dict, Iterable, List, Optional
 
 import matplotlib.pyplot as plt
 import pandas as pd
@@ -125,6 +125,7 @@ def capture_screenshots(
     labels: Optional[List[int]],
     max_subjects: int,
     per_label: bool = True,
+    ground_truth_map: Optional[Dict[str, Path]] = None,
 ) -> None:
     """Render PNG screenshots of the provided segmentation pairs."""
 
@@ -142,11 +143,17 @@ def capture_screenshots(
         post_visualizer = SegmentationVisualizer()
         prediction_pp_array = post_visualizer.load_segmentation(str(post_path))
 
+        gt_array = None
+        if ground_truth_map and subject in ground_truth_map:
+            gt_visualizer = SegmentationVisualizer()
+            gt_array = gt_visualizer.load_segmentation(str(ground_truth_map[subject]))
+
         # Render combined comparison
         comp_visualizer = SegmentationVisualizer(spacing=base_visualizer.spacing)
         comp_visualizer.visualize_comparison(
             prediction_array,
             prediction_pp_array=prediction_pp_array,
+            ground_truth_array=gt_array,
             labels_to_show=labels,
             title=f"{subject} - Pre vs Post",
             save_screenshot=str(output_dir / f"{subject}_comparison.png"),
@@ -160,11 +167,30 @@ def capture_screenshots(
                 label_visualizer.visualize_comparison(
                     prediction_array,
                     prediction_pp_array=prediction_pp_array,
+                    ground_truth_array=gt_array,
                     labels_to_show=[label_id],
                     title=f"{subject} - Label {label_id}",
                     save_screenshot=str(output_dir / f"{subject}_label{label_id}_comparison.png"),
                     start_interactive=False,
                 )
+
+
+def resolve_ground_truth_path(root: Path, subject: str) -> Optional[Path]:
+    """Try to resolve a ground-truth segmentation file for the subject."""
+
+    candidates = [
+        root / subject / "labels_native.nii.gz",
+        root / subject / "labels.nii.gz",
+        root / subject / "segmentation.nii.gz",
+        root / f"{subject}_labels.nii.gz",
+        root / f"{subject}_labels.mha",
+        root / subject / "labels_native.mha",
+    ]
+
+    for path in candidates:
+        if path.exists():
+            return path
+    return None
 
 
 def main() -> int:
@@ -180,12 +206,17 @@ def main() -> int:
         "--max-screenshots",
         type=int,
         default=1,
-        help="Maximum number of subjects to capture screenshots for (default: 5).",
+        help="Maximum number of subjects to capture screenshots for (default: 1).",
     )
     parser.add_argument(
         "--per-label-screenshots",
         action="store_true",
         help="Additionally render per-label comparison screenshots for each subject.",
+    )
+    parser.add_argument(
+        "--ground-truth-root",
+        type=str,
+        help="Optional root directory containing ground-truth segmentations (e.g., data/test).",
     )
     parser.add_argument(
         "--labels",
@@ -213,6 +244,19 @@ def main() -> int:
             plot_improvements(improvements, output_dir, value_col)
 
     pairs = find_segmentation_pairs(experiment_dir)
+    ground_truth_map: Optional[Dict[str, Path]] = None
+    if args.ground_truth_root:
+        gt_root = Path(args.ground_truth_root).expanduser().resolve()
+        if not gt_root.exists():
+            raise FileNotFoundError(f"Ground-truth root does not exist: {gt_root}")
+        ground_truth_map = {}
+        for subject, _, _ in pairs:
+            gt_path = resolve_ground_truth_path(gt_root, subject)
+            if gt_path:
+                ground_truth_map[subject] = gt_path
+            else:
+                print(f"[ground-truth] Warning: No GT file found for subject {subject}")
+
     if pairs:
         capture_screenshots(
             pairs,
@@ -220,6 +264,7 @@ def main() -> int:
             labels=args.labels,
             max_subjects=args.max_screenshots,
             per_label=args.per_label_screenshots,
+            ground_truth_map=ground_truth_map,
         )
     else:
         print("No segmentation .mha files found; skipping screenshot capture.")

@@ -30,12 +30,16 @@ screenshots summarising the metrics and segmentations:
 ```
 python generate_experiment_report.py \
     --experiment-dir experiments_001/all_preprocessing_YYYYMMDD_HHMMSS/<timestamped_run> \
-    --max-screenshots 3
+    --max-screenshots 3 \
+    --per-label-screenshots \
+    --ground-truth-root ./data/test
 ```
 
 The script writes all figures and tables to `<experiment_dir>/report/` by default. Screenshots are rendered off-screen
 using VTK, so a GUI session is not required. Matplotlib and seaborn are used for plotting; install them via pip if they
-are not already available in your environment.
+are not already available in your environment. Supplying `--ground-truth-root` enables three-panel comparison renders
+that juxtapose prediction, post-processed prediction, and ground truth (if the subject’s label file can be located under
+the provided root).
 
 After you complete the exercises, dive into the 
     
