@@ -1,27 +1,25 @@
-"""Configuration management for experiments.
+"""Configuration utilities for the single-run experiment workflow."""
 
-This module handles experiment configurations, random forest parameters,
-and ablation study setups.
-"""
+from __future__ import annotations
 
 import json
-import os
-from dataclasses import asdict, is_dataclass
-from typing import Dict, List, Optional, Any
-from dataclasses import dataclass, asdict
+from dataclasses import asdict, dataclass, field, is_dataclass
 from enum import Enum
+from typing import Any, Dict, Optional, Tuple
 
 
 class OptimizationLevel(Enum):
-    """Random Forest optimization levels."""
+    """Random Forest optimisation presets."""
+
     NONE = "none"
-    QUICK = "quick" 
+    QUICK = "quick"
     FULL = "full"
 
 
 @dataclass
 class PreprocessingConfig:
-    """Configuration for preprocessing parameters."""
+    """Configuration flags for preprocessing components."""
+
     skullstrip_pre: bool = True
     normalization_pre: bool = True
     registration_pre: bool = True
@@ -33,20 +31,25 @@ class PreprocessingConfig:
 
 @dataclass
 class PostprocessingConfig:
-    """Configuration for postprocessing parameters."""
+    """Configuration parameters for postprocessing."""
+
     simple_post: bool = True
-    min_component_size: int = 5  # Global default (down from 10)
-    per_tissue_sizes: Optional[Dict[str, int]] = None  # e.g., {'Hippocampus': 3, 'WhiteMatter': 20}
-    kernel_radius: tuple = (1, 1, 1)  # For closing/opening
-    retention_threshold: float = 0.5  # Skip if <50% voxels kept
+    copy_unhandled_labels: bool = True
+    recipes: Dict[str, Dict[str, Any]] = field(default_factory=dict)
+    # Legacy fields kept for backwards compatibility with older config files.
+    min_component_size: int = 5
+    per_tissue_sizes: Optional[Dict[str, int]] = None
+    kernel_radius: Tuple[int, int, int] = (1, 1, 1)
+    retention_threshold: float = 0.5
 
 
 @dataclass
 class RandomForestConfig:
-    """Configuration for Random Forest parameters."""
+    """Random Forest hyper-parameter configuration."""
+
     n_estimators: int = 100
     max_depth: Optional[int] = None
-    max_features: str = None
+    max_features: Optional[str] = None
     min_samples_split: int = 2
     min_samples_leaf: int = 1
     bootstrap: bool = True
@@ -56,622 +59,166 @@ class RandomForestConfig:
 
 @dataclass
 class ExperimentConfig:
-    """Complete experiment configuration."""
+    """Full configuration payload passed to the pipeline."""
+
     name: str
     description: str
     preprocessing: PreprocessingConfig
     postprocessing: PostprocessingConfig
     forest: RandomForestConfig
-    
-    def save(self, filepath: str):
-        """Save configuration to JSON file."""
-        config_dict = asdict(self)
-        with open(filepath, 'w') as f:
-            json.dump(config_dict, f, indent=2)
-    
+
+    def save(self, filepath: str) -> None:
+        """Persist the configuration to disk."""
+
+        with open(filepath, "w", encoding="utf-8") as handle:
+            json.dump(asdict(self), handle, indent=2)
+
     @classmethod
-    def load(cls, filepath: str) -> 'ExperimentConfig':
-        """Load configuration from JSON file."""
-        with open(filepath, 'r') as f:
-            config_dict = json.load(f)
-        
-        # Convert dictionaries back to dataclasses
-        preprocessing = PreprocessingConfig(**config_dict['preprocessing'])
-        postprocessing = PostprocessingConfig(**config_dict['postprocessing'])
-        forest = RandomForestConfig(**config_dict['forest'])
-        
+    def load(cls, filepath: str) -> "ExperimentConfig":
+        """Reconstruct an experiment configuration from disk."""
+
+        with open(filepath, "r", encoding="utf-8") as handle:
+            payload = json.load(handle)
+
         return cls(
-            name=config_dict['name'],
-            description=config_dict['description'],
-            preprocessing=preprocessing,
-            postprocessing=postprocessing,
-            forest=forest
+            name=payload["name"],
+            description=payload["description"],
+            preprocessing=PreprocessingConfig(**payload["preprocessing"]),
+            postprocessing=PostprocessingConfig(**payload["postprocessing"]),
+            forest=RandomForestConfig(**payload["forest"]),
         )
-    
 
     def to_pipeline_dict(self) -> Dict[str, Any]:
-        """Convert configuration to a dictionary format expected by the pipeline."""
-        
-        def safe_asdict(obj):
-            if isinstance(obj, list):
-                # take first item if wrapped in a list
-                if len(obj) > 0 and is_dataclass(obj[0]):
-                    return asdict(obj[0])
-                else:
-                    return obj
-            elif is_dataclass(obj):
-                return asdict(obj)
-            return obj
-        
+        """Serialise the configuration for `pipeline.main`."""
+
+        def _flatten(value: Any) -> Any:
+            if is_dataclass(value):
+                return asdict(value)
+            if isinstance(value, list) and value and is_dataclass(value[0]):
+                return asdict(value[0])
+            return value
+
         return {
-            'preprocessing': safe_asdict(self.preprocessing),
-            'postprocessing': safe_asdict(self.postprocessing),
-            'forest': safe_asdict(self.forest)
+            "preprocessing": _flatten(self.preprocessing),
+            "postprocessing": _flatten(self.postprocessing),
+            "forest": _flatten(self.forest),
         }
 
 
 class RandomForestOptimizer:
-    """Handles Random Forest hyperparameter optimization."""
-    
+    """Helpers for deriving Random Forest configurations."""
+
     @staticmethod
     def get_default_parameters() -> RandomForestConfig:
-        """Get default Random Forest parameters."""
+        """Return a sensible default configuration."""
+
         return RandomForestConfig()
-    
+
     @staticmethod
-    def get_parameter_grid(optimization_level: OptimizationLevel) -> Dict[str, List]:
-        """Get parameter grid for hyperparameter optimization."""
+    def get_parameter_grid(optimization_level: OptimizationLevel) -> Dict[str, list]:
+        """Return the hyper-parameter grid for a requested optimisation level."""
+
         if optimization_level == OptimizationLevel.NONE:
             return {}
-        
-        elif optimization_level == OptimizationLevel.QUICK:
+
+        if optimization_level == OptimizationLevel.QUICK:
             return {
-                'n_estimators': [50, 100],
-                'max_depth': [10, 15, 20],
-                'max_features': [None, None],
-                'min_samples_split': [5, 10],
-                'min_samples_leaf': [2, 5]
+                "n_estimators": [50, 100],
+                "max_depth": [10, 15, 20],
+                "max_features": [None],
+                "min_samples_split": [5, 10],
+                "min_samples_leaf": [2, 5],
             }
-        
-        elif optimization_level == OptimizationLevel.FULL:
+
+        if optimization_level == OptimizationLevel.FULL:
             return {
-                'n_estimators': [50, 100, 200],
-                'max_depth': [10, 15, 20, 25],
-                'max_features': [None, None, None],
-                'min_samples_split': [2, 5, 10],
-                'min_samples_leaf': [1, 2, 4, 5],
-                'bootstrap': [True, False]
+                "n_estimators": [50, 100, 200],
+                "max_depth": [10, 15, 20, 25],
+                "max_features": [None],
+                "min_samples_split": [2, 5, 10],
+                "min_samples_leaf": [1, 2, 4, 5],
+                "bootstrap": [True, False],
             }
-        
-        else:
-            raise ValueError(f"Unknown optimization level: {optimization_level}")
-    
+
+        raise ValueError(f"Unknown optimisation level: {optimization_level}")
+
     @staticmethod
-    def estimate_optimization_time(optimization_level: OptimizationLevel, 
-                                 n_samples: int = 10000) -> str:
-        """Estimate optimization time based on level and data size."""
+    def estimate_optimization_time(
+        optimization_level: OptimizationLevel,
+        n_samples: int = 10_000,
+    ) -> str:
+        """Rudimentary wall-clock estimate for grid-search style optimisation."""
+
         if optimization_level == OptimizationLevel.NONE:
             return "< 1 minute"
-        
+
         grid = RandomForestOptimizer.get_parameter_grid(optimization_level)
         n_combinations = 1
         for values in grid.values():
             n_combinations *= len(values)
-        
-        # Rough time estimates based on grid size and data size
-        base_time_per_combination = 30  # seconds
-        if n_samples > 50000:
-            base_time_per_combination *= 2
-        
-        total_seconds = n_combinations * base_time_per_combination
-        total_minutes = total_seconds / 60
-        
+
+        base_seconds = 30 if n_samples <= 50_000 else 60
+        total_minutes = (n_combinations * base_seconds) / 60
+
         if total_minutes < 60:
             return f"~{int(total_minutes)} minutes"
-        else:
-            return f"~{total_minutes/60:.1f} hours"
+
+        return f"~{total_minutes/60:.1f} hours"
 
 
-class AblationStudyConfigurator:
-    """Creates configurations for ablation study experiments."""
-    
-    @staticmethod
-    def create_ablation_configs(forest_config: RandomForestConfig) -> Dict[int, ExperimentConfig]:
-        """Create 8 preprocessing ablation study configurations with decoupled normalization and bias correction."""
-        
-        configs = {}
-        
-        # Experiment 0: Baseline (no preprocessing)
-        configs[0] = ExperimentConfig(
-            name="baseline_none",
-            description="Baseline without any preprocessing",
-            preprocessing=PreprocessingConfig(
-                skullstrip_pre=False,
-                normalization_pre=False,
-                registration_pre=False,
-                biascorrection_pre=False,
-                coordinates_feature=True,
-                intensity_feature=True,
-                gradient_intensity_feature=True
-            ),
-            postprocessing=PostprocessingConfig(simple_post=False),
-            forest=forest_config
-        )
-        
-        # Experiment 1: Normalization only (no bias correction)
-        configs[1] = ExperimentConfig(
-            name="normalization_only",
-            description="With normalization only (no bias correction)",
-            preprocessing=PreprocessingConfig(
-                skullstrip_pre=False,
-                normalization_pre=True,
-                registration_pre=False,
-                biascorrection_pre=False,
-                coordinates_feature=True,
-                intensity_feature=True,
-                gradient_intensity_feature=True
-            ),
-            postprocessing=PostprocessingConfig(simple_post=False),
-            forest=forest_config
-        )
-        
-        # Experiment 2: Bias correction only (no normalization)
-        configs[2] = ExperimentConfig(
-            name="bias_correction_only",
-            description="With bias correction only (no normalization)",
-            preprocessing=PreprocessingConfig(
-                skullstrip_pre=False,
-                normalization_pre=False,
-                registration_pre=False,
-                biascorrection_pre=True,
-                coordinates_feature=True,
-                intensity_feature=True,
-                gradient_intensity_feature=True
-            ),
-            postprocessing=PostprocessingConfig(simple_post=False),
-            forest=forest_config
-        )
-        
-        # Experiment 3: Normalization + Bias correction together
-        configs[3] = ExperimentConfig(
-            name="normalization_bias",
-            description="With normalization + bias correction together",
-            preprocessing=PreprocessingConfig(
-                skullstrip_pre=False,
-                normalization_pre=True,
-                registration_pre=False,
-                biascorrection_pre=True,
-                coordinates_feature=True,
-                intensity_feature=True,
-                gradient_intensity_feature=True
-            ),
-            postprocessing=PostprocessingConfig(simple_post=False),
-            forest=forest_config
-        )
-        
-        # Experiment 4: Skull stripping only
-        configs[4] = ExperimentConfig(
-            name="skullstrip_only",
-            description="With skull stripping only",
-            preprocessing=PreprocessingConfig(
-                skullstrip_pre=True,
-                normalization_pre=False,
-                registration_pre=False,
-                biascorrection_pre=False,
-                coordinates_feature=True,
-                intensity_feature=True,
-                gradient_intensity_feature=True
-            ),
-            postprocessing=PostprocessingConfig(simple_post=False),
-            forest=forest_config
-        )
-        
-        # Experiment 5: Registration only
-        configs[5] = ExperimentConfig(
-            name="registration_only",
-            description="With registration only",
-            preprocessing=PreprocessingConfig(
-                skullstrip_pre=False,
-                normalization_pre=False,
-                registration_pre=True,
-                biascorrection_pre=False,
-                coordinates_feature=True,
-                intensity_feature=True,
-                gradient_intensity_feature=True
-            ),
-            postprocessing=PostprocessingConfig(simple_post=False),
-            forest=forest_config
-        )
-        
-        # Experiment 6: All preprocessing
-        configs[6] = ExperimentConfig(
-            name="all_preprocessing",
-            description="With normalization + bias correction + skull stripping + registration",
-            preprocessing=PreprocessingConfig(
-                skullstrip_pre=True,
-                normalization_pre=True,
-                registration_pre=True,
-                biascorrection_pre=True,
-                coordinates_feature=True,
-                intensity_feature=True,
-                gradient_intensity_feature=True
-            ),
-            postprocessing=PostprocessingConfig(simple_post=False),
-            forest=forest_config
-        )
-        
-        # Experiment 7: All preprocessing + postprocessing
-        configs[7] = ExperimentConfig(
-            name="all_preprocessing_postprocessing",
-            description="With all preprocessing + postprocessing",
-            preprocessing=PreprocessingConfig(
-                skullstrip_pre=True,
-                normalization_pre=True,
-                registration_pre=True,
-                biascorrection_pre=True,
-                coordinates_feature=True,
-                intensity_feature=True,
-                gradient_intensity_feature=True
-            ),
-            postprocessing=PostprocessingConfig(simple_post=True),
-            forest=forest_config
-        )
-        
-        return configs
-    
-    @staticmethod
-    def create_postprocessing_ablation_configs(forest_config: RandomForestConfig) -> Dict[int, ExperimentConfig]:
-        """Create postprocessing ablation study configurations.
-        
-        Tests different postprocessing parameters with full preprocessing enabled.
-        
-        Returns:
-            Dictionary mapping experiment IDs to configurations.
-        """
-        configs = {}
-        
-        # Base preprocessing config (use all preprocessing)
-        base_preprocessing = PreprocessingConfig(
-            skullstrip_pre=True,
-            normalization_pre=True,
-            registration_pre=True,
-            biascorrection_pre=True,
-            coordinates_feature=True,
-            intensity_feature=True,
-            gradient_intensity_feature=True
-        )
-        
-        # Experiment 0: No postprocessing (baseline)
-        configs[0] = ExperimentConfig(
-            name="post_none",
-            description="No postprocessing (baseline)",
-            preprocessing=base_preprocessing,
-            postprocessing=PostprocessingConfig(simple_post=False),
-            forest=forest_config
-        )
-        
-        # Experiment 1: Default postprocessing
-        configs[1] = ExperimentConfig(
-            name="post_default",
-            description="Default postprocessing (min_size=5, kernel=1)",
-            preprocessing=base_preprocessing,
-            postprocessing=PostprocessingConfig(
-                simple_post=True,
-                min_component_size=5,
-                kernel_radius=(1, 1, 1),
-                retention_threshold=0.5
-            ),
-            forest=forest_config
-        )
-        
-        # Experiment 2: Conservative postprocessing
-        configs[2] = ExperimentConfig(
-            name="post_conservative",
-            description="Conservative postprocessing (min_size=3, threshold=0.7)",
-            preprocessing=base_preprocessing,
-            postprocessing=PostprocessingConfig(
-                simple_post=True,
-                min_component_size=3,
-                kernel_radius=(1, 1, 1),
-                retention_threshold=0.7
-            ),
-            forest=forest_config
-        )
-        
-        # Experiment 3: Aggressive postprocessing
-        configs[3] = ExperimentConfig(
-            name="post_aggressive",
-            description="Aggressive postprocessing (min_size=15, kernel=3)",
-            preprocessing=base_preprocessing,
-            postprocessing=PostprocessingConfig(
-                simple_post=True,
-                min_component_size=15,
-                kernel_radius=(3, 3, 3),
-                retention_threshold=0.3
-            ),
-            forest=forest_config
-        )
-        
-        # Experiment 4: Per-tissue optimization (hippocampus-focused)
-        configs[4] = ExperimentConfig(
-            name="post_per_tissue_hippocampus",
-            description="Per-tissue sizes (hippocampus-focused: Hip=3, Amy=3, WM=20)",
-            preprocessing=base_preprocessing,
-            postprocessing=PostprocessingConfig(
-                simple_post=True,
-                min_component_size=5,
-                per_tissue_sizes={
-                    'Hippocampus': 3,
-                    'Amygdala': 3,
-                    'WhiteMatter': 20,
-                    'GreyMatter': 10
-                },
-                kernel_radius=(2, 2, 1),
-                retention_threshold=0.5
-            ),
-            forest=forest_config
-        )
-        
-        # Experiment 5: Per-tissue balanced
-        configs[5] = ExperimentConfig(
-            name="post_per_tissue_balanced",
-            description="Per-tissue sizes (balanced: Hip=4, WM=15, GM=8)",
-            preprocessing=base_preprocessing,
-            postprocessing=PostprocessingConfig(
-                simple_post=True,
-                min_component_size=5,
-                per_tissue_sizes={
-                    'Hippocampus': 4,
-                    'Amygdala': 4,
-                    'WhiteMatter': 15,
-                    'GreyMatter': 8,
-                    'Thalamus': 6
-                },
-                kernel_radius=(1, 1, 1),
-                retention_threshold=0.5
-            ),
-            forest=forest_config
-        )
-        
-        # Experiment 6: Anisotropic kernel (for thick slices)
-        configs[6] = ExperimentConfig(
-            name="post_anisotropic",
-            description="Anisotropic kernel (2,2,1) for thick slices",
-            preprocessing=base_preprocessing,
-            postprocessing=PostprocessingConfig(
-                simple_post=True,
-                min_component_size=5,
-                kernel_radius=(2, 2, 1),
-                retention_threshold=0.5
-            ),
-            forest=forest_config
-        )
-        
-        # Experiment 7: Large isotropic kernel
-        configs[7] = ExperimentConfig(
-            name="post_large_kernel",
-            description="Large isotropic kernel (3,3,3) with balanced size",
-            preprocessing=base_preprocessing,
-            postprocessing=PostprocessingConfig(
-                simple_post=True,
-                min_component_size=8,
-                kernel_radius=(3, 3, 3),
-                retention_threshold=0.4
-            ),
-            forest=forest_config
-        )
-        
-        # Experiment 8: Optimal combination (based on experience)
-        configs[8] = ExperimentConfig(
-            name="post_optimal",
-            description="Optimal combination: per-tissue + anisotropic",
-            preprocessing=base_preprocessing,
-            postprocessing=PostprocessingConfig(
-                simple_post=True,
-                min_component_size=5,
-                per_tissue_sizes={
-                    'Hippocampus': 3,
-                    'Amygdala': 3,
-                    'WhiteMatter': 18,
-                    'GreyMatter': 9,
-                    'Thalamus': 7
-                },
-                kernel_radius=(2, 2, 1),
-                retention_threshold=0.55
-            ),
-            forest=forest_config
-        )
-        
-        return configs
-    
-    @staticmethod
-    def create_combined_ablation_configs(forest_config: RandomForestConfig) -> Dict[int, ExperimentConfig]:
-        """Create combined preprocessing + postprocessing ablation study.
-        
-        This extends the 8 preprocessing experiments with the best postprocessing configurations.
-        Total: 16 experiments (8 preprocessing variations × 2 postprocessing states).
-        
-        Returns:
-            Dictionary mapping experiment IDs to configurations.
-        """
-        configs = {}
-        
-        # First 8: Original preprocessing ablation (no postprocessing)
-        preprocessing_configs = AblationStudyConfigurator.create_ablation_configs(forest_config)
-        for i in range(8):
-            configs[i] = preprocessing_configs[i]
-        
-        # Next 8: Same preprocessing ablation but with optimal postprocessing
-        optimal_postprocessing = PostprocessingConfig(
-            simple_post=True,
-            min_component_size=5,
-            per_tissue_sizes={
-                'Hippocampus': 3,
-                'Amygdala': 3,
-                'WhiteMatter': 18,
-                'GreyMatter': 9,
-                'Thalamus': 7
-            },
-            kernel_radius=(2, 2, 1),
-            retention_threshold=0.55
-        )
-        
-        for i in range(8):
-            orig_config = preprocessing_configs[i]
-            configs[i + 8] = ExperimentConfig(
-                name=f"{orig_config.name}_with_post",
-                description=f"{orig_config.description} + optimal postprocessing",
-                preprocessing=orig_config.preprocessing,
-                postprocessing=optimal_postprocessing,
-                forest=forest_config
-            )
-        
-        return configs
-    
-    @staticmethod
-    def get_experiment_summary() -> Dict[int, str]:
-        """Get summary description of each experiment."""
-        return {
-            0: "Baseline (no preprocessing)",
-            1: "Normalization only",
-            2: "Bias correction only",
-            3: "Normalization + Bias correction",
-            4: "Skull stripping only", 
-            5: "Registration only",
-            6: "All preprocessing (Norm + Bias + Skull + Reg)",
-            7: "All preprocessing + Post-processing"
-        }
-    
-    @staticmethod
-    def get_postprocessing_experiment_summary() -> Dict[int, str]:
-        """Get summary of postprocessing ablation experiments."""
-        return {
-            0: "No postprocessing (baseline)",
-            1: "Default postprocessing (min_size=5, kernel=1)",
-            2: "Conservative (min_size=3, strict retention)",
-            3: "Aggressive (min_size=15, large kernel)",
-            4: "Per-tissue: Hippocampus-focused",
-            5: "Per-tissue: Balanced",
-            6: "Anisotropic kernel (2,2,1)",
-            7: "Large isotropic kernel (3,3,3)",
-            8: "Optimal: Per-tissue + anisotropic"
-        }
-    
-    @staticmethod
-    def get_combined_experiment_summary() -> Dict[int, str]:
-        """Get summary of combined ablation experiments."""
-        base_summary = AblationStudyConfigurator.get_experiment_summary()
-        combined_summary = {}
-        
-        # First 8: without postprocessing
-        for i in range(8):
-            combined_summary[i] = base_summary[i]
-        
-        # Next 8: with optimal postprocessing
-        for i in range(8):
-            combined_summary[i + 8] = f"{base_summary[i]} + Optimal Post"
-        
-        return combined_summary
+def create_all_preprocessing_config(
+    name: str = "all_preprocessing",
+    include_postprocessing: bool = True,
+    forest_config: Optional[RandomForestConfig] = None,
+    description: Optional[str] = None,
+) -> ExperimentConfig:
+    """Factory for the canonical experiment configuration.
 
+    The resulting configuration enables every preprocessing component and toggles
+    post-processing based on `include_postprocessing`. The pipeline will still
+    emit both pre- and post-processed metrics, allowing downstream analysis to
+    separate them without re-running the experiment.
+    """
 
-class ConfigurationValidator:
-    """Validates experiment configurations."""
-    
-    @staticmethod
-    def validate_paths(data_atlas_dir: str, data_train_dir: str, data_test_dir: str) -> List[str]:
-        """Validate that required data paths exist."""
-        missing_paths = []
-        
-        if not os.path.exists(data_atlas_dir):
-            missing_paths.append(f"Atlas directory: {data_atlas_dir}")
-        
-        if not os.path.exists(data_train_dir):
-            missing_paths.append(f"Training directory: {data_train_dir}")
-        
-        if not os.path.exists(data_test_dir):
-            missing_paths.append(f"Test directory: {data_test_dir}")
-        
-        return missing_paths
-    
-    @staticmethod
-    def validate_experiment_config(config: ExperimentConfig) -> List[str]:
-        """Validate experiment configuration."""
-        issues = []
-        
-        # Check name
-        if not config.name or not config.name.strip():
-            issues.append("Experiment name cannot be empty")
-        
-        # Check Random Forest parameters
-        if config.forest.n_estimators <= 0:
-            issues.append("n_estimators must be positive")
-        
-        if config.forest.max_depth is not None and config.forest.max_depth <= 0:
-            issues.append("max_depth must be positive or None")
-        
-        if config.forest.min_samples_split < 2:
-            issues.append("min_samples_split must be at least 2")
-        
-        if config.forest.min_samples_leaf < 1:
-            issues.append("min_samples_leaf must be at least 1")
-        
-        # Check that at least one feature is enabled
-        if not any([config.preprocessing.coordinates_feature,
-                   config.preprocessing.intensity_feature,
-                   config.preprocessing.gradient_intensity_feature]):
-            issues.append("At least one feature type must be enabled")
-        
-        return issues
-    
-    @staticmethod
-    def estimate_runtime(optimization_level: OptimizationLevel, 
-                        n_experiments: int = 9,
-                        n_subjects: int = 10) -> str:
-        """Estimate total runtime for ablation study."""
-        # Estimate optimization time
-        opt_time_str = RandomForestOptimizer.estimate_optimization_time(optimization_level)
-        
-        # Estimate per-experiment time (rough estimate)
-        per_exp_minutes = 5 + (n_subjects * 2)  # Base time + time per subject
-        total_exp_minutes = n_experiments * per_exp_minutes
-        
-        # Parse optimization time
-        if "minute" in opt_time_str:
-            opt_minutes = int(opt_time_str.split()[0].replace("~", ""))
-        elif "hour" in opt_time_str:
-            opt_hours = float(opt_time_str.split()[0].replace("~", ""))
-            opt_minutes = opt_hours * 60
-        else:
-            opt_minutes = 0
-        
-        total_minutes = opt_minutes + total_exp_minutes
-        
-        if total_minutes < 60:
-            return f"~{int(total_minutes)} minutes"
-        else:
-            return f"~{total_minutes/60:.1f} hours"
-
-
-def create_default_config(name: str = "default", 
-                         optimization_level: OptimizationLevel = OptimizationLevel.QUICK) -> ExperimentConfig:
-    """Create a default experiment configuration."""
-    
-    if optimization_level == OptimizationLevel.NONE:
+    if forest_config is None:
         forest_config = RandomForestOptimizer.get_default_parameters()
-    else:
-        # Use reasonable defaults for optimized versions
-        forest_config = RandomForestConfig(
-            n_estimators=100,
-            max_depth=15,
-            max_features=None,
-            min_samples_split=5,
-            min_samples_leaf=2
+
+    preprocessing = PreprocessingConfig(
+        skullstrip_pre=True,
+        normalization_pre=True,
+        registration_pre=True,
+        biascorrection_pre=False,
+        coordinates_feature=True,
+        intensity_feature=True,
+        gradient_intensity_feature=True,
+    )
+
+    postprocessing = PostprocessingConfig(simple_post=include_postprocessing)
+
+    experiment_description = description or (
+        "All preprocessing components enabled{}.".format(
+            " with postprocessing" if include_postprocessing else " without postprocessing"
         )
-    
+    )
+
     return ExperimentConfig(
         name=name,
-        description=f"Default configuration with {optimization_level.value} optimization",
-        preprocessing=PreprocessingConfig(),
-        postprocessing=PostprocessingConfig(),
-        forest=forest_config
+        description=experiment_description,
+        preprocessing=preprocessing,
+        postprocessing=postprocessing,
+        forest=forest_config,
+    )
+
+
+def create_default_config(
+    name: str = "all_preprocessing",
+    include_postprocessing: bool = True,
+    forest_config: Optional[RandomForestConfig] = None,
+) -> ExperimentConfig:
+    """Backwards compatible helper that maps to the new single-run setup."""
+
+    return create_all_preprocessing_config(
+        name=name,
+        include_postprocessing=include_postprocessing,
+        forest_config=forest_config,
     )

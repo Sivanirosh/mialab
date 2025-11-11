@@ -27,7 +27,7 @@
 
 # Create logs directory if it doesn't exist
 mkdir -p logs
-cd /storage/homefs/ns121060/mialab
+cd /storage/homefs/ns12l060/mialab
 
 # Load and activate conda properly
 module load Anaconda3
@@ -43,10 +43,10 @@ echo "Environment: $CONDA_DEFAULT_ENV"
 # python -c "import SimpleITK" 2>/dev/null || pip install SimpleITK scikit-learn pymia
 # pip install scikit-learn pymia pathos pandas matplotlib seaborn 
 
-export PYTHONPATH="/storage/homefs/ns121060/mialab:$PYTHONPATH"
+export PYTHONPATH="/storage/homefs/ns12l060/mialab:$PYTHONPATH"
 
 echo "=========================================="
-echo "Starting ablation experiments..."
+echo "Starting single-run experiment..."
 echo "=========================================="
 echo "Timestamp: $(date)"
 echo "Working directory: $(pwd)"
@@ -60,10 +60,7 @@ python -m mia_experiments.cli run \
   --data-atlas ./data/atlas \
   --data-train ./data/train \
   --data-test ./data/test \
-  --optimization none \
-  --study-type combined \
-  --output-dir ./ablation_experiments \
-  --verbose
+  --output-dir ./experiments_001
 
 exit_code=$?
 

@@ -36,6 +36,50 @@ def load_atlas_images(directory: str):
         raise ValueError('T1w and T2w atlas images have not the same image properties')
 
 
+def _build_label_recipes(recipe_config: t.Optional[dict]) -> t.Dict[int, fltr_postp.LabelPostprocessingRecipe]:
+    """Merge user-provided recipe overrides with the defaults."""
+
+    recipes = fltr_postp.default_recipes()
+    if not recipe_config:
+        return recipes
+
+    for label_key, overrides in recipe_config.items():
+        if overrides is None:
+            continue
+        try:
+            label_id = int(label_key)
+        except (TypeError, ValueError):
+            warnings.warn(f"Skipping invalid label key '{label_key}' in postprocessing recipes.")
+            continue
+
+        base = recipes.get(label_id, fltr_postp.LabelPostprocessingRecipe())
+        opening = _normalise_radius(overrides.get("opening_radius", base.opening_radius))
+        closing = _normalise_radius(overrides.get("closing_radius", base.closing_radius))
+        keep_components = int(overrides.get("keep_components", base.keep_components))
+        min_volume = int(overrides.get("min_volume_voxels", base.min_volume_voxels))
+        allow_fewer = bool(overrides.get("allow_fewer_components", base.allow_fewer_components))
+
+        recipes[label_id] = fltr_postp.LabelPostprocessingRecipe(
+            opening_radius=opening,
+            closing_radius=closing,
+            keep_components=keep_components,
+            min_volume_voxels=min_volume,
+            allow_fewer_components=allow_fewer,
+        )
+
+    return recipes
+
+
+def _normalise_radius(value: t.Any) -> fltr_postp.Radius:
+    if value is None:
+        return None
+    if isinstance(value, (list, tuple)):
+        if len(value) != 3:
+            raise ValueError(f"Structuring element radius must have length 3, received {value}")
+        return tuple(int(v) for v in value)
+    raise ValueError(f"Unsupported radius specification: {value!r}")
+
+
 class FeatureImageTypes(enum.Enum):
     """Represents the feature image types."""
 
@@ -278,24 +322,13 @@ def post_process(img: structure.BrainImage, segmentation: sitk.Image, probabilit
     # construct pipeline
     pipeline = fltr.FilterPipeline()
     if kwargs.get('simple_post', False):
-        # Use tissue-specific postprocessing parameters if configured, otherwise use defaults
-        if kwargs.get('tissue_specific_post', False):
-            tissue_params = fltr_postp.PostProcessingParams(
-                min_component_size=kwargs.get('min_component_size', 5),
-                per_tissue_sizes=kwargs.get('per_tissue_sizes', {
-                    'WhiteMatter': 50,
-                    'GreyMatter': 30,
-                    'Thalamus': 20,
-                    'Hippocampus': 5,
-                    'Amygdala': 3
-                }),
-                kernel_radius=kwargs.get('kernel_radius', (1, 1, 1)),
-                retention_threshold=kwargs.get('retention_threshold', 0.5)
-            )
-            pipeline.add_filter(fltr_postp.ImagePostProcessing())
-            pipeline.set_param(tissue_params, len(pipeline.filters) - 1)
-        else:
-            pipeline.add_filter(fltr_postp.ImagePostProcessing())
+        recipe_map = _build_label_recipes(kwargs.get('recipes'))
+        copy_unhandled = kwargs.get('copy_unhandled_labels', True)
+
+        post_filter = fltr_postp.ImagePostProcessing(default_recipes=recipe_map)
+        pipeline.add_filter(post_filter)
+        params = fltr_postp.PostProcessingParams(recipes=recipe_map, copy_unhandled_labels=copy_unhandled)
+        pipeline.set_param(params, len(pipeline.filters) - 1)
     if kwargs.get('crf_post', False):
         pipeline.add_filter(fltr_postp.DenseCRF())
         pipeline.set_param(fltr_postp.DenseCRFParams(img.images[structure.BrainImageTypes.T1w],

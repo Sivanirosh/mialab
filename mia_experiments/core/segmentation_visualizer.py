@@ -139,15 +139,19 @@ class SegmentationVisualizer:
         
         return actor
     
-    def visualize(self, segmentation_array: np.ndarray, 
+    def visualize(self, segmentation_array: np.ndarray,
                   labels_to_show: Optional[List[int]] = None,
-                  title: str = "Brain Tissue Segmentation"):
+                  title: str = "Brain Tissue Segmentation",
+                  save_screenshot: Optional[str] = None,
+                  start_interactive: bool = True):
         """Visualize the segmentation.
         
         Args:
             segmentation_array: 3D numpy array of segmentation.
             labels_to_show: List of label values to show. If None, show all labels.
             title: Window title.
+            save_screenshot: Optional path to save a rendered screenshot (PNG).
+            start_interactive: Whether to start the interactive render loop.
         """
         # Clear previous actors
         self.renderer.RemoveAllViewProps()
@@ -173,7 +177,8 @@ class SegmentationVisualizer:
         self.renderer.SetBackground(0.1, 0.1, 0.15)  # Dark blue-gray background
         
         # Set up render window
-        self.render_window.AddRenderer(self.renderer)
+        if self.render_window.GetRenderers().GetNumberOfItems() == 0:
+            self.render_window.AddRenderer(self.renderer)
         self.render_window.SetSize(800, 600)
         self.render_window.SetWindowName(title)
         
@@ -182,6 +187,11 @@ class SegmentationVisualizer:
         self.render_interactor.SetInteractorStyle(style)
         self.render_interactor.SetRenderWindow(self.render_window)
         
+        if save_screenshot:
+            self.render_window.SetOffScreenRendering(True)
+        else:
+            self.render_window.SetOffScreenRendering(False)
+
         # Reset camera to show all actors
         self.renderer.ResetCamera()
         
@@ -195,152 +205,124 @@ class SegmentationVisualizer:
         
         self.render_interactor.Initialize()
         self.render_window.Render()
-        self.render_interactor.Start()
+
+        if save_screenshot:
+            self._save_screenshot(self.render_window, save_screenshot)
+
+        if start_interactive and not save_screenshot:
+            self.render_interactor.Start()
     
-    def visualize_comparison(self, prediction_array: np.ndarray,
-                            prediction_pp_array: np.ndarray,
-                            ground_truth_array: np.ndarray,
-                            labels_to_show: Optional[List[int]] = None,
-                            title: str = "Segmentation Comparison",
-                            save_screenshot: Optional[str] = None):
-        """Visualize prediction, prediction_pp, and ground truth side by side.
-        
-        Args:
-            prediction_array: 3D numpy array of prediction segmentation.
-            prediction_pp_array: 3D numpy array of prediction segmentation after post-processing.
-            ground_truth_array: 3D numpy array of ground truth segmentation.
-            labels_to_show: List of label values to show. If None, show all labels.
-            title: Window title.
-            save_screenshot: Optional path to save a screenshot (PNG).
-        """
-        # Create new render window and interactor for comparison view
+    def visualize_comparison(
+        self,
+        prediction_array: np.ndarray,
+        prediction_pp_array: Optional[np.ndarray] = None,
+        ground_truth_array: Optional[np.ndarray] = None,
+        labels_to_show: Optional[List[int]] = None,
+        title: str = "Segmentation Comparison",
+        save_screenshot: Optional[str] = None,
+        start_interactive: bool = True,
+    ):
+        """Visualize segmentation arrays side by side (prediction, post-processed, ground truth)."""
+
+        panels: List[tuple[str, np.ndarray]] = [("Prediction", prediction_array)]
+
+        if prediction_pp_array is not None:
+            panels.append(("Post-processed", prediction_pp_array))
+
+        if ground_truth_array is not None:
+            panels.append(("Ground Truth", ground_truth_array))
+
+        if len(panels) < 2:
+            # Nothing to compare, fall back to single visualization
+            self.visualize(
+                prediction_array,
+                labels_to_show=labels_to_show,
+                title=title,
+                save_screenshot=save_screenshot,
+                start_interactive=start_interactive,
+            )
+            return
+
         render_window = vtk.vtkRenderWindow()
-        
-        # Create three renderers for side-by-side view
-        renderer_pred = vtk.vtkOpenGLRenderer()
-        renderer_pred_pp = vtk.vtkOpenGLRenderer()
-        renderer_gt = vtk.vtkOpenGLRenderer()
-    
-        # Shared camera for synchronized view
+        if save_screenshot:
+            render_window.SetOffScreenRendering(True)
+
+        num_panels = len(panels)
+        renderers: List[vtk.vtkRenderer] = []
         shared_camera = vtk.vtkCamera()
-        for renderer in (renderer_pred, renderer_pred_pp, renderer_gt):
-            renderer.SetActiveCamera(shared_camera)
-            renderer.SetBackground(0.1, 0.1, 0.15)
-        
+
         if labels_to_show is None:
             labels_to_show = list(LABEL_TO_TISSUE.keys())
-        
-        # Extract surfaces for prediction
-        print("Extracting prediction surfaces...")
-        actors_added_pred = 0
-        for label_value in labels_to_show:
-            tissue_name = LABEL_TO_TISSUE.get(label_value, f'Label{label_value}')
-            actor = self.extract_surface(prediction_array, label_value, tissue_name)
-            if actor is not None:
-                actor.GetProperty().SetOpacity(0.7)  # Slightly transparent for comparison
-                renderer_pred.AddActor(actor)
-                actors_added_pred += 1
-                print(f"  Added {tissue_name} (label {label_value})")
 
-        # Extract surfaces for prediction after post-processing
-        print("Extracting prediction surfaces...")
-        actors_added_pred_pp = 0
-        for label_value in labels_to_show:
-            tissue_name = LABEL_TO_TISSUE.get(label_value, f'Label{label_value}')
-            actor = self.extract_surface(prediction_pp_array, label_value, tissue_name)
-            if actor is not None:
-                actor.GetProperty().SetOpacity(0.7)  # Slightly transparent for comparison
-                renderer_pred_pp.AddActor(actor)
-                actors_added_pred_pp += 1
-                print(f"  Added {tissue_name} (label {label_value})")
-        
-        # Extract surfaces for ground truth
-        print("Extracting ground truth surfaces...")
-        actors_added_gt = 0
-        for label_value in labels_to_show:
-            tissue_name = LABEL_TO_TISSUE.get(label_value, f'Label{label_value}')
-            actor = self.extract_surface(ground_truth_array, label_value, tissue_name)
-            if actor is not None:
-                actor.GetProperty().SetOpacity(0.7)
-                renderer_gt.AddActor(actor)
-                actors_added_gt += 1
-                print(f"  Added {tissue_name} (label {label_value})")
-        
-        if actors_added_pred == 0 and actors_added_pred_pp == 0 and actors_added_gt == 0:
-            print("Warning: No surfaces found to display!")
-            return
-        
-        # Set viewports (left for prediction, right for ground truth)
-        renderer_pred.SetViewport(0.0, 0.0, 0.33, 1.0)
-        renderer_pred.SetBackground(0.1, 0.1, 0.15)
-        renderer_pred_pp.SetViewport(0.33, 0.0, 0.66, 1.0)
-        renderer_pred_pp.SetBackground(0.1, 0.1, 0.15)
-        renderer_gt.SetViewport(0.66, 0.0, 1.0, 1.0)
-        renderer_gt.SetBackground(0.1, 0.1, 0.15)
-        
-        # Add text labels
-        text_pred = vtk.vtkTextActor()
-        text_pred.SetInput("Prediction")
-        text_pred.SetPosition(10, 10)
-        text_pred.GetTextProperty().SetFontSize(20)
-        text_pred.GetTextProperty().SetColor(1.0, 1.0, 1.0)
-        renderer_pred.AddActor2D(text_pred)
+        for idx, (panel_title, data_array) in enumerate(panels):
+            renderer = vtk.vtkOpenGLRenderer()
+            renderer.SetActiveCamera(shared_camera)
+            renderer.SetBackground(0.1, 0.1, 0.15)
 
-        text_pred_pp = vtk.vtkTextActor()
-        text_pred_pp.SetInput("Prediction PP")
-        text_pred_pp.SetPosition(10, 10)
-        text_pred_pp.GetTextProperty().SetFontSize(20)
-        text_pred_pp.GetTextProperty().SetColor(1.0, 1.0, 1.0)
-        renderer_pred_pp.AddActor2D(text_pred_pp)        
-        
-        text_gt = vtk.vtkTextActor()
-        text_gt.SetInput("Ground Truth")
-        text_gt.SetPosition(10, 10)
-        text_gt.GetTextProperty().SetFontSize(20)
-        text_gt.GetTextProperty().SetColor(1.0, 1.0, 1.0)
-        renderer_gt.AddActor2D(text_gt)
-        
-        # Set up render window
-        render_window.AddRenderer(renderer_pred)
-        render_window.AddRenderer(renderer_pred_pp)
-        render_window.AddRenderer(renderer_gt)
-        render_window.SetSize(1000, 600)
+            actors_added = 0
+            for label_value in labels_to_show:
+                tissue_name = LABEL_TO_TISSUE.get(label_value, f"Label{label_value}")
+                actor = self.extract_surface(data_array, label_value, tissue_name)
+                if actor is not None:
+                    actor.GetProperty().SetOpacity(0.8)
+                    renderer.AddActor(actor)
+                    actors_added += 1
+
+            # Add text overlay
+            text_actor = vtk.vtkTextActor()
+            text_actor.SetInput(panel_title)
+            text_actor.SetPosition(10, 10)
+            text_actor.GetTextProperty().SetFontSize(20)
+            text_actor.GetTextProperty().SetColor(1.0, 1.0, 1.0)
+            renderer.AddActor2D(text_actor)
+
+            viewport_min_x = idx / num_panels
+            viewport_max_x = (idx + 1) / num_panels
+            renderer.SetViewport(viewport_min_x, 0.0, viewport_max_x, 1.0)
+
+            render_window.AddRenderer(renderer)
+            renderers.append(renderer)
+
+        render_window.SetSize(350 * num_panels, 600)
         render_window.SetWindowName(title)
-        
-        # Set up interactor
+
         render_interactor = vtk.vtkRenderWindowInteractor()
         style = vtk.vtkInteractorStyleMultiTouchCamera()
         render_interactor.SetInteractorStyle(style)
         render_interactor.SetRenderWindow(render_window)
-        
-        # Reset cameras
-        renderer_pred.ResetCamera()
-        renderer_pred_pp.ResetCameraClippingRange()
-        renderer_gt.ResetCameraClippingRange()
-        
-        # Start rendering
-        print(f"\nDisplaying comparison view ({actors_added_pred} prediction surfaces, {actors_added_gt} GT surfaces)")
+
+        for renderer in renderers:
+            renderer.ResetCamera()
+
+        print(f"\nDisplaying comparison view with {num_panels} panels.")
         print("Controls:")
         print("  - Left click + drag: Rotate")
         print("  - Right click + drag: Zoom")
         print("  - Middle click + drag: Pan")
         print("  - Close window to exit\n")
-        
+
         render_interactor.Initialize()
         render_window.Render()
 
-        # Optionally save screenshot
         if save_screenshot:
-            w2i = vtk.vtkWindowToImageFilter()
-            w2i.SetInput(render_window)
-            w2i.Update()
-            writer = vtk.vtkPNGWriter()
-            writer.SetFileName(save_screenshot)
-            writer.SetInputConnection(w2i.GetOutputPort())
-            writer.Write()
-            print(f"Screenshot saved to: {save_screenshot}")
+            self._save_screenshot(render_window, save_screenshot)
 
-        render_interactor.Start()
+        if start_interactive and not save_screenshot:
+            render_interactor.Start()
+
+    @staticmethod
+    def _save_screenshot(render_window: vtk.vtkRenderWindow, file_path: str) -> None:
+        """Save the current render window contents to a PNG file."""
+
+        w2i = vtk.vtkWindowToImageFilter()
+        w2i.SetInput(render_window)
+        w2i.Update()
+
+        writer = vtk.vtkPNGWriter()
+        writer.SetFileName(file_path)
+        writer.SetInputConnection(w2i.GetOutputPort())
+        writer.Write()
+        print(f"Screenshot saved to: {file_path}")
 
 
 def find_segmentation_files(experiment_dir: str, subject_id: Optional[str] = None) -> Dict[str, str]:
