@@ -1,13 +1,8 @@
 # Created by .ignore support plugin (hsz.mobi)
 
 # MIALAB SPECIFIC
-ablation_experiments/*
-ablation_experiments/exp_*
-ablation_experiments/temp_*
-PRESENTATION_NARRATIVE.md
 logs/
-analyze_ablation.py
-*.mha
+#*.mha
 PRESENTATION_NARRATIVE.md
 
 ### Python template
@@ -246,4 +241,3 @@ xcuserdata/
 
 ### Project specific stuff
 *.nii.gz
-*.mha
